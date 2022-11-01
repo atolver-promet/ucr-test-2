@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.ucr_testimonials.field_author_name
+    - field.field.paragraph.ucr_testimonials.field_media
+    - field.field.paragraph.ucr_testimonials.field_testimonial_body
+    - field.field.paragraph.ucr_testimonials.field_testimonial_font_color
+    - field.field.paragraph.ucr_testimonials.field_testimonial_picture_style
+    - field.field.paragraph.ucr_testimonials.field_testimonial_text_orient
+    - field.field.paragraph.ucr_testimonials.field_title
+    - paragraphs.paragraphs_type.ucr_testimonials
+  module:
+    - options
+id: paragraph.ucr_testimonials.default
+targetEntityType: paragraph
+bundle: ucr_testimonials
+mode: default
+content:
+  field_author_name:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_media:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: entity_reference_entity_id
+    region: content
+  field_testimonial_body:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_testimonial_font_color:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_testimonial_picture_style:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_testimonial_text_orient:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

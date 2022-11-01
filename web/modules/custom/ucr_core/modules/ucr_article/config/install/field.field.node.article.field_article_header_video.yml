@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_header_video
+    - node.type.article
+  module:
+    - link
+id: node.article.field_article_header_video
+field_name: field_article_header_video
+entity_type: node
+bundle: article
+label: 'Header Video'
+description: '<em>( Optional ):</em> Please enter in the absolute URL of the video you wish to display. To have this properly display, please use the video hosts'' embed URL, and that you have also included an image above to use as a pre-loader.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

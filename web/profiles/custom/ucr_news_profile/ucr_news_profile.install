@@ -1,0 +1,459 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Riverside installation profile.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\layout_builder\Entity\LayoutBuilderEntityViewDisplay;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_news_profile_install() {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+      return;
+  }
+}
+
+/**
+ * November 2018 - Enable additional modules. Disable Autoplay. Update Blocks on UCR News Theme. Update Configuration for new structure.
+ */
+function ucr_news_profile_update_8001() {
+    // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * January 2019 - Adding the Varnish Cache Purge
+ */
+function ucr_news_profile_update_8002() {
+    // Removed to clean up code. Check the Git History for code if needed.
+}
+
+
+/**
+ * February 2019 - Update all of the Role Permissions.
+ */
+function ucr_news_profile_update_8003() {
+    $config = \Drupal::configFactory();
+
+    // Update the Permissions for the Roles that need to be updated.
+    $roles = \Drupal\user\Entity\Role::loadMultiple();
+
+    $anonymous_permissions = array(
+        'access content',
+        'access site-wide contact form',
+        'download media',
+        'never autoplay videos',
+        'view media',
+    );
+
+    $authenticated_permissions = array(
+        'access content',
+        'access shortcuts',
+        'access site-wide contact form',
+        'download media',
+        'never autoplay videos',
+        'view media',
+    );
+
+    foreach($roles as $role) {
+        $role_id = $role->id();
+        $new_permissions = "";
+        $permissions_from_file = "";
+
+        if(in_array($role_id, array('anonymous', 'authenticated'))) {
+            switch($role_id) {
+                case "anonymous": {
+                    $new_permissions = $anonymous_permissions;
+                    break;
+                }
+                case "authenticated": {
+                    $new_permissions = $authenticated_permissions;
+                    break;
+                }
+            }
+        }elseif(in_array($role_id, array('site_editor', 'contributor', 'author', 'site_builder'))) {
+            if($role_id == "site_builder") {
+                $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/config/optional/user.role.site_builder.yml';
+            } elseif($role_id == "site_editor") {
+                $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/config/optional/user.role.site_editor.yml';
+            } elseif($role_id == "contributor") {
+                $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/config/optional/user.role.contributor.yml';
+            } elseif($role_id == "author") {
+                $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/config/optional/user.role.author.yml';
+            }
+
+            $file_contents = file_get_contents($file_path);
+            $permissions_from_file = Yaml::decode($file_contents);
+            $new_permissions = $permissions_from_file['permissions'];
+        }
+
+        if(!empty($new_permissions)) {
+            foreach($new_permissions as $new_perm) {
+                $role->grantPermission($new_perm)->save(TRUE);
+            }
+        }
+    }
+}
+
+/**
+ * July 2019 - Enable new Layout Builder, and Update Configurations
+ */
+function ucr_news_profile_update_8004() {
+    $skip_type = 'page';
+
+    // Add all content types to the workflow editorial.
+    $workflow_config_dependencies = array();
+    $all_node_types = Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple();
+    $node_types = array();
+    foreach($all_node_types as $n_type) {
+        if($n_type->id() !== $skip_type) {
+            $node_types[] = $n_type->id();
+            $workflow_config_dependencies[] = 'node.type.'.$n_type->id();
+        }
+    }
+
+    if(count($node_types) > 0) {
+        Drupal::configFactory()->getEditable('workflows.workflow.editorial')
+            ->set('type_settings.entity_types.node', $node_types)
+            ->save(TRUE);
+    }
+
+    // Add all custom block types to the workflow editorial.
+    $all_block_types = Drupal::entityTypeManager()->getStorage('block_content_type')->loadMultiple();
+    $block_types = array();
+    foreach($all_block_types as $b_type) {
+        $block_types[] = $b_type->id();
+        $workflow_config_dependencies[] = 'block_content.type.'.$b_type->id();
+    }
+
+    if(count($block_types) > 0) {
+        Drupal::configFactory()->getEditable('workflows.workflow.editorial')
+            ->set('type_settings.entity_types.block_content', $block_types)
+            ->save(TRUE);
+    }
+
+    if(count($workflow_config_dependencies) > 0) {
+        Drupal::configFactory()->getEditable('workflows.workflow.editorial')
+            ->set('dependencies.config', $workflow_config_dependencies)
+            ->save(TRUE);
+    }
+}
+
+/**
+ * August 2019 - Enable new Layout Builder
+ */
+function ucr_news_profile_update_8005() {
+    $moduleHandler = Drupal::service('module_handler');
+
+    if(!$moduleHandler->moduleExists('layout_builder')) {
+        Drupal::service('module_installer')->install(['layout_builder']);
+    }
+    if(!$moduleHandler->moduleExists('layout_builder_restrictions')) {
+        Drupal::service('module_installer')->install(['layout_builder_restrictions']);
+    }
+    if(!$moduleHandler->moduleExists('layout_builder_modal')) {
+        Drupal::service('module_installer')->install(['layout_builder_modal']);
+    }
+    if(!$moduleHandler->moduleExists('ucr_layouts')) {
+        Drupal::service('module_installer')->install(['ucr_layouts']);
+    }
+    if($moduleHandler->moduleExists('lightning_layout')) {
+        Drupal::service('module_installer')->uninstall(['lightning_layout']);
+    }
+    if($moduleHandler->moduleExists('layout_library')) {
+        Drupal::service('module_installer')->uninstall(['layout_library']);
+    }
+    if($moduleHandler->moduleExists('layout_builder_st')) {
+        Drupal::service('module_installer')->uninstall(['layout_builder_st']);
+    }
+}
+
+/**
+ * October 2019 - Check if sites have new CK Editor Entity Browser and Update Accordingly. Add new Admin Theme (Claro). Remove Themes that should not be used (Bartik & Seven)
+ */
+function ucr_news_profile_update_8006() {
+    // Update the ck editor media entity browser.
+    $current_config = Drupal::configFactory()->getEditable('entity_browser.browser.ckeditor_media_browser');
+    if(!$current_config->isNew()) {
+        $widgets = $current_config->get('widgets');
+        foreach ($widgets as $widget_uuid => $widget_data) {
+            if ($widget_data['id'] == 'view') {
+                $current_config->set('widgets.' . $widget_uuid . '.settings.view_display', 'entity_browser_1')->save(TRUE);
+            }
+        }
+    }
+
+    \Drupal::service('theme_installer')->install(['claro']);
+    \Drupal::service('theme_installer')->uninstall(['bartik']);
+}
+
+
+/**
+ * March 2020 - Enable XML Sitemap module and apply settings
+ */
+function ucr_news_profile_update_8007() {
+     $config = \Drupal::configFactory();
+          $moduleHandler = \Drupal::service('module_handler');
+
+          // Install the new modules needed.
+          if(!$moduleHandler->moduleExists('xmlsitemap')) {
+              \Drupal::service('module_installer')->install(['xmlsitemap']);
+          }
+
+
+      	$config_files = [
+              'xmlsitemap.settings',
+      		'xmlsitemap.settings.media.document',
+      		'xmlsitemap.settings.media.image',
+      		'xmlsitemap.settings.node.article',
+      		'xmlsitemap.settings.node.event',
+      		'xmlsitemap.settings.node.galleria',
+      		'xmlsitemap.settings.node.gcs',
+      		'xmlsitemap.settings.node.page',
+      		'xmlsitemap.settings.node.people_profiles',
+
+          ];
+
+      	// Update the XML Sitemap configurations.
+
+      	foreach($config_files as $file_name){
+      		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/optional/'.$file_name.'.yml';
+      		$file_contents = file_get_contents($file_path);
+      		$new_yaml = Yaml::decode($file_contents);
+
+      		$current_config = $config->getEditable($file_name);
+      		$current_config->setData($new_yaml)->save(TRUE);
+      	}
+}
+
+/**
+ * April 2020 - Enable XML sitemap Search Engine for all profiles
+ */
+function ucr_news_profile_update_8008() {
+     $config = \Drupal::configFactory();
+          $moduleHandler = \Drupal::service('module_handler');
+
+        // Install the new modules needed.
+           if(!$moduleHandler->moduleExists('xmlsitemap_engines')) {
+               \Drupal::service('module_installer')->install(['xmlsitemap_engines']);
+           }
+
+       	$config_files = [
+       	'xmlsitemap.settings',
+              		'xmlsitemap.settings.media.document',
+              		'xmlsitemap.settings.media.image',
+              		'xmlsitemap.settings.node.article',
+              		'xmlsitemap.settings.node.event',
+              		'xmlsitemap.settings.node.galleria',
+              		'xmlsitemap.settings.node.gcs',
+              		'xmlsitemap.settings.node.page',
+              		'xmlsitemap.settings.node.people_profiles',
+               'xmlsitemap_engines.settings',
+
+           ];
+
+
+      	// Update the XML Sitemap configurations.
+
+      	foreach($config_files as $file_name){
+      		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/optional/'.$file_name.'.yml';
+      		$file_contents = file_get_contents($file_path);
+      		$new_yaml = Yaml::decode($file_contents);
+
+      		$current_config = $config->getEditable($file_name);
+      		$current_config->setData($new_yaml)->save(TRUE);
+      	}
+}
+
+/**
+ * August 2020 -  Added new styles in wysiwyg editors and installed media file replace
+ */
+function ucr_news_profile_update_8009() {
+     $config = \Drupal::configFactory();
+          $moduleHandler = \Drupal::service('module_handler');
+
+          // Install the new modules needed.
+                if(!$moduleHandler->moduleExists('media_entity_file_replace')) {
+                    \Drupal::service('module_installer')->install(['media_entity_file_replace']);
+                }
+
+           	$config_files = [
+             'editor.editor.rich_text_editor_limited',
+             'editor.editor.rich_text_editor_source',
+             'core.entity_form_display.media.document.default',
+
+           ];
+
+      	foreach($config_files as $file_name){
+      		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/install/'.$file_name.'.yml';
+      		$file_contents = file_get_contents($file_path);
+      		$new_yaml = Yaml::decode($file_contents);
+
+      		$current_config = $config->getEditable($file_name);
+      		$current_config->setData($new_yaml)->save(TRUE);
+      	}
+}
+
+
+/**
+ * March 2021 - Disable or uninstall Statistics
+ */
+function ucr_news_profile_update_8010() {
+    $config = \Drupal::configFactory();
+    $moduleHandler = \Drupal::service('module_handler');
+
+    if($moduleHandler->moduleExists('statistics')) {
+        Drupal::service('module_installer')->uninstall(['statistics']);
+    }
+
+}
+
+/**
+ * June 2021 - Install Antibot and Honeypot
+ */
+function ucr_news_profile_update_8011() {
+    $config = \Drupal::configFactory();
+    $moduleHandler = \Drupal::service('module_handler');
+
+    if(!$moduleHandler->moduleExists('antibot')) {
+        \Drupal::service('module_installer')->install(['antibot']);
+    }
+    if(!$moduleHandler->moduleExists('honeypot')) {
+        \Drupal::service('module_installer')->install(['honeypot']);
+    }
+
+}
+
+/**
+ * July 2021 - Limit Layout Builder options for Basic pages
+ */
+function ucr_news_profile_update_8012() {
+       $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+
+  	$config_files = [
+      	    'core.entity_view_display.node.page.default',
+          ];
+
+   	// Update the XML Sitemap configurations.
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/optional/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+}
+
+/**
+ * August 2021 - Part 1. Enable Layout Builder for News Basic Page
+ */
+function ucr_news_profile_update_8013() {
+      LayoutBuilderEntityViewDisplay::load('node.page.default')
+              ->enableLayoutBuilder()
+              ->setOverridable()
+              ->save(TRUE);
+
+}
+
+/**
+ * August 2021 - Part 2. Update Header styles in WYSIWYG Editors
+ */
+function ucr_news_profile_update_8014() {
+      $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+
+  	$$config_files = [
+           	    'editor.editor.rich_text_editor_source',
+                  'editor.editor.rich_text_editor_limited',
+               ];
+   	// Update the XML Sitemap configurations.
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/install/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+
+}
+
+/**
+ * October 2021 - Part 1. Update linkit default profile to add email matcher
+ */
+function ucr_news_profile_update_8015() {
+      $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+
+  	$$config_files = [
+           	    'linkit.linkit_profile.linkit_default_profile',
+               ];
+   	// Update the XML Sitemap configurations.
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/config/install/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+
+}
+
+/**
+ * November 2021 - Install and enable transliterate_filenames module
+ */
+function ucr_news_profile_update_8016() {
+    $config = \Drupal::configFactory();
+    $moduleHandler = \Drupal::service('module_handler');
+
+     if(!$moduleHandler->moduleExists('transliterate_filenames')) {
+          \Drupal::service('module_installer')->install(['transliterate_filenames']);
+      }
+}
+
+/**
+ * April 2021 -Update WYSIWYG Editors to include styled callout boxes
+ */
+function ucr_news_profile_update_8017() {
+      $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+
+  	$$config_files = [
+           	    'editor.editor.rich_text_editor_source',
+                  'editor.editor.rich_text_editor_limited',
+               ];
+   	// Update the XML Sitemap configurations.
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/install/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+
+}
+
+function ucr_news_profile_update_dependencies() {
+  $dependencies = array();
+    $dependencies['ucr_news_profile']['8005'] = [
+        'lightning_layout' => '8010'
+    ];
+
+    return $dependencies;
+}

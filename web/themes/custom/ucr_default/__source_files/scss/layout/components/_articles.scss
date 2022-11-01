@@ -1,0 +1,884 @@
+// For all general listing pages.
+$article-border-1: #dde0e4;
+$article-border-2: #999999;
+$article-title: #003da5;
+$article-title-hover: $ucr-blue;
+$article-paginate-background: #6a7887;
+$article-paginate-text: $white;
+$article-paginate-background-hover: $ucr-blue;
+$article-page-about: #333333;
+$article-page-title: $white;
+$article-page-title-mobile: #868d96;
+$article-page-subtitle: $article-page-title;
+$article-page-subtitle-mobile: #868d90;
+$article-page-author: #b0b0b0;
+$article-page-title-simple: $blue-grey-900;
+$article-page-subtitle-simple: $blue-800;
+$article-sharing-title: #333333;
+$article-page-tags-title: #333333;
+$article-page-tags-background: $link-color;
+$article-page-tags-border: $link-color;
+$article-page-tags-text: $white;
+$article-block-border: $ucr-white-4;
+$article-block-title: $blue-grey-900;
+$article-block-standard-time-border: $ucr-alt-blue-3;
+$article-block-standard-time-text: $blue-grey-200;
+$article-block-box-cover: #234674;
+$article-block-slideshow-date-line: $blue-800;
+$article-block-slideshow-dots: $grey-400;
+$article-block-slideshow-dots-active: $blue-800;
+$article-block-slideshow-arrow: $blue-800;
+main {
+  > div {
+    &#content-container {
+      .ucr-articles--page--list {
+        .ucr-articles--page--list--item {
+          border: 1px solid $article-border-1;
+          padding: 0;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          @include breakpoint(medium) {
+            padding: 20px 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid $article-border-1;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+          }
+          &:first-child {
+            margin-top: 0;
+          }
+          .ucr-articles--page--list--thumbnail {
+            display: inline-block;
+            border: none;
+            @include breakpoint(medium) {
+              border: 1px solid $article-border-2;
+            }
+            a {
+              text-decoration: none !important;
+              &::after {
+                display: none;
+                content: '';
+              }
+            }
+          }
+          h2 {
+            font-family: "Fira Sans Regular", sans-serif;
+            font-size: 28px;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 0;
+            a {
+              color: $article-title !important;
+              font-weight: 300;
+              text-decoration: underline;
+              padding: 0.8rem;
+              margin-bottom: 0;
+              display: block;
+              @include breakpoint(medium) {
+                padding: 0;
+                margin-bottom: 0.5rem;
+                display: inline-block;
+              }
+              &:hover {
+                color: $article-title-hover;
+              }
+              &::after {
+                display: none;
+                content: '';
+              }
+            }
+          }
+          .ucr-articles--page--list--body {
+            p {
+              margin: 0;
+              padding: 0;
+            }
+          }
+          .ucr-articles--page--list--about {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid $article-border-1;
+            font-family: "Fira Sans Regular", sans-serif;
+            font-weight: 100;
+            font-size: 14px;
+            line-height: 22px;
+            text-transform: uppercase;
+            display: inline-block;
+            color: $article-page-about;
+            .author-name {
+              font-family: "Fira Sans Regular", sans-serif;
+              font-weight: lighter;
+              text-transform: capitalize;
+            }
+            a {
+              text-decoration: none;
+              color: #d6336b;
+              &:hover {
+                color: darken(#d6336b, 30%);
+              }
+            }
+          }
+        }
+      }
+      // For the Pager for the listing pages.
+      .ucr-articles-pager {
+        margin-top: 0.8rem;
+        line-height: normal;
+        font-family: "Fira Sans Regular", sans-serif;
+        li {
+          &.pagination-previous, &.pagination-next {
+            a {
+              background-color: $article-paginate-background;
+              border-radius: 5px;
+              color: $article-paginate-text;
+              text-decoration: none;
+              padding: 8px 22px;
+              &:hover {
+                color: $article-paginate-text;
+                background-color: $article-paginate-background-hover;
+              }
+            }
+          }
+          &.disabled {
+            background-color: lighten($article-paginate-background, 20%);
+            border-radius: 5px;
+            color: darken($article-paginate-text, 5%);
+            padding: 8px 22px;
+            &:hover {
+              background-color: lighten($article-paginate-background, 20%);
+            }
+          }
+        }
+      }
+      // CSS for the node page title display.
+      .ucr-articles--page--title {
+        color: $article-page-title;
+        margin-bottom: 0;
+        position: relative;
+        @include breakpoint(medium) {
+          margin-bottom: 24px;
+        }
+        .ucr-articles--page--title--background {
+          position: relative;
+          padding-bottom: 0;
+          .ucr-articles--page--title--video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            video {
+              &.header-video-player {
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                top: 50%;
+                left: 49.99%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+              }
+            }
+            iframe {
+              &.header-video-player {
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                top: 50%;
+                left: 49.99%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+                border: none;
+              }
+            }
+          }
+        }
+        .ucr-articles--page--title--overlay {
+          position: relative;
+          padding: 10px 10px 24px 10px;
+          @include breakpoint(medium) {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.65);
+            padding: 24px 24px 18px 24px;
+          }
+          h1 {
+            color: $article-page-title-mobile;
+            font-family: $font-family-roboto;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 30px;
+            @include breakpoint(medium) {
+              color: $article-page-title;
+              font-family: $font-family-roboto;
+              font-weight: bold;
+              font-size: 40px;
+              line-height: 48px;
+            }
+          }
+          span {
+            &.ucr-articles--page--title--subtitle {
+              color: $article-page-subtitle-mobile;
+              font-family: $font-family-roboto;
+              font-weight: 100;
+              font-size: 18px;
+              line-height: 24px;
+              @include breakpoint(medium) {
+                color: $article-page-subtitle;
+                font-family: $font-family-roboto;
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 30px;
+              }
+            }
+          }
+          .ucr-articles--page--title--author-info {
+            font-size: 0.825rem;
+            font-style: italic;
+            color: $article-page-subtitle-mobile;
+            @include breakpoint(medium) {
+              color: $article-page-author;
+            }
+          }
+        }
+        .ucr-articles--page--title--simple {
+          padding: 10px 0 0 0;
+          @include breakpoint(medium) {
+            padding: 24px 0 0 0;
+          }
+          h1 {
+            color: $article-page-title-simple;
+            font-family: $font-family-roboto;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 30px;
+            @include breakpoint(medium) {
+              font-size: 40px;
+              line-height: 48px;
+            }
+          }
+          span {
+            &.ucr-articles--page--title--subtitle {
+              color: $article-page-subtitle-simple;
+              font-family: $font-family-roboto;
+              font-weight: 600;
+              font-size: 18px;
+              line-height: 24px;
+              @include breakpoint(medium) {
+                font-size: 20px;
+                line-height: 30px;
+              }
+            }
+          }
+          .ucr-articles--page--title--author-info {
+            font-size: 0.825rem;
+            font-style: italic;
+            color: $article-page-subtitle-mobile;
+          }
+        }
+      }
+      // CSS for the node full page body display
+      .pca-content {
+        .ucr-articles--page--full {
+          .ucr-articles--page--full--body {
+            > p {
+              &:first-child {
+                &:first-letter {
+                  float: left;
+                  font-family: $font-family-roboto-slab;
+                  font-weight: bold;
+                  color: $body-color;
+                  font-size: 90px;
+                  line-height: 60px;
+                  padding-top: 7px;
+                  padding-right: 7px;
+                }
+              }
+            }
+            figure {
+              &.embedded-entity {
+                &.align-left, &.align-right {
+                  display: table;
+                  figcaption {
+                    display: table-caption;
+                    caption-side: bottom;
+                  }
+                }
+              }
+            }
+          }
+          .ucr-articles--page--full--sharing {
+            text-align: center;
+            .sharing-title {
+              text-align: left;
+              font-size: 12px;
+              color: $article-sharing-title;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-weight: lighter;
+              padding-bottom: 10px;
+              text-transform: uppercase;
+            }
+            .addtoany_list {
+              > a {
+                padding: 0;
+                > span {
+                  position: relative;
+                  display: inline-block;
+                  border-radius: 0;
+                  width: 45px;
+                  @include breakpoint(medium) {
+                    width: 100px;
+                  }
+                  @include breakpoint(large) {
+                    width: 110px;
+                  }
+                  @include breakpoint(xlarge) {
+                    width: 165px;
+                  }
+                  @include breakpoint(xxlarge) {
+                    width: 165px;
+                  }
+                  > svg {
+                    height: 32px;
+                  }
+                }
+                &::after {
+                  display: none;
+                }
+              }
+            }
+          }
+          .ucr-articles--page--full--tags {
+            margin: 1rem 0;
+            .tags-title {
+              font-size: 12px;
+              color: $article-page-tags-title;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-weight: lighter;
+              text-transform: uppercase;
+              padding-bottom: 1rem;
+            }
+            .tags-list {
+              div {
+                display: inline-block;
+                margin-right: 12px;
+                margin-bottom: 7px;
+                a {
+                  display: inline-block;
+                  background-color: $article-page-tags-background;
+                  border: 1px solid $article-page-tags-border;
+                  border-radius: 5px;
+                  text-decoration: none;
+                  color: $article-page-tags-text;
+                  padding: 5px 20px 8px 20px;
+                  line-height: normal;
+                  &:hover {
+                    background-color: $article-page-tags-text;
+                    color: $article-page-tags-border;
+                  }
+                }
+              }
+            }
+          }
+          .ucr-articles--page--full--view-more {
+            margin: 1rem 0;
+            text-align: left;
+            @include breakpoint(medium) {
+              text-align: right;
+            }
+            a {
+              @extend .btn-med-blue;
+              border-radius: 5px;
+            }
+          }
+        }
+      }
+      // CSS for global preview properties
+      .ucr-articles--block--more-link {
+        a {
+          @extend .btn-ucr-split;
+          background-color: #003DA5;
+          color: #fff !important;
+          border: 1px solid #003da5 !important;
+          &:after {
+            background-color: #003DA5;
+            color: #fff !important;
+          }
+          &:hover {
+            background-color: darken(#003DA5, 3%) !important;
+            color: $white !important;
+            &:after {
+              background-color: darken(#003DA5, 3%) !important;
+            }
+          }
+        }
+      }
+      // CSS for the preview: standard
+      .ucr-articles--block--standard {
+        height: 100%;
+        .ucr-articles--block--standard--content {
+          border: 1px solid $article-block-border;
+          @include breakpoint(medium) {
+            max-width:600px;
+            min-height: 291px;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+          }
+          .standard-image {
+            img {
+              border: none;
+            }
+          }
+          .article-date {
+            display: block;
+            padding: 1rem 1rem 0.5rem;
+            time {
+              display: inline-block;
+              padding-bottom: 2px;
+              font-size: 1rem;
+              border-bottom: 3px solid #FF8B1C;
+              color: #777777;
+            }
+          }
+          .article-title {
+            padding: 0.5rem 1rem;
+            h2 {
+              margin: 0;
+              padding: 0;
+              font-size: 1.4rem;
+              font-weight: 300;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              color: #003DA5;
+              line-height: normal;
+            }
+          }
+          .article-summary {
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem 1rem;
+            color: $body-color;
+            @include breakpoint(medium) {
+              padding: 0.5rem 1rem 3.5rem;
+            }
+          }
+          .article-read-more {
+            display: block;
+            width: 100%;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-size: .75rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-transform: uppercase;
+            padding: 0.5rem 1.25rem;
+            background-color: #003DA5;
+            @include breakpoint(medium) {
+              position: absolute;
+              bottom: 0;
+            }
+          }
+        }
+        a {
+          text-decoration: none !important;
+          &::after {
+            display: none;
+            content: '';
+          }
+          &:hover {
+            .article-read-more {
+              border-color: $ucr-grey-4;
+              color: $article-block-standard-time-border;
+            }
+          }
+        }
+      }
+      // CSS for the preview: standard alt
+      .ucr-articles--block--standard-alt {
+        padding-bottom: 0 !important;
+        &:last-child {
+          padding-bottom: 0.625rem !important;
+          @include breakpoint(medium) {
+            padding-bottom: 0.9375rem !important;
+          }
+        }
+        .ucr-articles--block--standard-alt-content {
+          border-bottom: 1px solid $article-block-border;
+          a {
+            text-decoration: none;
+            &::after {
+              display: none;
+              content: '';
+            }
+          }
+          .standard-image {
+            img {
+              border: 1px solid $article-block-border;
+            }
+          }
+          .article-title {
+            h3 {
+              margin: 0;
+              line-height: normal;
+              font-family: $font-family-roboto;
+              font-size: 1.4rem;
+              font-weight: bold;
+              a {
+                display: inline-block;
+                margin-bottom: 0.5rem;
+                color: $article-block-title;
+                &:hover {
+                  color: $ucr-blue;
+                }
+              }
+            }
+          }
+          .article-author-info {
+            font-family: $font-family-montserrat;
+            font-size: 14px;
+            line-height: 22px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid $ucr-white-4;
+            .article-author {
+              font-family: $font-family-roboto-slab;
+              font-weight: lighter;
+              text-transform: capitalize;
+            }
+          }
+        }
+      }
+      // CSS for the preview: box images
+      .ucr-articles--block--box-images {
+        position: relative;
+        max-height: 420px;
+        overflow: hidden;
+        max-width: 767px;
+        margin: 0 auto;
+        @include breakpoint(medium) {
+          max-width: 475px;
+        }
+        @include breakpoint(large) {
+          max-width: 370px;
+        }
+        .background-image {
+        }
+        .background-cover {
+          position:absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.35;
+          z-index: 1;
+          background-color: $article-block-box-cover;
+          transition: opacity 0.5s ease;
+        }
+        .ucr-articles--block--box-images--content {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          z-index: 3;
+          padding: 0 0.9375rem 2.75rem 0.9375rem;
+          .article-title {
+            h3 {
+              line-height: 2rem;
+              font-size: 1.5rem;
+              color: $white;
+              font-family: $font-family-roboto;
+              font-weight: 700;
+              margin: 0;
+              padding-bottom: 0.4rem;
+              @include breakpoint(medium) {
+                padding-bottom: 0.6rem;
+              }
+            }
+          }
+          .article-subtitle {
+            font-family: $font-family-roboto;
+            font-weight: 400;
+            line-height: 1.25rem;
+            font-size: 1rem;
+            padding-bottom: 0.4rem;
+            color: #fff !important;
+            @include breakpoint(medium) {
+              padding-bottom: 0.6rem;
+            }
+          }
+          .article-author-info {
+            font-family: "Fira Sans Regular";
+            font-size: 0.9rem;
+            line-height: 1.125rem;
+            color: #fff !important;
+          }
+        }
+        a {
+          color: $white;
+          text-decoration: none;
+          &:hover {
+            color: $white;
+            text-decoration: none;
+            .background-cover {
+              opacity: 0.85;
+            }
+          }
+        }
+      }
+      // CSS for the preview: minimalist
+      .ucr-articles--block--minimalist {
+        padding-bottom: 0 !important;
+        &:last-child {
+          padding-bottom: 0.625rem !important;
+          @include breakpoint(medium) {
+            padding-bottom: 0.9375rem !important;
+          }
+        }
+        .ucr-articles--block--minimalist--content {
+          color: $body-color;
+          border-bottom: 1px solid $article-block-border;
+          padding-bottom: 0.625rem;
+          @include breakpoint(medium) {
+            height: 100%;
+            padding-bottom: 0.9375rem;
+          }
+          .article-title {
+            h3 {
+              line-height: 2rem;
+              font-size: 1.5rem;
+              font-family: $font-family-roboto;
+              font-weight: 700;
+              margin: 0;
+              padding-bottom: 0.4rem;
+              @include breakpoint(medium) {
+                padding-bottom: 0.6rem;
+              }
+              a {
+                color: $article-block-title;
+                text-decoration: none;
+                &::after {
+                  display: none;
+                  content: '';
+                }
+                &:hover {
+                  color: $ucr-blue;
+                }
+              }
+            }
+          }
+          .article-subtitle {
+            font-family: $font-family-roboto;
+            font-weight: 400;
+            line-height: 1.25rem;
+            font-size: 0.95rem;
+            padding-bottom: 0.4rem;
+            @include breakpoint(medium) {
+              padding-bottom: 0.6rem;
+            }
+          }
+          .article-author-info {
+            font-family: $font-family-roboto-slab;
+            font-size: 0.8rem;
+            font-style: italic;
+            line-height: normal;
+          }
+        }
+      }
+      // CSS for the preview: slideshow
+      .ucr-articles--block--slideshow {
+        overflow: hidden;
+        position: relative;
+        button {
+          &.slick-arrow {
+            z-index: 9;
+            cursor: pointer;
+          }
+          &.slick-prev {
+            left: 0 !important;
+          }
+          &.slick-next {
+            right: 0 !important;
+          }
+        }
+        .ucr-articles--block--slideshow--content {
+          font-family: $font-family-roboto;
+          color: $white;
+          position: relative;
+          @include breakpoint(xlarge) {
+            min-height: 450px;
+            max-height: 550px;
+          }
+          .background-image {
+            @include breakpoint(xlarge) {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 100%;
+              transform: translate(-50%, -50%);
+            }
+          }
+          .background-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0, 0.8), rgba(0,0,0, 0));
+            transition: background 0.5s ease;
+            &:hover, &:focus {
+              background-color: rgba(0,0,0, 0.25);
+            }
+            .background-cover-content {
+              position: relative;
+              width: 100%;
+              min-height: 100%;
+              .slideshow-title-content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                font-size: 18px;
+                line-height: 24px;
+                @include breakpoint(large) {
+                  font-size: 20px;
+                  line-height: 24px;
+                }
+                a {
+                  display: block;
+                  margin: 0 50px 25px 50px;
+                  text-decoration: none;
+                  color: $white;
+                  @include breakpoint(large) {
+                    margin: 0 75px 50px 75px;
+                  }
+                  &:hover {
+                    text-decoration: none;
+                    color: $white;
+                  }
+                  .article-date {
+                    font-family: $font-family-montserrat;
+                    font-size: 11px;
+                    line-height: 14px;
+                    display: inline-block;
+                    padding-bottom: 8px;
+                    margin-bottom: 24px;
+                    border-bottom: 3px solid $article-block-slideshow-date-line;
+                    @include breakpoint(large) {
+                      font-size: 16px;
+                      line-height: 16px;
+                    }
+                  }
+                  .article-title {
+                    h3 {
+                      font-weight: bold;
+                      color: $white;
+                      margin: 0;
+                      padding: 0 0 16px 0;
+                      font-size: 24px;
+                      line-height: 30px;
+                      @include breakpoint(large) {
+                        font-size: 32px;
+                        line-height: 36px;
+                      }
+                    }
+                  }
+                  .article-subtitle {
+                    display: none;
+                    @include breakpoint(medium) {
+                      display: block;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        ul {
+          &.slick-dots {
+            li {
+              margin: 0;
+              button {
+                padding-top:8px;
+                &::before {
+                  font-family: "Material Design Icons";
+                  font-size: 13px;
+                  content: "\F130";
+                  color: $article-block-slideshow-dots !important;
+                }
+              }
+              &.slick-active {
+                button {
+                  &::before {
+                    color: $article-block-slideshow-dots-active !important;
+                    content: "\F12F";
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .slick-arrow {
+          //background-color: $article-block-slideshow-arrow;
+          background: rgba($article-block-slideshow-arrow, 0.5);
+          transition: background-color 0.3s ease;
+          &:hover, &:active, &:focus {
+            background: rgba($article-block-slideshow-arrow, 0.9);
+            &::before {
+              color: $white;
+            }
+          }
+        }
+      }
+      #hero-panel-area {
+        .ucr-custom-block {
+          .ucr-articles--block--container {
+            .cell {
+              padding: 0 !important;
+              margin: 0 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// CSS for the category and tags listing
+.ucr-articles-topics-list--block--container {
+  ul {
+    &.ucr-articles-topics-list--list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      li {
+        a {
+          font-weight: normal;
+          border-bottom: 1px solid #919191;
+          text-decoration: none;
+          color: #d6336b !important;
+          padding: 0.625rem;
+          display: block;
+          @include breakpoint(medium) {
+            padding: 0.9375rem;
+          }
+          &::after {
+            content: "\F13E";
+            display: inline-block;
+            font: normal normal normal 24px/1 "Material Design Icons";
+            font-size: inherit;
+            line-height: 1;
+            text-rendering: auto;
+            padding-left: 4px;
+          }
+          &:hover, &:focus {
+            color: #329AF0;
+          }
+        }
+      }
+    }
+  }
+}

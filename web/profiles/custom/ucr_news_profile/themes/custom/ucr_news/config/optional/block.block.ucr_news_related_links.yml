@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.ucr-news-related-links
+  module:
+    - system
+  theme:
+    - ucr_news
+id: ucr_news_related_links
+theme: ucr_news
+region: footer_third
+weight: 0
+provider: null
+plugin: 'system_menu_block:ucr-news-related-links'
+settings:
+  id: 'system_menu_block:ucr-news-related-links'
+  label: 'Related Links'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

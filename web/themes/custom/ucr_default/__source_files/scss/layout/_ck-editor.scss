@@ -1,0 +1,168 @@
+body {
+  // Make the font size of the toolbar dropdowns smaller
+  .cke_panel_listItem {
+    font-size:11px;
+  }
+  &.cke_editable {
+    display: inherit;
+    flex-direction: inherit;
+    margin: inherit;
+    padding: 1rem;
+    color: $body-color;
+    a {
+      color: $link-color;
+    }
+    h1 {
+      color: #003DA5;
+      font-weight: 300;
+      font-size: 2.375rem;
+      line-height: 1.10526;
+      font-family: "Fira Sans Regular", sans-serif !important;
+      &.page-title {
+        color: $blue-800;
+        margin-bottom: 2rem;
+      }
+    }
+    h2 {
+      @extend h1;
+      font-size: 2.125rem;
+    }
+    h3 {
+      @extend h1;
+      font-weight: 400;
+      font-size: 1.875rem;
+    }
+    h4 {
+      @extend h1;
+      font-weight: 400;
+      font-size: 1.625rem;
+    }
+    h5 {
+      @extend h1;
+      font-weight: 400;
+      font-size: 1.375rem;
+    }
+    h6 {
+      @extend h1;
+      font-weight: 400;
+      font-size: 1.125rem;
+    }
+
+    pre {
+      white-space: pre-wrap;       /* Since CSS 2.1 */
+      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+      white-space: -pre-wrap;      /* Opera 4-6 */
+      white-space: -o-pre-wrap;    /* Opera 7 */
+      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background-color: $blue-50;
+      border: 1px solid darken($blue-900, 5%);
+    }
+
+    div.callout-brand-gold {
+      padding: 1.5rem;
+      background-color: #FFB81C;
+    }
+
+    div.callout-brand-blue {
+      padding: 1.5rem;
+      background-color: #003DA5;
+    }
+
+    div.callout-happy-green {
+      padding: 1.5rem;
+      background-color: #78AF05;
+    }
+
+    div.callout-red {
+      padding: 1.5rem;
+      background-color: #F57373;
+    }
+
+    div.callout-light-blue {
+        padding: 1.5rem;
+      background-color: #91AFCC;
+    }
+
+    div.callout-light-grey {
+      padding: 1.5rem;
+      background-color: #b0bec5;
+    }
+
+
+    figure {
+
+      figcaption {
+        display: table-caption;
+        caption-side: bottom;
+        font-size: 0.775rem;
+        text-align: center;
+        font-weight: bold;
+        padding-bottom: 0.4rem;
+        border-bottom: 2px solid $ucr-blue;
+      }
+
+      &.align-center {
+        text-align: center;
+        display: table;
+      }
+
+      &.align-left {
+        display: table;
+        figcaption {
+          margin-right: 1rem;
+        }
+        img {
+          margin-right: 1rem;
+        }
+      }
+
+      &.align-right {
+        display: table;
+        figcaption {
+          margin-left: 1rem;
+        }
+        img {
+          margin-left: 1rem;
+        }
+      }
+
+      article {
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    article {
+      &.align-center {
+        text-align: center;
+        img {
+          margin-bottom: 1rem;
+        }
+      }
+
+      &.align-left {
+        img {
+          margin-right: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      &.align-right {
+        img {
+          margin-left: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    div {
+      drupal-entity {
+        @extend figure;
+        @extend article;
+      }
+    }
+  }
+}

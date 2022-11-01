@@ -1,0 +1,51 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.expanding_card_block
+    - field.storage.block_content.field_info_cards
+    - paragraphs.paragraphs_type.expanding_card
+  module:
+    - entity_reference_revisions
+id: block_content.expanding_card_block.field_info_cards
+field_name: field_info_cards
+entity_type: block_content
+bundle: expanding_card_block
+label: 'Expanding Cards'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      expanding_card: expanding_card
+    target_bundles_drag_drop:
+      accordion:
+        weight: 9
+        enabled: false
+      bubbles:
+        weight: 10
+        enabled: false
+      carousel_slider:
+        weight: 11
+        enabled: false
+      expanding_card:
+        enabled: true
+        weight: 12
+      galleria_items:
+        weight: 13
+        enabled: false
+      info_card:
+        weight: 14
+        enabled: false
+      statistic:
+        weight: 15
+        enabled: false
+      tab:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions

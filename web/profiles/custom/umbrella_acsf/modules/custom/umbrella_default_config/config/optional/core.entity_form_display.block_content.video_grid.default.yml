@@ -1,0 +1,81 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_grid
+    - field.field.block_content.video_grid.body
+    - field.field.block_content.video_grid.field_button_url
+    - field.field.block_content.video_grid.field_callout_text_color
+    - field.field.block_content.video_grid.field_color
+    - field.field.block_content.video_grid.field_title
+    - field.field.block_content.video_grid.field_video_embed
+    - field.field.block_content.video_grid.field_video_grid_item
+    - field.field.block_content.video_grid.field_video_header_title
+    - field.field.block_content.video_grid.field_video_image
+    - field.field.block_content.video_grid.field_video_subtitle
+  module:
+    - content_moderation
+    - datetime
+    - link
+    - paragraphs
+id: block_content.video_grid.default
+targetEntityType: block_content
+bundle: video_grid
+mode: default
+content:
+  field_button_url:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_video_grid_item:
+    type: entity_reference_paragraphs
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_callout_text_color: true
+  field_color: true
+  field_video_embed: true
+  field_video_header_title: true
+  field_video_image: true
+  field_video_subtitle: true

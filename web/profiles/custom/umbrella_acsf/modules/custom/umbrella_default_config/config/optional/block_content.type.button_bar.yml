@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: button_bar
+label: 'Button Bar'
+revision: 1
+description: 'Add a block of buttons'

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.articles_block
+    - field.storage.block_content.field_article_display
+  module:
+    - options
+id: block_content.articles_block.field_article_display
+field_name: field_article_display
+entity_type: block_content
+bundle: articles_block
+label: 'Display As'
+description: 'Select how you want this to be displayed. If you select ''Slideshow'', for best look and performance, make sure that your Articles have the appropriate images.'
+required: true
+translatable: false
+default_value:
+  -
+    value: normal
+default_value_callback: ''
+settings: {  }
+field_type: list_string

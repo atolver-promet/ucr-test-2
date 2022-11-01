@@ -1,0 +1,163 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_slider
+    - field.field.block_content.testimonial_slider.body
+    - field.field.block_content.testimonial_slider.field_block_margin_bottom
+    - field.field.block_content.testimonial_slider.field_block_margin_left
+    - field.field.block_content.testimonial_slider.field_block_margin_right
+    - field.field.block_content.testimonial_slider.field_block_margin_top
+    - field.field.block_content.testimonial_slider.field_testimonials
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_group
+    - paragraphs
+    - text
+third_party_settings:
+  field_group:
+    group_tab_content:
+      children:
+        - group_general
+        - group_introduction
+        - group_style_options
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Tab Content'
+      region: content
+    group_general:
+      children:
+        - field_testimonials
+      parent_name: group_tab_content
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: General
+      region: content
+    group_style_options:
+      children:
+        - group_margin_options
+      parent_name: group_tab_content
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Style Options'
+      region: content
+    group_margin_options:
+      children:
+        - field_block_margin_top
+        - field_block_margin_bottom
+        - field_block_margin_left
+        - field_block_margin_right
+      parent_name: group_style_options
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Margin Options'
+      region: content
+    group_introduction:
+      children:
+        - body
+      parent_name: group_tab_content
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Introduction
+      region: content
+id: block_content.testimonial_slider.default
+targetEntityType: block_content
+bundle: testimonial_slider
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 101
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_block_margin_bottom:
+    weight: 107
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_left:
+    weight: 108
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_right:
+    weight: 109
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_top:
+    weight: 106
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_testimonials:
+    type: paragraphs
+    weight: 103
+    settings:
+      title: Testimonial
+      title_plural: Testimonials
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ucr_testimonials
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+        add_above: '0'
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 2
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden: {  }

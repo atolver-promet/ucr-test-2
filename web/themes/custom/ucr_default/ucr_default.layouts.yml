@@ -1,0 +1,1380 @@
+# One-Column
+layout_onecol:
+  label: 'One Column (Centered)'
+  category: 'Columns: 1'
+  template: templates/layouts/single_column/layout_onecol
+  icon: 'templates/layouts/single_column/icons/one-col-center.png'
+  default_region: main
+  regions:
+    main:
+      label: 'Main Content'
+layout_onecol_full:
+  label: 'One Column (Full Width)'
+  category: 'Columns: 1'
+  template: templates/layouts/single_column/layout_onecol_full
+  icon: 'templates/layouts/single_column/icons/one-col-full.png'
+  default_region: main
+  regions:
+    main:
+      label: 'Main Content'
+layout_onecol_variant_1:
+  label: 'One Column (Variant 1)'
+  category: 'Columns: 1'
+  template: templates/layouts/single_column/layout_onecol_variant_1
+  icon: 'templates/layouts/single_column/icons/one-col-variant-1.png'
+  default_region: region1
+  regions:
+    region1:
+      label: 'Region 1'
+    region2:
+      label: 'Region 2'
+    region3:
+      label: 'Region 3'
+layout_onecol_variant_2:
+  label: 'One Column (Variant 2)'
+  category: 'Columns: 1'
+  template: templates/layouts/single_column/layout_onecol_variant_2
+  icon: 'templates/layouts/single_column/icons/one-col-variant-2.png'
+  default_region: region1
+  regions:
+    region1:
+      label: 'Region 1'
+    region2:
+      label: 'Region 2'
+    region3:
+      label: 'Region 3'
+# Two-Columns
+two_column_50_50:
+  label: '50/50 (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50
+  icon: 'templates/layouts/two_column/icons/two-col-50-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_50_50_mix_1:
+  label: '50/50 (Mixed)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-50-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_50_50_full:
+  label: '50/50 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50-full
+  icon: 'templates/layouts/two_column/icons/two-col-50-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_50_50_Bricks:
+  label: '50/50 Bricks (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50-bricks-center
+  icon: 'templates/layouts/two_column/icons/two-col-50-brick-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_50_50_bricks_mix_1:
+  label: '50/50 Bricks (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50-bricks-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-50-brick-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_50_50_bricks_mix_2:
+  label: '50/50 Bricks (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50-bricks-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-50-brick-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_50_50_bricks_mix_3:
+  label: '50/50 Bricks (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50-bricks-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-50-brick-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_50_50_bricks_full:
+  label: '50/50 Bricks (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-50-50-bricks-full
+  icon: 'templates/layouts/two_column/icons/two-col-50-brick-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33:
+  label: '66/33 (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33
+  icon: 'templates/layouts/two_column/icons/two-col-66-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33_mix_1:
+  label: '66/33 (Mixed)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-66-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33_full:
+  label: '66/33 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33-full
+  icon: 'templates/layouts/two_column/icons/two-col-66-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33_bricks:
+  label: '66/33 Bricks (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33-bricks-center
+  icon: 'templates/layouts/two_column/icons/two-col-66-brick-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33_bricks_mix_1:
+  label: '66/33 Bricks (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33-bricks-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-66-brick-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33_bricks_mix_2:
+  label: '66/33 Bricks (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33-bricks-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-66-brick-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33_bricks_mix_3:
+  label: '66/33 Bricks (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33-bricks-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-66-brick-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_66_33_bricks_full:
+  label: '66/33 Bricks (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-66-33-bricks-full
+  icon: 'templates/layouts/two_column/icons/two-col-66-brick-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_33_66:
+  label: '33/66 (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66
+  icon: 'templates/layouts/two_column/icons/two-col-33-center.png'
+  default_region: top
+  regions:
+      top:
+        label: 'Top'
+      column1:
+        label: 'Column 1'
+      column2:
+        label: 'Column 2'
+      bottom:
+        label: 'Bottom'
+two_column_33_66_mix_1:
+  label: '33/66 (Mixed)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-33-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_33_66_full:
+  label: '33/66 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66-full
+  icon: 'templates/layouts/two_column/icons/two-col-33-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_33_66_bricks:
+  label: '33/66 Bricks (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66-bricks-center
+  icon: 'templates/layouts/two_column/icons/two-col-33-brick-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_33_66_bricks_mix_1:
+  label: '33/66 Bricks (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66-bricks-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-33-brick-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_33_66_bricks_mix_2:
+  label: '33/66 Bricks (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66-bricks-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-33-brick-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_33_66_bricks_mix_3:
+  label: '33/66 Bricks (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66-bricks-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-33-brick-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_33_66_bricks_full:
+  label: '33/66 Bricks (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-33-66-bricks-full
+  icon: 'templates/layouts/two_column/icons/two-col-33-brick-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_75_25:
+  label: '75/25 (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25
+  icon: 'templates/layouts/two_column/icons/two-col-75-center.png'
+  default_region: top
+  regions:
+      top:
+        label: 'Top'
+      column1:
+        label: 'Column 1'
+      column2:
+        label: 'Column 2'
+      bottom:
+        label: 'Bottom'
+two_column_75_25_mix_1:
+  label: '75/25 (Mixed)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-75-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_75_25_full:
+  label: '75/25 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25-full
+  icon: 'templates/layouts/two_column/icons/two-col-75-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_75_25_bricks:
+  label: '75/25 Bricks (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25-bricks-center
+  icon: 'templates/layouts/two_column/icons/two-col-75-brick-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_75_25_bricks_mix_1:
+  label: '75/25 Bricks (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25-bricks-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-75-brick-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_75_25_bricks_mix_2:
+  label: '75/25 Bricks (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25-bricks-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-75-brick-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_75_25_bricks_mix_3:
+  label: '75/25 Bricks (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25-bricks-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-75-brick-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_75_25_bricks_full:
+  label: '75/25 Bricks (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-75-25-bricks-full
+  icon: 'templates/layouts/two_column/icons/two-col-75-brick-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_25_75:
+  label: '25/75 (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75
+  icon: 'templates/layouts/two_column/icons/two-col-25-center.png'
+  default_region: top
+  regions:
+      top:
+        label: 'Top'
+      column1:
+        label: 'Column 1'
+      column2:
+        label: 'Column 2'
+      bottom:
+        label: 'Bottom'
+two_column_25_75_mix_1:
+  label: '25/75 (Mixed)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-25-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_25_75_full:
+  label: '25/75 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75-full
+  icon: 'templates/layouts/two_column/icons/two-col-25-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    column1:
+      label: 'Column 1'
+    column2:
+      label: 'Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_25_75_bricks:
+  label: '25/75 Bricks (Centered)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75-bricks-center
+  icon: 'templates/layouts/two_column/icons/two-col-25-brick-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_25_75_bricks_mix_1:
+  label: '25/75 Bricks (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75-bricks-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-25-brick-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_25_75_bricks_mix_2:
+  label: '25/75 Bricks (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75-bricks-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-25-brick-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_25_75_bricks_mix_3:
+  label: '25/75 Bricks (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75-bricks-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-25-brick-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_25_75_bricks_full:
+  label: '25/75 Bricks (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-25-75-bricks-full
+  icon: 'templates/layouts/two_column/icons/two-col-25-brick-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_1_center:
+  label: 'Zebra Style 1 (Center)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-1-center
+  icon: 'templates/layouts/two_column/icons/two-col-variant-1-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_1_mix_1:
+  label: 'Zebra Style 1 (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-1-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-variant-1-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_1_mix_2:
+  label: 'Zebra Style 1 (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-1-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-variant-1-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_1_mix_3:
+  label: 'Zebra Style 1 (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-1-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-variant-1-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_1_full:
+  label: 'Zebra Style 1 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-1-full
+  icon: 'templates/layouts/two_column/icons/two-col-variant-1-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_2_center:
+  label: 'Zebra Style 2 (Center)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-2-center
+  icon: 'templates/layouts/two_column/icons/two-col-variant-2-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_2_mix_1:
+  label: 'Zebra Style 2 (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-2-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-variant-2-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_2_mix_2:
+  label: 'Zebra Style 2 (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-2-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-variant-2-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_2_mix_3:
+  label: 'Zebra Style 2 (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-2-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-variant-2-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_2_full:
+  label: 'Zebra Style 2 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-2-full
+  icon: 'templates/layouts/two_column/icons/two-col-variant-2-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_3_center:
+  label: 'Zebra Style 3 (Center)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-3-center
+  icon: 'templates/layouts/two_column/icons/two-col-variant-3-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_3_mix_1:
+  label: 'Zebra Style 3 (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-3-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-variant-3-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_3_mix_2:
+  label: 'Zebra Style 3 (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-3-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-variant-3-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_3_mix_3:
+  label: 'Zebra Style 3 (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-3-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-variant-3-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_3_full:
+  label: 'Zebra Style 3 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-3-full
+  icon: 'templates/layouts/two_column/icons/two-col-variant-3-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_4_center:
+  label: 'Zebra Style 4 (Center)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-4-center
+  icon: 'templates/layouts/two_column/icons/two-col-variant-4-all-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_4_mix_1:
+  label: 'Zebra Style 4 (Mix 1)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-4-mix-1
+  icon: 'templates/layouts/two_column/icons/two-col-variant-4-top-middle-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_4_mix_2:
+  label: 'Zebra Style 4 (Mix 2)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-4-mix-2
+  icon: 'templates/layouts/two_column/icons/two-col-variant-4-top-bottom-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_4_mix_3:
+  label: 'Zebra Style 4 (Mix 3)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-4-mix-3
+  icon: 'templates/layouts/two_column/icons/two-col-variant-4-top-center.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+two_column_zebra_4_full:
+  label: 'Zebra Style 4 (Full Width)'
+  category: 'Columns: 2'
+  template: templates/layouts/two_column/two-column-zebra-4-full
+  icon: 'templates/layouts/two_column/icons/two-col-variant-4-full.png'
+  default_region: top
+  regions:
+    top:
+      label: 'Top'
+    first_column1:
+      label: 'First Column 1'
+    first_column2:
+      label: 'First Column 2'
+    middle:
+      label: 'Middle'
+    second_column1:
+      label: 'Second Column 1'
+    second_column2:
+      label: 'Second Column 2'
+    bottom:
+      label: 'Bottom'
+# Three Columns
+three_column_25_50_25:
+  label: '25/50/25 (Centered)'
+  category: 'Columns: 3'
+  template: templates/layouts/three_column/three-column-25-50-25
+  icon: 'templates/layouts/three_column/icons/three-col-25-center.png'
+  default_region: main
+  regions:
+    top:
+      label: 'Top'
+    left_column:
+      label: 'Left Sidebar'
+    main:
+      label: 'Main Content'
+    right_column:
+      label: 'Right Sidebar'
+    bottom:
+      label: 'Bottom'
+three_column_25_50_25_mix_1:
+  label: '25/50/25 (Mixed)'
+  category: 'Columns: 3'
+  template: templates/layouts/three_column/three-column-25-50-25-mix-1
+  icon: 'templates/layouts/three_column/icons/three-col-25-top-center.png'
+  default_region: main
+  regions:
+    top:
+      label: 'Top'
+    left_column:
+      label: 'Left Sidebar'
+    main:
+      label: 'Main Content'
+    right_column:
+      label: 'Right Sidebar'
+    bottom:
+      label: 'Bottom'
+three_column_25_50_25_full:
+  label: '25/50/25 (Full Width)'
+  category: 'Columns: 3'
+  template: templates/layouts/three_column/three-column-25-50-25-full
+  icon: 'templates/layouts/three_column/icons/three-col-25-full.png'
+  default_region: main
+  regions:
+    top:
+      label: 'Top'
+    left_column:
+      label: 'Left Sidebar'
+    main:
+      label: 'Main Content'
+    right_column:
+      label: 'Right Sidebar'
+    bottom:
+      label: 'Bottom'
+three_column_33_34_33:
+  label: '33/34/33 (Centered)'
+  category: 'Columns: 3'
+  template: templates/layouts/three_column/three-column-33-34-33
+  icon: 'templates/layouts/three_column/icons/three-col-33-center.png'
+  default_region: main
+  regions:
+    top:
+      label: 'Top'
+    left_column:
+      label: 'Left Sidebar'
+    main:
+      label: 'Main Content'
+    right_column:
+      label: 'Right Sidebar'
+    bottom:
+      label: 'Bottom'
+three_column_33_34_33_mix_1:
+  label: '33/34/33 (Mixed)'
+  category: 'Columns: 3'
+  template: templates/layouts/three_column/three-column-33-34-33-mix-1
+  icon: 'templates/layouts/three_column/icons/three-col-33-top-center.png'
+  default_region: main
+  regions:
+    top:
+      label: 'Top'
+    left_column:
+      label: 'Left Sidebar'
+    main:
+      label: 'Main Content'
+    right_column:
+      label: 'Right Sidebar'
+    bottom:
+      label: 'Bottom'
+three_column_33_34_33_full:
+  label: '33/34/33 (Full Width)'
+  category: 'Columns: 3'
+  template: templates/layouts/three_column/three-column-33-34-33-full
+  icon: 'templates/layouts/three_column/icons/three-col-33-full.png'
+  default_region: main
+  regions:
+    top:
+      label: 'Top'
+    left_column:
+      label: 'Left Sidebar'
+    main:
+      label: 'Main Content'
+    right_column:
+      label: 'Right Sidebar'
+    bottom:
+      label: 'Bottom'
+# LAYOUT BUILDER LAYOUTS
+lb_one_column:
+  label: 'One Column'
+  category: 'Layout Builder'
+  path: templates/layouts
+  template: one-column
+  class: '\Drupal\ucr_layouts\Plugin\Layout\OneColumn'
+  default_region: main
+  regions:
+    main:
+      label: 'Main Content'
+  icon_map:
+    - [main]
+lb_two_column:
+  label: 'Two Columns'
+  category: 'Layout Builder'
+  path: templates/layouts
+  template: two-column
+  class: '\Drupal\ucr_layouts\Plugin\Layout\TwoColumn'
+  default_region: column_1
+  regions:
+    column_1:
+      label: 'Column 1'
+    column_2:
+      label: 'Column 2'
+  icon_map:
+    - [column_1, column_2]
+lb_three_column:
+  label: 'Three Columns'
+  category: 'Layout Builder'
+  path: templates/layouts
+  template: three-column
+  class: '\Drupal\ucr_layouts\Plugin\Layout\ThreeColumn'
+  default_region: column_1
+  regions:
+    column_1:
+      label: 'Column 1'
+    column_2:
+      label: 'Column 2'
+    column_3:
+      label: 'Column 3'
+  icon_map:
+    - [column_1, column_2, column_3]
+lb_four_column:
+  label: 'Four Columns'
+  category: 'Layout Builder'
+  path: templates/layouts
+  template: four-column
+  class: '\Drupal\ucr_layouts\Plugin\Layout\FourColumn'
+  default_region: column_1
+  regions:
+    column_1:
+      label: 'Column 1'
+    column_2:
+      label: 'Column 2'
+    column_3:
+      label: 'Column 3'
+    column_4:
+      label: 'Column 4'
+  icon_map:
+    - [column_1, column_2, column_3, column_4]

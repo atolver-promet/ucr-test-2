@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - node
+id: college_page_path
+label: 'College Page Pattern'
+type: 'canonical_entities:node'
+pattern: '/colleges/[node:title]'
+selection_criteria:
+  9004e5f1-c989-416f-8e04-5576c04fe4b6:
+    id: node_type
+    bundles:
+      college_page: college_page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 9004e5f1-c989-416f-8e04-5576c04fe4b6
+selection_logic: and
+weight: -5
+relationships: {  }

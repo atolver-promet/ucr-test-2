@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_courses_taught
+    - node.type.people_profiles
+  module:
+    - text
+id: node.people_profiles.field_courses_taught
+field_name: field_courses_taught
+entity_type: node
+bundle: people_profiles
+label: 'Courses Taught'
+description: '<em>( Optional )</em> Please enter in any courses the person may have taught. Enter each one on a separate line.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

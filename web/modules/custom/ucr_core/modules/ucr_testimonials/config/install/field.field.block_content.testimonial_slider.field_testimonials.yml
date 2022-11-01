@@ -1,0 +1,63 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_slider
+    - field.storage.block_content.field_testimonials
+    - paragraphs.paragraphs_type.ucr_testimonials
+  module:
+    - entity_reference_revisions
+id: block_content.testimonial_slider.field_testimonials
+field_name: field_testimonials
+entity_type: block_content
+bundle: testimonial_slider
+label: Testimonials
+description: 'Please use the option below to create / manage the Testimonials.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      ucr_testimonials: ucr_testimonials
+    target_bundles_drag_drop:
+      accordion:
+        weight: 13
+        enabled: false
+      bubbles:
+        weight: 14
+        enabled: false
+      button_bar:
+        weight: 15
+        enabled: false
+      carousel_slider:
+        weight: 16
+        enabled: false
+      cta_item:
+        weight: 17
+        enabled: false
+      expanding_card:
+        weight: 18
+        enabled: false
+      galleria_items:
+        weight: 19
+        enabled: false
+      info_card:
+        weight: 20
+        enabled: false
+      statistic:
+        weight: 21
+        enabled: false
+      tab:
+        weight: 22
+        enabled: false
+      ucr_columns:
+        weight: 23
+        enabled: false
+      ucr_testimonials:
+        enabled: true
+        weight: 24
+field_type: entity_reference_revisions

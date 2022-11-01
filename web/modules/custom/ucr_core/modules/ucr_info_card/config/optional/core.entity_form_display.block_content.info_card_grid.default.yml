@@ -1,0 +1,235 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.info_card_grid
+    - field.field.block_content.info_card_grid.body
+    - field.field.block_content.info_card_grid.field_block_bg_color
+    - field.field.block_content.info_card_grid.field_block_font_color
+    - field.field.block_content.info_card_grid.field_block_include_extra
+    - field.field.block_content.info_card_grid.field_block_margin_bottom
+    - field.field.block_content.info_card_grid.field_block_margin_left
+    - field.field.block_content.info_card_grid.field_block_margin_right
+    - field.field.block_content.info_card_grid.field_block_margin_top
+    - field.field.block_content.info_card_grid.field_block_padding_horizontal
+    - field.field.block_content.info_card_grid.field_block_padding_vertical
+    - field.field.block_content.info_card_grid.field_counter
+    - field.field.block_content.info_card_grid.field_info_cards
+    - workflows.workflow.editorial
+  module:
+    - color_field
+    - content_moderation
+    - field_group
+    - paragraphs
+    - text
+third_party_settings:
+  field_group:
+    group_info_cards_form_tabs:
+      children:
+        - group_cards_info
+        - group_introduction
+        - group_style_
+      parent_name: ''
+      weight: 4
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Info Cards Form Tabs'
+      region: content
+    group_cards_info:
+      children:
+        - field_counter
+        - field_info_cards
+      parent_name: group_info_cards_form_tabs
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: 'Cards Info'
+      region: content
+    group_introduction:
+      children:
+        - body
+      parent_name: group_info_cards_form_tabs
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: '<em>( Optional )</em> Enter in content that will be displayed above the Info Cards.'
+        required_fields: true
+      label: Introduction
+      region: content
+    group_style_:
+      children:
+        - field_block_include_extra
+        - field_block_font_color
+        - group_background_options
+        - group_padding_options
+        - group_margin_options
+      parent_name: group_info_cards_form_tabs
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Style Options'
+      region: content
+    group_padding_options:
+      children:
+        - field_block_padding_horizontal
+        - field_block_padding_vertical
+      parent_name: group_style_
+      weight: 39
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Padding Options'
+      region: content
+    group_margin_options:
+      children:
+        - field_block_margin_top
+        - field_block_margin_bottom
+        - field_block_margin_left
+        - field_block_margin_right
+      parent_name: group_style_
+      weight: 40
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Margin Options'
+      region: content
+    group_background_options:
+      children:
+        - field_block_bg_color
+      parent_name: group_style_
+      weight: 38
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Background Options'
+      region: content
+id: block_content.info_card_grid.default
+targetEntityType: block_content
+bundle: info_card_grid
+mode: default
+content:
+  body:
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_block_bg_color:
+    weight: 26
+    settings:
+      default_colors: '#E9EDF2,#CDD3DA,#868D96,#485057,#2D6CC0,#A5C8EA,#91AFCC,#637EA4,#1D3661,#003DA5,#FFB81C'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_block_font_color:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_include_extra:
+    weight: 3
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_block_margin_bottom:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_left:
+    weight: 34
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_right:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_top:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_horizontal:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_vertical:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_counter:
+    weight: 6
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_info_cards:
+    type: entity_reference_paragraphs
+    weight: 7
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: info_card
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 6
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden: {  }

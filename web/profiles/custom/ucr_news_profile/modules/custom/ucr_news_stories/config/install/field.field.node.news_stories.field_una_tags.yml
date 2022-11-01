@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_tags
+  - node.type.news_stories
+  - taxonomy.vocabulary.tags
+id: node.news_stories.field_una_tags
+field_name: field_una_tags
+entity_type: node
+bundle: news_stories
+label: Tags
+description: '<em>( Optional )</em> Select the different tags you want to be associated with this News Story. Begin typing and it will auto-complete / show you a list of matching tags. If the tag doesn''t exist, it will automatically be created upon submission.<br /><br />You can manage the Tags Taxonomy <a href="/admin/structure/taxonomy/manage/tags/overview" target="_blank">here</a>.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tags: tags
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

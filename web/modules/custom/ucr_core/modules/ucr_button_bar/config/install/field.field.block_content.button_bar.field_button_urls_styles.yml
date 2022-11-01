@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.button_bar
+  - field.storage.block_content.field_button_urls_styles
+  - paragraphs.paragraphs_type.button_bar
+  module:
+  - entity_reference_revisions
+id: block_content.button_bar.field_button_urls_styles
+field_name: field_button_urls_styles
+entity_type: block_content
+bundle: button_bar
+label: 'URLs & Styles'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      button_bar: button_bar
+    target_bundles_drag_drop:
+      accordion:
+        weight: 10
+        enabled: false
+      bubbles:
+        weight: 11
+        enabled: false
+      button_bar:
+        enabled: true
+        weight: 12
+      carousel_slider:
+        weight: 13
+        enabled: false
+      expanding_card:
+        weight: 14
+        enabled: false
+      galleria_items:
+        weight: 15
+        enabled: false
+      info_card:
+        weight: 16
+        enabled: false
+      statistic:
+        weight: 17
+        enabled: false
+      tab:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

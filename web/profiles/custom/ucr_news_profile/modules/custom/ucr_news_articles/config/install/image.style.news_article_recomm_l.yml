@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: news_article_recomm_l
+label: 'News Article - Recommended (L)'
+effects:
+  415c818f-8f65-4239-8f0a-cebb949f640f:
+    uuid: 415c818f-8f65-4239-8f0a-cebb949f640f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 232
+      height: 232
+      crop_type: focal_point

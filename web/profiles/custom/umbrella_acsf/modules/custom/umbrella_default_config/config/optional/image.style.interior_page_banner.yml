@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: interior_page_banner
+label: 'Interior Page Banner (1315 x 461)'
+effects:
+  a47b5441-f7b1-4743-bd06-57e5c54118c0:
+    uuid: a47b5441-f7b1-4743-bd06-57e5c54118c0
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1315
+      height: 461
+      crop_type: focal_point

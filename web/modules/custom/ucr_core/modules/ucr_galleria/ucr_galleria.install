@@ -1,0 +1,274 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_galleria_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Update the Galleria with the new content keywords taxonomy.
+ */
+function ucr_galleria_update_8001() {
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  $page_contents = \Drupal\field\Entity\FieldConfig::loadByName('node', 'galleria', 'field_content_keywords');
+  if(!$page_contents) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/field.field.node.galleria.field_content_keywords.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  $meta_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'galleria', 'field_meta_tags');
+  if(!$meta_field) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/field.field.node.galleria.field_meta_tags.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Update the Form Display.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/core.entity_form_display.node.galleria.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_form = Yaml::decode($file_contents);
+  $current_form = $config->getEditable('core.entity_form_display.node.galleria.default');
+  $current_form_id = $current_form->get('uuid');
+  if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_form);
+    $current_form->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_form->set('dependencies', $new_form['dependencies'])
+      ->set('third_party_settings', $new_form['third_party_settings'])
+      ->set('content', $new_form['content'])
+      ->set('hidden', $new_form['hidden'])->save(TRUE);
+  }
+}
+
+/**
+ * Add the 'Intro Body' field & Update the Preview Field.
+ */
+function ucr_galleria_update_8002() {
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  // *** Update the Form Display.
+  $profile_name = $config->getEditable('core.extension')->get('profile');
+
+  // Create the field.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/field.field.block_content.galleria.body.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_field = Yaml::decode($file_contents);
+
+  $uuid = $uuid_service->generate();
+  $full_array = array_merge(array('uuid' => $uuid), $new_field);
+  \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+
+  // Update the Galleria Preview Selector.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/field.field.block_content.galleria.field_galleria_preview.yml';
+  $file_contents = file_get_contents($file_path);
+  $update_field = Yaml::decode($file_contents);
+
+  $current_preview_field = $config->getEditable('field.field.block_content.galleria.field_galleria_preview');
+  $current_preview_field->set('description', $update_field['description'])
+    ->set('required', $update_field['required'])->save(TRUE);
+
+  // Update the form view.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/core.entity_form_display.block_content.galleria.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_form = Yaml::decode($file_contents);
+  $current_form = $config->getEditable('core.entity_form_display.block_content.galleria.default');
+  $current_form->set('dependencies', $new_form['dependencies'])
+    ->set('content', $new_form['content'])->save(TRUE);
+
+  // Update the display view.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/core.entity_view_display.block_content.galleria.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_view = Yaml::decode($file_contents);
+  $current_view = $config->getEditable('core.entity_view_display.block_content.galleria.default');
+  $current_view->set('dependencies', $new_view['dependencies'])
+    ->set('content', $new_view['content'])
+    ->set('hidden', $new_view['hidden'])->save(TRUE);
+}
+
+/**
+ * October 2018 - Add the Full View Display. This is for the UCR Default Profile & UCR News Only.
+ */
+function ucr_galleria_update_8003() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // *** Add the new View Display.
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $acceptable_profiles = array('ucr_profile', 'ucr_profile_local', 'ucr_news_profile', 'ucr_news_local');
+    if(in_array($profile_name, $acceptable_profiles)) {
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/core.entity_view_display.block_content.galleria.center.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_display = Yaml::decode($file_contents);
+
+        $new_config_display = $config->getEditable('core.entity_view_display.block_content.galleria.center');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_display);
+        $new_config_display->setData($full_array)->save(TRUE);
+    }
+}
+
+/**
+ * November 2018 - Update for Non-Umbrella Sites adding Social Media Options.
+ */
+function ucr_galleria_update_8004() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    // Only Update the view and image formats for the default profile.
+    if(!in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+        $social_image_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'galleria', 'field_social_media_image');
+        if(!$social_image_field) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/field.field.node.galleria.field_social_media_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        // Update the Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/core.entity_form_display.node.galleria.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_form_display.node.galleria.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('third_party_settings', $page_form_yml['third_party_settings'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the Display View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/core.entity_view_display.node.galleria.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_view_display.node.galleria.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the Teaser Display View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_galleria/config/install/core.entity_view_display.node.galleria.teaser.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_view_display.node.galleria.teaser');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+    }
+}
+
+/**
+ * December 2018 - Adding of Style Options.
+ */
+function ucr_galleria_update_8005() {
+    $config = \Drupal::configFactory();
+    $module_handler = \Drupal::moduleHandler();
+    $uuid_service = \Drupal::service('uuid');
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.field.block_content.galleria.field_block_margin_bottom',
+            'field.field.block_content.galleria.field_block_margin_left',
+            'field.field.block_content.galleria.field_block_margin_right',
+            'field.field.block_content.galleria.field_block_margin_top',
+            'core.entity_form_display.block_content.galleria.default',
+            'core.entity_view_display.block_content.galleria.center',
+            'core.entity_view_display.block_content.galleria.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_galleria', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_galleria_update_8006() {
+    $config = \Drupal::configFactory();
+    $module_handler = \Drupal::moduleHandler();
+    $uuid_service = \Drupal::service('uuid');
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.galleria.default',
+            'core.entity_form_display.node.galleria.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_galleria', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_galleria_update_dependencies() {
+  $dependencies = array();
+  $dependencies['ucr_galleria']['8006'] = [
+    'ucr_core' => '8010'
+  ];
+
+  return $dependencies;
+}

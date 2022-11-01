@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.custom_header
+  - field.storage.block_content.field_title
+id: block_content.custom_header.field_title
+field_name: field_title
+entity_type: block_content
+bundle: custom_header
+label: Title
+description: 'Enter in the text to be displayed as a title.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

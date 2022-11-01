@@ -1,0 +1,231 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_faqs_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+
+    $roles = \Drupal\user\Entity\Role::loadMultiple();
+    $valid_roles = array('site_builders', 'editors', 'contributors');
+    foreach($roles as $role) {
+        $role_id = $role->id();
+        if (in_array($role_id, $valid_roles)) {
+            if($role_id == "site_builders") {
+                $role->grantPermission('create faq content')->save(TRUE);
+                $role->grantPermission('delete any faq content')->save(TRUE);
+                $role->grantPermission('delete own faq content')->save(TRUE);
+                $role->grantPermission('edit any faq content')->save(TRUE);
+                $role->grantPermission('edit own faq content')->save(TRUE);
+                $role->grantPermission('revert faq revisions')->save(TRUE);
+                $role->grantPermission('view faq revisions')->save(TRUE);
+                $role->grantPermission('create terms in faq_category')->save(TRUE);
+                $role->grantPermission('delete terms in faq_category')->save(TRUE);
+                $role->grantPermission('edit terms in faq_category')->save(TRUE);
+                $role->grantPermission('administer faq_category vocabulary terms')->save(TRUE);
+            } elseif($role_id == "editors") {
+                $role->grantPermission('create faq content')->save(TRUE);
+                $role->grantPermission('delete any faq content')->save(TRUE);
+                $role->grantPermission('delete own faq content')->save(TRUE);
+                $role->grantPermission('edit any faq content')->save(TRUE);
+                $role->grantPermission('edit own faq content')->save(TRUE);
+                $role->grantPermission('revert faq revisions')->save(TRUE);
+                $role->grantPermission('view faq revisions')->save(TRUE);
+                $role->grantPermission('create terms in faq_category')->save(TRUE);
+                $role->grantPermission('delete terms in faq_category')->save(TRUE);
+                $role->grantPermission('edit terms in faq_category')->save(TRUE);
+                $role->grantPermission('administer faq_category vocabulary terms')->save(TRUE);
+            } elseif($role_id == "contributors") {
+                $role->grantPermission('create faq content')->save(TRUE);
+                $role->grantPermission('delete own faq content')->save(TRUE);
+                $role->grantPermission('edit any faq content')->save(TRUE);
+                $role->grantPermission('edit own faq content')->save(TRUE);
+                $role->grantPermission('revert faq revisions')->save(TRUE);
+                $role->grantPermission('view faq revisions')->save(TRUE);
+                $role->grantPermission('create terms in faq_category')->save(TRUE);
+                $role->grantPermission('edit terms in faq_category')->save(TRUE);
+                $role->grantPermission('administer faq_category vocabulary terms')->save(TRUE);
+            }
+        }
+    }
+
+    // Update the metatags to include the new permissions.
+    $meta_perms = array(
+        'faq' => array(
+            'basic' => 'basic',
+            'open_graph' => 'open_graph',
+            'twitter_cards' => 'twitter_cards',
+        ),
+    );
+
+    $config = \Drupal::configFactory();
+    $current_config = $config->getEditable('metatag.settings');
+    $current_config->set('entity_type_groups.node.faq', $meta_perms['faq'])->save(TRUE);
+}
+
+/**
+ * November 2018 - Update for Non-Umbrella Sites adding Social Media Options.
+ */
+function ucr_faqs_update_8001() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    // Only Update the view and image formats for the default profile.
+    if(!in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+        $social_image_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'faq', 'field_social_media_image');
+        if(!$social_image_field) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_faqs/config/install/field.field.node.faq.field_social_media_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        $meta_tags = \Drupal\field\Entity\FieldConfig::loadByName('node', 'faq', 'field_meta_tags');
+        if(!$meta_tags) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_faqs/config/install/field.field.node.faq.field_meta_tags.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        $keywords = \Drupal\field\Entity\FieldConfig::loadByName('node', 'faq', 'field_content_keywords');
+        if(!$keywords) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_faqs/config/install/field.field.node.faq.field_content_keywords.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        // Update the Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_faqs/config/install/core.entity_form_display.node.faq.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_form_display.node.faq.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('third_party_settings', $page_form_yml['third_party_settings'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the Display View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_faqs/config/install/core.entity_view_display.node.faq.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_view_display.node.faq.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the Taxonomy Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_faqs/config/install/core.entity_form_display.taxonomy_term.faq_category.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_form_display.taxonomy_term.faq_category.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the Taxonomy Display View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_faqs/config/install/core.entity_view_display.taxonomy_term.faq_category.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_view_display.taxonomy_term.faq_category.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the metatags to include the new permissions.
+        $meta_perms = array(
+            'faq' => array(
+                'basic' => 'basic',
+                'open_graph' => 'open_graph',
+                'twitter_cards' => 'twitter_cards',
+            ),
+        );
+        $current_config = $config->getEditable('metatag.settings');
+        $current_config->set('entity_type_groups.node.faq', $meta_perms['faq'])->save(TRUE);
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_faqs_update_8002() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.node.faq.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_faqs', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_faqs_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_faqs']['8002'] = [
+        'ucr_core' => '8010',
+    ];
+
+    return $dependencies;
+}

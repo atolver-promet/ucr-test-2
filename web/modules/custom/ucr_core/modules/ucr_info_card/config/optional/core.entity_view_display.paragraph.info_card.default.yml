@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.paragraph.info_card.field_body
+  - field.field.paragraph.info_card.field_info_card_url
+  - paragraphs.paragraphs_type.info_card
+  module:
+  - link
+  - text
+id: paragraph.info_card.default
+targetEntityType: paragraph
+bundle: info_card
+mode: default
+content:
+  field_body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_info_card_url:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden: {  }

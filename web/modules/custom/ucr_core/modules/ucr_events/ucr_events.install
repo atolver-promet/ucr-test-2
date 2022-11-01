@@ -1,0 +1,368 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_events_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_events_update_8001() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * Update the Event Image with the correct path and update the event_list view.
+ */
+function ucr_events_update_8002() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * Update the Events with the new content keywords taxonomy.
+ */
+function ucr_events_update_8003() {
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  $page_contents = \Drupal\field\Entity\FieldConfig::loadByName('node', 'event', 'field_content_keywords');
+  if(!$page_contents) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/field.field.node.event.field_content_keywords.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  $meta_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'event', 'field_meta_tags');
+  if(!$meta_field) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/field.field.node.event.field_meta_tags.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Update the Form Display.
+  $profile_name = $config->getEditable('core.extension')->get('profile');
+
+  if(in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/umbrella/core.entity_form_display.node.event.default.yml';
+  } else {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_form_display.node.event.default.yml';
+  }
+  $file_contents = file_get_contents($file_path);
+  $new_form = Yaml::decode($file_contents);
+  $current_form = $config->getEditable('core.entity_form_display.node.event.default');
+  $current_form_id = $current_form->get('uuid');
+  if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_form);
+    $current_form->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_form->set('dependencies', $new_form['dependencies'])
+      ->set('third_party_settings', $new_form['third_party_settings'])
+      ->set('content', $new_form['content'])
+      ->set('hidden', $new_form['hidden'])->save(TRUE);
+  }
+}
+
+/**
+ * Update the Events View for non-umbrella sites.
+ */
+function ucr_events_update_8004() {
+  $config = \Drupal::configFactory();
+  // *** Update the Form Display.
+
+  $profile_name = $config->getEditable('core.extension')->get('profile');
+
+  if(!in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/views.view.event_list.yml';
+    $file_contents = file_get_contents($file_path);
+    $view_xml = Yaml::decode($file_contents);
+    $current_view = $config->getEditable('views.view.event_list');
+    $current_view->set('dependencies', $view_xml['dependencies'])
+                 ->set('display', $view_xml['display'])->save(TRUE);
+  }
+}
+
+/**
+ * October 2018 - Update the View for Non-Umbrella Sites, as well as additional configuration.
+ */
+function ucr_events_update_8005() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // Add the new Date Format.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.date_format.ucr_events_standard_format.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_view = Yaml::decode($file_contents);
+
+    $current_view = $config->getEditable('core.date_format.ucr_events_standard_format');
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_view);
+    $current_view->setData($full_array)->save(TRUE);
+
+    // Add the new Image Format.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/image.style.event_full.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_view = Yaml::decode($file_contents);
+
+    $current_view = $config->getEditable('image.style.event_full');
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_view);
+    $current_view->setData($full_array)->save(TRUE);
+
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    // Only Update the view and image formats for the default profile.
+    if(!in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+        // Add the new View Mode:
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_view_mode.taxonomy_term.event_contacts.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+
+        $current_view = $config->getEditable('core.entity_view_mode.taxonomy_term.event_contacts');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_view);
+        $current_view->setData($full_array)->save(TRUE);
+
+        // Update the View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/views.view.event_list.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('views.view.event_list');
+        $current_view->set('dependencies', $view_xml['dependencies'])
+            ->set('display', $view_xml['display'])->save(TRUE);
+
+        // Update the other Image Styles
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/image.style.event_listing_image.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('image.style.event_listing_image');
+        $current_view->set('label', $view_xml['label'])->save(TRUE);
+
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/image.style.event_listing_image_alt.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('image.style.event_listing_image_alt');
+        $current_view->set('label', $view_xml['label'])
+            ->set('effects', $view_xml['effects'])->save(TRUE);
+
+        // Update the Node Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_form_display.node.event.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_form_display.node.event.default');
+        $current_view->set('dependencies', $view_xml['dependencies'])
+            ->set('third_party_settings', $view_xml['third_party_settings'])
+            ->set('content', $view_xml['content'])
+            ->set('hidden', $view_xml['hidden'])
+            ->save(TRUE);
+
+        // Update the Taxonomy Contact Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_form_display.taxonomy_term.contact.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_form_display.taxonomy_term.contact.default');
+
+        $current_form_id = $current_view->get('uuid');
+        if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $view_xml);
+            $current_view->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $current_view->set('dependencies', $view_xml['dependencies'])
+                ->set('content', $view_xml['content'])
+                ->set('hidden', $view_xml['hidden'])
+                ->save(TRUE);
+        }
+
+        // Update the Taxonomy Event Type Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_form_display.taxonomy_term.event_type.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_form_display.taxonomy_term.event_type.default');
+
+        $current_form_id = $current_view->get('uuid');
+        if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $view_xml);
+            $current_view->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $current_view->set('dependencies', $view_xml['dependencies'])
+                ->set('content', $view_xml['content'])
+                ->set('hidden', $view_xml['hidden'])
+                ->save(TRUE);
+        }
+
+        // Update the Node View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_view_display.node.event.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_view_display.node.event.default');
+        $current_view->set('dependencies', $view_xml['dependencies'])
+            ->set('third_party_settings', $view_xml['third_party_settings'])
+            ->set('content', $view_xml['content'])
+            ->set('hidden', $view_xml['hidden'])
+            ->save(TRUE);
+
+        // Update the Taxonomy Term Contact Default View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_view_display.taxonomy_term.contact.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_view_display.taxonomy_term.contact.default');
+        $current_view->set('dependencies', $view_xml['dependencies'])
+            ->set('third_party_settings', $view_xml['third_party_settings'])
+            ->set('content', $view_xml['content'])
+            ->set('hidden', $view_xml['hidden'])
+            ->save(TRUE);
+
+        // Update the Taxonomy Term Event Type Default View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_view_display.taxonomy_term.event_type.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_view_display.taxonomy_term.event_type.default');
+        $current_view->set('dependencies', $view_xml['dependencies'])
+            ->set('third_party_settings', $view_xml['third_party_settings'])
+            ->set('content', $view_xml['content'])
+            ->set('hidden', $view_xml['hidden'])
+            ->save(TRUE);
+
+        // Update the Taxonomy Term Event Vocabulary
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/taxonomy.vocabulary.contact.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('taxonomy.vocabulary.contact');
+        $current_view->set('name', $view_xml['name'])
+            ->set('description', $view_xml['description'])
+            ->save(TRUE);
+
+        // Update the Taxonomy Term Event Vocabulary
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/taxonomy.vocabulary.event_type.yml';
+        $file_contents = file_get_contents($file_path);
+        $view_xml = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('taxonomy.vocabulary.event_type');
+        $current_view->set('name', $view_xml['name'])
+            ->set('description', $view_xml['description'])
+            ->save(TRUE);
+
+        // Add the new Taxonomy View:
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_view_display.taxonomy_term.contact.event_contacts.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+
+        $current_view = $config->getEditable('core.entity_view_display.taxonomy_term.contact.event_contacts');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_view);
+        $current_view->setData($full_array)->save(TRUE);
+    }
+}
+
+/**
+ * November 2018 - Update for Non-Umbrella Sites adding Social Media Options.
+ */
+function ucr_events_update_8006() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    // Only Update the view and image formats for the default profile.
+    if(!in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+        $social_image_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'article', 'field_social_media_image');
+        if(!$social_image_field) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/field.field.node.event.field_social_media_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        // Update the Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_form_display.node.event.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_form_display.node.event.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('third_party_settings', $page_form_yml['third_party_settings'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the Display View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_events/config/install/core.entity_view_display.node.event.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_view_display.node.event.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+    }
+}
+/**
+ *  July 2019 - Update to the Form Displays.
+ */
+function ucr_events_update_8007() {
+
+    $config = \Drupal::configFactory();
+    $module_handler = \Drupal::moduleHandler();
+    $uuid_service = \Drupal::service('uuid');
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+
+        //create the new storage spaces.
+        //Storage fields for the Basic block
+        $custom_header_storage = [
+            'core.entity_form_display.node.event.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_events', $custom_header_storage);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_events_update_dependencies() {
+  $dependencies = array();
+  $dependencies['ucr_events']['8007'] = [
+    'ucr_core' => '8010'
+  ];
+
+  return $dependencies;
+}

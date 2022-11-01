@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_contact_number
+  module:
+    - telephone
+    - user
+id: user.user.field_contact_number
+field_name: field_contact_number
+entity_type: user
+bundle: user
+label: 'Contact Number'
+description: '<em>( Optional )</em> Enter in the user''s contact phone number.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

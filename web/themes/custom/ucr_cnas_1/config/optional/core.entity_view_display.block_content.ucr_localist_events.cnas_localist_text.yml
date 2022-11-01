@@ -1,0 +1,25 @@
+uuid: ce282844-10b0-4685-86cb-d020ae957a0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_localist_events
+    - core.entity_view_mode.block_content.cnas_localist_text
+    - field.field.block_content.ucr_localist_events.body
+  module:
+    - text
+_core:
+  default_config_hash: _UUz9wRhe4WbSSB39HEvxOevc7KFpMXqGPYdoQLKpkk
+id: block_content.ucr_localist_events.cnas_localist_text
+targetEntityType: block_content
+bundle: ucr_localist_events
+mode: cnas_localist_text
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

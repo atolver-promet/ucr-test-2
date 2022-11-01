@@ -1,0 +1,157 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.homepage_callout_slider.field_callout_content_alignment
+    - field.field.paragraph.homepage_callout_slider.field_callout_description
+    - field.field.paragraph.homepage_callout_slider.field_callout_overlay_colour
+    - field.field.paragraph.homepage_callout_slider.field_callout_text_colour
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_button
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_button_te
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_image
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_title
+    - paragraphs.paragraphs_type.homepage_callout_slider
+  module:
+    - color_field
+    - content_moderation
+    - datetime
+    - entity_browser
+    - field_group
+    - link
+    - text
+third_party_settings:
+  field_group:
+    group_homepage_callout_slider:
+      children:
+        - group_homepage_callout_image
+        - group_homepage_callout_text
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        label: 'Homepage Callout Tabs'
+        direction: horizontal
+        id: ''
+        classes: ''
+      label: 'Homepage Callout Tabs'
+    group_homepage_callout_text:
+      children:
+        - field_homepage_callout_title
+        - field_callout_description
+        - field_homepage_callout_button_te
+        - field_homepage_callout_button_li
+        - field_homepage_callout_button
+        - field_callout_text_colour
+        - field_callout_overlay_colour
+        - field_callout_content_alignment
+      parent_name: group_homepage_callout_slider
+      weight: 6
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Homepage Callout Text'
+    group_homepage_callout_image:
+      children:
+        - field_homepage_callout_image
+      parent_name: group_homepage_callout_slider
+      weight: 5
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Homepage Callout Image'
+id: paragraph.homepage_callout_slider.default
+targetEntityType: paragraph
+bundle: homepage_callout_slider
+mode: default
+content:
+  field_callout_content_alignment:
+    weight: 14
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_callout_description:
+    weight: 8
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_callout_overlay_colour:
+    weight: 13
+    settings:
+      default_colors: "\n#AC725E,#D06B64,#F83A22,#FA573C,#FF7537,#FFAD46\n#42D692,#16A765,#7BD148,#B3DC6C,#FBE983\n#92E1C0,#9FE1E7,#9FC6E7,#4986E7,#9A9CFF\n#B99AFF,#C2C2C2,#CABDBF,#CCA6AC,#F691B2\n#CD74E6,#A47AE2"
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_callout_text_colour:
+    weight: 12
+    settings:
+      default_colors: "\n#AC725E,#D06B64,#F83A22,#FA573C,#FF7537,#FFAD46\n#42D692,#16A765,#7BD148,#B3DC6C,#FBE983\n#92E1C0,#9FE1E7,#9FC6E7,#4986E7,#9A9CFF\n#B99AFF,#C2C2C2,#CABDBF,#CCA6AC,#F691B2\n#CD74E6,#A47AE2"
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_homepage_callout_button:
+    type: link_default
+    weight: 11
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_homepage_callout_button_te:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_homepage_callout_image:
+    type: entity_browser_file
+    weight: 8
+    settings:
+      entity_browser: image_browser
+      field_widget_edit: true
+      field_widget_remove: true
+      view_mode: default
+      preview_image_style: thumbnail
+      open: true
+      selection_mode: selection_append
+    region: content
+    third_party_settings: {  }
+  field_homepage_callout_title:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 2
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

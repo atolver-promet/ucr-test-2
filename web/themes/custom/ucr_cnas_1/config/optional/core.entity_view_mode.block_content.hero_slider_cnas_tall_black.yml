@@ -1,0 +1,14 @@
+uuid: 67258b95-26ff-4e6c-947b-832a3ee139af
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.hero_slider_cnas_tall_black
+label: 'Hero Slider - CNAS Tall Black'
+targetEntityType: block_content
+cache: true

@@ -1,0 +1,159 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_people_profiles_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_people_profiles_update_8001() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * Update the People Profiles with the new content keywords taxonomy.
+ */
+function ucr_people_profiles_update_8002() {
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  $page_contents = \Drupal\field\Entity\FieldConfig::loadByName('node', 'people_profiles', 'field_content_keywords');
+  if(!$page_contents) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_people_profiles/config/install/field.field.node.people_profiles.field_content_keywords.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  $meta_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'people_profiles', 'field_meta_tags');
+  if(!$meta_field) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_people_profiles/config/install/field.field.node.people_profiles.field_meta_tags.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Update the Form Display.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_people_profiles/config/install/core.entity_form_display.node.people_profiles.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_form = Yaml::decode($file_contents);
+  $current_form = $config->getEditable('core.entity_form_display.node.people_profiles.default');
+  $current_form_id = $current_form->get('uuid');
+  if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_form);
+    $current_form->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_form->set('dependencies', $new_form['dependencies'])
+      ->set('third_party_settings', $new_form['third_party_settings'])
+      ->set('content', $new_form['content'])
+      ->set('hidden', $new_form['hidden'])->save(TRUE);
+  }
+}
+
+/**
+ * November 2018 - Update for Non-Umbrella Sites adding Social Media Options.
+ */
+function ucr_people_profiles_update_8003() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    // Only Update the view and image formats for the default profile.
+    if(!in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+        $social_image_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'article', 'field_social_media_image');
+        if(!$social_image_field) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_people_profiles/config/install/field.field.node.people_profiles.field_social_media_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        // Update the Form View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_people_profiles/config/install/core.entity_form_display.node.people_profiles.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_form_display.node.people_profiles.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('third_party_settings', $page_form_yml['third_party_settings'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Update the Display View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_people_profiles/config/install/core.entity_view_display.node.people_profiles.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_view_display.node.people_profiles.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_people_profiles_update_8004() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.node.people_profiles.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_people_profiles', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_people_profiles_update_dependencies() {
+  $dependencies = array();
+  $dependencies['ucr_people_profiles']['8004'] = [
+    'ucr_core' => '8010'
+  ];
+
+  return $dependencies;
+}

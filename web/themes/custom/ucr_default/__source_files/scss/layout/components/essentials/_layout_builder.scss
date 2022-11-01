@@ -1,0 +1,70 @@
+// Layout Builder CSS
+$layout-background: $light-blue-100;
+$layout-background-alt: $white;
+
+form {
+  &.node-layout-builder-form {
+    div {
+      &#edit-actions {
+        max-width:75rem;
+        margin: 0 auto;
+        padding: 0.625rem;
+        @include breakpoint(medium) {
+          padding: 0.9375rem;
+        }
+      }
+      &#edit-moderation-state-wrapper {
+        @extend #edit-actions;
+      }
+      &.layout-builder__message {
+        @extend #edit-actions;
+      }
+    }
+  }
+  &.entity-view-display-layout-builder-form {
+    @extend .node-layout-builder-form;
+  }
+}
+// Layout Builder Modal CSS Override
+#layout-builder-modal {
+  max-height: calc(100vh - 100px) !important;
+  div {
+    &.description {
+      margin: 0.3rem;
+      font-size: 0.75rem;
+      font-style: italic;
+      line-height: normal;
+    }
+  }
+  form {
+    & > div {
+      &.form-wrapper {
+        margin-top: 1rem;
+        background-color: $layout-background;
+        & > div {
+          padding: 0.5rem;
+          &:nth-child(even) {
+            background-color: $layout-background-alt;
+          }
+          label {
+            margin: 0 0 0.1rem 0;
+            padding: 0;
+            font-weight: bold;
+            [for] {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+      &.form-item-settings-view-mode {
+        padding: 0.5rem 0;
+      }
+    }
+  }
+  input {
+    margin: 0;
+  }
+  select {
+    margin: 0;
+  }
+}

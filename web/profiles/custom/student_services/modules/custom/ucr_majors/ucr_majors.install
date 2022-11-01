@@ -1,0 +1,71 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_majors_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+
+    // Update the Permissions for the Roles that need to be updated.
+    $roles = \Drupal\user\Entity\Role::loadMultiple();
+
+    $skipped_roles = array('anonymous', 'authenticated', 'administrator');
+
+    $new_perms = array(
+        'administer majors vocabulary terms' => array('site_builders', 'editors'),
+        'create college_page content' => array('all'),
+        'create terms in majors' => array('all'),
+        'delete any college_page content' => array('site_builders', 'editors'),
+        'delete own college_page content' => array('all'),
+        'delete terms in majors' => array('site_builders', 'editors'),
+        'edit any college_page content' => array('site_builders', 'editors'),
+        'edit own college_page content' => array('all'),
+        'edit terms in majors' => array('all'),
+        'revert college_page revisions' => array('site_builders', 'editors'),
+        'view college_page revisions' => array('site_builders', 'editors'),
+    );
+
+    foreach($roles as $role) {
+        $role_id = $role->id();
+        if(!in_array($role_id, $skipped_roles)) {
+            foreach($new_perms as $perm => $for_roles) {
+                if(in_array('all', $for_roles) || in_array($role_id, $for_roles)) {
+                    $role->grantPermission($perm)->save(TRUE);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_majors_update_8001() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.node.college_page.default',
+            'core.entity_view_display.node.college_page.teaser',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_majors', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}

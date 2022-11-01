@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_link_grid
+    - field.field.block_content.image_link_grid.body
+    - field.field.block_content.image_link_grid.field_box
+  module:
+    - paragraphs
+id: block_content.image_link_grid.default
+targetEntityType: block_content
+bundle: image_link_grid
+mode: default
+content:
+  field_box:
+    type: entity_reference_paragraphs
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true

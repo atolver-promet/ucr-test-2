@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: carousel_slider
+label: 'Carousel Slider'
+revision: 1
+description: 'Create a slider of images or videos.'

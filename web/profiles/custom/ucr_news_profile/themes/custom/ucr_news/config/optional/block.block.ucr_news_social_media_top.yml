@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ucr_global
+  theme:
+    - ucr_news
+id: ucr_news_social_media_top
+theme: ucr_news
+region: social_media
+weight: 0
+provider: null
+plugin: ucr_global_footer_follow_us
+settings:
+  id: ucr_global_footer_follow_us
+  label: 'Social Media Links (Header)'
+  provider: ucr_global
+  label_display: '0'
+visibility: {  }

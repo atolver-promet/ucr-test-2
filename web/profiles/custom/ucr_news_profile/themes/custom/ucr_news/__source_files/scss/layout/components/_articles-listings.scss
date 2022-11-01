@@ -1,0 +1,124 @@
+main {
+  > div {
+    &#content-container {
+      .una-listing {
+        .una-listing-item {
+          border: 1px solid #dde0e4;
+          padding: 0;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          @include breakpoint(medium) {
+            padding: 20px 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid #dde0e4;
+            border-left: none;
+            border-right: none;
+            border-top: none;
+          }
+          .una-thumbnail {
+            position: relative;
+            display: inline-block;
+            border: none;
+            @include breakpoint(medium) {
+              border: 1px solid #999999;
+            }
+            a {
+              text-decoration: none;
+            }
+            .articles-media {
+              top: inherit;
+              left: inherit;
+              bottom: 0;
+              right: 0;
+            }
+          }
+          .una-summary {
+            p {
+              margin: 0;
+              padding: 0;
+            }
+          }
+          h3 {
+            font-family: $font-family-roboto;
+            font-size: 28px;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 0;
+            a {
+              color: #414141;
+              text-decoration: none;
+              padding: 0.8rem;
+              margin-bottom: 0;
+              display: block;
+              @include breakpoint(medium) {
+                padding: 0;
+                margin-bottom: 0.5rem;
+                display: inline-block;
+              }
+              &:hover {
+                color: #2d6cc0;
+              }
+            }
+          }
+          .una-about-info {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #dde0e4;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-weight: 100;
+            font-size: 14px;
+            line-height: 22px;
+            text-transform: uppercase;
+            display: inline-block;
+            color: #333333;
+            .una-author-name {
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-weight: lighter;
+              text-transform: capitalize;
+            }
+            a {
+              text-decoration: none;
+              &:hover {
+                color: #2D6CC0;
+              }
+            }
+          }
+        }
+      }
+      .una-pager {
+        margin-top: 0.8rem;
+        line-height: normal;
+        font-family: $font-family-roboto;
+        li {
+          &.pagination-previous, &.pagination-next {
+            a {
+              background-color: #6a7887;
+              border-radius: 5px;
+              color: $white;
+              text-decoration: none;
+              padding: 8px 22px;
+              &:hover {
+                color: $white;
+                background-color: #2d6cc0;
+              }
+            }
+          }
+          &.disabled {
+            background-color: lighten(#6a7887, 20%);
+            border-radius: 5px;
+            color: darken($white, 5%);
+            padding: 8px 22px;
+            &:hover {
+              background-color: lighten(#6a7887, 20%);
+            }
+          }
+        }
+      }
+      .una-dept-rss {
+        padding: 0.7rem 0;
+        text-align: right;
+      }
+    }
+  }
+}

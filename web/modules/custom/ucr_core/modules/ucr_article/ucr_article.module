@@ -1,0 +1,726 @@
+<?php
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\taxonomy\TermInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
+
+use Drupal\media\Entity\Media;
+
+use Drupal\ucr_article\ArticleViews;
+
+function ucr_article_theme_suggestions_views_view_unformatted_alter(array &$suggestions, array $variables) {
+    $add_suggestion = false;
+    $view = $variables['view'];
+    $view_id = $view->storage->id();
+    $display_id = $view->current_display;
+
+    if($view_id) {
+        switch($view_id) {
+            case "article_content": {
+                if($display_id) {
+                    $add_suggestion = (preg_match("/ucr_articles_term_type_(\d+)_page/", $display_id) ? true : false);
+                }
+            break;
+            }
+            case "taxonomy_term": {
+                $taxonomy = \Drupal::routeMatch()->getParameter('taxonomy_term');
+                $bundle = $taxonomy->bundle();
+                $add_suggestion = ($bundle == "article_categories" ? true : false);
+            break;
+            }
+        }
+    }
+
+    if($add_suggestion) {
+        $new_suggestion = array('views_view_unformatted__article_content__ucr_articles_default_page');
+        array_splice($suggestions, count($suggestions), 0, $new_suggestion);
+    }
+}
+
+function ucr_article_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+    if(isset($variables['elements']['content']['#block_content'])) {
+        if($variables['elements']['content']['#block_content']->bundle() == "articles_block") {
+            $add_suggestions = array(
+                'block__block_content__ucr_articles_block'
+            );
+            array_splice($suggestions, 1, 0, $add_suggestions);
+        }
+    }
+}
+
+// Add the suggestion for the page title for the article content type, and only for the actual viewing of the node.
+function ucr_article_theme_suggestions_page_title_alter(array &$suggestions, array $variables) {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if($node instanceof \Drupal\node\NodeInterface) {
+        $route_name = \Drupal::routeMatch()->getRouteName();
+        $content_type = $node->getType();
+        if ($content_type == "article") {
+            if($route_name == "entity.node.canonical") {
+                $add_suggestions = array(
+                    'page_title__' . $content_type,
+                    'page_title__' . $content_type . '__full',
+                );
+                array_splice($suggestions, 1, 0, $add_suggestions);
+            }
+        }
+    }
+}
+
+function ucr_article_theme() {
+    return [
+        'block__block_content__ucr_articles_block' => [
+            'template' => 'block/block--block-content--ucr-articles-block',
+            'base hook' => 'block'
+        ],
+    ];
+}
+
+// Grab the needed variables of the viewed node to add into the new variables for the page title.
+function ucr_article_preprocess_page_title(&$variables) {
+    $node = \Drupal::routeMatch()->getParameter('node');
+    if($node instanceof \Drupal\node\NodeInterface) {
+        $route_name = \Drupal::routeMatch()->getRouteName();
+        $content_type = $node->getType();
+        if ($content_type == "article") {
+            if ($route_name == "entity.node.canonical") {
+                $article_variables = [
+                    'header_image' => '',
+                    'subtitle' => '',
+                    'author_name' => '',
+                    'author_date' => '',
+                    'header_video' => '',
+                    'header_video_youtube' => FALSE,
+                ];
+
+                if(!$node->field_article_header_image->isEmpty()) {
+                    $file = $node->get('field_article_header_image')->getValue();
+                    $entity = Media::load($file[0]['target_id']);
+                    $file_entity = $entity->image->entity;
+                } elseif(!$node->field_article_image->isEmpty()) {
+                    $file_entity = $node->field_article_image->entity;
+                }
+
+                if(!empty($file_entity)) {
+                    $header_image_array = array(
+                        'responsive_image_style_id' => 'article_header',
+                        'uri' => $file_entity->getFileUri(),
+                    );
+
+                    $image = \Drupal::service('image.factory')->get($header_image_array['uri']);
+                    if ($image->isValid()) {
+                        $header_image_array['width'] = $image->getWidth();
+                        $header_image_array['height'] = $image->getHeight();
+                    }
+                    else {
+                        $header_image_array['width'] = $header_image_array['height'] = NULL;
+                    }
+
+                    $header_image_build = [
+                        '#theme' => 'responsive_image',
+                        '#width' => $header_image_array['width'],
+                        '#height' => $header_image_array['height'],
+                        '#responsive_image_style_id' => $header_image_array['responsive_image_style_id'],
+                        '#uri' => $header_image_array['uri'],
+                    ];
+
+                    $renderer = \Drupal::service('renderer');
+                    $renderer->addCacheableDependency($header_image_build, $file_entity);
+
+                    $article_variables['header_image'] = $header_image_build;
+                }
+
+                if(!$node->field_article_subtitle->isEmpty()) {
+                    $subtitle = $node->get('field_article_subtitle')->getValue();
+                    $article_variables['subtitle'] = $subtitle[0]['value'];
+                }
+
+                if(!$node->field_article_author->isEmpty()) {
+                    $author_name = $node->get('field_article_author')->getValue();
+                    $article_variables['author_name'] = $author_name[0]['value'];
+                }
+
+                if(!$node->field_article_date->isEmpty()) {
+                    $author_date = $node->field_article_date->date->getTimestamp();
+                    $author_date = \Drupal::service('date.formatter')->format($author_date, 'ucr_article_standard_format');
+                    $article_variables['author_date'] = $author_date;
+                }
+
+                if(!$node->field_article_header_video->isEmpty()) {
+                    $video_url = $node->get('field_article_header_video')->getValue();
+                    if(!empty($video_url[0]['uri'])) {
+                        $article_variables['header_video'] = $video_url[0]['uri'];
+                        if(preg_match('/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+/', $video_url[0]['uri'])) {
+                            $article_variables['header_video_youtube'] = TRUE;
+                        }
+                    }
+                }
+
+                $variables['articles'] = $article_variables;
+            }
+        }
+    }
+}
+
+function ucr_article_preprocess_block(&$variables) {
+    if(isset($variables['elements']['content']['#block_content'])) {
+        $bundle = $variables['elements']['content']['#block_content']->bundle();
+        if (strtolower($bundle) == "articles_block") {
+            $variables['#cache']['max-age'] = 0; // ALWAYS disable cache for this block!
+
+            $target_id = "";
+            $display_id = "";
+            $show_id = "";
+            $view_block_name = "";
+            $node_id = "";
+            $term_ids = "";
+
+            $variables['ucr_articles'] = [
+                'term_id' => NULL,
+                'display_view' => 'standard',
+                'show_list' => 'latest',
+                'view_block_name' => 'ucr_articles_latest_standard_block',
+                'related_node_id' => NULL,
+                'related_term_ids' => NULL,
+            ];
+
+            $block_content = $variables['elements']['content']['#block_content'];
+
+            if($block_content->hasField('field_article_type')) {
+                $type_to_filter = $block_content->get('field_article_type')->getValue();
+                if (!empty($type_to_filter)) {
+                    $target_id = $type_to_filter[0]['target_id'];
+                    if (!empty($target_id)) {
+                        $variables['ucr_articles']['term_id'] = $target_id;
+                    }
+                }
+            }
+
+            if($block_content->hasField('field_article_display')) {
+                $display_as = $block_content->get('field_article_display')->getValue();
+                if (!empty($display_as)) {
+                    $display_id = $display_as[0]['value'];
+                    if (!empty($display_id)) {
+                        $variables['ucr_articles']['display_view'] = $display_id;
+                    }
+                }
+            }
+
+            //kevinti: For Article Topics List
+            if($block_content->hasField('field_list_by')) {
+                $display_list_as = $block_content->get('field_list_by')->getValue();
+                if (!empty($display_list_as)) {
+                    $display_id = $display_list_as[0]['value'];
+                    if (!empty($display_id)) {
+                        $variables['ucr_articles']['display_view'] = $display_id;
+                    }
+                }
+            }
+
+            if($block_content->hasField('field_article_list')) {
+                $show_list = $block_content->get('field_article_list')->getValue();
+                if (!empty($show_list)) {
+                    $show_id = $show_list[0]['value'];
+                    if (!empty($show_id)) {
+                        $variables['ucr_articles']['show_list'] = $show_id;
+                    }
+                }
+            }
+
+            switch($show_id) {
+                case "latest":
+                case "featured":
+                case "spotlight":
+                    $view_block_name = "ucr_articles_".$show_id."_".$display_id."_block";
+                break;
+                case "related":
+                    $view_block_name = "ucr_articles_".$show_id."_".$display_id."_block";
+
+                    $node = \Drupal::routeMatch()->getParameter('node');
+                    if($node instanceof \Drupal\node\NodeInterface) {
+                        $route_name = \Drupal::routeMatch()->getRouteName();
+                        $bundle = $node->getType();
+                        if (($bundle == "article") && ($route_name == "entity.node.canonical")) {
+                            $node_id = $node->id();
+                            $types = $node->get('field_article_types')->getValue();
+                            $categories = $node->get('field_category')->getValue();
+                            $tags = $node->get('field_tags')->getValue();
+
+                            if(!empty($types)) {
+                                foreach($types as $type) {
+                                    $term_ids .= (!empty($term_ids) ? "+" : "").$type['target_id'];
+                                }
+                            }
+                            if(!empty($categories)) {
+                                foreach($categories as $cat) {
+                                    $term_ids .= (!empty($term_ids) ? "+" : "").$cat['target_id'];
+                                }
+                            }
+                            if(!empty($tags)) {
+                                foreach($tags as $tag) {
+                                    $term_ids .= (!empty($term_ids) ? "+" : "").$tag['target_id'];
+                                }
+                            }
+
+                            if(!empty($node_id)) { $variables['ucr_articles']['related_node_id'] = $node_id; }
+                            if(!empty($term_ids)) { $variables['ucr_articles']['related_term_ids'] = $term_ids; }
+                        }
+                    }
+                break;
+            }
+
+            if(!empty($view_block_name)) {
+                $variables['ucr_articles']['view_block_name'] = $view_block_name;
+            }
+        }
+    }
+}
+
+function ucr_article_taxonomy_term_presave(TermInterface $term) {
+    $messenger = \Drupal::messenger();
+
+    $bundle = $term->bundle();
+    if($bundle == "article_types") {
+        $current_tid = $term->get('tid')->value;
+        $original_field = $term->get('field_at_base_path')->value;
+
+        // Make it all lowercase
+        $cleanup = strtolower($original_field);
+        //Make alphanumeric (removes all other characters)
+        $cleanup = preg_replace("/[^a-z0-9_\s-]/", "", $cleanup);
+        //Clean up multiple dashes or whitespaces
+        $cleanup = preg_replace("/[\s-]+/", " ", $cleanup);
+        //Convert whitespaces and underscore to dash
+        $cleanup = preg_replace("/[\s_]/", "-", $cleanup);
+
+        if ($cleanup == "articles") {
+            $messenger->addError(t('You cannot use this as a base path, as it is the default base path for all Articles. Please enter in another word.'));
+            $response = new RedirectResponse(\Drupal::request()->getRequestUri());
+            $response->send();
+            exit;
+        }
+
+        $existing_paths = array();
+        $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($bundle);
+        foreach ($terms as $term_info) {
+            $term_obj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_info->tid);
+            if (!empty($current_tid)) {
+                if ($term_info->tid !== $current_tid) {
+                    $existing_paths[] = $term_obj->get('field_at_base_path')->value;
+                }
+            } else {
+                $existing_paths[] = $term_obj->get('field_at_base_path')->value;
+            }
+        }
+
+        if (in_array($cleanup, $existing_paths)) {
+            $messenger->addError(t('The Base Path you entered is already in use within the Taxonomy Vocabulary. Please enter in another Base Path.'));
+            $response = new RedirectResponse(\Drupal::request()->getRequestUri());
+            $response->send();
+            exit;
+        }
+
+        $term->set('field_at_base_path', $cleanup);
+    }
+}
+
+function ucr_article_taxonomy_term_insert(TermInterface $term) {
+    $messenger = \Drupal::messenger();
+
+    $bundle = $term->bundle();
+    if($bundle == "article_types") {
+        $new_page = ArticleViews::createViewPage($term);
+        $new_feed = ArticleViews::createViewFeed($term);
+
+        if(!$new_page) {
+            $messenger->addWarning(t('The new display page for the new Article Type could not be created. Please delete the term and try again.'));
+        }
+
+        if(!$new_feed) {
+            $messenger->addWarning(t('The new display feed for the new Article Type could not be created. Please delete the term and try again.'));
+        }
+
+        drupal_flush_all_caches();
+    }
+}
+
+function ucr_article_taxonomy_term_update(TermInterface $term) {
+    $messenger = \Drupal::messenger();
+
+    $bundle = $term->bundle();
+    if($bundle == "article_types") {
+        $page_updated = ArticleViews::updateViewPage($term);
+        $feed_updated = ArticleViews::updateViewFeed($term);
+
+        if($page_updated && $feed_updated) {
+            $query = \Drupal::entityQuery('node');
+            $query->condition('type', 'article');
+            $entity_ids = $query->execute();
+
+            if(count($entity_ids) > 0) {
+                $article_storage = \Drupal::entityTypeManager()->getStorage('node');
+                foreach ($entity_ids as $eid) {
+                    $entity = $article_storage->load($eid);
+
+                    // Update Entity URL alias.
+                    \Drupal::service('pathauto.generator')->updateEntityAlias($entity, 'update');
+                }
+            }
+
+            drupal_flush_all_caches();
+        } else {
+            $messenger->addWarning(t('The display page / feed for the new Article Type could not be updated. Please try updating again.'));
+
+        }
+    }
+}
+
+function ucr_article_taxonomy_term_delete(TermInterface $term) {
+    $messenger = \Drupal::messenger();
+
+    $bundle = $term->bundle();
+    if($bundle == "article_types") {
+        $page_updated = ArticleViews::deleteViewPage($term);
+        $feed_updated = ArticleViews::deleteViewFeed($term);
+
+        if($page_updated && $feed_updated) {
+            $messenger = \Drupal::messenger();
+            $messenger->addMessage(t('You will need to update all the Article Content that was once '.$term->get('name')->value));
+
+            drupal_flush_all_caches();
+        } else {
+            $messenger->addWarning(t('The display page for the deleted Article Type could not be removed. It will need to be removed manually.'));
+
+        }
+    }
+}
+
+function ucr_article_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('node_article_form', 'node_article_edit_form'))) {
+    $form['article_author_info'] = [
+      '#type' => 'details',
+      '#title' => t('Article Authoring Info'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 101,
+      '#optional' => true,
+      '#open' => false,
+    ];
+
+    $form['field_article_author']['#group'] = 'article_author_info';
+    $form['field_article_date']['#group'] = 'article_author_info';
+    $form['field_article_location']['#group'] = 'article_author_info';
+
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => t('Content Keywords'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 101,
+      '#optional' => true,
+      '#open' => true,
+    ];
+
+    $form['field_content_keywords']['#group'] = 'keywords';
+  }
+
+  return $form;
+}
+
+function ucr_article_views_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
+    $id = $view->id();
+    if(strtolower($id) == "article_content") {
+        $display = $view->current_display;
+        if(strtolower($display) == "ucr_articles_category_list_page") {
+            $title = $view->getTitle();
+            if (is_numeric($title)) { // If the Taxonomy ID was passed, then get the name.
+                $taxonomy_title = \Drupal\taxonomy\Entity\Term::load($title)->name->value;
+            }
+            else {
+                $taxonomy_title = $title;
+            }
+            $new_title = t("All Articles with the Category: ".$taxonomy_title);
+
+            $view->setTitle($new_title);
+        } else {
+            $current_title = $view->getTitle();
+            $appending_title = "";
+            $route_params = \Drupal::routeMatch()->getParameters();
+
+            $day = $route_params->get('arg_2');
+            $day = (!is_numeric($day) ? "" : $day);
+
+            $month = $route_params->get('arg_1');
+            $month = (!is_numeric($month) ? "" : $month);
+
+            $year = $route_params->get('arg_0');
+            $year = (!is_numeric($year) ? "" : $year);
+            if (!empty($day) && !empty($month) && !empty($year)) {
+                $appending_title = " for " . date("F jS, Y", strtotime($year . "-" . $month . "-" . $day));
+            } elseif (!empty($month) && !empty($year)) {
+                $appending_title = " for " . date("F Y", strtotime($year . "-" . $month . "-01"));
+            } elseif (!empty($year)) {
+                $appending_title = " for " . $year;
+            }
+
+            if(!empty($appending_title)) {
+                $new_title = t($current_title.$appending_title);
+                $view->setTitle($new_title);
+            }
+        }
+    }
+}
+
+function ucr_article_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+    $route_name = $route_match->getRouteName();
+    $links = $breadcrumb->getLinks();
+    if($links) {
+        $home_link = $links[0];
+    } else {
+        $home_link = array();
+    }
+
+    $types = array('view_id', 'taxonomy_term', 'node');
+    $type_name = "";
+    foreach($types as $type_to_try) {
+        $route_type = $route_match->getParameter($type_to_try);
+        if($route_type) {
+            $type_name = $type_to_try;
+            break;
+        }
+    }
+
+    switch($type_name) {
+        case "view_id": {
+            $view_name = $route_match->getParameter('view_id');
+            if($view_name == "article_content") {
+                $appending_title = "";
+
+                $day = $route_match->getParameter('arg_2');
+                $day = (!is_numeric($day) ? "" : $day);
+
+                $month = $route_match->getParameter('arg_1');
+                $month = (!is_numeric($month) ? "" : $month);
+
+                $year = $route_match->getParameter('arg_0');
+                $year = (!is_numeric($year) ? "" : $year);
+                if (!empty($day) && !empty($month) && !empty($year)) {
+                    $appending_title = " for " . date("F jS, Y", strtotime($year . "-" . $month . "-" . $day));
+                } elseif (!empty($month) && !empty($year)) {
+                    $appending_title = " for " . date("F Y", strtotime($year . "-" . $month . "-01"));
+                } elseif (!empty($year)) {
+                    $appending_title = " for " . $year;
+                }
+
+                if (!empty($appending_title)) {
+                    $new_links = array();
+                    $new_links[] = $home_link;
+                    $new_links[] = $links[1];
+
+                    $text_from_link = $links[1]->getText();
+                    $article_type_title = substr($text_from_link, 7);
+                    $new_links[] = \Drupal\Core\Link::createFromRoute(t($article_type_title . $appending_title), "<none>");
+
+                    $breadcrumb = new Breadcrumb();
+                    $breadcrumb->addCacheableDependency($route_name);
+                    $breadcrumb->setLinks($new_links);
+                }
+            } elseif($view_name == "taxonomy_term") {
+                $taxonomy = $route_match->getParameter('taxonomy_term');
+                $bundle = $taxonomy->bundle();
+
+                if(in_array($bundle, array("article_categories"))) {
+                    $new_links = array();
+                    $new_links[] = $home_link;
+                    $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t("Latest Articles"), Url::fromUserInput('/articles'));
+                    $new_links[] = \Drupal\Core\Link::createFromRoute(t("All Articles with the Category: ".$taxonomy->name->value), "<none>");
+
+                    $breadcrumb = new Breadcrumb();
+                    $breadcrumb->addCacheableDependency($route_name);
+                    $breadcrumb->setLinks($new_links);
+                }
+            }
+            break;
+        }
+        case "taxonomy_term": {
+            break;
+        }
+        case "node": {
+            $node = $route_match->getParameter('node');
+            if($node instanceof \Drupal\node\NodeInterface) {
+                $bundle = $node->getType();
+                if(($bundle == "article") && ($route_name == "entity.node.canonical")) {
+                    $authored_date = $node->get('field_article_date')->getString();
+                    $new_links = array();
+                    $new_links[] = $home_link;
+                    $new_links[] = $links[1];
+
+                    if(array_key_exists(4, $links)) {
+                        $pre_compiled_url = $links[4]->getUrl()->toString();
+
+                        if (!empty($authored_date)) {
+                            $display_date = date('F jS, Y', strtotime($authored_date));
+                            $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t($display_date), Url::fromUserInput($pre_compiled_url));
+                        }
+                        $new_links[] = \Drupal\Core\Link::createFromRoute(t($route_type->get('title')->value), "<none>");
+
+                        $breadcrumb = new Breadcrumb();
+                        $breadcrumb->addCacheableDependency($route_name);
+                        $breadcrumb->setLinks($new_links);
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+function ucr_article_preprocess_html(&$variables) {
+    $view_id = \Drupal::routeMatch()->getParameter('view_id');
+    if($view_id) {
+        $site_name = \Drupal::config('system.site')->get('name');
+
+        switch($view_id) {
+            case "taxonomy_term": {
+                $taxonomy = \Drupal::routeMatch()->getParameter('taxonomy_term');
+                $bundle = $taxonomy->bundle();
+                if(in_array($bundle, array("article_categories"))) {
+                    $variables['head_title']['title'] = t('All Articles with the Category: ' . $taxonomy->name->value . " | " . $site_name);
+                }
+            break;
+            }
+            case "article_content": {
+                $get_page_title = $variables['page']['#title'];
+                $variables['head_title']['title'] = t($get_page_title." | ".$site_name);
+            break;
+            }
+        }
+    }
+
+    $node = \Drupal::routeMatch()->getParameter('node');// Load the node entity from current route
+    if ($node instanceof \Drupal\node\NodeInterface) {
+        $route_name = \Drupal::routeMatch()->getRouteName();
+        $bundle = $node->getType();
+        if(($bundle == "article") && ($route_name == "entity.node.canonical")) {
+            $update_to_summary = true;
+            $update_to_header = true;
+            $file_uri = "";
+            $file_name = "";
+
+            // If the node has the social field, and it is not empty, then no updates are required.
+            if($node->hasField('field_social_media_image')) {
+                if(!$node->get('field_social_media_image')->isEmpty()) {
+                    $update_to_header = false;
+                    $update_to_summary = false;
+                }
+            }
+            // If the node has the header image, and it is filled in, then minimally the summary switch is not needed.
+            if($node->hasField('field_article_header_image')) {
+                if(!$node->get('field_article_header_image')->isEmpty()) {
+                    $file_uri = $node->get('field_article_header_image')->entity->get('image')->entity->uri->value;
+                    $file_name = $node->get('field_article_header_image')->entity->getName();
+                    $update_to_summary = false;
+                } else {
+                    if($node->hasField('field_article_image')) {
+                        if(!$node->get('field_article_image')->isEmpty()) {
+                            $file_uri = $node->get('field_article_image')->entity->uri->value;
+                            $file_name = $node->get('field_article_image')->entity->getFilename();
+                            $update_to_summary = false;
+                        } else { // Failsafe to make sure that the header image isn't tried to be used.
+                            $update_to_header = false;
+                        }
+                    }
+                }
+            } else { // Failsafe to make sure that the header image isn't tried to be used.
+                $update_to_header = false;
+            }
+
+            // Switch the Twitter type to just Summary only.
+            if($update_to_summary) {
+                $twitter_card_type = [
+                    '#tag' => 'meta',
+                    '#attributes' => [
+                        'name' => 'twitter:card',
+                        'content' => 'summary',
+                    ],
+                ];
+                $variables['page']['#attached']['html_head'][] = [$twitter_card_type, 'twitter_cards_type'];
+            } elseif($update_to_header) { // There is the header image field, so we will go ahead and use that info instead.
+                $url = file_create_url($file_uri);
+                if(!empty($url)) {
+                    $social_image = [
+                        '#tag' => 'link',
+                        '#attributes' => [
+                            'rel' => 'image_src',
+                            'href' => $url,
+                        ],
+                    ];
+                    $variables['page']['#attached']['html_head'][] = [$social_image, 'image_src'];
+
+                    $social_image_twitter = [
+                        '#tag' => 'meta',
+                        '#attributes' => [
+                            'name' => 'twitter:image',
+                            'content' => $url,
+                        ],
+                    ];
+                    $variables['page']['#attached']['html_head'][] = [$social_image_twitter, 'twitter_cards_image'];
+
+                    $social_image_og = [
+                        '#tag' => 'meta',
+                        '#attributes' => [
+                            'property' => 'og:image',
+                            'content' => $url,
+                        ],
+                    ];
+                    $variables['page']['#attached']['html_head'][] = [$social_image_og, 'og_image_0'];
+                }
+
+
+                if(!empty($file_name)) {
+                    $social_name_twitter = [
+                        '#tag' => 'meta',
+                        '#attributes' => [
+                            'name' => 'twitter:image:alt',
+                            'content' => $file_name,
+                        ],
+                    ];
+                    $variables['page']['#attached']['html_head'][] = [$social_name_twitter, 'twitter_cards_image_alt'];
+
+                    $social_name_og = [
+                        '#tag' => 'meta',
+                        '#attributes' => [
+                            'property' => 'og:image:alt',
+                            'content' => $file_name,
+                        ],
+                    ];
+                    $variables['page']['#attached']['html_head'][] = [$social_name_og, 'og_image_alt'];
+                }
+            }
+        }
+    }
+}

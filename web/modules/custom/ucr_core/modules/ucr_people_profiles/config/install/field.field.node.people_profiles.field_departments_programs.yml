@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_departments_programs
+    - node.type.people_profiles
+    - taxonomy.vocabulary.departments_programs
+id: node.people_profiles.field_departments_programs
+field_name: field_departments_programs
+entity_type: node
+bundle: people_profiles
+label: 'Departments / Programs'
+description: 'Select which department(s) and / or program(s) that you belong to. Start typing in the official name of. If it does not show up, please check that it does exist as a ''Departments / Programs'' taxonomy terms. If you need to remove an item from the list, simply erase the name from the box.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      departments_programs: departments_programs
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

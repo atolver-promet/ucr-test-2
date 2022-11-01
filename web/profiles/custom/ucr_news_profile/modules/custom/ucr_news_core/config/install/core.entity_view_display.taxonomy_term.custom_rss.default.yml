@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.custom_rss
+id: taxonomy_term.custom_rss.default
+targetEntityType: taxonomy_term
+bundle: custom_rss
+mode: default
+content: {  }
+hidden:
+  description: true

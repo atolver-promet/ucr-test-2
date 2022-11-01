@@ -1,0 +1,32 @@
+name: 'Umbrella Hero'
+description: Module for the custom block for the Hero Slider options.
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block
+  - block_class
+  - paragraphs
+  - block_content
+  - color_field
+  - content_moderation
+  - datetime
+  - entity_browser
+  - entity_reference_revisions
+  - fences
+  - field
+  - field_group
+  - file
+  - image
+  - link
+  - metatag
+  - path
+  - responsive_image
+  - text
+  - ucr_carousel_slider
+  - video_embed_field
+  - viewfield
+  - views
+  - ucr_core
+  - ucr_carousel_slider

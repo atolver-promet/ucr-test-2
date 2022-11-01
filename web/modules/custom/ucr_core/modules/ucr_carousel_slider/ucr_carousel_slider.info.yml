@@ -1,0 +1,26 @@
+name: 'Carousel Slider Component'
+description: 'Provide a custom block type with ''Paragraphs'' the ability to create carousel slider. Utilizes Slick Slider.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block
+  - block_content
+  - entity_browser
+  - entity_reference_revisions
+  - field
+  - field_group
+  - file
+  - focal_point
+  - image
+  - lightning_core
+  - link
+  - media
+  - options
+  - paragraphs
+  - responsive_image
+  - slick
+  - slick_paragraphs
+  - system
+  - ucr_core

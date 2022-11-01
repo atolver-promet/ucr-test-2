@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: author_avatar
+label: 'Author - Avatar'
+effects:
+  32ba9a31-3dd9-414a-a985-f827ca3dd99e:
+    uuid: 32ba9a31-3dd9-414a-a985-f827ca3dd99e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 50
+      height: 50
+      crop_type: focal_point

@@ -1,0 +1,278 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Url;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\responsive_image\Entity\ResponsiveImageStyle;
+use Drupal\breakpoint\BreakPointManager;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_scotmemo_field_config_insert(FieldConfigInterface $field) {
+    // Don't do anything during config sync.
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_scotmemo_modules_installed(array $modules) {
+    // Don't do anything during config sync.
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+
+function ucr_scotmemo_menu_local_actions_alter(&$local_actions) {
+}
+
+/**
+ * @param $view
+ * Implements hook_views_post_render().
+ * Used to update the title for the taxonomy view that is within the 'news_article_views' view.
+ */
+function ucr_scotmemo_views_post_render($view) {
+    $id = $view->id();
+    if(strtolower($id) == "ucr_scotmemo") {
+        $display = $view->current_display;
+        if(strtolower($display) == "scotmemos_listing") {
+            $route_params = \Drupal::routeMatch()->getParameters();
+            $year = $route_params->get('arg_0');
+            $month = $route_params->get('arg_1');
+            $day = $route_params->get('arg_2');
+
+            $appending_title = "";
+            $day = (!is_numeric($day) ? "" : $day);
+            $month = (!is_numeric($month) ? "" : $month);
+            $year = (!is_numeric($year) ? "" : $year);
+            if(!empty($day) && !empty($month) && !empty($year)) {
+                $appending_title = " for ".date("F jS, Y", strtotime($year."-".$month."-".$day));
+            } elseif(!empty($month) && !empty($year)) {
+                $appending_title = " for ".date("F Y", strtotime($year."-".$month."-01"));
+            } elseif(!empty($year)) {
+                $appending_title = " for ".$year;
+            }
+
+            $view->setTitle("ScotMemos" . $appending_title);
+        }
+    }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function ucr_scotmemo_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+    $route_name = $route_match->getRouteName();
+    $links = $breadcrumb->getLinks();
+    if($links) {
+        $home_link = $links[0];
+    } else {
+        $home_link = array();
+    }
+
+    $types = array('view_id', 'taxonomy_term', 'node');
+    $type_name = "";
+    foreach($types as $type_to_try) {
+        $route_type = $route_match->getParameter($type_to_try);
+        if($route_type) {
+            $type_name = $type_to_try;
+            break;
+        }
+    }
+
+    switch($type_name) {
+
+        case "view_id": {
+            $view_name = $route_match->getParameter('view_id');
+            $view_display = $route_match->getParameter('display_id');
+
+            // Check and validate for the Breadcrumbs for the News Listing View.
+            if(($view_name == "ucr_scotmemo") && ($view_display == "scotmemos_listing")) {
+                $year = $route_match->getParameter('arg_0');
+                $month = $route_match->getParameter('arg_1');
+                $day = $route_match->getParameter('arg_2');
+
+                $appending_title = "";
+                $day = (!is_numeric($day) ? "" : $day);
+                $month = (!is_numeric($month) ? "" : $month);
+                $year = (!is_numeric($year) ? "" : $year);
+                if(!empty($day) && !empty($month) && !empty($year)) {
+                    $appending_title = " for ".date("F jS, Y", strtotime($year."-".$month."-".$day));
+                } elseif(!empty($month) && !empty($year)) {
+                    $appending_title = " for ".date("F Y", strtotime($year."-".$month."-01"));
+                } elseif(!empty($year)) {
+                    $appending_title = " for ".$year;
+                }
+
+                $new_links = array();
+                $new_links[] = $home_link;
+                if(!empty($appending_title)) {
+                    $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t("ScotMemos"), Url::fromUserInput('/scotmemos'));
+                    $new_links[] = \Drupal\Core\Link::createFromRoute(t("ScotMemos".$appending_title), "<none>");
+                } else {
+                    $new_links[] = \Drupal\Core\Link::createFromRoute(t("ScotMemos"), "<none>");
+                }
+                $breadcrumb = new Breadcrumb();
+                $breadcrumb->addCacheableDependency($route_name);
+                $breadcrumb->setLinks($new_links);
+            }
+            break;
+        }
+        case "taxonomy_term": {
+            break;
+        }
+        case "node": {
+            $bundle = $route_type->bundle();
+
+            // Modify the Breadcrumbs for the Scotmemo Submissions Content Type.
+            if(($bundle == "scotmemo_submissions") && ($route_name == "entity.node.canonical")) {
+                $authored_date = $route_type->get('field_date_to_publish')->value;
+                $new_links = array();
+                $new_links[] = $home_link;
+                $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t("Scotmemos"), Url::fromUserInput('/scotmemos'));
+
+
+                if(!empty($authored_date)) {
+                    $year = date('Y', strtotime($authored_date));
+                    $month = date('m', strtotime($authored_date));
+                    $day = date('d', strtotime($authored_date));
+                    $display_date = date('F jS, Y', strtotime($authored_date));
+                    $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t($display_date), Url::fromUserInput('/scotmemos/'.$year."/".$month."/".$day));
+
+                }
+                $new_links[] = \Drupal\Core\Link::createFromRoute(t($route_type->get('title')->value), "<none>");
+
+                $breadcrumb = new Breadcrumb();
+                $breadcrumb->addCacheableDependency($route_name);
+                $breadcrumb->setLinks($new_links);
+            }
+            break;
+        }
+    }
+}
+
+function ucr_scotmemo_form_alter(&$form, $form_state, $form_id) {
+    if (in_array($form_id, array('node_scotmemo_form', 'node_scotmemo_edit_form'))) {
+
+
+        $form['field_una_authored_by']['#group'] = 'una_author_info';
+        $form['field_una_authored_on']['#group'] = 'una_author_info';
+
+
+        $form['una_topic_tags'] = [
+            '#type' => 'details',
+            '#title' => t('Tags'),
+            '#group' => 'advanced',
+            '#attributes' => [
+                'class' => ['node-form-options']
+            ],
+            '#attached' => [
+                'library' => ['node/drupal.node'],
+            ],
+            '#weight' => 100,
+            '#optional' => true,
+            '#open' => false,
+        ];
+
+        $form['field_una_tags']['#group'] = 'una_topic_tags';
+
+        $form['keywords'] = [
+            '#type' => 'details',
+            '#title' => t('Content Keywords'),
+            '#group' => 'advanced',
+            '#attributes' => [
+                'class' => ['node-form-options']
+            ],
+            '#attached' => [
+                'library' => ['node/drupal.node'],
+            ],
+            '#weight' => 101,
+            '#optional' => true,
+            '#open' => true,
+        ];
+
+        $form['field_content_keywords']['#group'] = 'keywords';
+    }
+
+    return $form;
+}
+
+
+
+function ucr_scotmemo_preprocess_node(&$variables)
+{
+    $node = $variables['node'];
+
+    //make sure node type is scotmemo
+    if ($node->getType() == 'scotmemo_submissions') {
+        //Retrieve image url if image exists
+        if (!empty($node->get('field_memo_header_image')->entity)) {
+
+            //initialize variables
+            $alignFlag = $node->get('field_left_align_this_image')->value;
+            $image_field = $node->get('field_memo_header_image')->entity->get('image')->entity->uri->value;
+
+            $variables['align_flag'] = $alignFlag;
+
+            if ($alignFlag == "1"){
+
+                //output_image_tag is used in responsive images;
+                $variables['output_image_tag'] = FALSE;
+
+                //a localized $variable because the following code was meant for preprocess_responsive_image
+                $responsive_image_variables = array(
+                    "responsive_image_style_id" => "scotmemo_header_image_left",
+                    "uri" => $image_field
+                );
+
+                $style = ResponsiveImageStyle::load($responsive_image_variables['responsive_image_style_id']);
+
+                //retrieve breakpoints then reverses it because it initially grabs the breakpoints from smallest to largest
+                $breakpoints = array_reverse(\Drupal::service('breakpoint.manager')->getBreakpointsByGroup($style->getBreakpointGroup()));
+
+                //now get the style mappings of the selected responsive style; returns srcset of the responsive image style.
+                foreach($style -> getKeyedImageStyleMappings() as $breakpoint_id => $multipliers){
+                    if(isset($breakpoints[$breakpoint_id])){
+                        $variables['sources'][] = _responsive_image_build_source_attributes($responsive_image_variables, $breakpoints[$breakpoint_id], $multipliers);
+                    }
+                }
+                //send over to twig
+                $variables['img_element'] = array(
+                    '#theme' => 'image',
+                    '#srcset' => array(
+                        array(
+                            'uri' => _responsive_image_image_style_url($style -> getFallbackImageStyle(), $responsive_image_variables['uri']),
+                        ),
+                    ),
+                );
+            }
+            else{
+                $variables['output_image_tag'] = TRUE;
+                $style = ImageStyle::load('scotmemo_header_image_default');
+                $styled_image_url = $style->buildUrl($image_field);
+
+                // convert to relative path
+                $relative_url = file_url_transform_relative($styled_image_url);
+
+                //send over to twig
+                $variables['img_src'] = $relative_url;
+            }
+        }
+    }
+}

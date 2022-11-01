@@ -1,0 +1,35 @@
+ul.accordion {
+	li {
+		a.accordion-title {
+			padding: 16px 27px 16px 64px;
+			font-family: $trade-gothic;
+			font-size: 16px;
+			line-height: 16px;
+			border-bottom: solid 1px #dcdcdc;
+			color: #46ACEB;
+			text-decoration: none;
+			&::before {
+				right: auto;
+				left: 0;
+				top: 0px;
+				font-size: 2rem;
+				margin-top: 0;
+				padding: 9px 15px 20px 15px;
+			}
+	    &:hover {
+		    background: #fff;
+		    color: #46ACEB;
+		    border-bottom: solid 1px #dcdcdc;
+	    }
+		}
+		&.is-active {
+			a.accordion-title {
+				background: #4da8f7;
+				color: #fff;
+			}
+		}
+	}
+	div.accordion-content {
+		color: #6F7780;
+	}
+}

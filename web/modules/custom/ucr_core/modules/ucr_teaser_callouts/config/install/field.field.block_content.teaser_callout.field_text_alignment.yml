@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.teaser_callout
+    - field.storage.block_content.field_text_alignment
+  module:
+    - options
+id: block_content.teaser_callout.field_text_alignment
+field_name: field_text_alignment
+entity_type: block_content
+bundle: teaser_callout
+label: 'Text Alignment'
+description: 'Select what side the text will be displayed on in the callout.'
+required: true
+translatable: false
+default_value:
+  -
+    value: r
+default_value_callback: ''
+settings: {  }
+field_type: list_string

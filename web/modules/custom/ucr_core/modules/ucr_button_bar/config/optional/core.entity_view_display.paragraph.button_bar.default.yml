@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.paragraph.button_bar.field_button_link
+  - field.field.paragraph.button_bar.field_button_styles
+  - paragraphs.paragraphs_type.button_bar
+  module:
+  - link
+  - options
+id: paragraph.button_bar.default
+targetEntityType: paragraph
+bundle: button_bar
+mode: default
+content:
+  field_button_link:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_button_styles:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+hidden: {  }

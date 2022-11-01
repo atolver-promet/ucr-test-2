@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_button_sizes
+field_name: field_button_sizes
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: fixed-option-1
+      label: 'fixed width 268 pixels'
+    -
+      value: fixed-option-2
+      label: 'fixed width 368 pixels'
+    -
+      value: fixed-option-3
+      label: 'fixed width 568 pixels'
+    -
+      value: justify-100
+      label: 'justified 100 percent'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

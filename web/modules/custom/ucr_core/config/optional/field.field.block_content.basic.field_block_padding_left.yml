@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.basic
+  - field.storage.block_content.field_block_padding_left
+  module:
+  - options
+id: block_content.basic.field_block_padding_left
+field_name: field_block_padding_left
+entity_type: block_content
+bundle: basic
+label: 'Padding Left'
+description: '<em>( Optional ):</em> Please select the padding for the left.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

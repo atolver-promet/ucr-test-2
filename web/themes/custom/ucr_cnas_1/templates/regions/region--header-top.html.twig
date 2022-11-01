@@ -1,0 +1,61 @@
+<div class="cell small-order-2 medium-order-1 audience-container">
+    <div class="grid-container audience-menu-bar">
+        <div class="grid-x align-middle">
+            <div class="cell medium-shrink show-for-medium global-header-menu">
+              <a class="skip-main" href="#main">Skip to main content</a>
+                <nav role="navigation" aria-labelledby="global-header-menu">
+                	<h2 id="global-header-menu" class="visually-hidden">Social Media Links</h2>
+                    <ul class="menu social-nav">
+                        {% if twitter %}
+                            <li><a href="{{twitter}}" title="{% if twitter_title %}{{ twitter_title }}{% else %}twitter{% endif %}" target="_blank"><span class="fab fa-twitter"></span></a></li>
+                        {% endif %}
+
+                        {% if facebook %}
+                            <li><a href="{{facebook}}" title="{% if facebook_title %}{{ facebook_title }}{% else %}facebook{% endif %}" target="_blank"><span class="fab fa-facebook-f"></span></a></li>
+                        {% endif %}
+
+                        {% if instagram %}
+                            <li><a href="{{instagram}}" title="{% if instagram_title %}{{ instagram_title }}{% else %}instagram{% endif %}" target="_blank"><span class="fab fa-instagram"></span></a></li>
+                        {% endif %}
+
+                        {% if youtube %}
+                            <li><a href="{{youtube}}" title="{% if youtube_title %}{{ youtube_title }}{% else %}youtube{% endif %}" target="_blank"><span class="fab fa-youtube"></span></a></li>
+                        {% endif %}
+
+                        {% if flickr %}
+                            <li><a href="{{flickr}}" title="{% if flickr_title %}{{ flickr_title }}{% else %}flick{% endif %}" target="_blank"><span class="fab fa-flickr"></span></a></li>
+                        {% endif %}
+
+                        {% if linkedin %}
+                            <li><a href="{{linkedin}}" title="{% if linkedin_title %}{{ linkedin_title }}{% else %}linkedin {% endif %}" target="_blank"><span class="fab fa-linkedin"></span></a></li>
+                        {% endif %}
+
+                        {% if rss %}
+                            <li><a href="{{rss}}" title="{% if rss_title %}{{ rss_title }}{% else %}rss{% endif %}" target="_blank"><span class="fas fa-rss"></span></a></li>
+                        {% endif %}
+
+                      {% if reddit %}
+                        <li><a href="{{reddit}}" title="{% if reddit_title %}{{ reddit_title }}{% else %}reddit{% endif %}" target="_blank"><span class="fab fa-reddit"></span></a></li>
+                      {% endif %}
+
+                      {% if discord %}
+                        <li><a href="{{discord}}" title="{% if discord_title %}{{ discord_title }}{% else %}discord{% endif %}" target="_blank"><span class="fab fa-discord"></span></a></li>
+                      {% endif %}
+
+                      {% if tiktok %}
+                        <li><a href="{{tiktok}}" title="{% if tiktok_title %}{{ tiktok_title }}{% else %}tiktok{% endif %}" target="_blank"><span class="mdi mdi-music-note"></span></a></li>
+                      {% endif %}
+
+                    </ul>
+
+
+                </nav>
+            </div>
+            {% if content %} {{ content }} {% endif %}
+            <div class="cell shrink hide-for-medium" data-responsive-toggle="main-menu-container" data-hide-for="medium">
+                <button class="mdi mdi-menu button mobile-menu-expander" id="mobile-menu-expander" type="button" data-toggle="main-menu-container">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,283 @@
+// File contains CSS for the Parent Org Title, Audience Menu, and Site-Top Search Bar.
+// The Site-Top Search Bar & Audience Menu CSS in here is for primarily Desktop Views. For Mobile views, look in the 'primary_navigation.scss' file.
+// -------------------------------------------
+$audience-mobile-view-background: #003DA5;
+$audience-border: $blue-grey-200;
+$audience-org-color: $blue-grey-400;
+$audience-desktop-menu-link-hover: $blue-grey-100;
+$audience-desktop-menu-button: #000;
+$audience-desktop-menu-button-background: #FFB81C;
+$global-menu-link: $blue-grey-400;
+$global-menu-link-hover: $ucr-alt-blue-3;
+// **** Update for the new Audience Button Search
+.audience-container {
+  position: relative;
+  line-height: normal;
+  max-height: 45px;
+  background-color: $audience-mobile-view-background;
+  border-bottom: 1px solid $audience-border;
+  &::after {
+    width:100%;
+    display: block;
+    box-shadow: 0 1px 3px 1px;
+    content: '';
+  }
+  .audience-menu-bar {
+    min-height: 45px;
+    .global-header-menu {
+      display: none;
+      font-family: "Fira Sans Regular", sans-serif;
+      font-weight: 900;
+      font-size: .8rem;
+      @include breakpoint(medium) {
+        display: inherit;
+        margin-right: auto;
+      }
+      .menu {
+        a {
+          color: #003da5;
+          &:hover, &:focus {
+            color: darken(#003da5, 3%);
+          }
+          &::after {
+            content: "";
+            padding-left: 0;
+          }
+        }
+      }
+    }
+    .org-name {
+      align-self: center;
+      @include breakpoint(medium) {
+        align-self: flex-start;
+      }
+      .parent-org-title {
+        text-transform: uppercase;
+        font-family: "Fira Sans Medium", sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: -0.01px;
+        line-height: 1;
+        display: inline-block;
+        max-width: 100%;
+        padding: 8px 0;
+        margin: 0;
+        a {
+          color: $white;
+          &::after {
+            content: "";
+            padding-left: 0;
+          }
+        }
+        @include breakpoint(medium) {
+          -webkit-transform: translateY(50%);
+          -ms-transform: translateY(50%);
+          transform: translateY(50%);
+          font-size: 1rem;
+          font-weight: inherit;
+          padding: 0;
+          a {
+            color: $audience-org-color;
+            letter-spacing: 0;
+            &:hover {
+              border-bottom: 1px dotted;
+            }
+          }
+        }
+      }
+    }
+    .audience-links-desktop {
+      display: none;
+      visibility: hidden;
+      @include breakpoint(medium) {
+        display: block;
+        visibility: visible;
+      }
+      nav {
+        &.audience-links {
+          > ul {
+            &.menu {
+              li {
+                a {
+                  font-weight: 600;
+                  font-size: 0.8rem;
+                  letter-spacing: 0.0375rem;
+                  font-family: "Fira Sans Regular",sans-serif;
+                  text-transform: uppercase;
+                  color: $body-color;
+                  position: relative;
+                  &:hover, &:focus {
+                    background-color: darken($audience-desktop-menu-link-hover, 10%);
+                    color: $body-background;
+                  }
+                }
+                &.audience-button {
+                  > a {
+                    font-size: 1rem;
+                    font-weight: 900;
+                    background-color: $audience-desktop-menu-button-background;
+                    color: $audience-desktop-menu-button;
+                    padding: 15px 10px 15px 10px !important;
+                    &::after {
+                      display: none;
+                    }
+                    &:hover, &:focus {
+                      background-color: darken($audience-desktop-menu-button-background, 10%);
+                      color: darken($audience-desktop-menu-button, 10%);
+                    }
+                  }
+                  &.is-dropdown-submenu-parent {
+                    > a {
+                      padding: 13px 7px 13px 20px !important;
+                      &::after {
+                        background: url('../images/drop-down-arrow-circle-icon.svg') no-repeat 0 0 transparent;
+                        content: "" !important;
+                        display: inline-block !important;
+                        height: 20px !important;
+                        margin-left: 20px !important;
+                        position: relative;
+                        top: 2px;
+                        width: 20px !important;
+                        border: none !important;
+                      }
+                      &:hover, &:focus {
+                        &::after {
+                          background: url('../images/drop-down-arrow-circle-icon.svg') no-repeat 0 0 transparent;
+                        }
+                      }
+                    }
+                  }
+                }
+                ul {
+                  &.submenu {
+                    background-color: $audience-desktop-menu-link-hover;
+                    border: 1px solid darken($audience-desktop-menu-link-hover, 10%);
+                    border-radius: 2px;
+                    border-bottom: none;
+                    box-shadow: 1px 1px 4px $grey-800;
+                    li {
+                      &.is-dropdown-submenu-parent {
+                        &.opens-right {
+                          > a {
+                            &::after {
+                              @include css-triangle(5px, $body-color, right);
+                            }
+                            &:hover, &:focus {
+                              &::after {
+                                @include css-triangle(5px, $body-background, right);
+                              }
+                            }
+                          }
+                        }
+                        &.opens-left {
+                          > a {
+                            &::after {
+                              @include css-triangle(5px, $body-color, left);
+                            }
+                            &:hover, &:focus {
+                              &::after {
+                                @include css-triangle(5px, $body-background, left);
+                              }
+                            }
+                          }
+                        }
+                        &.is-active {
+                          > a {
+                            background-color: transparent;
+                          }
+                        }
+                      }
+                      a {
+                        padding: 0.7rem 1.15rem 0.7rem 1rem;
+                        border-bottom: 1px solid darken($audience-desktop-menu-link-hover, 10%);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    button {
+      &.mobile-menu-expander {
+        font-size: 2rem;
+        height: 45px;
+        width: 45px;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        right: -10px;
+        background-color: #FFB81C;
+        color: #003DA5;
+      }
+      &.mobile-menu-expander-clicked {
+        @extend .mobile-menu-expander;
+        background-color: #f2a900;
+        &.mdi-menu {
+          &:before {
+            content: '\f156';
+            color: $white;
+          }
+        }
+      }
+    }
+    section {
+      &.google-search {
+        border-left: 1px solid $audience-border;
+        button {
+          &.audience-search-button {
+            width: 125px;
+            min-height: 46px;
+            background-color: transparent;
+            border: none;
+            color: darken($audience-mobile-view-background, 5%);
+            margin: 0;
+            padding: 0 1rem;
+            text-align: left;
+            line-height: 1.5rem;
+            font-family: "Fira Sans Regular";
+            &::before {
+              display: inline-block;
+              font-family: "Material Design Icons";
+              font-size: 1.5rem;
+              text-rendering: auto;
+              line-height: normal;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              color: #003DA5;
+              content: "\F349";
+              text-align: center;
+              vertical-align: middle;
+              padding-right: 5px;
+            }
+          }
+        }
+      }
+    }
+    @include breakpoint(medium) {
+      min-height: 46px;
+    }
+  }
+  @include breakpoint(medium) {
+    max-height: 46px;
+    background-color: $body-background;
+    transition: max-height 0.25s ease, visibility 0.25s ease, overflow 0s ease;
+    box-shadow: none;
+    overflow: visible;
+    visibility: visible;
+    &::after {
+      box-shadow: none;
+    }
+  }
+}
+.sticky-shrink {
+  .audience-container {
+    @include breakpoint(medium) {
+      max-height: 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
+  }
+}

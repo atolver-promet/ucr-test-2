@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.tabs
+    - field.storage.block_content.field_vertical_status
+id: block_content.tabs.field_vertical_status
+field_name: field_vertical_status
+entity_type: block_content
+bundle: tabs
+label: 'View as Vertical Tabs'
+description: '<em>( Optional )</em> Check this to display the tabs in a vertical display. If this is unchecked, they will default to horizontal display.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Vertical
+  off_label: Horizontal
+field_type: boolean

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.articles
+  module:
+    - system
+    - views
+  theme:
+    - ucr_cnas_1
+id: ucr_cnas_1_exposed_form_articles_all_articles_listing_page
+theme: ucr_cnas_1
+region: right_sidebar
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:articles-all_articles_listing_page'
+settings:
+  id: 'views_exposed_filter_block:articles-all_articles_listing_page'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    pages: /articles
+    negate: false
+    context_mapping: {  }

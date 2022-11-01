@@ -1,0 +1,8 @@
+.ucr-galleria-container {
+  justify-content: center;
+}
+.ucr-galleria-thumbnails {
+  margin: 0 auto !important;
+  width: 100%;
+  background: #FFFFFF;
+}

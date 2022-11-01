@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: testimonial_slider
+label: 'Testimonial Slider'
+revision: 1
+description: 'Creates a testimonial Slider'

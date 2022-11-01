@@ -1,0 +1,451 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Riverside installation profile.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function umbrella_acsf_install() {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  // Enable ucr_default theme.
+  $set_theme = $config->getEditable('system.theme');
+    $set_theme->set('default', 'ucr_umbrella')
+        ->set('admin', 'seven')->save(TRUE);
+
+    $set_editing = $config->getEditable('node.settings');
+    $set_editing->set('use_admin_theme', true)->save(TRUE);
+
+  // Override the Lightning setup that always displays the lightning logo and favicon.
+  $set_icons = $config->getEditable('system.theme.global');
+  $set_icons->set('logo', array('path' => '', 'url' => '', 'use_default' => TRUE));
+  $set_icons->set('favicon', array('mimetype' => '', 'path' => '', 'url' => '', 'use_default' => TRUE));
+  $set_icons->save(TRUE);
+
+  // Setup the regional settings.
+  $set_region = $config->getEditable('system.date');
+  $set_region->set('country', array('default' => 'US'));
+  $set_region->set('timezone', array('default' => 'America/Los_Angeles', 'user' => array('configurable' => false, 'warn' => false, 'default' => '0')));
+  $set_region->save(TRUE);
+
+  // Set the initial cache to be 10 minutes.
+  $set_cache = $config->getEditable('system.performance');
+  $set_cache->set('cache', array('page' => array('max_age' => 600)))->save(TRUE);
+
+  // Setup the imagemagick as the default library.
+  $set_image_library = $config->getEditable('system.image');
+  $set_image_library->set('toolkit', 'imagemagick')->save(TRUE);
+
+  // Setup the imagemagick pathways.
+  $set_magic = $config->getEditable('imagemagick.settings');
+  $set_magic->set('path_to_binaries', '/usr/bin/')->save(TRUE);
+
+  // Set the basic page to always be published.
+  $fields = \Drupal::service('entity_field.manager')->getFieldDefinitions('node', 'page');
+  $fields['status']->getConfig('page')->setDefaultValue(TRUE)->save(TRUE);
+
+  // Update the Media / Field Document field to allow all of the extensions that we need.
+  $field_document = $config->getEditable('field.field.media.document.field_document');
+  $field_document->set('settings.file_extensions', 'txt pdf doc docx xls csv xlsx pps ppt pptx rtf')->save(TRUE);
+
+  // Set intial Home Link
+  $home_link = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'Home', 'link' => array('uri' => 'internal:/'), 'menu_name' => 'main', 'weight' => '0', 'expanded' => true));
+  $home_link->save();
+
+  $for_info_link = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'find-info-link', 'link' => array('uri' => 'route:<nolink>'), 'menu_name' => 'main', 'weight' => '1', 'expanded' => true));
+  $for_info_link->save();
+
+  // Set the Quicklinks
+  $q_link_1 = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'Demo Link 1', 'link' => array('uri' => 'internal:#'), 'menu_name' => 'quick-links', 'expanded' => true));
+  $q_link_1->save();
+  $q_link_2 = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'Demo Link 2', 'link' => array('uri' => 'internal:#'), 'menu_name' => 'quick-links', 'expanded' => true));
+  $q_link_2->save();
+  $q_link_3 = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'Demo Link 3', 'link' => array('uri' => 'internal:#'), 'menu_name' => 'quick-links', 'expanded' => true));
+  $q_link_3->save();
+
+  // Set the Audience Left Links
+  $al_link_1 = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'A to Z Listing', 'link' => array('uri' => 'https://www.ucr.edu/alpha'), 'menu_name' => 'audience-menu-left-side', 'expanded' => true));
+  $al_link_1->save();
+  $al_link_2 = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'Campus Map', 'link' => array('uri' => 'https://campusmap.ucr.edu'), 'menu_name' => 'audience-menu-left-side', 'expanded' => true));
+  $al_link_2->save();
+  $al_link_3 = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'Find People', 'link' => array('uri' => 'https://profiles.ucr.edu'), 'menu_name' => 'audience-menu-left-side', 'expanded' => true));
+  $al_link_3->save();
+  $al_link_4 = \Drupal\menu_link_content\Entity\MenuLinkContent::create(array('title' => 'News', 'link' => array('uri' => 'https://ucrtoday.ucr.edu'), 'menu_name' => 'audience-menu-left-side', 'expanded' => true));
+  $al_link_4->save();
+
+  // Go ahead and if the 'content_author' default role still exists, remove it.
+  $roles = \Drupal\user\Entity\Role::loadMultiple();
+  $roles_to_remove = array('content_author');
+
+  foreach($roles as $role) {
+    $role_id = $role->id();
+    if(in_array($role_id, $roles_to_remove)) {
+      $role->delete();
+    }
+  }
+
+  // Check and if the original 'Rich Text' is there, remove it so it cannot be used anymore.
+  $old_editor = \Drupal\filter\Entity\FilterFormat::load('rich_text');
+  if(is_object($old_editor)) {
+    $old_editor->delete();
+  }
+
+  // Override the Content View page with the information needed. Even though this view lives in ucr_core module, we still need to do the override because of Lightning.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.content.yml';
+  $file_contents = file_get_contents($file_path);
+  $content_yml = Yaml::decode($file_contents);
+
+  $get_content_view = $config->getEditable('views.view.content');
+  $current_view_id = $get_content_view->get('uuid');
+  if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $content_yml);
+    $get_content_view->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $get_content_view->set('dependencies', $content_yml['dependencies'])->save(TRUE);
+    $get_content_view->set('display', $content_yml['display'])->save(TRUE);
+  }
+
+  // Override the Media View with the new information needed.  Even though this view lives in ucr_core module, we still need to do the override because of Lightning.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.media.yml';
+  $file_contents = file_get_contents($file_path);
+  $media_yml = Yaml::decode($file_contents);
+
+  $get_media_view = $config->getEditable('views.view.media');
+  $current_view_id = $get_media_view->get('uuid');
+  if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $media_yml);
+    $get_media_view->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $get_media_view->set('dependencies', $media_yml['dependencies'])->save(TRUE);
+    $get_media_view->set('display', $media_yml['display'])->save(TRUE);
+  }
+
+  // Override the Basic Page Form Display with the new information needed. The entity_form_display lives in the core module because of the .module hook file.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_form_display.node.page.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $page_form_yml = Yaml::decode($file_contents);
+
+  $get_page_form = $config->getEditable('core.entity_form_display.node.page.default');
+  $current_view_id = $get_page_form->get('uuid');
+  if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+    $get_page_form->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+    $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+    $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+  }
+
+  // Update the Media Image Form Display.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_form_display.media.image.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $yml_data = Yaml::decode($file_contents);
+
+  $current_config = $config->getEditable('core.entity_form_display.media.image.default');
+  $current_view_id = $current_config->get('uuid');
+  if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $yml_data);
+    $current_config->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_config->set('dependencies', $yml_data['dependencies'])->save(TRUE);
+    $current_config->set('content', $yml_data['content'])->save(TRUE);
+    $current_config->set('hidden', $yml_data['hidden'])->save(TRUE);
+  }
+
+  // Update the Media Image Form Display Browser.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_form_display.media.image.media_browser.yml';
+  $file_contents = file_get_contents($file_path);
+  $yml_data = Yaml::decode($file_contents);
+
+  $current_config = $config->getEditable('core.entity_form_display.media.image.media_browser');
+  $current_view_id = $current_config->get('uuid');
+  if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $yml_data);
+    $current_config->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_config->set('dependencies', $yml_data['dependencies'])->save(TRUE);
+    $current_config->set('content', $yml_data['content'])->save(TRUE);
+    $current_config->set('hidden', $yml_data['hidden'])->save(TRUE);
+  }
+
+  // Update the basic workflow.
+  $file_path = DRUPAL_ROOT . '/profiles/custom/umbrella_acsf/config/optional/workflows.workflow.editorial.yml';
+  $file_contents = file_get_contents($file_path);
+  $yml_data = Yaml::decode($file_contents);
+
+  $current_config = $config->getEditable('workflows.workflow.editorial');
+  $current_config->set('type_settings.entity_types', $yml_data['type_settings']['entity_types'])->save(TRUE);
+
+  // Update the taxonomy term view.
+  $file_path = DRUPAL_ROOT . '/profiles/custom/umbrella_acsf/config/optional/views.view.taxonomy_term.yml';
+  $file_contents = file_get_contents($file_path);
+  $yml_data = Yaml::decode($file_contents);
+
+  $current_config = $config->getEditable('views.view.taxonomy_term');
+  $current_view_id = $current_config->get('uuid');
+  if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $yml_data);
+    $current_config->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_config->set('display.default', $yml_data['display']['default'])->save(TRUE);
+  }
+
+  // Update the image entity browser.
+  $current_config = $config->getEditable('entity_browser.browser.image_browser');
+  $widgets = $current_config->get('widgets');
+  foreach($widgets as $widget_uuid => $widget_data) {
+    if($widget_data['id'] == 'view') {
+      $current_config->set('widgets.'.$widget_uuid.'.settings.view_display', 'entity_browser_2')->save(TRUE);
+    }
+  }
+
+  // Update the media entity browser.
+  $current_config = $config->getEditable('entity_browser.browser.media_browser');
+  $widgets = $current_config->get('widgets');
+  foreach($widgets as $widget_uuid => $widget_data) {
+    if($widget_data['id'] == 'view') {
+      $current_config->set('widgets.'.$widget_uuid.'.settings.view_display', 'entity_browser_1')->save(TRUE);
+    }
+  }
+
+  // Create a standard homepage and set the path of it to '/home', with its pathauto turned off.
+  $homepage = \Drupal::entityTypeManager()->getStorage('node')->create(array('type' => 'page'));
+  $homepage->setTitle('Welcome to Your New Website!');
+  $homepage->body->value = '<p>This is a welcome message to your brand-new UCR Website!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tempor pharetra lectus, non sollicitudin odio pharetra sit amet. Aenean quis tristique orci. Suspendisse non mi non magna vehicula semper eget vel velit. Morbi eu magna ex. In molestie augue sem, ac convallis massa mollis eu. Curabitur pulvinar ex tortor. Praesent sit amet vulputate quam. Donec at risus ut turpis tincidunt venenatis et vel justo.</p>
+<p>Pellentesque venenatis quam massa, id lobortis enim sagittis sed. Donec interdum diam sapien, ut ultrices orci porta at. Sed placerat tellus vel metus vestibulum, vel blandit libero luctus. Morbi vehicula diam et finibus mattis. Maecenas ipsum lectus, vestibulum interdum venenatis nec, ornare vel ligula. Sed ultricies ligula metus, ac venenatis ante tincidunt nec. Cras at dapibus ante. Donec quis lectus gravida, hendrerit mi eu, dapibus sem. Aenean quis justo id quam dapibus venenatis. Quisque et massa quis urna maximus elementum. Morbi mauris leo, elementum at dignissim quis, vehicula vel risus.</p>
+<p>Suspendisse pellentesque leo accumsan, viverra odio sit amet, molestie tortor. Sed in nunc molestie ex venenatis luctus. Praesent eu ipsum metus. Quisque id augue turpis. Nulla facilisi. Phasellus vulputate nec urna at tincidunt. Vivamus eget nulla sed nibh semper molestie a et nunc. Vivamus dignissim est vel felis eleifend, at porta libero pulvinar. Sed porta finibus malesuada. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus sed imperdiet nulla, a dictum tortor.</p>';
+  $homepage->body->format = 'rich_text_editor_limited';
+  $homepage->path->alias = '/home';
+  $homepage->path->pathauto = FALSE;
+  $homepage->enforceIsNew(TRUE);
+  $homepage->setPublished(TRUE);
+  $homepage->save(TRUE);
+
+  // Set the newly created homepage as the base frontpage.
+  $set_homepage = $config->getEditable('system.site');
+  $set_homepage->set('page', array('front' => '/home'))->save(TRUE);
+}
+
+// Initial Profile Update to include the setting of existing sites to use the theme default icons.
+function umbrella_acsf_update_8001() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ *  Uninstalls the old Workbench Moderation module, and installs the new Content Moderation & Workflows module. Also handles turning off the legacy lightning scheduled updates for lightning scheduler.
+ */
+function umbrella_acsf_update_8002() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ *  Uninstall the 3rd party 'Media Entity Actions' module, as it is not necessary after the conversion is completed. Update Permissions for roles.
+ */
+function umbrella_acsf_update_8003() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ *  Install the Redirect module for existing sites, and give the site builders permission to it. Update regional settings.
+ */
+function umbrella_acsf_update_8004() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ *  Install the ImageMagick module & set the correct config.
+ */
+function umbrella_acsf_update_8005() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ *  Install the Block Region Permission Module & set the proper permissions. Install the new Expanding Card Module. Update the block placement for the admin tabs.
+ */
+function umbrella_acsf_update_8006() {
+  // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * Update the Document Field in the Document Media Type with the proper extensions. Update the Linkit Profile. Turn on the following Modules: Big Pipe, Inline Form Errors, Admin Toolbar Filters, Additional Redirects.
+ */
+function umbrella_acsf_update_8007() {
+  $config = \Drupal::configFactory();
+
+  $field_document = $config->getEditable('field.field.media.document.field_document');
+  $field_document->set('settings.file_extensions', 'txt pdf doc docx xls csv xlsx pps ppt pptx rtf')->save(TRUE);
+
+  // Get the storage of the new people fields, then create them one at a time.
+  $file_path = DRUPAL_ROOT . '/profiles/custom/umbrella_acsf/config/install/linkit.linkit_profile.linkit_default_profile.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_linkit_profile = Yaml::decode($file_contents);
+
+  $existing_linkit = $config->getEditable('linkit.linkit_profile.linkit_default_profile');
+  $existing_linkit->set('attributes', $new_linkit_profile['attributes'])->save(TRUE);
+  $existing_linkit->set('matchers', $new_linkit_profile['matchers'])->save(TRUE);
+
+  $moduleHandler = \Drupal::service('module_handler');
+  if (!$moduleHandler->moduleExists('big_pipe')) {
+    \Drupal::service('module_installer')->install(['big_pipe']);
+  }
+  if (!$moduleHandler->moduleExists('inline_form_errors')) {
+    \Drupal::service('module_installer')->install(['inline_form_errors']);
+  }
+  if (!$moduleHandler->moduleExists('admin_toolbar_links_access_filter')) {
+    \Drupal::service('module_installer')->install(['admin_toolbar_links_access_filter']);
+  }
+  if (!$moduleHandler->moduleExists('redirect_404')) {
+    \Drupal::service('module_installer')->install(['redirect_404']);
+  }
+  if (!$moduleHandler->moduleExists('redirect_domain')) {
+    \Drupal::service('module_installer')->install(['redirect_domain']);
+  }
+
+  if ($moduleHandler->moduleExists('update')) {
+    \Drupal::service('module_installer')->uninstall(['update']);
+  }
+}
+
+/**
+ * Update the Roles with new permissions. Update File Settings for Cron Deletion.
+ */
+function umbrella_acsf_update_8008() {
+  $config = \Drupal::configFactory();
+
+  // Update Role Permissions.
+  $roles = \Drupal\user\Entity\Role::loadMultiple();
+  $to_update = array('site_builders', 'editors', 'contributors');
+
+  foreach($roles as $role) {
+    $role_id = $role->id();
+    if(in_array($role_id, $to_update)) {
+      if($role_id == "site_builders") {
+        $role->grantPermission('administer menu')->save(TRUE);
+      }
+
+      if(in_array($role_id, array('site_builders', 'editors'))) {
+        $role->grantPermission('delete terms in content_keywords')->save(TRUE);
+      }
+
+      $role->grantPermission('access taxonomy overview')->save(TRUE);
+      $role->grantPermission('administer content_keywords vocabulary terms')->save(TRUE);
+      $role->grantPermission('create terms in article_categories')->save(TRUE);
+      $role->grantPermission('create terms in contact')->save(TRUE);
+      $role->grantPermission('create terms in content_keywords')->save(TRUE);
+      $role->grantPermission('create terms in departments_programs')->save(TRUE);
+      $role->grantPermission('create terms in event_type')->save(TRUE);
+      $role->grantPermission('create terms in tags')->save(TRUE);
+      $role->grantPermission('edit terms in content_keywords')->save(TRUE);
+    }
+  }
+
+  $file_settings = $config->getEditable('file.settings');
+  $file_settings->set('make_unused_managed_files_temporary', TRUE)->save(TRUE);
+
+  $file_settings = $config->getEditable('system.file');
+  $file_settings->set('temporary_maximum_age', 86400)->save(TRUE);
+}
+
+/**
+ * September 2018 - Enable the new Umbrella Hero Module.
+ */
+function umbrella_acsf_update_8009() {
+    $moduleHandler = \Drupal::service('module_handler');
+    if (!$moduleHandler->moduleExists('umbrella_hero')) {
+        \Drupal::service('module_installer')->install(['umbrella_hero']);
+    }
+}
+
+/**
+ * November 2018 - Update the Default Theme Block Placement so no errors occur.
+ */
+function umbrella_acsf_update_8010() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // Update the blocks for the themes so they won't be disabled.
+    $items_to_update = array(
+        'ucr_default' => array('ucr_default_help', 'ucr_default_local_actions', 'ucr_default_local_tasks', 'ucr_default_messages'));
+    foreach($items_to_update as $folder_name => $item_lists) {
+        foreach($item_lists as $name) {
+            $file_path = DRUPAL_ROOT . '/themes/custom/'.$folder_name.'/config/install/block.block.'.$name.'.yml';
+            $file_contents = file_get_contents($file_path);
+            $new_yaml = Yaml::decode($file_contents);
+
+            $current_config = $config->getEditable('block.block.'.$name);
+            $current_id = $current_config->get('uuid');
+            if(!$current_id) { // Custom Form does not exist. So create a new one.
+                $uuid = $uuid_service->generate();
+                $full_array = array_merge(array('uuid' => $uuid), $new_yaml);
+                $current_config->setData($full_array)->save(TRUE);
+            } else {
+                $current_config->set('region', $new_yaml['region'])
+                    ->set('weight', $new_yaml['weight'])->save(TRUE);
+            }
+        }
+    }
+}
+
+/**
+ * January 2019 - Adding the Varnish Cache Purge
+ */
+function umbrella_acsf_update_8011() {
+    $config = \Drupal::configFactory();
+    $moduleHandler = \Drupal::service('module_handler');
+
+    // Install the new modules needed.
+    if(!$moduleHandler->moduleExists('purge')) {
+        \Drupal::service('module_installer')->install(['purge']);
+    }
+    if(!$moduleHandler->moduleExists('purge_drush')) {
+        \Drupal::service('module_installer')->install(['purge_drush']);
+    }
+    if(!$moduleHandler->moduleExists('purge_ui')) {
+        \Drupal::service('module_installer')->install(['purge_ui']);
+    }
+    if(!$moduleHandler->moduleExists('purge_processor_cron')) {
+        \Drupal::service('module_installer')->install(['purge_processor_cron']);
+    }
+    if(!$moduleHandler->moduleExists('purge_processor_lateruntime')) {
+        \Drupal::service('module_installer')->install(['purge_processor_lateruntime']);
+    }
+    if(!$moduleHandler->moduleExists('purge_queuer_coretags')) {
+        \Drupal::service('module_installer')->install(['purge_queuer_coretags']);
+    }
+    if(!$moduleHandler->moduleExists('acquia_purge')) {
+        \Drupal::service('module_installer')->install(['acquia_purge']);
+    }
+
+    $set_cache = $config->getEditable('system.performance');
+    $set_cache->set('cache', array('page' => array('max_age' => 2764800)))->save(TRUE);
+
+    $file_purge_plugins = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/optional/purge.plugins.yml';
+    $file_contents = file_get_contents($file_purge_plugins);
+    $purge_settings = Yaml::decode($file_contents);
+    $current_settings = $config->getEditable('purge.plugins');
+    $current_settings->setData($purge_settings)->save(TRUE);
+}
+
+function umbrella_acsf_update_dependencies() {
+  $dependencies = array();
+
+  return $dependencies;
+}

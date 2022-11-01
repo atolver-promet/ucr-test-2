@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_open_to_other
+    - node.type.event
+id: node.event.field_open_to_other
+field_name: field_open_to_other
+entity_type: node
+bundle: event
+label: 'Other Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

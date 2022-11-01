@@ -1,0 +1,94 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.paragraph.cta_item.field_cta_bg_image
+  - field.field.paragraph.cta_item.field_cta_caption
+  - field.field.paragraph.cta_item.field_cta_description
+  - field.field.paragraph.cta_item.field_cta_font_color
+  - field.field.paragraph.cta_item.field_cta_open_modal
+  - field.field.paragraph.cta_item.field_cta_overlay_color
+  - field.field.paragraph.cta_item.field_cta_title
+  - field.field.paragraph.cta_item.field_cta_url
+  - paragraphs.paragraphs_type.cta_item
+  module:
+  - color_field
+  - link
+  - options
+id: paragraph.cta_item.default
+targetEntityType: paragraph
+bundle: cta_item
+mode: default
+content:
+  field_cta_bg_image:
+    type: entity_reference_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: cta_background
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_cta_caption:
+    weight: 4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_cta_description:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_cta_font_color:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_cta_open_modal:
+    weight: 10
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_cta_overlay_color:
+    weight: 6
+    label: hidden
+    settings:
+      format: hex
+      opacity: '1'
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+  field_cta_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_cta_url:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden: {  }

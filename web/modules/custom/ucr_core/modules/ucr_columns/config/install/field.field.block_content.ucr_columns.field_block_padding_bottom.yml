@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_columns
+    - field.storage.block_content.field_block_padding_bottom
+  module:
+    - options
+id: block_content.ucr_columns.field_block_padding_bottom
+field_name: field_block_padding_bottom
+entity_type: block_content
+bundle: ucr_columns
+label: 'Block Padding Bottom'
+description: '<em>( Optional ):</em> Please select the padding for the bottom.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: ucr_news_tags
+label: 'UCR News Tags'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/tag/[term:name]'
+selection_criteria:
+  e61d39d3-4fe0-410d-a058-f077ef59cfb8:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      tags: tags
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: e61d39d3-4fe0-410d-a058-f077ef59cfb8
+selection_logic: and
+weight: -4
+relationships: {  }

@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\feeds\Entity\Feed;
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_rss_import_modules_installed(array $modules) {
+    // Don't do anything during config sync.
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+// Look into getting the Feed ID, then getting the URL of the Feed from the DB entity.
+function ucr_rss_import_preprocess_block(&$variables) {
+    if(isset($variables['elements']['content']['#block_content'])) {
+        $bundle = $variables['elements']['content']['#block_content']->bundle();
+        if (strtolower($bundle) == "feeds_display") {
+            $display_id = $variables['elements']['content']['#block_content']->get('field_feed_to_display')->getValue();
+            if(!empty($display_id)) {
+                $fid = $display_id[0]['target_id'];
+                if (!empty($fid)) {
+                    $feed_data = \Drupal::entityTypeManager()->getStorage('feeds_feed')->load($fid);
+                    if($feed_data) {
+                        $feed_source = $feed_data->getSource();
+                        $variables['feed_url_from_id'] = $feed_source;
+                    } else {
+                        $variables['feed_url_from_id'] = NULL;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Look into getting the Feed ID, then getting the URL of the Feed from the DB entity.
+function ucr_rss_import_preprocess_views_view_field(&$variables) {
+    $view = $variables['view'];
+    if (($view->id() == 'feeds_import_display') && ($view->getDisplay()->display['id'] == "feeds_import_display_block")) {
+        $field = $variables['field'];
+        if($field->field == "field_feed_item_description") {
+            $default_value = $field->advancedRender($variables['row']);
+            $img_search = preg_match('/(<img[^>]+>)/i', $default_value, $matches);
+            if(count($matches) > 0) {
+                $xss = new \Drupal\Component\Utility\Xss();
+                $variables['image_output'] = $xss::filter($matches[0], array('img'));
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - media
+third_party_settings:
+  lightning_core:
+    description: ''
+id: media.article_preview_box_images
+label: 'Article - Preview Box Images'
+targetEntityType: media
+cache: true

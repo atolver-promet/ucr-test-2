@@ -1,0 +1,17 @@
+name: 'Statistics Grid Component'
+type: module
+description: 'Provide a custom block type with ''Paragraphs'' the ability to create a grid of statistically styled content.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - color_field
+  - entity_browser
+  - entity_reference_revisions
+  - field
+  - field_group
+  - file
+  - image
+  - paragraphs
+  - ucr_core

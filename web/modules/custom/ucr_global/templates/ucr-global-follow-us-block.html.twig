@@ -1,0 +1,10 @@
+{% block content %}
+{% if social_links is not empty %}
+	<h1>Follow Us:</h1>
+	<div class="button-group">
+{% for network, social_data in social_links %}
+		<a href="{{ social_data.url }}" target="_blank" class="button button-{{ network }}"><span class="show-for-sr">{{ social_data.sr_text }}</span></a>
+{% endfor %}
+	</div>
+{% endif %}
+{% endblock %}

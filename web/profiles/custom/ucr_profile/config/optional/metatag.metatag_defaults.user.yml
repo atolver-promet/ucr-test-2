@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+id: user
+label: User
+tags:
+  description: '[site:name]'
+  title: '[user:display-name] | [site:name]'
+  canonical_url: '[user:url]'
+  og_type: user
+  og_url: '[user:url]'
+  og_title: '[user:display-name] | [site:name]'
+  twitter_cards_page_url: '[user:url]'
+  twitter_cards_title: '[user:display-name] | [site:name]'

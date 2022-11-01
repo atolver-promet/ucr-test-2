@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Riverside installation profile.
+ */
+
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_umbrella_profile_install() {
+    // Don't do anything during config sync.
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+
+function ucr_umbrella_profile_update_dependencies() {
+    $dependencies = array();
+
+    return $dependencies;
+}

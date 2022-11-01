@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - ctools
+  - taxonomy
+id: feeds_import_items
+label: 'Feeds Import - Items Pattern'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/feeds/item/[term:field_feed_item_pub_date:date:custom:Y]/[term:field_feed_item_pub_date:date:custom:m]/[term:field_feed_item_pub_date:date:custom:d]/[term:name]'
+selection_criteria:
+  5f5c128f-bdad-496b-a39a-d9038b63a775:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      feeds_items: feeds_items
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 5f5c128f-bdad-496b-a39a-d9038b63a775
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,31 @@
+add collection item entities:
+  title: 'Create new Collection Item entities'
+
+administer collection item entities:
+  title: 'Administer Collection Item entities'
+  description: 'Allow to access the administration form to configure Collection Item entities.'
+  restrict access: true
+
+delete collection item entities:
+  title: 'Delete Collection Item entities'
+
+edit collection item entities:
+  title: 'Edit Collection Item entities'
+
+view published collection item entities:
+  title: 'View published Collection Item entities'
+
+view unpublished collection item entities:
+  title: 'View unpublished Collection Item entities'
+
+view all collection item revisions:
+  title: 'View all Collection Item revisions'
+
+revert all collection item revisions:
+  title: 'Revert all Collection Item revisions'
+  description: 'Role requires permission <em>view Collection Item revisions</em> and <em>edit rights</em> for collection item entities in question or <em>administer collection item entities</em>.'
+
+delete all collection item revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Collection Item revisions</em> and <em>delete rights</em> for collection item entities in question or <em>administer collection item entities</em>.'
+

@@ -1,0 +1,8 @@
+majors_globals:
+  version: VERSION
+  js:
+    js/majors.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once

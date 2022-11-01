@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies: {  }
+id: taxonomy_term
+label: 'Taxonomy term'
+tags:
+  description: '[term:description]'
+  title: '[term:name] | [site:name]'
+  canonical_url: '[term:url]'
+  og_description: '[term:description]'
+  og_type: website
+  og_url: '[term:url]'
+  og_title: '[term:name] | [site:name]'
+  twitter_cards_page_url: '[term:url]'
+  twitter_cards_title: '[term:name] | [site:name]'
+  twitter_cards_description: '[term:description]'

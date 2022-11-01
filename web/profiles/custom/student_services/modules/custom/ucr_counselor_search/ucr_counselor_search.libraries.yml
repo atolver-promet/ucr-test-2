@@ -1,0 +1,8 @@
+ucr_counselor_search_globals:
+  version: VERSION
+  js:
+    js/counselor_search.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once

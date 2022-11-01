@@ -1,0 +1,122 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video.field_colo_palette
+    - field.field.paragraph.video.field_image
+    - field.field.paragraph.video.field_link
+    - field.field.paragraph.video.field_title
+    - field.field.paragraph.video.field_video_subtitle
+    - field.field.paragraph.video.field_video_url
+    - field.field.paragraph.video.field_youtube_url
+    - image.style.16_9_m
+    - image.style.grid_4_column
+    - paragraphs.paragraphs_type.video
+  module:
+    - color_field
+    - fences
+    - image
+    - link
+    - video_embed_field
+id: paragraph.video.default
+targetEntityType: paragraph
+bundle: video
+mode: default
+content:
+  field_colo_palette:
+    weight: 3
+    label: hidden
+    settings:
+      format: hex
+      opacity: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: color_field_formatter_text
+    region: content
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: grid_4_column
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: image
+    region: content
+  field_link:
+    type: link
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_video_subtitle:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_video_url:
+    weight: 4
+    label: hidden
+    settings:
+      image_style: 16_9_m
+      link_image_to: ''
+      responsive: true
+      width: 854
+      height: 480
+      modal_max_width: 854
+      autoplay: false
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: video_embed_field_colorbox
+    region: content
+  field_youtube_url:
+    weight: 6
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

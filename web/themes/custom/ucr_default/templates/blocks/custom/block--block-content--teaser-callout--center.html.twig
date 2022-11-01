@@ -1,0 +1,121 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set background_image_style = "" %}
+{% set background_color_style = "" %}
+{% set catch_cache = content.field_block_bg_image|render %}
+{% set background_image = file_url(content.field_block_bg_image|field_target_entity.image.entity.uri.value) %}
+{% set background_color = content.field_block_bg_color|field_value|render %}
+{% if background_color is not empty %}
+    {% set background_color_style = "background: linear-gradient(" ~ background_color ~ "," ~ background_color ~ ");" %}
+{% else %}
+    {% set background_color = content.field_callout_color|field_value|render %}
+    {% if background_color is not empty %}
+        {% set background_color_style = "background: linear-gradient(" ~ background_color ~ "," ~ background_color ~ ");" %}
+    {% endif %}
+{% endif %}
+{% if background_image != '' and background_image != '/' %}
+    {% set background_image_style = "background: url(" ~ background_image ~") 0 0/cover;" %}
+{% else %}
+    {% set background_image = file_url(content.field_callout_image.0['#item'].entity.uri.value) %}
+    {% if background_image != '' and background_image != '/' %}
+        {% set background_image_style = "background: url(" ~ background_image ~") 0 0/cover;" %}
+    {% endif %}
+{% endif %}
+{% if background_image_style == '' %}
+    {% set background_image_style = background_color_style %}
+{% endif %}
+{% set font_color = content.field_block_font_color|field_value|render %}
+{% if font_color == "" %}
+    {% set font_color = "color: " ~ content.field_callout_text_color|field_value|render ~ ";" %}
+{% else %}
+    {% set font_color = "" %}
+{% endif %}
+{% set text_alignment = content.field_text_alignment|field_value|render %}
+{% set intro = content.body|field_value|render %}
+{% set block_classes = [
+    ucr_custom_css.build,
+] %}
+{% block content %}
+<div{{ attributes.addClass(block_classes) }}>
+    {{ title_prefix }}
+    {% if label %}
+        <div class="grid-container teaser-callout-intro">
+            <div class="grid-x grid-padding-x">
+                <div class="cell"><h2{{ title_attributes }}>{{ label }}</h2></div>
+            </div>
+        </div>
+    {% endif %}
+    {{ title_suffix }}
+    {% if intro is not empty %}
+        <div class="grid-container teaser-callout-intro">
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    {{ content.body|field_value }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="grid-container">
+        <div class="cell">
+            <div class="teaser-callout" style="{{ background_image_style }}">
+                <div class="grid-x align-stretch">
+                    {% if text_alignment == "r" %}
+                        <div class="auto cell align-self-middle show-for-medium">
+                            <div class="ts-option text-center">
+                                {{ content.field_optional_media|field_value }}
+                            </div>
+                        </div>
+                        <div class="medium-5 cell">
+                            <div class="ts-text" style="{{ font_color }} {{ background_color_style }}">
+                                {{ content.field_callout_title }}
+                                <p>{{ content.field_callout_body|field_value }}</p>
+                                {{ content.field_callout_urls }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="medium-5 cell">
+                            <div class="ts-text" style="{{ font_color }} {{ background_color_style }}">
+                                {{ content.field_callout_title }}
+                                <p>{{ content.field_callout_body|field_value }}</p>
+                                {{ content.field_callout_urls }}
+                            </div>
+                        </div>
+                        <div class="auto cell align-self-middle show-for-medium">
+                            <div class="ts-option text-center">
+                                {{ content.field_optional_media|field_value }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

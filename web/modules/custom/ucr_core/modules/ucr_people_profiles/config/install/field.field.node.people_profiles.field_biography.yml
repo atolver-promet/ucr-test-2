@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_biography
+    - node.type.people_profiles
+  module:
+    - text
+id: node.people_profiles.field_biography
+field_name: field_biography
+entity_type: node
+bundle: people_profiles
+label: Biography
+description: '<em>( Optional )</em> Please enter a brief biography for the profile. If you leave it blank, nothing will show up in this section.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

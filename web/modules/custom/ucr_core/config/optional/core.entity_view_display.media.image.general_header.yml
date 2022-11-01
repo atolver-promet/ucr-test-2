@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.media.general_header
+  - field.field.media.image.field_media_in_library
+  - field.field.media.image.image
+  - media.type.image
+  - responsive_image.styles.content_header
+  module:
+  - responsive_image
+id: media.image.general_header
+targetEntityType: media
+bundle: image
+mode: general_header
+content:
+  image:
+    type: responsive_image
+    weight: 0
+    label: hidden
+    settings:
+      responsive_image_style: content_header
+      image_link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_media_in_library: true
+  name: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<div class="grid-container">
+    <div class="grid-x grid-padding-x">
+        <div class="cell">
+            <form{{ attributes }}>
+                {{ children }}
+            </form>
+        </div>
+    </div>
+</div>

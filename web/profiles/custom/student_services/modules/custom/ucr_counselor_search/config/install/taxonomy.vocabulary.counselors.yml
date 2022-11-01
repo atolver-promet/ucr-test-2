@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Counselors for Transfers'
+vid: counselors
+description: 'A list of counselors that support either Freshman or Transfer Students'
+hierarchy: 0
+weight: 0

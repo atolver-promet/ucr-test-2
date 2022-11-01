@@ -1,0 +1,195 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Config\FileStorage;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_info_card_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Add the 'Intro Body' field.
+ */
+function ucr_info_card_update_8001() {
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  // *** Update the Form Display.
+  $profile_name = $config->getEditable('core.extension')->get('profile');
+
+  // Create the field.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_info_card/config/install/field.field.block_content.info_card_grid.body.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_field = Yaml::decode($file_contents);
+
+  $uuid = $uuid_service->generate();
+  $full_array = array_merge(array('uuid' => $uuid), $new_field);
+  \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+
+  // Update the form view.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_info_card/config/install/core.entity_form_display.block_content.info_card_grid.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_form = Yaml::decode($file_contents);
+  $current_form = $config->getEditable('core.entity_form_display.block_content.info_card_grid.default');
+  $current_form->set('dependencies', $new_form['dependencies'])
+    ->set('third_party_settings', $new_form['third_party_settings'])
+    ->set('content', $new_form['content'])->save(TRUE);
+
+  // Update the display view.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_info_card/config/install/core.entity_view_display.block_content.info_card_grid.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_view = Yaml::decode($file_contents);
+  $current_view = $config->getEditable('core.entity_view_display.block_content.info_card_grid.default');
+  $current_view->set('dependencies', $new_view['dependencies'])
+    ->set('content', $new_view['content'])
+    ->set('hidden', $new_view['hidden'])->save(TRUE);
+}
+
+/**
+ * October 2018 - Add the Full View Display. This is for the UCR Default Profile Only.
+ */
+function ucr_info_card_update_8002() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // *** Add the new View Display.
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $acceptable_profiles = array('ucr_profile', 'ucr_profile_local');
+    if(in_array($profile_name, $acceptable_profiles)) {
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_info_card/config/install/core.entity_view_display.block_content.info_card_grid.center.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_display = Yaml::decode($file_contents);
+
+        $new_config_display = $config->getEditable('core.entity_view_display.block_content.info_card_grid.center');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_display);
+        $new_config_display->setData($full_array)->save(TRUE);
+    }
+}
+
+/**
+ * December 2018 - Adding of Custom Block Colors & Style Options.
+ */
+function ucr_info_card_update_8003() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.storage.paragraph.field_info_card_url',
+            'field.field.paragraph.info_card.field_info_card_url',
+            'field.field.block_content.info_card_grid.field_block_bg_color',
+            'field.field.block_content.info_card_grid.field_block_font_color',
+            'field.field.block_content.info_card_grid.field_block_include_extra',
+            'field.field.block_content.info_card_grid.field_block_margin_bottom',
+            'field.field.block_content.info_card_grid.field_block_margin_left',
+            'field.field.block_content.info_card_grid.field_block_margin_right',
+            'field.field.block_content.info_card_grid.field_block_margin_top',
+            'field.field.block_content.info_card_grid.field_block_padding_horizontal',
+            'field.field.block_content.info_card_grid.field_block_padding_vertical',
+            'field.field.block_content.info_card_grid.field_counter',
+            'core.entity_form_display.block_content.info_card_grid.default',
+            'core.entity_view_display.block_content.info_card_grid.center',
+            'core.entity_view_display.block_content.info_card_grid.default',
+            'core.entity_form_display.paragraph.info_card.default',
+            'core.entity_view_display.paragraph.info_card.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_info_card', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_info_card_update_8004() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.info_card_grid.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_info_card', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * August 2020- Updated color options for info card grid
+ */
+function ucr_info_card_update_8005() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.info_card_grid.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_info_card', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * March 2022- Added title attribute for Info Card Links and added a new view mode for left aligning card content
+ */
+function ucr_info_card_update_8006() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.paragraph.info_card.default',
+            'core.entity_view_mode.block_content.info_card_left_align',
+            'core.entity_view_display.block_content.info_card_grid.info_card_left_align',
+
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_info_card', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_info_card_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_info_card']['8003'] = [
+        'ucr_core' => '8007'
+    ];
+    return $dependencies;
+}

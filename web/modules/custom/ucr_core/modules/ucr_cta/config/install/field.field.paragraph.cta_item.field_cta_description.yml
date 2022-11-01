@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cta_description
+    - paragraphs.paragraphs_type.cta_item
+id: paragraph.cta_item.field_cta_description
+field_name: field_cta_description
+entity_type: paragraph
+bundle: cta_item
+label: Description
+description: '<em>( Optional ):</em> Please enter in a brief description. Max 255 characters.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

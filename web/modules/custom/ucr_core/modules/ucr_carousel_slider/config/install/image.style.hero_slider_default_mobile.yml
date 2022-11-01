@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: hero_slider_default_mobile
+label: 'Hero Slider Default (Mobile) - (768 x 250)'
+effects:
+  83b752e3-65e3-43d8-bdff-adb90ec1667f:
+    uuid: 83b752e3-65e3-43d8-bdff-adb90ec1667f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 250
+      crop_type: focal_point

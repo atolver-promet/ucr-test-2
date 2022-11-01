@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.teaser_callout_slider
+    - field.storage.block_content.field_tea
+    - paragraphs.paragraphs_type.teaser_callout_slider
+  module:
+    - entity_reference_revisions
+id: block_content.teaser_callout_slider.field_tea
+field_name: field_tea
+entity_type: block_content
+bundle: teaser_callout_slider
+label: 'Teaser Callout Slider'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      teaser_callout_slider: teaser_callout_slider
+    target_bundles_drag_drop:
+      accordion:
+        weight: 18
+        enabled: false
+      box:
+        weight: 19
+        enabled: false
+      box_info:
+        weight: 20
+        enabled: false
+      bubbles:
+        weight: 21
+        enabled: false
+      carousel_slider:
+        weight: 22
+        enabled: false
+      column:
+        weight: 23
+        enabled: false
+      hero_slides:
+        weight: 24
+        enabled: false
+      hero_slideshow:
+        weight: 25
+        enabled: false
+      info_card:
+        weight: 26
+        enabled: false
+      link_column:
+        weight: 27
+        enabled: false
+      quicklinks_sidebar:
+        weight: 28
+        enabled: false
+      statistic:
+        weight: 29
+        enabled: false
+      statistic_with_image:
+        weight: 30
+        enabled: false
+      tab:
+        weight: 31
+        enabled: false
+      teaser_callout_slider:
+        enabled: true
+        weight: 32
+      testimonial_slider:
+        weight: 33
+        enabled: false
+      video:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

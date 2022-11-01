@@ -1,0 +1,52 @@
+entity_type_groups:
+  consumer:
+    consumer:
+      basic: basic
+  feeds_feed:
+    ucr_rss_feed_importer:
+      basic: basic
+  media:
+    document:
+      basic: basic
+    image:
+      basic: basic
+    video:
+      basic: basic
+  node:
+    article:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    event:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    galleria:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    gcs:
+      basic: basic
+    page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    people_profiles:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+  redirect:
+    redirect:
+      basic: basic
+  oauth2_token:
+    access_token:
+      basic: basic
+    auth_code:
+      basic: basic
+    refresh_token:
+      basic: basic

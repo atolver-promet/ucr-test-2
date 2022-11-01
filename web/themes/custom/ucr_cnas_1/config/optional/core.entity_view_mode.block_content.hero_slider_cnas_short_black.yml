@@ -1,0 +1,14 @@
+uuid: a556cd97-8619-41cf-b6e1-1a30c437d4b0
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.hero_slider_cnas_short_black
+label: 'Hero Slider - CNAS Short Black'
+targetEntityType: block_content
+cache: true

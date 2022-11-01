@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies: {  }
+id: global
+label: Global
+tags:
+  description: '[site:slogan]'
+  title: '[current-page:title] | [site:name]'
+  canonical_url: '[current-page:url]'
+  og_description: '[site:slogan]'
+  og_url: '[current-page:url]'
+  og_title: '[site:name]'
+  og_site_name: '[site:name]'
+  twitter_cards_page_url: '[current-page:url]'
+  twitter_cards_type: summary
+  twitter_cards_title: '[current-page:title] | [site:name]'
+  twitter_cards_description: '[site:slogan]'

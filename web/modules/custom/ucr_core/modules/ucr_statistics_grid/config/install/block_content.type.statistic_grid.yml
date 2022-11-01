@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: statistic_grid
+label: 'Statistic Grid'
+revision: 1
+description: 'Create a grid with a statistical card display.'

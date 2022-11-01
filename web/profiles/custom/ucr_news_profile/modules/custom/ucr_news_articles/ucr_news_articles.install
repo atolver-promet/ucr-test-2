@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_news_articles_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+
+    $config = \Drupal::configFactory();
+
+    // Append the TVI Settings for the taxonomies needed.
+    // Topics Taxonomy
+    $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_articles/config/optional/tvi.taxonomy_vocabulary.una_topic_category.yml';
+    $file_contents = file_get_contents($file_path);
+    $content_yml = Yaml::decode($file_contents);
+
+    $settings = $config->getEditable('tvi.taxonomy_vocabulary.una_topic_category');
+    $settings->setData($content_yml)->save(TRUE);
+}
+
+/**
+ * July 2019 - Update to the Form Displays
+ */
+function ucr_news_articles_update_8001() {
+    // Create the new Field Configs for the Block.
+    $config_files = [
+        'core.entity_form_display.node.news_articles.default',
+    ];
+
+    $completed = UCRCustoms::updateConfigFromStorage('ucr_news_articles', $config_files);
+    if(!$completed) {
+        throw new UpdateException('Update has Failed.');
+    }
+}

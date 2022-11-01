@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{% set num_items = view.args[1] == "" ? 3 : view.args[1] %}
+
+{% set items_per_row = view.args[2] == "" ? 4 : view.args[2] %}
+
+{% if items_per_row > 1 %}
+  {% set large_items = items_per_row %}
+  {% set medium_items = 2 %}
+{% else %}
+      {% set large_items = items_per_row %}
+      {% set medium_items = items_per_row %}
+{% endif %}
+
+<div class="feed-import-view-container">
+    <div class="grid-container full">
+        <div class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-{{ medium_items }} large-up-{{ large_items }} align-center" data-equalizer data-equalize-on="medium" data-equalize-by-row="true">
+        {% for row in rows %}
+            <div{{ row.attributes.addClass('cell') }}>
+                {{ row.content }}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>

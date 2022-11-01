@@ -1,0 +1,83 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.carousel_slider
+  - core.entity_view_mode.block_content.hero_slider_large
+  - field.field.block_content.carousel_slider.body
+  - field.field.block_content.carousel_slider.field_block_margin_bottom
+  - field.field.block_content.carousel_slider.field_block_margin_left
+  - field.field.block_content.carousel_slider.field_block_margin_right
+  - field.field.block_content.carousel_slider.field_block_margin_top
+  - field.field.block_content.carousel_slider.field_sliders
+  module:
+  - options
+  - slick_paragraphs
+  - text
+id: block_content.carousel_slider.hero_slider_large
+targetEntityType: block_content
+bundle: carousel_slider
+mode: hero_slider_large
+content:
+  body:
+    type: text_default
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_block_margin_bottom:
+    type: list_key
+    weight: 2
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_block_margin_left:
+    type: list_key
+    weight: 3
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_block_margin_right:
+    type: list_key
+    weight: 4
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_block_margin_top:
+    type: list_key
+    weight: 5
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_sliders:
+    type: slick_paragraphs_vanilla
+    weight: 1
+    label: hidden
+    settings:
+      optionset: hero_slider_ui
+      skin: grid
+      view_mode: hero_slider_large
+      cache: 0
+      current_view_mode: hero_slider_large
+      override: false
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      skin_arrows: ''
+      skin_dots: ''
+      style: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  scheduled_publication: true

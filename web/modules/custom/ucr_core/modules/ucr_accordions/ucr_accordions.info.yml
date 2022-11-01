@@ -1,0 +1,15 @@
+name: 'Accordions Component'
+description: 'Provide a custom block type with ''Paragraphs'' the ability to create an accordion view of content.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - entity_reference_revisions
+  - field
+  - field_group
+  - options
+  - paragraphs
+  - text
+  - ucr_core

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_callout_description
+    - paragraphs.paragraphs_type.homepage_callout_slider
+  module:
+    - text
+id: paragraph.homepage_callout_slider.field_callout_description
+field_name: field_callout_description
+entity_type: paragraph
+bundle: homepage_callout_slider
+label: 'Homepage Callout Description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

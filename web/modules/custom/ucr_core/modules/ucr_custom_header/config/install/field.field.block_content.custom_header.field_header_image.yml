@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.custom_header
+  - field.storage.block_content.field_header_image
+  - media.type.image
+id: block_content.custom_header.field_header_image
+field_name: field_header_image
+entity_type: block_content
+bundle: custom_header
+label: 'Header Image'
+description: 'Select the image that you would like to have displayed.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

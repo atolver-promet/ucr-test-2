@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.thumbnail
+  module:
+    - file
+    - image
+    - node
+id: linkit_default_profile
+label: 'Default Profile'
+description: ''
+attributes:
+  title:
+    id: title
+    weight: 0
+    settings:
+      automatic_title: true
+matchers:
+  f2b03d93-9e9f-4690-a03a-7a9152da977e:
+    uuid: f2b03d93-9e9f-4690-a03a-7a9152da977e
+    id: 'entity:node'
+    weight: 0
+    settings:
+      result_description: 'Last updated on: [node:changed]'
+      bundles: {  }
+      group_by_bundle: true
+      include_unpublished: false
+  26b2f069-ec9e-4c95-898b-e8faad9c43b3:
+    uuid: 26b2f069-ec9e-4c95-898b-e8faad9c43b3
+    id: 'entity:media'
+    weight: 0
+    settings:
+      result_description: 'Last Updated on: [media:changed]'
+      bundles: {  }
+      group_by_bundle: true
+  9da4ad76-491c-4fb3-aa99-494423e89d93:
+    uuid: 9da4ad76-491c-4fb3-aa99-494423e89d93
+    id: 'entity:file'
+    weight: 0
+    settings:
+      result_description: '<em>( [file:mime] )</em> - File Size: [file:size]'
+      bundles: null
+      group_by_bundle: null
+      images:
+        show_dimensions: false
+        show_thumbnail: true
+        thumbnail_image_style: thumbnail

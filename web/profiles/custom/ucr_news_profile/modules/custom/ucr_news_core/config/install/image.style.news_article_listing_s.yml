@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: news_article_listing_s
+label: 'News Article - Listing (S)'
+effects:
+  15b4b569-38c6-4c3c-b3b7-0774d45943c8:
+    uuid: 15b4b569-38c6-4c3c-b3b7-0774d45943c8
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 767
+      height: 767
+      crop_type: focal_point

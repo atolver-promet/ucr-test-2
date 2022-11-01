@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.teaser_callout
+  - field.storage.block_content.field_block_bg_image
+  - media.type.image
+id: block_content.teaser_callout.field_block_bg_image
+field_name: field_block_bg_image
+entity_type: block_content
+bundle: teaser_callout
+label: 'Background Image'
+description: '<em>( Optional ):</em> Select an image to use as the background for your callout.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

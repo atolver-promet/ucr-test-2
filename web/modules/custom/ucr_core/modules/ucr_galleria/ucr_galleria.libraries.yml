@@ -1,0 +1,17 @@
+galleria_globals:
+  version: VERSION
+  css:
+    theme:
+      css/galleria.css: {}
+  js:
+    js/galleria/galleria.min.js: {}
+    js/galleria/themes/azur/galleria.azur.min.js: {preprocess: false}
+    js/galleria.js: {}
+  dependencies:
+    - core/jquery
+galleria_slick:
+  css:
+    theme:
+      /libraries/slick/slick/slick.css: {}
+  js:
+    /libraries/slick/slick/slick.min.js: {}

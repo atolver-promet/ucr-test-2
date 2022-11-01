@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: tabs
+label: Tabs
+revision: 1
+description: 'Create a content block that displays information with Tab-like functionality.'

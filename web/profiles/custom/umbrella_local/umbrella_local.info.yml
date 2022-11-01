@@ -1,0 +1,26 @@
+name: 'UCR Profile - Umbrella (Local)'
+type: profile
+version: 8.x-dev
+description: 'Site Factory Sub-Profile of Lightning, Umbrella site. This profile excludes Acquia ACSF modules and should be used for local development.'
+core: '8.x'
+core_version_requirement: ^8 || ^9
+package: Profiles
+base profile: umbrella_acsf
+install:
+  - dblog
+  - update
+exclude:
+  - acsf
+  - acsf_sso
+  - lightning_roles
+  - lightning_landing_page
+  - lightning_media_instagram
+  - lightning_media_twitter
+  - lightning_media_audio
+  - lightning_media_slideshow
+  - media_entity_twitter
+  - media_entity_instagram
+  - syslog
+themes:
+  - seven
+  - ucr_umbrella

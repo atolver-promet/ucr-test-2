@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_una_featured
+    - node.type.news_articles
+id: node.news_articles.field_una_featured
+field_name: field_una_featured
+entity_type: node
+bundle: news_articles
+label: 'Featured Article?'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: column
+label: Column
+icon_uuid: null
+description: 'Creates columns for Additional Information Block'
+behavior_plugins: {  }

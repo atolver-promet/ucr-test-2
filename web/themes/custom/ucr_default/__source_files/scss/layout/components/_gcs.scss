@@ -1,0 +1,93 @@
+// ***** Google Search Modal
+$gcs-modal-title-background: #234674;
+$gcs-modal-title: $white;
+$gcs-modal-button: $white;
+$gcs-modal-button-background: #3898EC;
+$gcs-modal-button-cancel-background: #F44336;
+$gcs-modal-button-close-hover: $black;
+div {
+  &#gscSearchFormModal {
+    @include breakpoint(medium) {
+      //border-radius: 10px;
+      box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
+    }
+    .gsc-modal-top {
+      //background-color: $gcs-modal-title-background;
+      color: $gcs-modal-title;
+      margin: -1rem -1rem 1rem -1rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      line-height: normal;
+      font-weight: 700;
+      @include breakpoint(medium) {
+        font-size: 1.5rem;
+      }
+      button {
+        &.close-button {
+          background-color: #f44336;
+          line-height: 1.45rem;
+          color: $gcs-modal-button;
+          width: 50px;
+          height: 50px;
+          margin: 0;
+          padding: 5px;
+          top: 0;
+          right: 0;
+          @include breakpoint(medium) {
+            line-height: 2rem;
+          }
+          &:hover {
+            color: $gcs-modal-button-close-hover;
+          }
+        }
+      }
+    }
+    .gsc-modal-body {
+      @include breakpoint(medium) {
+        padding: 3rem;
+      }
+      input {
+        @include breakpoint(medium) {
+          font-size: 1.5rem;
+          font-family: "Fira Sans Regular";
+          color: #858e96;
+          background-color: #e8ecef;
+          font-size: 16px;
+        }
+        &::placeholder {
+          color: #858e96;
+        }
+      }
+      button {
+        margin: 0;
+        width: 100%;
+        max-width:276px;
+        text-align: center;
+        font-size: 1rem;
+        background-color: $gcs-modal-button-background;
+        &:hover {
+          background-color: darken($gcs-modal-button-background, 20%);
+        }
+        &.gsc-modal-button-close {
+          background-color: $gcs-modal-button-cancel-background;
+          transition: all 0.5s ease;
+          &:hover {
+            background-color: darken($gcs-modal-button-cancel-background, 20%);
+          }
+        }
+      }
+      span{
+        &.gsc-welcome-text{
+          color: #003DA5;
+          font-size: 23px;
+          text-align: center;
+          text-transform: uppercase;
+          &:before {
+            content: url('../images/ray-of-light-icon.svg');
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

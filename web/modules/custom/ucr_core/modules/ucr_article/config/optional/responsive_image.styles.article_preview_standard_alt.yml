@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.article_preview_standard_alt_l
+    - image.style.article_preview_standard_alt_s
+  theme:
+    - ucr_default
+id: article_preview_standard_alt
+label: 'Article Preview: Standard Alt'
+image_style_mappings:
+  -
+    breakpoint_id: ucr_default.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_alt_l
+  -
+    breakpoint_id: ucr_default.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_alt_l
+  -
+    breakpoint_id: ucr_default.tablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_alt_l
+  -
+    breakpoint_id: ucr_default.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_alt_s
+breakpoint_group: ucr_default
+fallback_image_style: article_preview_standard_alt_l

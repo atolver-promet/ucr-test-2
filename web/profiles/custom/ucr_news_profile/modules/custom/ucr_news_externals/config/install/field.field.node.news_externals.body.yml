@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.news_externals
+  module:
+    - text
+id: node.news_externals.body
+field_name: body
+entity_type: node
+bundle: news_externals
+label: Body
+description: 'Please enter in the teaser text from the external article that you want displayed on your site.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

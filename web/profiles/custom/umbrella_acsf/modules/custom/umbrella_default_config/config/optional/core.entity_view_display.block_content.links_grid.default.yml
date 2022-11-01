@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.links_grid
+    - field.field.block_content.links_grid.field_links
+  module:
+    - field_group
+    - link
+third_party_settings:
+  field_group:
+    group_row:
+      children:
+        - field_links
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: row
+        element: div
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Row
+id: block_content.links_grid.default
+targetEntityType: block_content
+bundle: links_grid
+mode: default
+content:
+  field_links:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden: {  }

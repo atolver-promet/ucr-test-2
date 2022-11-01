@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.call_to_actions
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.call_to_actions.body
+field_name: body
+entity_type: block_content
+bundle: call_to_actions
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

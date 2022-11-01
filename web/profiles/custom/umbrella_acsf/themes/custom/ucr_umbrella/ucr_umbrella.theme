@@ -1,0 +1,158 @@
+<?php
+use \Drupal\block_content\BlockContentInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\image\Entity\ImageStyle;
+
+// Add your custom theme override functions here.
+/**
+ * Implements hook_preprocess_block()
+ */
+function ucr_umbrella_preprocess_block(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function ucr_umbrella_preprocess_field(&$variables) {
+	if ($variables['field_name'] == "field_galleria_images") {
+//		$a = $variables['element']['#object'];
+//		kint($a);
+		foreach ($variables['items'] as $key => $item) {
+			$fid = $item['content']['#item']->target_id;//The file ID
+			$file = \Drupal\file\Entity\File::load($fid);
+			$path = $file->getFileUri();
+			$variables['items'][$key]['thumbnail'] = ImageStyle::load('gallery_thumbnail_131x131_')->buildUrl($path);
+			$variables['items'][$key]['full'] = file_create_url($path);
+		}
+	}
+}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Adds additional classes
+ */
+function ucr_umbrella_preprocess_html(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_node
+ *
+ * Add template suggestions and classes
+ */
+function ucr_umbrella_preprocess_node(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_page
+ *
+ * Add convenience variables and template suggestions
+ */
+function ucr_umbrella_preprocess_page(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function ucr_umbrella_preprocess_views_view(&$variables) {
+	//load block field for vertical tabs into views template
+	if ($variables['id'] == "accordion" and isset($variables['view_array']['#arguments'][0]) and $variables['view_array']['#arguments'][0] > 0) {
+		$bid = $variables['view_array']['#arguments'][0];
+		$block = \Drupal\block_content\Entity\BlockContent::load($bid);
+		$val = $block->field_options->getValue();
+		$variables['accordion_option'] = '';
+		if (isset($val[0]['value']) and $val[0]['value'] == "multi-expand") {
+			$variables['accordion_option'] = 'data-multi-expand="true"';
+		} else if (isset($val[0]['value']) and $val[0]['value'] == "closed") {
+			$variables['accordion_option'] = 'data-allow-all-closed="true"';
+		} else if (isset($val[0]['value']) and $val[0]['value'] == "disabled") {
+			$variables['accordion_option'] = 'disabled';
+		}
+	}
+	//load block field for accordion options into views template
+	if ($variables['id'] == "horizontal_tabs" and isset($variables['view_array']['#arguments'][0]) and $variables['view_array']['#arguments'][0] > 0) {
+		$bid = $variables['view_array']['#arguments'][0];
+		$block = \Drupal\block_content\Entity\BlockContent::load($bid);
+		$val = $block->field_vertical_tab_option->getValue();
+		if (isset($val[0]['value']) and $val[0]['value'] == 1) {
+			$variables['vertical_tab'] = true;
+
+		} else {
+			$variables['vertical_tab'] = false;
+		}
+	}
+	if ($variables['id'] == "galleria" and isset($variables['view_array']['#arguments'][0]) and $variables['view_array']['#arguments'][0] > 0) {
+		$bid = $variables['view_array']['#arguments'][0];
+		/*
+		$block = \Drupal\block_content\Entity\BlockContent::load($bid);
+		kint($bid);
+		kint($block);
+		*/
+		$block = \Drupal::entityTypeManager()->getStorage('block_content')->load($bid);
+    $block_content = \Drupal::entityTypeManager()->getViewBuilder('block_content')->view($block);
+    $variables['gallery_block'] = $block_content;
+		/*
+		$block = \Drupal\block\Entity\Block::load('simplenewssubscription');
+	  $block_content = \Drupal::entityTypeManager()
+	    ->getViewBuilder('block')
+	    ->view($block);
+		$variables['gallery_block'] = $block_content;
+		*/
+	}
+
+}
+
+/**
+ * Implements template_preprocess_views_view_field().
+ */
+function ucr_umbrella_preprocess_views_view_field(&$variables) {
+    $view_name = $variables['view']->id();
+    $field_name = $variables['field']->realField;
+
+    // Only do the following on the personnel profile view.
+    if($view_name == "personnel_profile") {
+        // If the field is the profession / job titles, process the length.
+        if($field_name == 'field_profession_titles_value') {
+            $field_value = trim($variables['field']->getValue($variables['row']));
+            $explode = explode(PHP_EOL, $field_value);
+            $field_value = implode(', ', $explode);
+
+            $field_value = (strlen($field_value) > 45 ? substr($field_value, 0, 42)."..." : $field_value);
+
+            $variables['output'] = $field_value;
+        }
+
+        // If the field is the Taxonomy field (Dept / Programs), process the length.
+        if($field_name == "field_departments_programs_target_id") {
+            $field_value = html_entity_decode(trim($variables['field']->advancedRender($variables['row'])));
+            $field_value = (strlen($field_value) > 45 ? substr($field_value, 0, 42)."..." : $field_value);
+
+            $variables['output'] = $field_value;
+        }
+    }
+
+    if($view_name == "horizontal_tabs") {
+	    if($field_name == 'field_tab_title_value') {
+		    $row_id = $variables['row']->paragraphs_item_field_data_block_content__field_tabs_id;
+		    $field_value = trim($variables['field']->getValue($variables['row']));
+		    $path = '#panel'.$row_id; // prefixed with /
+				$url = Url::fromUri('internal:'.$path);
+				$link = Link::fromTextAndUrl($field_value, $url);
+				$link = $link->toRenderable();
+				$output = render($link);
+		    $variables['output'] = $output;
+		  }
+	  }
+}
+
+function ucr_umbrella_preprocess_paragraph__carousel_slider(&$variables) {
+    $paragraph = $variables['paragraph'];
+    $is_video = ($paragraph->field_media->isEmpty() ? false : true);
+    $variables['is_video_slide'] = $is_video;
+}
+
+/**
+* Implements paragraph preprocess hook
+* ORIGINAL CODE from /www.youtube.com/watch?v=sDQelP_GgCc
+*/

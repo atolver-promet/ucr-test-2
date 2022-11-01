@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_galleria_image_items
+    - node.type.galleria
+    - paragraphs.paragraphs_type.galleria_items
+  module:
+    - entity_reference_revisions
+id: node.galleria.field_galleria_image_items
+field_name: field_galleria_image_items
+entity_type: node
+bundle: galleria
+label: 'Galleria Items'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      galleria_items: galleria_items
+    target_bundles_drag_drop:
+      accordion:
+        weight: 8
+        enabled: false
+      bubbles:
+        weight: 9
+        enabled: false
+      carousel_slider:
+        weight: 10
+        enabled: false
+      galleria_items:
+        enabled: true
+        weight: 11
+      info_card:
+        weight: 12
+        enabled: false
+      statistic:
+        weight: 13
+        enabled: false
+      tab:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,134 @@
+$stat-container-background: $ucr-grey-3;
+$stat-card-background: $grey-400;
+$stat-card-black-background: $blue-grey-900;
+$stat-card-white-background: $body-background;
+$stat-card-font-white: $ucr-white-2;
+$stat-card-font-blue: $ucr-blue;
+$stat-card-font-black: $blue-grey-900;
+main {
+  > div {
+    &#content-container {
+      .stat-container {
+        background-color: $stat-container-background;
+        background-size: cover;
+        padding: 0.625rem;
+        @include breakpoint(medium) {
+          padding: 0.9375rem;
+        }
+        &.stat-container-custom-bg {
+          background-color: transparent;
+        }
+        .stat {
+          background: $stat-card-background;
+          padding: .5em .75em;
+          min-height: 239px;
+          text-align: center;
+          font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        }
+        .stat-number {
+          margin-top:1rem;
+          font-weight:300;
+          font-size: calc(100% + 3vw);
+          @include breakpoint(medium) {
+            font-size: calc(100% + 1vw);
+          }
+          &:after {
+            position: relative;
+            width: 50%;
+            content: "";
+            border-bottom: 2px solid #FFB81C;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 12px;
+            margin-top:12px;
+          }
+        }
+        .stat-description {
+          font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+          font-size: .875rem;
+          line-height: 1.64;
+          font-weight:700;
+          text-transform: uppercase;
+          padding: 0 0 1.5em 0;
+        }
+        &.stat-bg-black {
+          &.stat-opacity-90 {
+            .stat {
+              background: rgba($stat-card-black-background, 0.9);
+            }
+          }
+          &.stat-opacity-80 {
+            .stat {
+              background: rgba($stat-card-black-background, 0.8);
+            }
+          }
+          &.stat-opacity-60 {
+            .stat {
+              background: rgba($stat-card-black-background, 0.6);
+            }
+          }
+        }
+        &.stat-bg-white {
+          &.stat-opacity-90 {
+            .stat {
+              background: rgba($stat-card-white-background, 0.9);
+            }
+          }
+          &.stat-opacity-80 {
+            .stat {
+              background: rgba($stat-card-white-background, 0.8);
+            }
+          }
+          &.stat-opacity-60 {
+            .stat {
+              background: rgba($stat-card-white-background, 0.6);
+            }
+          }
+        }
+        &.stat-bg-none {
+          .stat {
+            background: transparent !important;
+          }
+        }
+        &.stat-font-color-white {
+          color: $stat-card-font-white;
+          h2 {
+            color: $stat-card-font-white;
+          }
+        }
+        &.stat-font-color-black {
+          color: $stat-card-font-black;
+          h2 {
+            color: $stat-card-font-black;
+          }
+        }
+        &.stat-font-color-blue {
+          color: $stat-card-font-blue;
+          h2 {
+            color: $stat-card-font-blue;
+          }
+        }
+      }
+      .ucr-custom-block {
+        &.stat-font-color-white {
+          color: $stat-card-font-white;
+          h2 {
+            color: $stat-card-font-white;
+          }
+        }
+        &.stat-font-color-black {
+          color: $stat-card-font-black;
+          h2 {
+            color: $stat-card-font-black;
+          }
+        }
+        &.stat-font-color-blue {
+          color: $stat-card-font-blue;
+          h2 {
+            color: $stat-card-font-blue;
+          }
+        }
+      }
+    }
+  }
+}

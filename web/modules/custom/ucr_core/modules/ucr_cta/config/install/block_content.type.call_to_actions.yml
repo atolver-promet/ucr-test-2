@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: call_to_actions
+label: 'Call to Actions'
+revision: 1
+description: 'Create a grid of simple text, image, and color items. Choose from multiple layout styles for the overall look.'

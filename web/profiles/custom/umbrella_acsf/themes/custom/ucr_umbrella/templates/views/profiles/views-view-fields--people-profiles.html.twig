@@ -1,0 +1,63 @@
+{#
+/**
+ * @file
+ * Default view template to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set no_card_css = '' %}
+{% set profile_card_image = fields.field_image_media.content|striptags('<img>')|trim %}
+{% set profile_location = fields.field_office_location.content|striptags|trim %}
+{% set profile_phone = fields.field_phone_number.content|striptags|trim %}
+{% set profile_email = fields.field_email_address.content|striptags|trim %}
+
+{% if profile_card_image is not empty %}
+<div class="profile-card-image-container">
+    {{ fields.field_image_media.content }}
+</div>
+{% else %}
+    {% set no_card_css = ' no-profile-card-image' %}
+{% endif %}
+<div class="profile-card-name-container{{ no_card_css }}">
+    <h3>{{ fields.field_prefix_name.content }} {{ fields.field_first_name.content }} {{ fields.field_last_name.content }} {{ fields.field_suffix_name.content }}</h3>
+    <div class="profile-job-titles">{{ fields.field_profession_titles.content }}</div>
+    <div class="profile-dept-info">{{ fields.field_departments_programs.content }}</div>
+</div>
+<div class="profile-card-contact-info">
+    {% if profile_location is not empty %}
+    <div class="contact-location">{{ fields.field_office_location.content }}</div>
+    {% endif %}
+    {% if profile_phone is not empty %}
+    <div class="contact-phone">{{ fields.field_phone_number.content }}</div>
+    {% endif %}
+    <div class="contact-email"><a href="mailto:{{ profile_email }}">{{ fields.field_email_address.content }}</a></div>
+</div>
+<div class="profile-card-view-more">
+    <a href="{% spaceless %}{{ fields.path.content|striptags|escape }}{% endspaceless %}">View Profile</a>
+</div>

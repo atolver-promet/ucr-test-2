@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_article_day_month_format
+label: 'Articles - Day / Month Format'
+locked: false
+pattern: 'd M'

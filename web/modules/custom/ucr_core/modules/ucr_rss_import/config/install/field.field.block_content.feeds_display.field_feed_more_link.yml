@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.feeds_display
+  - field.storage.block_content.field_feed_more_link
+  module:
+  - link
+id: block_content.feeds_display.field_feed_more_link
+field_name: field_feed_more_link
+entity_type: block_content
+bundle: feeds_display
+label: 'More Link'
+description: '<em>( Optional ):</em> Enter in the URL to display to visitors where they can go to view where the feed came from.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 16_9_article_image_main
+label: 'Article Image - (1170 x 658)'
+effects:
+  75784eee-3077-46e6-a9b3-5e7bd5f96e2d:
+    uuid: 75784eee-3077-46e6-a9b3-5e7bd5f96e2d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1170
+      height: 658
+      crop_type: focal_point

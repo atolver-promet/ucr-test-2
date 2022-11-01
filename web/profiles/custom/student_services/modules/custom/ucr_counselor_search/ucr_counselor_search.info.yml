@@ -1,0 +1,23 @@
+name: 'Counselor Search Component'
+description: 'Provides a content type to create a College page and List View of Majors'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - entity_browser
+  - entity_reference_revisions
+  - field
+  - field_group
+  - focal_point
+  - image
+  - menu_ui
+  - node
+  - paragraphs
+  - path
+  - pathauto
+  - text
+  - user
+  - views
+  - ucr_core

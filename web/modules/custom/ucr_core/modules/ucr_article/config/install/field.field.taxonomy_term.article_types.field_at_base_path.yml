@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_at_base_path
+    - taxonomy.vocabulary.article_types
+id: taxonomy_term.article_types.field_at_base_path
+field_name: field_at_base_path
+entity_type: taxonomy_term
+bundle: article_types
+label: 'Base Path'
+description: 'Please enter in the base path that will be used when articles are created with this type. Keep all characters lowercase and dash''s only.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

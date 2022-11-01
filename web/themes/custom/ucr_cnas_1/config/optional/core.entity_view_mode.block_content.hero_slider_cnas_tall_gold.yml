@@ -1,0 +1,14 @@
+uuid: a7c892ac-37d6-4269-a180-0f1b1df34980
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.hero_slider_cnas_tall_gold
+label: 'Hero Slider - CNAS Tall Gold'
+targetEntityType: block_content
+cache: true

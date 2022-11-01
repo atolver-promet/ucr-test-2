@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_bubble_caption_placement
+    - paragraphs.paragraphs_type.bubbles
+  module:
+    - options
+id: paragraph.bubbles.field_bubble_caption_placement
+field_name: field_bubble_caption_placement
+entity_type: paragraph
+bundle: bubbles
+label: 'Bubble Caption Placement'
+description: 'Select where to place the caption. By default, it will be centered.'
+required: false
+translatable: false
+default_value:
+  -
+    value: bubble-text
+default_value_callback: ''
+settings: {  }
+field_type: list_string

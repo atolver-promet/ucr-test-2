@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: ucr_news_media_contacts
+label: 'UCR News Media Contacts'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/media-contact/[term:name]'
+selection_criteria:
+  ab8a3684-874b-46bb-bab1-6aa4e75ce25e:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      ucr_news_article_media_contacts: ucr_news_article_media_contacts
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: ab8a3684-874b-46bb-bab1-6aa4e75ce25e
+selection_logic: and
+weight: -2
+relationships: {  }

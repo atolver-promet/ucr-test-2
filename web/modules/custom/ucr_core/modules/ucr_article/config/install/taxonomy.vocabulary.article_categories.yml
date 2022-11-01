@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Article Categories'
+vid: article_categories
+description: 'A Taxonomy of categories to organize articles.'
+hierarchy: 0
+weight: 0

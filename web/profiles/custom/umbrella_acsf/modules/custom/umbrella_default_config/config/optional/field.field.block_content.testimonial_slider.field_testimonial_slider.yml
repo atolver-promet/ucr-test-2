@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_slider
+    - field.storage.block_content.field_testimonial_slider
+    - paragraphs.paragraphs_type.testimonial_slider
+  module:
+    - entity_reference_revisions
+id: block_content.testimonial_slider.field_testimonial_slider
+field_name: field_testimonial_slider
+entity_type: block_content
+bundle: testimonial_slider
+label: 'Testimonial Slider'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      testimonial_slider: testimonial_slider
+    target_bundles_drag_drop:
+      accordion:
+        weight: 10
+        enabled: false
+      box:
+        weight: 11
+        enabled: false
+      bubbles:
+        weight: 12
+        enabled: false
+      carousel_slider:
+        weight: 13
+        enabled: false
+      info_card:
+        weight: 14
+        enabled: false
+      statistic:
+        weight: 15
+        enabled: false
+      tab:
+        weight: 16
+        enabled: false
+      testimonial_slider:
+        enabled: true
+        weight: 17
+      video:
+        weight: 18
+        enabled: false
+field_type: entity_reference_revisions

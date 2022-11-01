@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: form_preview
+label: 'Form Preview'
+effects:
+  ed93574c-5c0a-449b-ac0c-c5a273ffa6be:
+    uuid: ed93574c-5c0a-449b-ac0c-c5a273ffa6be
+    id: image_scale
+    weight: 1
+    data:
+      width: 600
+      height: 600
+      upscale: false

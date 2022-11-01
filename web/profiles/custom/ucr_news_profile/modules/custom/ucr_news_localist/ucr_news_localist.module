@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_news_localist_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_news_localist_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}

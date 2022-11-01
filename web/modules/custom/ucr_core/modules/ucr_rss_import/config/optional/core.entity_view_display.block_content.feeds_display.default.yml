@@ -1,0 +1,65 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.feeds_display
+    - field.field.block_content.feeds_display.body
+    - field.field.block_content.feeds_display.field_feed_limit
+    - field.field.block_content.feeds_display.field_feed_more_link
+    - field.field.block_content.feeds_display.field_feed_to_display
+    - field.field.block_content.feeds_display.field_items_per_row
+  module:
+    - link
+    - text
+id: block_content.feeds_display.default
+targetEntityType: block_content
+bundle: feeds_display
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  content_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_feed_limit:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: number_unformatted
+    region: content
+  field_feed_more_link:
+    weight: 5
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_feed_to_display:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: entity_reference_entity_id
+    region: content
+  field_items_per_row:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: number_unformatted
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: scale_225
+label: 'WYSIWYG Scale - 225px'
+effects:
+  0fb48a92-9d3f-4268-ae85-6abe7e1445e5:
+    uuid: 0fb48a92-9d3f-4268-ae85-6abe7e1445e5
+    id: image_scale
+    weight: 1
+    data:
+      width: 225
+      height: 225
+      upscale: false

@@ -1,0 +1,903 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Config\FileStorage;
+use Drupal\ucr_core\UCRCustoms;
+/**
+ * Implements hook_install().
+ */
+function ucr_core_install() {
+    if (\Drupal::isConfigSyncing()) {
+    return;
+    }
+}
+
+/**
+ * Update Core for new Content-Ordering Taxonomy, Content Views, and updated Entity Browser.
+ */
+function ucr_core_update_8001() {
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  // Begin User Fields Creations.
+  // *** User's Full Name
+  $fullNameStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_full_name');
+  if (!$fullNameStorage) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.user.field_full_name.yml';
+    $file_contents = file_get_contents($file_path);
+    $full_name = Yaml::decode($file_contents);
+    \Drupal\field\Entity\FieldStorageConfig::create($full_name)->save();
+  }
+
+  $user_name = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_full_name');
+  if(!$user_name) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.user.user.field_full_name.yml';
+    $file_contents = file_get_contents($file_path);
+    $name_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $name_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Campus Relations
+  $campusRelationStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_campus_relation');
+  if (!$campusRelationStorage) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.user.field_campus_relation.yml';
+    $file_contents = file_get_contents($file_path);
+    $relation = Yaml::decode($file_contents);
+    \Drupal\field\Entity\FieldStorageConfig::create($relation)->save();
+  }
+
+  $campus_relations = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_campus_relation');
+  if(!$campus_relations) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.user.user.field_campus_relation.yml';
+    $file_contents = file_get_contents($file_path);
+    $relation_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $relation_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Contact Number
+  $contactNumberStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_contact_number');
+  if (!$contactNumberStorage) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.user.field_contact_number.yml';
+    $file_contents = file_get_contents($file_path);
+    $contact_number = Yaml::decode($file_contents);
+    \Drupal\field\Entity\FieldStorageConfig::create($contact_number)->save();
+  }
+
+  $contact_number = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_contact_number');
+  if(!$contact_number) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.user.user.field_contact_number.yml';
+    $file_contents = file_get_contents($file_path);
+    $number_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $number_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Dept ID
+  $deptIDStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_dept_id');
+  if (!$deptIDStorage) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.user.field_dept_id.yml';
+    $file_contents = file_get_contents($file_path);
+    $dept_id = Yaml::decode($file_contents);
+    \Drupal\field\Entity\FieldStorageConfig::create($dept_id)->save();
+  }
+
+  $dept_id = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_dept_id');
+  if(!$dept_id) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.user.user.field_dept_id.yml';
+    $file_contents = file_get_contents($file_path);
+    $dept_id_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $dept_id_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Dept Name
+  $deptNameStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_dept_name');
+  if (!$deptNameStorage) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.user.field_dept_name.yml';
+    $file_contents = file_get_contents($file_path);
+    $dept_name = Yaml::decode($file_contents);
+    \Drupal\field\Entity\FieldStorageConfig::create($dept_name)->save();
+  }
+
+  $dept_name = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_dept_name');
+  if(!$dept_name) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.user.user.field_dept_name.yml';
+    $file_contents = file_get_contents($file_path);
+    $dept_name_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $dept_name_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // *** Org ID
+  $orgIDStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('user', 'field_org_id');
+  if (!$orgIDStorage) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.user.field_org_id.yml';
+    $file_contents = file_get_contents($file_path);
+    $org_id = Yaml::decode($file_contents);
+    \Drupal\field\Entity\FieldStorageConfig::create($org_id)->save();
+  }
+
+  $org_id = \Drupal\field\Entity\FieldConfig::loadByName('user', 'user', 'field_org_id');
+  if(!$org_id) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.user.user.field_org_id.yml';
+    $file_contents = file_get_contents($file_path);
+    $org_id_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $org_id_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+  // End User Fields Creations.
+
+  // Begin updating the user admin view & the form display.
+  // *** Update the Form Display.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_form_display.user.user.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $user_form = Yaml::decode($file_contents);
+  $current_form = $config->getEditable('core.entity_form_display.user.user.default');
+  $current_form_id = $current_form->get('uuid');
+  if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $user_form);
+    $current_form->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_form->set('dependencies', $user_form['dependencies'])
+      ->set('third_party_settings', $user_form['third_party_settings'])
+      ->set('content', $user_form['content'])
+      ->set('hidden', $user_form['hidden'])->save(TRUE);
+  }
+
+  // *** Update the user view display
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_view_display.user.user.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $user_view = Yaml::decode($file_contents);
+  $current_view = $config->getEditable('core.entity_view_display.user.user.default');
+  $current_view_id = $current_view->get('uuid');
+  if(!$current_view_id) { // Custom View does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $user_view);
+    $current_view->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+    $current_view->set('dependencies', $user_view['dependencies'])
+      ->set('content', $user_view['content'])
+      ->set('hidden', $user_view['hidden'])->save(TRUE);
+  }
+
+  // *** Update the user_admin view
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.user_admin_people.yml';
+  $file_contents = file_get_contents($file_path);
+  $user_yml = Yaml::decode($file_contents);
+  $current_user_view = $config->getEditable('views.view.user_admin_people');
+  $current_user_view->set('dependencies', $user_yml['dependencies'])->save(TRUE);
+  $current_user_view->set('display', $user_yml['display'])->save(TRUE);
+
+  // Create the new Taxonomy item for use.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/taxonomy.vocabulary.content_keywords.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_tax = Yaml::decode($file_contents);
+  $current_vocab = $config->getEditable('taxonomy.vocabulary.content_keywords');
+  $vocab_id = $current_vocab->get('uuid');
+  if(!$vocab_id) { // The new vocab not exist. So create a new one.
+    // This will create the vocab definition.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_tax);
+    $current_vocab->setData($full_array)->save(TRUE);
+
+    // Create the form_display mode.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/core.entity_form_display.taxonomy_term.content_keywords.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $tax_form_view = Yaml::decode($file_contents);
+    $current_form_view = $config->getEditable('core.entity_form_display.taxonomy_term.content_keywords.default');
+    $vocab_id = $current_form_view->get('uuid');
+    if(!$vocab_id) {
+      $uuid = $uuid_service->generate();
+      $full_array = array_merge(array('uuid' => $uuid), $tax_form_view);
+      $current_form_view->setData($full_array)->save(TRUE);
+    }
+
+    // Create the view_display mode.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/core.entity_view_display.taxonomy_term.content_keywords.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $tax_display_view = Yaml::decode($file_contents);
+    $current_display_view = $config->getEditable('core.entity_view_display.taxonomy_term.content_keywords.default');
+    $vocab_id = $current_display_view->get('uuid');
+    if(!$vocab_id) {
+      $uuid = $uuid_service->generate();
+      $full_array = array_merge(array('uuid' => $uuid), $tax_display_view);
+      $current_display_view->setData($full_array)->save(TRUE);
+    }
+  }
+
+  // Create the normal content keywords storage for all node content types, and then also the basic page assignment.
+  $contentKeywordsStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_content_keywords');
+  if (!$contentKeywordsStorage) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.node.field_content_keywords.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_storage = Yaml::decode($file_contents);
+    \Drupal\field\Entity\FieldStorageConfig::create($new_storage)->save();
+  }
+
+  $page_contents = \Drupal\field\Entity\FieldConfig::loadByName('node', 'page', 'field_content_keywords');
+  if(!$page_contents) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.node.page.field_content_keywords.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+  }
+
+  // Setup the new image styles
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/image.style.media_view_browser.yml';
+  $file_contents = file_get_contents($file_path);
+  $image_style_1 = Yaml::decode($file_contents);
+  $current_style = $config->getEditable('image.style.media_view_browser');
+  $current_id = $current_style->get('uuid');
+  if(!$current_id) { // Custom View does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $image_style_1);
+    $current_style->setData($full_array)->save(TRUE);
+  }
+
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/image.style.media_view_thumbnail.yml';
+  $file_contents = file_get_contents($file_path);
+  $image_style_1 = Yaml::decode($file_contents);
+  $current_style = $config->getEditable('image.style.media_view_thumbnail');
+  $current_id = $current_style->get('uuid');
+  if(!$current_id) { // Custom View does not exist. So create a new one.
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $image_style_1);
+    $current_style->setData($full_array)->save(TRUE);
+  }
+
+  // Override the Content View page with the information needed.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.content.yml';
+  $file_contents = file_get_contents($file_path);
+  $content_yml = Yaml::decode($file_contents);
+
+  $get_content_view = $config->getEditable('views.view.content');
+  $get_content_view->set('dependencies', $content_yml['dependencies'])->save(TRUE);
+  $get_content_view->set('display', $content_yml['display'])->save(TRUE);
+
+  // Override the Media View with the new information needed.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.media.yml';
+  $file_contents = file_get_contents($file_path);
+  $media_yml = Yaml::decode($file_contents);
+
+  $get_media_view = $config->getEditable('views.view.media');
+  $get_media_view->set('dependencies', $media_yml['dependencies'])->save(TRUE);
+  $get_media_view->set('display', $media_yml['display'])->save(TRUE);
+
+  // Override the Basic Page Form Display with the new information needed.
+  $profile_name = $config->getEditable('core.extension')->get('profile');
+  if(in_array(strtolower($profile_name), array('umbrella_acsf', 'umbrella_local'))) {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/umbrella/core.entity_form_display.node.page.default.yml';
+  } else {
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_form_display.node.page.default.yml';
+  }
+
+  $file_contents = file_get_contents($file_path);
+  $page_form_yml = Yaml::decode($file_contents);
+
+  $get_page_form = $config->getEditable('core.entity_form_display.node.page.default');
+  $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+  $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+  $get_page_form->set('third_party_settings', $page_form_yml['third_party_settings'])->save(TRUE);
+  $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+}
+
+/**
+ * Update Content, Media, & General People List Views.
+ */
+function ucr_core_update_8002() {
+  $config = \Drupal::configFactory();
+
+  // Override the Content View page with the information needed.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.content.yml';
+  $file_contents = file_get_contents($file_path);
+  $content_yml = Yaml::decode($file_contents);
+
+  $get_content_view = $config->getEditable('views.view.content');
+  $get_content_view->set('dependencies', $content_yml['dependencies'])->save(TRUE);
+  $get_content_view->set('display', $content_yml['display'])->save(TRUE);
+
+  // Override the Media View with the new information needed.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.media.yml';
+  $file_contents = file_get_contents($file_path);
+  $media_yml = Yaml::decode($file_contents);
+
+  $get_media_view = $config->getEditable('views.view.media');
+  $get_media_view->set('dependencies', $media_yml['dependencies'])->save(TRUE);
+  $get_media_view->set('display', $media_yml['display'])->save(TRUE);
+
+  // Update the Users' View with the updated display.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.user_admin_people.yml';
+  $file_contents = file_get_contents($file_path);
+  $people_yml = Yaml::decode($file_contents);
+
+  $get_people_view = $config->getEditable('views.view.user_admin_people');
+  $get_people_view->set('display', $people_yml['display'])->save(TRUE);
+}
+
+/**
+ * August 2018 - Update the Tags Taxonomy with the updated form and display views. Add the TVI addition.
+ */
+function ucr_core_update_8003() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // Update the Taxonomy Term - Tags Form Display.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/core.entity_form_display.taxonomy_term.tags.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_form = Yaml::decode($file_contents);
+
+    $current_form = $config->getEditable('core.entity_form_display.taxonomy_term.tags.default');
+    $current_form_id = $current_form->get('uuid');
+    if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_form);
+        $current_form->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $current_form->set('dependencies', $new_form['dependencies'])
+            ->set('content', $new_form['content'])
+            ->set('hidden', $new_form['hidden'])->save(TRUE);
+    }
+
+    // Update the Taxonomy Term - Article Categories View Display.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/core.entity_view_display.taxonomy_term.tags.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_form = Yaml::decode($file_contents);
+
+    $current_form = $config->getEditable('core.entity_view_display.taxonomy_term.tags.default');
+    $current_form_id = $current_form->get('uuid');
+    if(!$current_form_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_form);
+        $current_form->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $current_form->set('dependencies', $new_form['dependencies'])
+            ->set('third_party_settings', $new_form['third_party_settings'])
+            ->set('content', $new_form['content'])
+            ->set('hidden', $new_form['hidden'])->save(TRUE);
+    }
+
+    // Import YML and override the Article View page with the new view page for article tag listing
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/tvi.taxonomy_vocabulary.tags.yml';
+    $file_contents = file_get_contents($file_path);
+    $content_yml = Yaml::decode($file_contents);
+    $get_content_view = $config->getEditable('tvi.taxonomy_vocabulary.tags');
+    $get_content_view->setData($content_yml)->save(TRUE);
+}
+
+/**
+ * October 2018 - Add the new Full Width View Mode for Blocks.
+ */
+function ucr_core_update_8004() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // Add the New View Mode.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/core.entity_view_mode.block_content.center.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_view_mode = Yaml::decode($file_contents);
+
+    $new_config_view = $config->getEditable('core.entity_view_mode.block_content.center');
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_view_mode);
+    $new_config_view->setData($full_array)->save(TRUE);
+
+    // Within the UCR Profile, add the new View Display for the Basic Block
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $acceptable_profiles = array('ucr_profile', 'ucr_profile_local');
+    if(in_array($profile_name, $acceptable_profiles)) {
+        // Add the New View Display.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_view_display.block_content.basic.center.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view_mode = Yaml::decode($file_contents);
+
+        $new_config_view = $config->getEditable('core.entity_view_display.block_content.basic.center');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_view_mode);
+        $new_config_view->setData($full_array)->save(TRUE);
+    }
+}
+
+/**
+ * November 2018 - Add the new Social Media Image field and the Header Image Field for the Basic Page.
+ */
+function ucr_core_update_8005() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $acceptable_profiles = array('ucr_profile', 'ucr_profile_local', 'ucr_news_profile', 'ucr_news_local', 'student_services', 'student_services_local');
+
+    if(in_array($profile_name, $acceptable_profiles)) {
+        // *** Setup the Header Image Storage
+        $storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_header_image');
+        if (!$storage) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.node.field_header_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $yaml_contents = Yaml::decode($file_contents);
+            \Drupal\field\Entity\FieldStorageConfig::create($yaml_contents)->save();
+        }
+
+        $header_image_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'page', 'field_header_image');
+        if(!$header_image_field) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.node.page.field_header_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        // *** Setup the Social Media Image Storage
+        $storage = \Drupal\field\Entity\FieldStorageConfig::loadByName('node', 'field_social_media_image');
+        if (!$storage) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.node.field_social_media_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $yaml_contents = Yaml::decode($file_contents);
+            \Drupal\field\Entity\FieldStorageConfig::create($yaml_contents)->save();
+        }
+
+        $social_image_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'page', 'field_social_media_image');
+        if(!$social_image_field) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.field.node.page.field_social_media_image.yml';
+            $file_contents = file_get_contents($file_path);
+            $field_yaml_content = Yaml::decode($file_contents);
+
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+            \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+        }
+
+        // Add the New View Mode.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/core.entity_view_mode.media.general_header.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view_mode = Yaml::decode($file_contents);
+
+        $new_config_view = $config->getEditable('core.entity_view_mode.media.general_header');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_view_mode);
+        $new_config_view->setData($full_array)->save(TRUE);
+
+        // Add the new Image Styles
+        $style_names = array('content_header_large', 'content_header_medium', 'content_header_small', 'content_header_xlarge');
+        foreach($style_names as $s_name) {
+            $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/image.style.'.$s_name.'.yml';
+            $file_contents = file_get_contents($file_path);
+            $new_style = Yaml::decode($file_contents);
+
+            $new_config_view = $config->getEditable('image.style.'.$s_name);
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $new_style);
+            $new_config_view->setData($full_array)->save(TRUE);
+        }
+
+        // Create the new Responsive
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/responsive_image.styles.content_header.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_response = Yaml::decode($file_contents);
+
+        $new_config_view = $config->getEditable('responsive_image.styles.content_header');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_response);
+        $new_config_view->setData($full_array)->save(TRUE);
+
+        // Create the new View Display
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_view_display.media.image.general_header.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_response = Yaml::decode($file_contents);
+
+        $new_config_view = $config->getEditable('core.entity_view_display.media.image.general_header');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_response);
+        $new_config_view->setData($full_array)->save(TRUE);
+
+        // Update the Basic Page Form
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_form_display.node.page.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_form_display.node.page.default');
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('third_party_settings', $page_form_yml['third_party_settings'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+
+        // Create the new View
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.content_views.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_response = Yaml::decode($file_contents);
+
+        $new_config_view = $config->getEditable('views.view.content_views');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_response);
+        $new_config_view->setData($full_array)->save(TRUE);
+    }
+}
+
+/**
+ * November 2018 - Add updated customization for Drupal 8.6.x.
+ */
+function ucr_core_update_8006() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // Add the new image style.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/image.style.media_view_thumbnail_grid.yml';
+    $file_contents = file_get_contents($file_path);
+    $page_form_yml = Yaml::decode($file_contents);
+
+    $get_page_form = $config->getEditable('image.style.media_view_thumbnail_grid');
+    $current_view_id = $get_page_form->get('uuid');
+    if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+        $get_page_form->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $get_page_form->set('label', $page_form_yml['label'])->save(TRUE);
+        $get_page_form->set('effects', $page_form_yml['effects'])->save(TRUE);
+    }
+
+    // Override the Media View with the new information needed.  Even though this view lives in ucr_core module, we still need to do the override because of Lightning.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/views.view.media.yml';
+    $file_contents = file_get_contents($file_path);
+    $media_yml = Yaml::decode($file_contents);
+
+    $get_media_view = $config->getEditable('views.view.media');
+    $current_view_id = $get_media_view->get('uuid');
+    if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $media_yml);
+        $get_media_view->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $get_media_view->set('dependencies', $media_yml['dependencies'])->save(TRUE);
+        $get_media_view->set('display', $media_yml['display'])->save(TRUE);
+    }
+
+    // Override the Media_Library View with the new information needed.  Even though this view lives in ucr_core module, we still need to do the override because of Lightning.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/views.view.media_library.yml';
+    $file_contents = file_get_contents($file_path);
+    $media_yml = Yaml::decode($file_contents);
+
+    $get_media_view = $config->getEditable('views.view.media_library');
+    $current_view_id = $get_media_view->get('uuid');
+    if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $media_yml);
+        $get_media_view->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $get_media_view->set('dependencies', $media_yml['dependencies'])->save(TRUE);
+        $get_media_view->set('display', $media_yml['display'])->save(TRUE);
+    }
+
+    // Override the Media Library View Display with the new information needed for the media types.
+    $media_views_to_update = array('document.media_library', 'image.media_library', 'video.media_library');
+    foreach($media_views_to_update as $mv_file) {
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/optional/core.entity_view_display.media.'.$mv_file.'.yml';
+        $file_contents = file_get_contents($file_path);
+        $page_form_yml = Yaml::decode($file_contents);
+
+        $get_page_form = $config->getEditable('core.entity_view_display.media.'.$mv_file);
+        $current_view_id = $get_page_form->get('uuid');
+        if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+            $uuid = $uuid_service->generate();
+            $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+            $get_page_form->setData($full_array)->save(TRUE);
+        } else { // A custom one exists, so update the parts needed.
+            $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+            $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+            $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+        }
+    }
+}
+
+/**
+ * December 2018 - Adding of Custom Block Colors & Style Options.
+ */
+function ucr_core_update_8007() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new storage spaces.
+        $config_files = [
+            'field.storage.block_content.field_block_bg_color',
+            'field.storage.block_content.field_block_bg_image',
+            'field.storage.block_content.field_block_include_extra',
+            'field.storage.block_content.field_block_margin_bottom',
+            'field.storage.block_content.field_block_margin_horizontal',
+            'field.storage.block_content.field_block_margin_left',
+            'field.storage.block_content.field_block_margin_right',
+            'field.storage.block_content.field_block_margin_top',
+            'field.storage.block_content.field_block_margin_vertical',
+            'field.storage.block_content.field_block_padding_bottom',
+            'field.storage.block_content.field_block_padding_horizontal',
+            'field.storage.block_content.field_block_padding_left',
+            'field.storage.block_content.field_block_padding_right',
+            'field.storage.block_content.field_block_padding_top',
+            'field.storage.block_content.field_block_padding_vertical',
+            'field.storage.block_content.field_content_bg_color',
+            'field.storage.block_content.field_block_font_color',
+            'field.field.block_content.basic.field_block_bg_color',
+            'field.field.block_content.basic.field_block_bg_image',
+            'field.field.block_content.basic.field_block_font_color',
+            'field.field.block_content.basic.field_content_bg_color',
+            'field.field.block_content.basic.field_block_margin_bottom',
+            'field.field.block_content.basic.field_block_margin_left',
+            'field.field.block_content.basic.field_block_margin_right',
+            'field.field.block_content.basic.field_block_margin_top',
+            'field.field.block_content.basic.field_block_padding_bottom',
+            'field.field.block_content.basic.field_block_padding_left',
+            'field.field.block_content.basic.field_block_padding_right',
+            'field.field.block_content.basic.field_block_padding_top',
+            'core.entity_form_display.block_content.basic.default',
+            'core.entity_view_display.block_content.basic.center',
+            'core.entity_view_display.block_content.basic.default',
+            'field.storage.node.field_header_video_url',
+            'field.storage.node.field_hide_overlay_title',
+            'field.storage.node.field_secondary_title',
+            'field.storage.node.field_title_link',
+            'field.storage.node.field_title_placement',
+            'image.style.header_with_video_large',
+            'image.style.header_with_video_medium',
+            'image.style.header_with_video_small',
+            'image.style.header_with_video_xlarge',
+            'core.entity_view_mode.media.header_with_video',
+            'field.field.node.page.field_header_video_url',
+            'field.field.node.page.field_hide_overlay_title',
+            'field.field.node.page.field_secondary_title',
+            'field.field.node.page.field_title_placement',
+            'field.field.node.page.field_title_link',
+            'core.entity_form_display.node.page.default',
+            'core.entity_view_display.media.image.header_with_video',
+            'responsive_image.styles.header_with_video',
+            'views.view.content_views',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_core', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+
+/**
+ * February 2019 - Updating the Media Default Views.
+ */
+function ucr_core_update_8008() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $moduleHandler = \Drupal::service('module_handler');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Install the new modules needed.
+        if(!$moduleHandler->moduleExists('media_entity_download')) {
+            \Drupal::service('module_installer')->install(['media_entity_download']);
+        }
+
+        // Create the new storage spaces.
+        $config_files = [
+            'field.storage.block_content.field_block_bg_image_cover',
+            'core.entity_view_display.media.document.default',
+            'core.entity_view_display.media.image.default',
+            'core.entity_view_display.media.video.default',
+            'image.style.scale_1170',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_core', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+
+        // Run the update here to delete from the key - value pair to clean up the DB.
+        $openapi_remove = \Drupal::database()->delete('key_value')
+            ->condition('collection', 'system.schema')
+            ->condition('name', 'openapi_redoc')
+            ->execute();
+        $media_remove = \Drupal::database()->delete('key_value')
+            ->condition('collection', 'system.schema')
+            ->condition('name', 'media_entity')
+            ->execute();
+        $entity_remove = \Drupal::database()->delete('key_value')
+            ->condition('collection', 'system.schema')
+            ->condition('name', 'entity')
+            ->execute();
+    }
+}
+
+/**
+ * April 2019 - Add the administer permissions for the CNAS Theme.
+ */
+function ucr_core_update_8009() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Go ahead and if the 'content_author' default role still exists, remove it.
+        $roles = \Drupal\user\Entity\Role::loadMultiple();
+        $to_update = array('site_builders');
+
+        foreach($roles as $role) {
+            $role_id = $role->id();
+            if (in_array($role_id, $to_update)) {
+                $role->grantPermission('administer ucr_cnas_1 content')
+                    ->grantPermission('administer ucr_cnas_1 content_footer')
+                    ->grantPermission('administer ucr_cnas_1 content_header')
+                    ->grantPermission('administer ucr_cnas_1 footer_first')
+                    ->grantPermission('administer ucr_cnas_1 footer_fourth')
+                    ->grantPermission('administer ucr_cnas_1 footer_second')
+                    ->grantPermission('administer ucr_cnas_1 footer_third')
+                    ->grantPermission('administer ucr_cnas_1 hero_content')
+                    ->grantPermission('administer ucr_cnas_1 left_sidebar')
+                    ->grantPermission('administer ucr_cnas_1 primary_menu')
+                    ->grantPermission('administer ucr_cnas_1 right_sidebar')
+                    ->grantPermission('administer ucr_cnas_1 site_alerts')
+                    ->save(TRUE);
+            }
+        }
+    }
+}
+
+/**
+ * July 2019 - Remove the TVI Settings for Tags for sites excluding Umbrella and News-Type Sites.
+ */
+function ucr_core_update_8010() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local', 'ucr_news_profile', 'ucr_news_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        $config->getEditable('tvi.taxonomy_vocabulary.tags')->delete();
+    }
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.basic.default',
+            'core.entity_form_display.node.page.default',
+            'core.entity_form_display.user.user.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_core', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * August 2019 - Update the 'Header with Video - Large' Image Style.
+ */
+function ucr_core_update_8011() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'image.style.header_with_video_large',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_core', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * July 2020 - Expand Summary field on Basic Page and Article content type
+ */
+function ucr_core_update_8012() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.node.page.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_core', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * August 2020 - Update color options on Basic Block
+ */
+function ucr_core_update_8013() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.basic.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_core', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * January 2021 - Update help text on Header Video URL
+ */
+function ucr_core_update_8014() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.field.node.page.field_header_video_url',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_core', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+
+function ucr_core_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_core']['8010'] = [
+        'node' => '8700',
+    ];
+    return $dependencies;
+}

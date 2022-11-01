@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - text
+    - ucr_collections
+id: collections.field_collection_item_general
+field_name: field_collection_item_general
+entity_type: collections
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - feeds.feed_type.ucr_rss_feed_importer
+id: feeds_feed.ucr_rss_feed_importer.default
+targetEntityType: feeds_feed
+bundle: ucr_rss_feed_importer
+mode: default
+content:
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: testimonial_author
+label: 'Testimonial Author'
+effects:
+  a109effe-519b-465b-b656-1cac865c7df4:
+    uuid: a109effe-519b-465b-b656-1cac865c7df4
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 220
+      height: 220
+      crop_type: focal_point

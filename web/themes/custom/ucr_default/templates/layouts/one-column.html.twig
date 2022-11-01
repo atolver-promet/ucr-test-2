@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a one-column layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+    set classes = [
+    'layout',
+    'layout-one-col',
+    'grid-container',
+]
+%}
+{% if content %}
+{% set classes = (attributes.ucr_layout_config.centered_options == 'full') ? classes|merge(['full']) : classes %}
+{% set background_color = (attributes.ucr_layout_config.bg_colors != '') ? ' style="background-color:' ~ attributes.ucr_layout_config.bg_colors ~ ';"' : '' %}
+{% if background_color is not empty %}<div{{ background_color|raw }}>{% endif %}
+    <div {{ attributes.addClass(classes)|without('ucr_layout_config') }}>
+        <div class="grid-x{{ attributes.ucr_layout_config.spacing_options }}">
+            <div class="cell{{ attributes.ucr_layout_config.classes.column_1 }}">
+                {% if content.main %}
+                    <div {{ region_attributes.main.addClass('layout__region', 'layout__region--main') }}>
+                        {{ content.main }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% if background_color is not empty %}</div>{% endif %}
+{% endif %}

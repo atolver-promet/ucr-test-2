@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: scale_550
+label: 'WYSIWYG Scale - 550px'
+effects:
+  fa5c9ffa-1c1e-4619-93fd-e423530a177a:
+    uuid: fa5c9ffa-1c1e-4619-93fd-e423530a177a
+    id: image_scale
+    weight: 1
+    data:
+      width: 550
+      height: 550
+      upscale: false

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: carousel_slider
+label: 'Carousel Slider'
+icon_uuid: null
+description: 'Create a Carousel Slider for images and / or video'
+behavior_plugins: {  }

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.home_hero_option
+    - field.field.block_content.home_hero_option.field_home_hero_view
+    - field.field.block_content.home_hero_option.field_homepage_callout_slider
+  module:
+    - viewfield
+id: block_content.home_hero_option.default
+targetEntityType: block_content
+bundle: home_hero_option
+mode: default
+content:
+  field_home_hero_view:
+    weight: 0
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: 0
+      empty_view_title: hidden
+    third_party_settings: {  }
+    type: viewfield_default
+    region: content
+hidden:
+  field_homepage_callout_slider: true
+  scheduled_publication: true

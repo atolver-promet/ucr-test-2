@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.links_grid
+    - field.field.block_content.links_grid.field_links
+  module:
+    - link
+id: block_content.links_grid.default
+targetEntityType: block_content
+bundle: links_grid
+mode: default
+content:
+  field_links:
+    weight: 28
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_listing_m_up
+label: 'Article Listing (M-Up)'
+effects:
+  bf1aabc3-2fb7-4546-9c1a-466d9c47d381:
+    uuid: bf1aabc3-2fb7-4546-9c1a-466d9c47d381
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 168
+      height: 168
+      crop_type: focal_point

@@ -16,6 +16,11 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
  */
 include __DIR__ . "/settings.pantheon.php";
 
+// fix for feeds temp file issue. - Set /tmp to files folder- do not use with sensitive/protected data
+if (isset($_ENV['PANTHEON_ENVIRONMENT']) && is_dir('sites/default/files/temp')) {
+  $settings["file_temp_path"] = 'sites/default/files/temp';
+}
+
 /**
  * Skipping permissions hardening will make scaffolding
  * work better, but will also raise a warning when you
@@ -32,3 +37,4 @@ $local_settings = __DIR__ . "/settings.local.php";
 if (file_exists($local_settings)) {
   include $local_settings;
 }
+

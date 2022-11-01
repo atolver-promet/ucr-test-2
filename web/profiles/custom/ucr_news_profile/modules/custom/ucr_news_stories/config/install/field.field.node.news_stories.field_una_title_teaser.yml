@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_title_teaser
+  - node.type.news_stories
+id: node.news_stories.field_una_title_teaser
+field_name: field_una_title_teaser
+entity_type: node
+bundle: news_stories
+label: 'Title Teaser'
+description: '<em>( Optional ):</em> Add teaser text to compliment the title.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

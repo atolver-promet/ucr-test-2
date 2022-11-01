@@ -1,0 +1,259 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_news_stories_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_news_stories_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_news_stories_menu_local_actions_alter(&$local_actions) {
+}
+
+/**
+ * @param $view
+ * Implements hook_views_post_render().
+ * Used to update the title for the taxonomy view that is within the 'news_stories_views' view.
+ */
+function ucr_news_stories_views_post_render($view) {
+    $id = $view->id();
+    if(strtolower($id) == "news_stories_views") {
+        $display = $view->current_display;
+        if(strtolower($display) == "news_story_listing") {
+            $route_params = \Drupal::routeMatch()->getParameters();
+            $year = $route_params->get('arg_0');
+            $month = $route_params->get('arg_1');
+            $day = $route_params->get('arg_2');
+
+            $appending_title = "";
+            $day = (!is_numeric($day) ? "" : $day);
+            $month = (!is_numeric($month) ? "" : $month);
+            $year = (!is_numeric($year) ? "" : $year);
+            if(!empty($day) && !empty($month) && !empty($year)) {
+                $appending_title = " for ".date("F jS, Y", strtotime($year."-".$month."-".$day));
+            } elseif(!empty($month) && !empty($year)) {
+                $appending_title = " for ".date("F Y", strtotime($year."-".$month."-01"));
+            } elseif(!empty($year)) {
+                $appending_title = " for ".$year;
+            }
+
+            $view->setTitle("Latest Stories" . $appending_title);
+        }
+    }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function ucr_news_stories_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  $route_name = $route_match->getRouteName();
+  $links = $breadcrumb->getLinks();
+  if($links) {
+    $home_link = $links[0];
+  } else {
+    $home_link = array();
+  }
+
+  $types = array('view_id', 'taxonomy_term', 'node');
+  $type_name = "";
+  foreach($types as $type_to_try) {
+    $route_type = $route_match->getParameter($type_to_try);
+    if($route_type) {
+      $type_name = $type_to_try;
+      break;
+    }
+  }
+
+  switch($type_name) {
+    case "view_id": {
+      $view_name = $route_match->getParameter('view_id');
+      $view_display = $route_match->getParameter('display_id');
+
+      // Check and validate for the Breadcrumbs for the News Listing View.
+      if(($view_name == "news_stories_views") && ($view_display == "news_story_listing")) {
+        $year = $route_match->getParameter('arg_0');
+        $month = $route_match->getParameter('arg_1');
+        $day = $route_match->getParameter('arg_2');
+
+        $appending_title = "";
+        $day = (!is_numeric($day) ? "" : $day);
+        $month = (!is_numeric($month) ? "" : $month);
+        $year = (!is_numeric($year) ? "" : $year);
+        if(!empty($day) && !empty($month) && !empty($year)) {
+          $appending_title = " for ".date("F jS, Y", strtotime($year."-".$month."-".$day));
+        } elseif(!empty($month) && !empty($year)) {
+          $appending_title = " for ".date("F Y", strtotime($year."-".$month."-01"));
+        } elseif(!empty($year)) {
+          $appending_title = " for ".$year;
+        }
+
+        $new_links = array();
+        $new_links[] = $home_link;
+        if(!empty($appending_title)) {
+          $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t("Latest Stories"), Url::fromUserInput('/stories'));
+          $new_links[] = \Drupal\Core\Link::createFromRoute(t("Stories".$appending_title), "<none>");
+        } else {
+          $new_links[] = \Drupal\Core\Link::createFromRoute(t("Latest Stories"), "<none>");
+        }
+        $breadcrumb = new Breadcrumb();
+        $breadcrumb->addCacheableDependency($route_name);
+        $breadcrumb->setLinks($new_links);
+      }
+    break;
+    }
+    case "taxonomy_term": {
+    break;
+    }
+    case "node": {
+      $bundle = $route_type->bundle();
+
+      // Modify the Breadcrumbs for the News Articles Content Type.
+      if(($bundle == "news_stories") && ($route_name == "entity.node.canonical")) {
+        $authored_date = $route_type->get('field_una_authored_on')->value;
+        $new_links = array();
+        $new_links[] = $home_link;
+        $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t("Stories"), Url::fromUserInput('/stories'));
+
+        if(!empty($authored_date)) {
+          $year = date('Y', strtotime($authored_date));
+          $month = date('m', strtotime($authored_date));
+          $day = date('d', strtotime($authored_date));
+          $display_date = date('F jS, Y', strtotime($authored_date));
+          $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t($display_date), Url::fromUserInput('/stories/'.$year."/".$month."/".$day));
+        }
+        $new_links[] = \Drupal\Core\Link::createFromRoute(t($route_type->get('title')->value), "<none>");
+
+        $breadcrumb = new Breadcrumb();
+        $breadcrumb->addCacheableDependency($route_name);
+        $breadcrumb->setLinks($new_links);
+      }
+    break;
+    }
+  }
+}
+
+function ucr_news_stories_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('node_news_stories_form', 'node_news_stories_edit_form'))) {
+    $form['una_author_info'] = [
+      '#type' => 'details',
+      '#title' => t('Story Author Info'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 98,
+      '#optional' => false,
+      '#open' => false,
+    ];
+
+    $form['field_una_authored_by']['#group'] = 'una_author_info';
+    $form['field_una_authored_on']['#group'] = 'una_author_info';
+
+    $form['una_tags_rss'] = [
+      '#type' => 'details',
+      '#title' => t('Tags & Custom RSS'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 100,
+      '#optional' => true,
+      '#open' => false,
+    ];
+
+    $form['field_una_tags']['#group'] = 'una_tags_rss';
+    $form['field_una_custom_rss']['#group'] = 'una_tags_rss';
+
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => t('Content Keywords'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 101,
+      '#optional' => true,
+      '#open' => true,
+    ];
+
+    $form['field_content_keywords']['#group'] = 'keywords';
+
+    // Programmatically change the Metatag values to be what they should be for the Articles.
+    $config = \Drupal::configFactory();
+    $meta_defaults = $config->get('metatag.metatag_defaults.node');
+    $tags = $meta_defaults->get('tags');
+
+
+    $modify_custom_metas = array(
+        'image_src' => $form['field_meta_tags']['widget'][0]['advanced']['image_src']['#default_value'],
+        'og_image' => $form['field_meta_tags']['widget'][0]['open_graph']['og_image']['#default_value'],
+        'twitter_cards_image' => $form['field_meta_tags']['widget'][0]['twitter_cards']['twitter_cards_image']['#default_value'],
+        'twitter_cards_image_alt' => $form['field_meta_tags']['widget'][0]['twitter_cards']['twitter_cards_image_alt']['#default_value'],
+    );
+
+    foreach($modify_custom_metas as $key => $form_val) {
+        $original_value = $tags[$key];
+        if(empty($form_val) || ($original_value == $form_val)) {
+            switch($key) {
+                case 'image_src': {
+                    $form['field_meta_tags']['widget'][0]['advanced']['image_src']['#default_value'] = '[node:field_una_header_image:entity:image:entity:url]
+';
+                break;
+                }
+                case 'og_image': {
+                    $form['field_meta_tags']['widget'][0]['open_graph']['og_image']['#default_value'] = '[node:field_una_header_image:entity:image:entity:url]
+';
+                break;
+                }
+                case 'twitter_cards_image': {
+                    $form['field_meta_tags']['widget'][0]['twitter_cards']['twitter_cards_image']['#default_value'] = '[node:field_una_header_image:entity:image:entity:url]
+';
+                break;
+                }
+                case 'twitter_cards_image_alt': {
+                    $form['field_meta_tags']['widget'][0]['twitter_cards']['twitter_cards_image_alt']['#default_value'] = '[node:field_una_header_image:entity:name]
+';
+                break;
+                }
+            }
+        }
+    }
+  }
+
+  return $form;
+}

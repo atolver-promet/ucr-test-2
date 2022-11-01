@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.college_page.body
+    - field.field.node.college_page.field_content_keywords
+    - field.field.node.college_page.field_header_image
+    - field.field.node.college_page.field_meta_tags
+    - field.field.node.college_page.field_social_media_image
+    - node.type.college_page
+  module:
+    - text
+    - user
+id: node.college_page.default
+targetEntityType: node
+bundle: college_page
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_header_image:
+    weight: 3
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_social_media_image:
+    weight: 4
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  field_content_keywords: true
+  field_meta_tags: true

@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_cta_font_color
+field_name: field_cta_font_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '#FEF4F6'
+      label: 'White (Default)'
+    -
+      value: '#293134'
+      label: Black
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

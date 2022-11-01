@@ -1,0 +1,24 @@
+ucr_collections.collections_type.*:
+  type: config_entity
+  label: 'Collection Group Config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    collection_url:
+      type: string
+      label: 'Collection Path'
+    collection_view:
+      type: string
+      label: 'Collection View Name'
+    collection_category:
+      type: string
+      label: 'Collection Category Vocabulary'
+    collection_status:
+      type: string
+      label: 'Collection Status Vocabulary'
+    uuid:
+      type: string

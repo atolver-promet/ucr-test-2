@@ -1,0 +1,36 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.scotmemo_submissions.body
+    - field.field.node.scotmemo_submissions.field_date_to_publish
+    - field.field.node.scotmemo_submissions.field_memo_header_image
+    - field.field.node.scotmemo_submissions.field_submitting_on_behalf_of
+    - node.type.scotmemo_submissions
+  module:
+    - text
+    - user
+id: node.scotmemo_submissions.teaser
+targetEntityType: node
+bundle: scotmemo_submissions
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  addtoany: true
+  field_date_to_publish: true
+  field_memo_header_image: true
+  field_submitting_on_behalf_of: true

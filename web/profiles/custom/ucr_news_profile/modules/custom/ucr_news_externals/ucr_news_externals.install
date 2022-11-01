@@ -1,0 +1,131 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_news_externals_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+
+    $config = \Drupal::configFactory();
+    // Update the metatags to include the new permissions.
+    $meta_perms = array(
+        'news_externals' => array(
+            'basic' => 'basic',
+            'open_graph' => 'open_graph',
+            'twitter_cards' => 'twitter_cards',
+        ),
+    );
+    $current_config = $config->getEditable('metatag.settings');
+    $current_config->set('entity_type_groups.node.news_externals', $meta_perms['news_externals'])->save(TRUE);
+}
+
+/**
+ * November 2018 - Update for Social Media Options.
+ */
+function ucr_news_externals_update_8001() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    $social_image_field = \Drupal\field\Entity\FieldConfig::loadByName('node', 'news_externals', 'field_social_media_image');
+    if(!$social_image_field) {
+        $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_externals/config/install/field.field.node.news_externals.field_social_media_image.yml';
+        $file_contents = file_get_contents($file_path);
+        $field_yaml_content = Yaml::decode($file_contents);
+
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+        \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+    }
+
+    $meta_tags = \Drupal\field\Entity\FieldConfig::loadByName('node', 'news_externals', 'field_meta_tags');
+    if(!$meta_tags) {
+        $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_externals/config/install/field.field.node.news_externals.field_meta_tags.yml';
+        $file_contents = file_get_contents($file_path);
+        $field_yaml_content = Yaml::decode($file_contents);
+
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $field_yaml_content);
+        \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+    }
+
+    // Update the Form View
+    $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_externals/config/install/core.entity_form_display.node.news_externals.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $page_form_yml = Yaml::decode($file_contents);
+
+    $get_page_form = $config->getEditable('core.entity_form_display.node.news_externals.default');
+    $current_view_id = $get_page_form->get('uuid');
+    if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+        $get_page_form->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+        $get_page_form->set('third_party_settings', $page_form_yml['third_party_settings'])->save(TRUE);
+        $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+        $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+    }
+
+    // Update the Display View
+    $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_externals/config/install/core.entity_view_display.node.news_externals.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $page_form_yml = Yaml::decode($file_contents);
+
+    $get_page_form = $config->getEditable('core.entity_view_display.node.news_externals.default');
+    $current_view_id = $get_page_form->get('uuid');
+    if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+        $get_page_form->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+        $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+        $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+    }
+
+    // Update the metatags to include the new permissions.
+    $meta_perms = array(
+        'news_externals' => array(
+            'basic' => 'basic',
+            'open_graph' => 'open_graph',
+            'twitter_cards' => 'twitter_cards',
+        ),
+    );
+    $current_config = $config->getEditable('metatag.settings');
+    $current_config->set('entity_type_groups.node.news_externals', $meta_perms['news_externals'])->save(TRUE);
+}
+
+/**
+ * July 2019 - Update to the Form Displays
+ */
+function ucr_news_externals_update_8002() {
+    // Create the new Field Configs for the Block.
+    $config_files = [
+        'core.entity_form_display.node.news_externals.default',
+    ];
+
+    $completed = UCRCustoms::updateConfigFromStorage('ucr_news_externals', $config_files);
+    if(!$completed) {
+        throw new UpdateException('Update has Failed.');
+    }
+}
+
+function ucr_news_externals_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_news_externals']['8001'] = [
+        'ucr_core' => '8005',
+        'ucr_news_profile' => '8001'
+    ];
+
+    return $dependencies;
+}

@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_file_upload
+    - node.type.people_profiles
+  module:
+    - file
+id: node.people_profiles.field_file_upload
+field_name: field_file_upload
+entity_type: node
+bundle: people_profiles
+label: 'CV File'
+description: '<em>( Optional )</em> Please either select or upload a file for the profile.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: profile-uploads
+  file_extensions: 'txt doc docx pdf ppt pptx'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

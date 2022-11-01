@@ -1,0 +1,7 @@
+ucrglobal.settings:
+  path: 'admin/config/system/ucr-global'
+  defaults:
+    _form: '\Drupal\ucr_global\Form\UcrGlobalSettingsForm'
+    _title: 'UCR Custom Site Settings'
+  requirements:
+    _permission: 'administer ucr_global'

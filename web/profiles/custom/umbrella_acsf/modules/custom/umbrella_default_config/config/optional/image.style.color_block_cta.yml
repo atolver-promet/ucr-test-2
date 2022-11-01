@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: color_block_cta
+label: 'Color Block CTA (406 x 406)'
+effects:
+  4654d1d4-0f70-42f6-be41-50777c2c3538:
+    uuid: 4654d1d4-0f70-42f6-be41-50777c2c3538
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 406
+      height: 406
+      crop_type: focal_point

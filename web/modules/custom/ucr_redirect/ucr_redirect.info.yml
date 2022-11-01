@@ -1,0 +1,6 @@
+name: 'UCR Redirect'
+type: module
+description: 'Fix artifact of Acquia /g/ files directory.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside

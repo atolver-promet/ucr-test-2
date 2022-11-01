@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: hero_slider_default_tablet
+label: 'Hero Slider Default (Tablet) - (1024 x 250)'
+effects:
+  2090569b-d98c-4d47-83e2-b45332d2730f:
+    uuid: 2090569b-d98c-4d47-83e2-b45332d2730f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 250
+      crop_type: focal_point

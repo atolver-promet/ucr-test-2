@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.article_categories.field_brand_color
+    - field.field.taxonomy_term.article_categories.field_category_image
+    - taxonomy.vocabulary.article_categories
+id: taxonomy_term.article_categories.default
+targetEntityType: taxonomy_term
+bundle: article_categories
+mode: default
+content: {  }
+hidden:
+  description: true
+  field_brand_color: true
+  field_category_image: true

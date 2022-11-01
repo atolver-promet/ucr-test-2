@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: custom_alert
+label: 'Custom Alert'
+revision: 1
+description: 'A simple alert / announcement that can be customized and placed on your site. '

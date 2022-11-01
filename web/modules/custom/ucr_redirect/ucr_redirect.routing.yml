@@ -1,0 +1,35 @@
+ucr_redirect.serve_files:
+  path: '/sites/g/files/{site}/files/{filepath1}'
+  defaults:
+    _controller: '\Drupal\ucr_redirect\Controller\ServeFiles::serve'
+    _title: 'Serve Files'
+  requirements:
+    _permission: 'access content'
+provus_core.serve_files_2:
+  path: '/sites/g/files/{site}/files/{filepath1}/{filepath2}'
+  defaults:
+    _controller: '\Drupal\ucr_redirect\Controller\ServeFiles::serve'
+    _title: 'Serve Files'
+  requirements:
+    _permission: 'access content'
+provus_core.serve_files_3:
+  path: '/sites/g/files/{site}/files/{filepath1}/{filepath2}/{filepath3}'
+  defaults:
+    _controller: '\Drupal\ucr_redirect\Controller\ServeFiles::serve'
+    _title: 'Serve Files'
+  requirements:
+    _permission: 'access content'
+provus_core.serve_files_4:
+  path: '/sites/g/files/{site}/files/{filepath1}/{filepath2}/{filepath3}/{filepath4}'
+  defaults:
+    _controller: '\Drupal\ucr_redirect\Controller\ServeFiles::serve'
+    _title: 'Serve Files'
+  requirements:
+    _permission: 'access content'
+provus_core.serve_files_5:
+  path: '/sites/g/files/{site}/files/{filepath1}/{filepath2}/{filepath3}/{filepath4}/{filepath5}'
+  defaults:
+    _controller: '\Drupal\ucr_redirect\Controller\ServeFiles::serve'
+    _title: 'Serve Files'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,72 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set background_style = "" %}
+{% set custom_background = "" %}
+{% set num_cols = content.field_counter|field_raw('value') %}
+{% set med_cols = (num_cols > 1 ? 2 : 1) %}
+{% set include_extras = content.field_block_include_extra|field_raw('value') %}
+{% set intro = content.body|field_value|render %}
+{% set background_color = content.field_block_bg_color|field_value|render %}
+{% if background_color is not empty %}
+    {% set background_style = 'background: linear-gradient(' ~ background_color ~ "," ~ background_color ~ ");" %}
+    {% set custom_background = "info-card-container-custom-bg" %}
+{% endif %}
+{% set block_classes = [
+    (include_extras ? ucr_custom_css.build : ''),
+] %}
+{% block content %}
+    <div{{ attributes.addClass(block_classes) }}{% if include_extras %} style="{{ background_style }}"{% endif %}>
+        {{ title_prefix }}
+        {% if label %}
+        <div class="grid-container full cnas">
+            <div class="grid-x grid-padding-x">
+                <div class="cell"><h2{{ title_attributes }}>{{ label }}</h2></div>
+            </div>
+        </div>
+        {% endif %}
+        {{ title_suffix }}
+        {% if intro is not empty %}
+        <div class="grid-container full cnas">
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    {{ content.body }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="info-card-container {{ custom_background }} {% if include_extras == false %} {{ ucr_custom_css.build }}{% endif %}"{% if include_extras == false %} style="{{ background_style }}"{% endif %}>
+            <div class="grid-container full cnas padding-2">
+                <div class="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-{{ med_cols }} large-up-{{ num_cols }} info-card-box text-center align-center" data-equalizer data-equalize-on="medium" data-equalize-by-row="true">
+                    {{ content.field_info_cards }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

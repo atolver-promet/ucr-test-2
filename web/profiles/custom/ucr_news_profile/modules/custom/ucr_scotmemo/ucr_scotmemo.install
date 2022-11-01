@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_scotmemo_install()
+{
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}

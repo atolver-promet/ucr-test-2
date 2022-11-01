@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.statistic_grid
+    - field.storage.block_content.field_statistic
+    - paragraphs.paragraphs_type.statistic
+  module:
+    - entity_reference_revisions
+id: block_content.statistic_grid.field_statistic
+field_name: field_statistic
+entity_type: block_content
+bundle: statistic_grid
+label: Statistics
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      statistic: statistic
+    target_bundles_drag_drop:
+      bubble_grid:
+        weight: 5
+        enabled: false
+      carousel_slider:
+        weight: 6
+        enabled: false
+      info_card:
+        weight: 7
+        enabled: false
+      statistic:
+        enabled: true
+        weight: 8
+field_type: entity_reference_revisions

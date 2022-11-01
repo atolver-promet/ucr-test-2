@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+  - ucr_design_1
+id: ucr_design_1_local_actions
+theme: ucr_design_1
+region: admin_controls
+weight: -11
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

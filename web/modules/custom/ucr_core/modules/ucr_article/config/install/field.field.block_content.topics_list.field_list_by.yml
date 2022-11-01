@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.topics_list
+    - field.storage.block_content.field_list_by
+  module:
+    - options
+id: block_content.topics_list.field_list_by
+field_name: field_list_by
+entity_type: block_content
+bundle: topics_list
+label: 'List by'
+description: 'Select what you want to displayed as a list'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

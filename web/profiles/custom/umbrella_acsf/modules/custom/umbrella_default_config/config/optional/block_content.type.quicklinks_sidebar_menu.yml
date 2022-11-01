@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: quicklinks_sidebar_menu
+label: 'Quicklinks Sidebar Menu'
+revision: 1
+description: 'Create a list of links for the top right corner of the body of the page'

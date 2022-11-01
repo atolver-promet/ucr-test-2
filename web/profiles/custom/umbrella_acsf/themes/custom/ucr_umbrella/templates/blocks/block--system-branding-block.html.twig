@@ -1,0 +1,30 @@
+{#
+{% extends "block.html.twig" %}
+/**
+ * @file
+ * Theme override for a branding block.
+ *
+ * Each branding element variable (logo, name, slogan) is only available if
+ * enabled in the block configuration.
+ *
+ * Available variables:
+ * - site_logo: Logo for site as defined in Appearance or theme settings.
+ * - site_name: Name for site as defined in Site information settings.
+ * - site_slogan: Slogan for site as defined in Site information settings.
+ */
+#}
+{% block content %}
+    <div class="cell shrink">
+        <a class="masthead-logo" href="{{ path('<front>') }}">
+            <span class="show-for-sr">UC Riverside</span>
+        </a>
+    </div>
+    <div class="cell auto">
+        <h1 class="masthead-title">
+            <a href="{{ path('<front>') }}">{% if site_name %} {{ site_name }} {% else %} UC Riverside {% endif %}</a>
+        </h1>
+    </div>
+    <div class="cell auto show-for-medium">
+        <p class="slogan">{{ site_slogan }}</p>
+    </div>
+{% endblock %}

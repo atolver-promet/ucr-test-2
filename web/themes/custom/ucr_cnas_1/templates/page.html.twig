@@ -1,0 +1,201 @@
+{#
+/**
+ * @file
+ * Zurb Foundations's theme implementation to display a single page.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ * - logo: The url of the logo image, as defined in theme settings.
+ * - linked_logo: The logo image, linked to <front>.
+ * - site_name: The name of the site. This is empty when displaying the site
+ *   name has been disabled in the theme settings.
+ * - linked_site_name: The name of the site that also links to <front>.
+ * - site_slogan: The slogan of the site. This is empty when displaying the site
+ *   slogan has been disabled in theme settings.
+ * - hide_site_name: A flag indicating if the site name has been toggled off on
+ *   the theme settings page. If hidden, the "visually-hidden" class is added
+ *   to make the site name visually hidden, but still accessible.
+ * - hide_site_slogan: A flag indicating if the site slogan has been toggled off
+ *   on the theme settings page. If hidden, the "visually-hidden" class is
+ *   added to make the site slogan visually hidden, but still accessible.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - messages: Status and error messages. Should be displayed prominently.
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.meta_header
+ * - page.header
+ * - page.help
+ * - page.highlighted
+ * - page.content
+ * - page.sidebar_first
+ * - page.sidebar_second
+ * - page.footer_first
+ * - page.footer_middle
+ * - page.footer_last
+ *
+ * @see template_preprocess_page()
+ * @see bartik_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+
+<header data-sticky-container >
+	<div class="header-sticky-container" data-ucr-sticky="{{ ucr_theme_sticky_nav }}" {% if header_style %} style="{{header_style}}" {% endif %}>
+	    <div class="grid-container full">
+	        {% if page.emergency %}
+	            {{ page.emergency }}
+	        {% endif %}
+	        {% if page.site_alerts %}
+	            {{ page.site_alerts }}
+	        {% endif %}
+	        <div class="grid-x">
+	            {{ page.header_top }}
+	            {{ page.header }}
+	            {{ page.primary_menu }}
+	        </div>
+	    </div>
+	</div>
+</header>
+<main>
+	<div id="content-container">
+	    {% if page.hero_content %}
+	        {{ page.hero_content }}
+	    {% endif %}
+	    <div id="main" class="grid-container primary-content-header">
+	        {% if page.drupal_messages %}
+	        <div class="grid-x grid-padding-x">
+	            {{ page.drupal_messages }}
+	        </div>
+	        {% endif %}
+	        <div class="grid-x grid-padding-x">
+	            {{ page.content_header }}
+	        </div>
+	        {% if page.admin_controls %}
+	        <div class="grid-x grid-padding-x">
+	            {{ page.admin_controls }}
+	        </div>
+	        {% endif %}
+	    </div>
+	    {% if page.left_sidebar or page.right_sidebar %}
+	    <div class="grid-container primary-content-area">
+	        <div class="grid-x grid-padding-x">
+	    {% else %}
+	    <div class="grid-container full primary-content-area">
+	        <div class="grid-x">
+	    {% endif %}
+	            {% if page.left_sidebar %}
+	            {{ page.left_sidebar }}
+	            {% endif %}
+	            <div class="cell large-auto small-order-3 medium-order-3 large-order-2 pca-content">
+	                {{ page.content }}
+	            </div>
+	            {% if page.right_sidebar %}
+	            {{ page.right_sidebar }}
+	            {% endif %}
+	        </div>
+	    </div>
+	    {% if page.content_footer %}
+	    <div class="grid-container primary-content-area">
+	        <div class="grid-x grid-padding-x">
+	            {{ page.content_footer }}
+	        </div>
+	    </div>
+	    {% endif %}
+	</div>
+</main>
+<footer {% if footer_style %} style="{{footer_style}}"{% endif %}>
+    <div class="footer-container">
+        <div class="footer-content-area">
+            <div class="grid-container">
+                {% if page.footer_top %}
+                    {{ page.footer_top }}
+                {% endif %}
+                <div class="grid-x grid-padding-x footer-columns">
+                    {% if page.footer_first %}
+                    {{ page.footer_first }}
+                    {% endif %}
+                    {% if page.footer_second %}
+                    {{ page.footer_second }}
+                    {% endif %}
+                    {% if page.footer_third %}
+                    {{ page.footer_third }}
+                    {% endif %}
+                    {% if page.footer_fourth %}
+                    {{ page.footer_fourth }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="site-legal-footer">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-x">
+                    <div class="cell">
+                        <ul>
+                            <!--<li><a href="/feedback" title="Send Feedback E-mail">Feedback</a></li>-->
+                            <li><a href="http://www.ucr.edu/privacy.html">Privacy and Accessibility</a></li>
+                            <li><a href="http://www.ucr.edu/terms.html">Terms and Conditions</a></li>
+                            <li>© {{ "now"|date("Y") }} Regents of the University of California</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% if internal_results_page is not empty %}
+    {% set results_page = internal_results_page %}
+{% else %}
+    {% set results_page = 'https://www.ucr.edu/search-results' %}
+{% endif %}
+<div class="large reveal" id="gscSearchFormModal" data-reveal data-animation-in="fade-in" data-animation-out="fade-out">
+    <div class="gsc-modal-top">
+        <span class="gsc-welcome-text">Let us help you with your search</span>
+        <button class="close-button" data-close aria-label="Close modal" type="button"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <form id="audience-search-form" name="gsc-search-form" action="{{ results_page }}">
+        <div class="gsc-modal-body">
+            <div class="grid-container full">
+                <div class="grid-x grid-padding-x grid-padding-y align-center-middle text-center">
+                    <div class="cell">
+                    	<label id="searchbox-label" class="hidden" aria-label="Enter your Search Criteria.">Enter your Search Criteria</label>
+                        <input type="text" maxlength="255" id="audience-search" name="q" value="{{ get.search_params.q }}" aria-labelledby="searchbox-label" placeholder="Search for..." />
+                    </div>
+                    {% if enable_site_search == true and internal_domain_name is not empty %}
+                    <div class="cell medium-4">
+                        <button class="button gsc-modal-button-submit" type="submit" name="search-by" value="all">Search All UCR</button>
+                    </div>
+                    <div class="cell medium-4">
+                        <button class="button gsc-modal-button-submit" type="submit" name="search-by" value="{{ internal_domain_name }}">Search This Site</button>
+                    </div>
+                    <div class="cell medium-4">
+                        <button type="button" class="button gsc-modal-button-close" data-close>Cancel</button>
+                    </div>
+                    {% else %}
+                    <div class="cell medium-6">
+                        <button class="button gsc-modal-button-submit" type="submit" name="search-by" value="all">Search</button>
+                    </div>
+                    <div class="cell medium-6">
+                        <button type="button" class="button gsc-modal-button-close" data-close>Cancel</button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

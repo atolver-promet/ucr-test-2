@@ -1,0 +1,126 @@
+<?php
+/**
+ * @file
+ * Contains installation and update routines for the Bubble Grid Custom Block Type.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Core\Utility\PDOException;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\block\Entity\Block;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_cta_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * December 2018 - Adding of Style Options.
+ */
+function ucr_cta_update_8001() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.field.block_content.call_to_actions.field_block_margin_bottom',
+            'field.field.block_content.call_to_actions.field_block_margin_left',
+            'field.field.block_content.call_to_actions.field_block_margin_right',
+            'field.field.block_content.call_to_actions.field_block_margin_top',
+            'core.entity_form_display.paragraph.cta_item.default',
+            'core.entity_form_display.block_content.call_to_actions.default',
+            'core.entity_view_display.block_content.call_to_actions.center',
+            'core.entity_view_display.block_content.call_to_actions.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_cta', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * April 2019 - Fix the 'More Information' text on the Caption.
+ */
+function ucr_cta_update_8002() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.field.paragraph.cta_item.field_cta_caption',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_cta', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_cta_update_8003() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.call_to_actions.default',
+            'core.entity_form_display.paragraph.cta_item.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_cta', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * August 2020 - Updated color options for CTA
+ */
+function ucr_cta_update_8004() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.paragraph.cta_item.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_cta', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_cta_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_cta']['8001'] = [
+        'ucr_core' => '8007'
+    ];
+    return $dependencies;
+}

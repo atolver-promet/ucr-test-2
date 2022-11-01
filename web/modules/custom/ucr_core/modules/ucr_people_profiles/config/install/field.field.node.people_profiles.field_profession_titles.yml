@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_profession_titles
+    - node.type.people_profiles
+id: node.people_profiles.field_profession_titles
+field_name: field_profession_titles
+entity_type: node
+bundle: people_profiles
+label: 'Job / Profession Titles'
+description: 'Please enter in the different titles you hold. Enter in each one on a separate line.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

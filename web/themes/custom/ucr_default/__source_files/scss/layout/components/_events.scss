@@ -1,0 +1,350 @@
+$ucr-events-detail-border: $ucr-white-4;
+$ucr-events-detail-date: $blue-700;
+$ucr-events-detail-location: $blue-700;
+$ucr-events-list-border: $ucr-white-4;
+$ucr-events-list-image-border: $ucr-grey-4;
+$ucr-events-list-title: #003DA5;
+$ucr-events-list-date: $blue-700;
+$ucr-events-list-location: $blue-700;
+$ucr-events-block-border: $ucr-white-4;
+$ucr-events-block-title: $ucr-alt-blue-3;
+$ucr-events-block-date: $blue-700;
+$ucr-events-block-location: $blue-700;
+$ucr-events-block-link: $ucr-alt-blue-3;
+$ucr-events-block-link-background: $body-background;
+main {
+  > div {
+    &#content-container {
+      //*******  Globals ********//
+      div {
+        &.more-link {
+          margin-right: 2.5em;
+          text-align: right;
+          clear:both;
+          a {
+            @extend .btn-ucr-split;
+            margin-right: 0px;
+          }
+        }
+      }
+      // ********* Events - Details Page *********** //
+      .event-information {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin-top: 40px;
+        padding: 32px;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.31);
+        .event-image {
+          padding-bottom: 1rem;
+        }
+        .event-date {
+          font-size: 17px;
+          font-weight: 800;
+          line-height: 1.2rem;
+          padding: 0 1rem;
+          color: #1e88e5;
+          &::before {
+            display: inline-block;
+            font-family: "Material Design Icons";
+            font-size: 1.15rem;
+            text-rendering: auto;
+            line-height: inherit;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-right: 4px;
+            color: #003DA5;
+            vertical-align: middle;
+            content: "\F150";
+          }
+        }
+        .event-additional-dates {
+          font-size: 17px;
+          font-weight: 800;
+          padding: 0 1rem;
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2rem;
+            li {
+              margin: 0;
+              padding: 0;
+              &::before {
+                display: inline-block;
+                font-family: "Material Design Icons";
+                font-size: 1.15rem;
+                text-rendering: auto;
+                line-height: inherit;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                padding-right: 4px;
+                color: $ucr-events-detail-date;
+                vertical-align: middle;
+                content: "\F150";
+              }
+            }
+          }
+        }
+        .event-location {
+          padding: 1rem;
+          font-size: 17px;
+          &::before {
+            display: inline-block;
+            font-family: "Material Design Icons";
+            font-size: 1.15rem;
+            text-rendering: auto;
+            line-height: inherit;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-right: 4px;
+            color: #003DA5;
+            vertical-align: middle;
+            content: "\F34E";
+          }
+          a {
+            text-decoration: none;
+            &::after {
+              content: "";
+              display: none;
+            }
+          }
+        }
+        .event-social-media {
+          padding: 0 1rem 1rem 1rem;
+          a {
+            &::after {
+              content: "";
+              display: none;
+            }
+          }
+        }
+        .event-body {
+          padding: 0 1rem 2.5rem 1rem;
+        }
+        .event-contact {
+          padding: 0 1rem 1rem 1rem;
+          h5 {
+            text-transform: uppercase;
+          }
+        }
+      }
+      .event-details {
+        //background-color: #e6e6e6;
+        margin-top: 49px;
+        padding: 24px 32px;
+        background-color: #dee2e6;
+        .event-foot-item {
+          margin: 2.5rem 0 0.5rem 0;
+          padding: 0.5rem;
+          border-top: 1px solid #868e96;
+          .event-foot-item-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #003DA5;
+          }
+          a{
+            color: #d6336b;
+            &:hover {
+              color: #003DA5;
+            }
+          }
+        }
+      }
+      // ********* Events - Listing Page *********** //
+      .events-listings {
+        .event-list-separator {
+          border-top: 2px solid $ucr-events-list-border;
+        }
+        .event-list-row {
+          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.39);
+          display: flex;
+          margin-top: 24px;
+          margin-right: 0px;
+          margin-left: 0px;
+          margin-bottom: 32px;
+          padding: 24px;
+          -webkit-box-align: start;
+
+          .event-list-separator {
+            border-top: 2px solid $ucr-events-list-border;
+          }
+          .event-list-image {
+            display: inline-block;
+            border: 1px solid $ucr-events-list-image-border;
+          }
+          .event-title {
+            color: $ucr-events-list-title;
+            font-size: 1.33em;
+            padding-bottom: 0.25rem;
+            a {
+              color: $ucr-events-list-title;
+              text-decoration: none;
+              &:hover {
+                color: #d6336b;
+                text-decoration: underline;
+              }
+            }
+          }
+          .separator-line-before, .separator-line-dark-before, .separator-line-maroon-before {
+            &::before {
+              margin-top: 0 !important;
+              background: $ucr-events-list-title;
+            }
+          }
+          .event-date {
+            font-family: "Fira Sans Regular", sans-serif;
+            font-weight: 400;
+            color: #1E88E5;
+            &::before {
+              display: inline-block;
+              font-family: "Material Design Icons";
+              font-size: 1.15rem;
+              text-rendering: auto;
+              line-height: inherit;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              padding-right: 4px;
+              color: #003DA5;
+              vertical-align: middle;
+              content: "\F150";
+            }
+          }
+          .event-location {
+            &::before {
+              display: inline-block;
+              font-family: "Material Design Icons";
+              font-size: 1.15rem;
+              text-rendering: auto;
+              line-height: inherit;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              padding-right: 4px;
+              color: #003DA5;
+              vertical-align: middle;
+              content: "\F34E";
+            }
+          }
+          .event-summary {
+            margin: 0.5rem 0;
+          }
+        }
+      }
+      // ********* Events - Blocks *********** //
+      .events-container {
+        .event-block-item {
+          position: relative;
+          border: 1px solid $ucr-events-block-border;
+          @include breakpoint(medium) {
+            min-height:591px;
+          }
+          .event-image {
+            border: none;
+            display: block;
+            margin: 0;
+            text-align: center;
+          }
+          .event-title {
+            margin: 1rem 1rem 0.5rem 1rem;
+            color: $ucr-events-block-title;
+            font-size: 1.33em;
+            padding-bottom: 0.25rem;
+            a {
+              color: $ucr-events-block-title;
+              text-decoration: none;
+              &:hover {
+                color: $link-color;
+                text-decoration: underline;
+              }
+            }
+          }
+          .event-date {
+            margin: 0.5rem 1rem;
+            font-family: "Fira Sans Regular", sans-serif;
+            font-weight: 400;
+            font-size: 0.8rem;
+            line-height: normal;
+            color: #1e88e5;
+            &::before {
+              display: inline-block;
+              font-family: "Material Design Icons";
+              font-size: 1.15rem;
+              text-rendering: auto;
+              line-height: inherit;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              padding-right: 4px;
+              color: #003DA5;
+              vertical-align: middle;
+              content: "\F150";
+            }
+          }
+          .event-location {
+            margin: 0.5rem 1rem;
+            font-size: 0.8rem;
+            line-height: normal;
+            &::before {
+              display: inline-block;
+              font-family: "Material Design Icons";
+              font-size: 1.15rem;
+              text-rendering: auto;
+              line-height: inherit;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              padding-right: 4px;
+              color: #003DA5;
+              vertical-align: middle;
+              content: "\F34E";
+            }
+          }
+          .separator-line-before, .separator-line-dark-before, .separator-line-maroon-before {
+            &::before {
+              margin-top: 0 !important;
+            }
+          }
+          .event-body {
+            font-size:.9em;
+            margin: 0.5rem 1rem 1rem 1rem;
+          }
+          .event-link {
+            display: block;
+            width: 100%;
+            @include breakpoint(medium) {
+              position: absolute;
+              bottom: 0;
+            }
+            a {
+              display: block;
+              font-family: Avenir Next W01,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+              font-size: .75rem;
+              font-weight: 600;
+              color: $ucr-events-block-link;
+              text-transform: uppercase;
+              padding: .5em 1.25rem;
+              background: $ucr-events-block-link-background;
+              border: 1px solid $ucr-events-block-link-background;
+              text-decoration: none;
+              &:hover{
+                border-color: $blue-grey-700;
+                color: $ucr-events-block-link;
+              }
+              &::after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

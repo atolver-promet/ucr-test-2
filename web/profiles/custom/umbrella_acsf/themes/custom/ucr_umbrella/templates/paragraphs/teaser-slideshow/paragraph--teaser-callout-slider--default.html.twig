@@ -1,0 +1,63 @@
+{% set tab_title = content.field_title|render|striptags|trim|convert_encoding('UTF-8', 'HTML-ENTITIES') %}
+{% set tab_id = content.field_title|raw|striptags|trim|lower|replace({' ':'_', '!':'', '@':'', '#':'', '$':'', '%':'', '^':'', '&':'', '*':'', '(':'', ')':'', '+':'', '=':'', '`':'', '~':'', '<':'', ',':'', '>':'', '.':'', '?':'', '/':'', '|':'', '\\':'', '\'':'', '"':'', '[':'', '{':'', ']':'', '}':'', ':':''}) %}
+{% set open_status = content.field_status|render|striptags|trim %}
+{% set open_text = "" %}
+
+{% if open_status == 1 %}
+    {% set open_text = "is-active" %}
+{% endif %}
+{% set background_color = content.field_callout_color|render|striptags|trim %}
+{% set background_style = "" %}
+{% if background_color is not empty %}
+    {% set background_style = background_style ~ "background-color: " ~ background_color ~ "; " %}
+{% endif %}
+
+{% set background_image = file_url(content.field_callout_image.0['#item'].entity.uri.value) %}
+{% set background_style_image = "" %}
+{% if background_image != '' and background_image != '/' %}
+    {% set background_style_image = background_style_image ~ "background-image: url(" ~ background_image ~"); " %}
+{% endif %}
+
+
+{% set text_color = content.field_text_color|render|striptags|trim %}
+{% set text_style = "" %}
+{% if text_color is not empty %}
+    {% set text_style = text_style ~ "color: " ~ text_color ~ "; " %}
+{% endif %}
+{%
+    set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    'tabs-panel',
+    open_text,
+]
+%}
+{% block paragraph %}
+    {% block content %}
+      <div class="teaser-wrapper">
+        <div class="teaser-image" style="{{ background_style_image }}">             
+			<div class="content-wrapper {{ content.field_orientation|render|striptags|trim }}" style="{{ background_style }} {{text_style}}">
+				<div class="teaser-section-title">
+				  {{ content.field_callout_title }}
+				</div>
+				<div class="teaser-title">
+				  {{ content.field_title }}
+				</div>
+				<div class="teaser-body">
+				  {{ content.field_callout_body }}
+				</div>
+				
+				<div class="teaser-button">
+				 
+				  {{ content.field_button }}
+				</div>
+
+			</div>
+		</div>	
+        <div {{ attributes.addClass(classes) }} id="{{ tab_id }}">
+            <div class="body">{{ content.field_callout_body }}</div>
+        </div>
+      </div>
+    {% endblock %}
+{% endblock paragraph %}

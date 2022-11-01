@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - media
+id: news_profile_media_pattern
+label: 'News Profile - Media Pattern'
+type: 'canonical_entities:media'
+pattern: '/media/[media:bundle]/[media:name]'
+selection_criteria:
+  8da55179-fadf-4627-91a0-47a68c54cd26:
+    id: 'entity_bundle:media'
+    bundles:
+      document: document
+      image: image
+      video: video
+    negate: false
+    context_mapping:
+      media: media
+    uuid: 8da55179-fadf-4627-91a0-47a68c54cd26
+selection_logic: and
+weight: -5
+relationships: {  }

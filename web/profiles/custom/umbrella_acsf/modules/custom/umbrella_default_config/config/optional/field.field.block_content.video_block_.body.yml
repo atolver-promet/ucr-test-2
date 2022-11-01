@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_block_
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.video_block_.body
+field_name: body
+entity_type: block_content
+bundle: video_block_
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

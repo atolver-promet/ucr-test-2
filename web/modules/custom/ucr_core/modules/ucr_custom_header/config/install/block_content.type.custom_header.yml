@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: custom_header
+label: 'Custom Header & Title'
+revision: 1
+description: 'A custom block that will allow you to place an image and title to be displayed statically. This should be used for pages that are auto-generated.'

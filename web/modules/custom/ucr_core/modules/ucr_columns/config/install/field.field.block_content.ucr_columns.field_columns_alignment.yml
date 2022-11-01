@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_columns
+    - field.storage.block_content.field_columns_alignment
+  module:
+    - options
+id: block_content.ucr_columns.field_columns_alignment
+field_name: field_columns_alignment
+entity_type: block_content
+bundle: ucr_columns
+label: 'Columns Alignment'
+description: 'Select how the columns should align if there isn''t enough to fill a whole row.'
+required: true
+translatable: false
+default_value:
+  -
+    value: center
+default_value_callback: ''
+settings: {  }
+field_type: list_string

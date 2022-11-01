@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_accordions_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Add the 'Intro Body' field.
+ */
+function ucr_accordions_update_8001() {
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  // *** Update the Form Display.
+  $profile_name = $config->getEditable('core.extension')->get('profile');
+
+  // Create the field.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_accordions/config/install/field.field.block_content.accordions.body.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_field = Yaml::decode($file_contents);
+
+  $uuid = $uuid_service->generate();
+  $full_array = array_merge(array('uuid' => $uuid), $new_field);
+  \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+
+  // Update the form view.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_accordions/config/install/core.entity_form_display.block_content.accordions.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_form = Yaml::decode($file_contents);
+  $current_form = $config->getEditable('core.entity_form_display.block_content.accordions.default');
+  $current_form->set('dependencies', $new_form['dependencies'])
+               ->set('third_party_settings', $new_form['third_party_settings'])
+               ->set('content', $new_form['content'])->save(TRUE);
+
+  // Update the display view.
+  $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_accordions/config/install/core.entity_view_display.block_content.accordions.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $new_view = Yaml::decode($file_contents);
+  $current_view = $config->getEditable('core.entity_view_display.block_content.accordions.default');
+  $current_view->set('dependencies', $new_view['dependencies'])
+               ->set('content', $new_view['content'])
+               ->set('hidden', $new_view['hidden'])->save(TRUE);
+}
+
+/**
+ * October 2018 - Add the Full View Display. This is for the UCR Default Profile Only.
+ */
+function ucr_accordions_update_8002() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // *** Update the Form Display.
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $acceptable_profiles = array('ucr_profile', 'ucr_profile_local');
+    if(in_array($profile_name, $acceptable_profiles)) {
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_accordions/config/install/core.entity_view_display.block_content.accordions.center.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_display = Yaml::decode($file_contents);
+
+        $new_config_display = $config->getEditable('core.entity_view_display.block_content.accordions.center');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_display);
+        $new_config_display->setData($full_array)->save(TRUE);
+    }
+}
+
+/**
+ * December 2018 - Adding of Style Options.
+ */
+function ucr_accordions_update_8003() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.field.block_content.accordions.field_block_margin_bottom',
+            'field.field.block_content.accordions.field_block_margin_left',
+            'field.field.block_content.accordions.field_block_margin_right',
+            'field.field.block_content.accordions.field_block_margin_top',
+            'core.entity_form_display.block_content.accordions.default',
+            'core.entity_view_display.block_content.accordions.center',
+            'core.entity_view_display.block_content.accordions.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_accordions', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays
+ */
+function ucr_accordions_update_8004() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.accordions.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_accordions', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_accordions_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_accordions']['8003'] = [
+        'ucr_core' => '8007'
+    ];
+    return $dependencies;
+}

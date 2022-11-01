@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_header_l
+label: 'Article Header (L)'
+effects:
+  56da0c86-0e9a-4c1e-a846-4c07977cf899:
+    uuid: 56da0c86-0e9a-4c1e-a846-4c07977cf899
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1170
+      height: 450
+      crop_type: focal_point

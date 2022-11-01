@@ -1,0 +1,151 @@
+.ucr-homepage-hero-video {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  line-height: 0;
+  max-height: 900px;
+  .hero-image {}
+  .hero-video {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    video {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 49.99%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+  }
+  .video-text-area {
+    position: absolute;
+    bottom: 70px;
+    left: 40px;
+    min-width: 41%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px 30px 30px;
+    line-height: normal;
+    .video-text-title h1 {
+      margin: 0;
+      font-family: "Trade Gothic Next W01", "Helvetica Neue", Helvetica, "Roboto", Arial, sans-serif;
+      color: white;
+      font-size: 56px;
+      text-shadow: 2px 0px 2px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+      font-style: normal;
+      line-height: 56px;
+      padding: 0 0 5px 0;
+      margin-bottom: 25px;
+    }
+    .video-text-button a {
+      display: inline-block;
+      font-size: 16px;
+      line-height: 19px;
+      color: #ffffff;
+      padding: 11px 23px;
+      background: rgba(0, 0, 0, 0.5);
+      border: solid 1px #fff;
+      -webkit-transition: color 0.5s, background-color 0.5s;
+      transition: color 0.5s, background-color 0.5s;
+      font-weight: 900;
+      font-family: "Avenir Next W01", "Helvetica Neue", Helvetica, "Roboto", Arial, sans-serif;
+      text-transform: uppercase;
+      text-align: center;
+      min-width: 277px;
+      &:hover {
+        background: rgba(0, 0, 0, 0);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+/* Set the Media Queries for the heights needed. */
+@media (max-width: 767px) {
+  .ucr-homepage-hero-video .hero-video {
+    display: none;
+  }
+}
+
+@media (min-width: 667px) {
+  .ucr-homepage-hero-video {
+    height: 450px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ucr-homepage-hero-video {
+    height: 520px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ucr-homepage-hero-video {
+    height: 640px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .ucr-homepage-hero-video .video-text-area {
+    padding: 30px;
+    max-width: 65%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .ucr-homepage-hero-video .video-text-area {
+    padding: 20px;
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 767px) {
+  .ucr-homepage-hero-video .video-text-area {
+    background-color: #000;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .ucr-homepage-hero-video .video-text-area .video-text-title h1 {
+    line-height: 26px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ucr-homepage-hero-video .video-text-area .video-text-title h1 {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 700px) {
+  .ucr-homepage-hero-video .video-text-area .video-text-title h1 {
+    line-height: 48px;
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .ucr-homepage-hero-video .video-text-area .video-text-title h1 {
+    line-height: 36px;
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 500px) {
+  .ucr-homepage-hero-video .video-text-area .video-text-title h1 {
+    display: block;
+  }
+}

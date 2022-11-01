@@ -1,0 +1,162 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.carousel_slider
+    - field.field.block_content.carousel_slider.body
+    - field.field.block_content.carousel_slider.field_block_margin_bottom
+    - field.field.block_content.carousel_slider.field_block_margin_left
+    - field.field.block_content.carousel_slider.field_block_margin_right
+    - field.field.block_content.carousel_slider.field_block_margin_top
+    - field.field.block_content.carousel_slider.field_sliders
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_group
+    - paragraphs
+    - text
+third_party_settings:
+  field_group:
+    group_carousel_form_tabs:
+      children:
+        - group_slider_info
+        - group_introduction
+        - group_style_options
+      parent_name: ''
+      weight: 3
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Carousel Form Tabs'
+      region: content
+    group_slider_info:
+      children:
+        - field_sliders
+      parent_name: group_carousel_form_tabs
+      weight: 6
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: 'Slider Info'
+      region: content
+    group_introduction:
+      children:
+        - body
+      parent_name: group_carousel_form_tabs
+      weight: 7
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: '<em>( Optional )</em> Enter in content that will be displayed above the Slider.'
+        required_fields: true
+      label: Introduction
+      region: content
+    group_style_options:
+      children:
+        - group_margin_options
+      parent_name: group_carousel_form_tabs
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Style Options'
+      region: content
+    group_margin_options:
+      children:
+        - field_block_margin_bottom
+        - field_block_margin_top
+        - field_block_margin_left
+        - field_block_margin_right
+      parent_name: group_style_options
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Margin Options'
+      region: content
+id: block_content.carousel_slider.default
+targetEntityType: block_content
+bundle: carousel_slider
+mode: default
+content:
+  body:
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_block_margin_bottom:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_left:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_right:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_top:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_sliders:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Slide
+      title_plural: Slides
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: carousel_slider
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: 'Title of the Slider'
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 5
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

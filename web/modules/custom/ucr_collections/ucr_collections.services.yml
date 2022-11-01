@@ -1,0 +1,6 @@
+services:
+  ucr_collections.route_subscriber:
+    class: Drupal\ucr_collections\Routing\RouteSubscriber
+    arguments: ['@config.factory', '@router.builder']
+    tags:
+      - { name: event_subscriber }

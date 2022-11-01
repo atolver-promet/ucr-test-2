@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.ucr_localist_events
+  - core.entity_view_mode.block_content.center
+  - field.field.block_content.ucr_localist_events.body
+  module:
+  - text
+id: block_content.ucr_localist_events.center
+targetEntityType: block_content
+bundle: ucr_localist_events
+mode: center
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

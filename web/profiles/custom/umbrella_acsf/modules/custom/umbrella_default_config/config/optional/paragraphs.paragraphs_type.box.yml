@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: box
+label: Box
+icon_uuid: null
+description: 'Creates Box for Image Link Grid'
+behavior_plugins: {  }

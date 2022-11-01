@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: meganav-main
+label: 'MegaNav Main navigation'
+description: 'An alternative Main navigation styled as a MegaNav.'
+locked: false

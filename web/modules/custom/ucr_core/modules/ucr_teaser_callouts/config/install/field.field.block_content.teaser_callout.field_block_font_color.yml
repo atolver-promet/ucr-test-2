@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.teaser_callout
+  - field.storage.block_content.field_block_font_color
+  module:
+  - options
+id: block_content.teaser_callout.field_block_font_color
+field_name: field_block_font_color
+entity_type: block_content
+bundle: teaser_callout
+label: 'Font Color'
+description: 'Please select the color of the font you want.'
+required: true
+translatable: true
+default_value:
+-
+  value: ucr-custom-block-font-black
+default_value_callback: ''
+settings: {  }
+field_type: list_string

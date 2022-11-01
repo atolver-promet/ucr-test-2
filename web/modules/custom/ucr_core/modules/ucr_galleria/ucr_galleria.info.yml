@@ -1,0 +1,23 @@
+name: 'Local Galleria Component'
+description: 'Provides a content type & custom block type with ''Paragraphs'' the ability to create a gallery of images.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - entity_browser
+  - entity_reference_revisions
+  - field
+  - field_group
+  - focal_point
+  - image
+  - menu_ui
+  - node
+  - paragraphs
+  - path
+  - pathauto
+  - text
+  - user
+  - views
+  - ucr_core

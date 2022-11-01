@@ -1,0 +1,48 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.taxonomy_term.counselors.field_counselor_email
+  - field.field.taxonomy_term.counselors.field_counselor_location
+  - field.field.taxonomy_term.counselors.field_counselor_phone_number
+  - field.field.taxonomy_term.counselors.field_counselor_title
+  - taxonomy.vocabulary.counselors
+third_party_settings:
+id: taxonomy_term.counselors.default
+targetEntityType: taxonomy_term
+bundle: counselors
+mode: default
+content:
+  field_counselor_email:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: email_mailto
+    region: content
+  field_counselor_location:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_counselor_phone_number:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_counselor_title:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true

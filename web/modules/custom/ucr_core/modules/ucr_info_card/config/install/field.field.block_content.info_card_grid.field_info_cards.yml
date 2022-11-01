@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.info_card_grid
+    - field.storage.block_content.field_info_cards
+    - paragraphs.paragraphs_type.info_card
+  module:
+    - entity_reference_revisions
+id: block_content.info_card_grid.field_info_cards
+field_name: field_info_cards
+entity_type: block_content
+bundle: info_card_grid
+label: 'Info Cards'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      info_card: info_card
+    target_bundles_drag_drop:
+      bubble_grid:
+        weight: 4
+        enabled: false
+      carousel_slider:
+        weight: 5
+        enabled: false
+      info_card:
+        enabled: true
+        weight: 6
+field_type: entity_reference_revisions

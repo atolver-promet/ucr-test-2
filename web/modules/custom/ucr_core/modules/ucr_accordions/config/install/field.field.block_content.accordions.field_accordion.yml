@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.accordions
+    - field.storage.block_content.field_accordion
+    - paragraphs.paragraphs_type.accordion
+  module:
+    - entity_reference_revisions
+id: block_content.accordions.field_accordion
+field_name: field_accordion
+entity_type: block_content
+bundle: accordions
+label: 'Accordion Items'
+description: 'Please add the different accordion items you want.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      accordion: accordion
+    target_bundles_drag_drop:
+      accordion:
+        enabled: true
+        weight: 6
+      bubbles:
+        weight: 7
+        enabled: false
+      carousel_slider:
+        weight: 8
+        enabled: false
+      info_card:
+        weight: 9
+        enabled: false
+      statistic:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

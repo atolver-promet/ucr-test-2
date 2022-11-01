@@ -1,0 +1,5 @@
+enable_override: 1
+view: news_general_view
+view_display: custom_news_list
+inherit_settings: 1
+pass_arguments: 1

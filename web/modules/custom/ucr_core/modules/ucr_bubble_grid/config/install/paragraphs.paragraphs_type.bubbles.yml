@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: bubbles
+label: Bubble
+icon_uuid: null
+description: 'Create a bubble for the bubble-style grid.'
+behavior_plugins: {  }

@@ -1,0 +1,76 @@
+main {
+  > div {
+    &#content-container {
+      .una-articles-authoring-post {
+        .author-announce-container {
+          .author-name-announce {
+            font-weight: bold;
+            color: $black;
+            line-height: normal;
+          }
+          .author-title-announce {
+            font-size: 0.95rem;
+            color: $ucr-grey-2;
+            font-weight: 200;
+            text-transform: capitalize;
+          }
+          .author-dept-announce {
+            font-size: 0.95rem;
+            color: $ucr-grey-2;
+            font-weight: 200;
+            text-transform: capitalize;
+          }
+          > div:last-child {
+            @include breakpoint(medium) {
+              margin-bottom: 0.5rem;
+              padding-bottom: 0.5rem;
+              border-bottom: 2px solid #215AA7;
+            }
+          }
+        }
+      }
+      .una-announce-header-post {
+        color: $white;
+        margin-bottom: 0;
+        padding-bottom: 16px;
+        @include breakpoint(medium) {
+          margin-bottom: 24px;
+          padding-bottom: 24px;
+          border-bottom: 1px solid $ucr-grey-1;
+        }
+        .una-announce-header-post-content {
+          .una-announce-header-date {
+            font-family: $font-family-montserrat;
+            font-weight: bold;
+            font-size: 11px;
+            line-height: 14px;
+            color: #6f7780;
+            padding-bottom: 0.9375rem;
+            span {
+              display: inline-block;
+              border-bottom: 2px solid #215AA7;
+              padding-bottom: 8px;
+            }
+          }
+          .una-announce-header-overlay {
+            padding: 10px 0 0 0;
+            @include breakpoint(medium) {
+              padding: 24px 0 0 0;
+            }
+            h1 {
+              color: $black;
+              font-family: $font-family-roboto;
+              font-weight: bold;
+              font-size: 24px;
+              line-height: 30px;
+              @include breakpoint(medium) {
+                font-size: 40px;
+                line-height: 48px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

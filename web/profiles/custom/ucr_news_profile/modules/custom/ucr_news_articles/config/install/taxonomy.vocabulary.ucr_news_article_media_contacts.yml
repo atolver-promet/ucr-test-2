@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Media Contacts'
+vid: ucr_news_article_media_contacts
+description: 'A Taxonomy that will hold embed code for personnel from the Profile''s Application.'
+hierarchy: 0
+weight: 0

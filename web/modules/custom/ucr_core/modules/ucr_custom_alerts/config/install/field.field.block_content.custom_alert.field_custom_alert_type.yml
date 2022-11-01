@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.custom_alert
+  - field.storage.block_content.field_custom_alert_type
+  module:
+  - options
+id: block_content.custom_alert.field_custom_alert_type
+field_name: field_custom_alert_type
+entity_type: block_content
+bundle: custom_alert
+label: 'Alert Type'
+description: 'Select the type of alert that relates to your message.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

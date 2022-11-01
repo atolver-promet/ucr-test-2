@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: header_with_video_large
+label: 'Header with Video - large'
+effects:
+  30364768-86d5-4ce3-b33a-597f0745056f:
+    uuid: 30364768-86d5-4ce3-b33a-597f0745056f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 555
+      crop_type: focal_point

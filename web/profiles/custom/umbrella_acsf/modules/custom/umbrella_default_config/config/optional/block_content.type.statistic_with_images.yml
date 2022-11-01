@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: statistic_with_images
+label: 'Statistics with Image'
+revision: 1
+description: ''

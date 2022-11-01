@@ -1,0 +1,141 @@
+// File contains CSS for the primary content column within the main content area.
+// -------------------------------------------
+#content-container {
+  flex: 1 0 auto;
+}
+.primary-content-area {
+  .general-menu {
+    background-color: white;
+    padding-bottom: 32px;
+    @include breakpoint(medium) {
+      padding-bottom: 64px;
+      border-top: 5px solid $color-picton-blue;
+    }
+    h2 {
+      background-color: #4B6E9D;
+      border-top: 0px none;
+      color: #fff;
+      cursor: pointer;
+      font-family: "Fira Sans Regular";
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 0;
+      padding:12px 20px 12px 40px;
+      position: relative;
+      text-align: left;
+      text-transform: uppercase;
+      z-index: 9;
+      &:after {
+        background: url('../images/bkg-quicklinks-down-arrow.png') no-repeat 0 0 transparent;
+        content: "";
+        display: inline-block;
+        height: 20px;
+        margin-left: 30px;
+        position: absolute;
+        right: 20px;
+        top: 9px;
+        width: 20px;
+      }
+      @include breakpoint(medium) {
+        font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        font-size: 1.45rem; // 24px
+        font-weight: 400;
+        color: $gray6;
+        line-height: 2rem; // 32px;
+        text-align: center;
+        border-bottom: 1px solid #bfbfbf;
+        padding: 16px 0 18px 0;
+        margin: 0;
+        background-color: #fff;
+        &:after {
+          display:none;
+        }
+      }
+    }
+    ul {
+      &.menu {
+        &.vertical {
+          li {
+            a {
+              font-weight: bold;
+              border-bottom: 1px solid lighten($color-primary-content, 22%);
+              text-decoration: none;
+              color: $color-primary-content;
+              padding: 16px 24px;
+              &::after {
+                content: "\F13E";
+                display: inline-block;
+                font: normal normal normal 24px/1 "Material Design Icons";
+                font-size: 24px;
+                line-height: 1;
+                font-size: inherit;
+                text-rendering: auto;
+                line-height: inherit;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                padding-left: 4px;
+              }
+              &:hover {
+                color: $color-picton-blue-alt;
+              }
+            }
+            ul {
+              &.menu {
+                &.submenu {
+                  li {
+                    a {
+                      padding-left: 40px;
+                      &::before {
+                        content: "\F130";
+                        display: inline-block;
+                        font: normal normal normal 8px/1 "Material Design Icons";
+                        text-rendering: auto;
+                        line-height: inherit;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        padding-right: 8px;
+                        margin-bottom: 3px;
+                        vertical-align: middle;
+                      }
+                    }
+                    ul {
+                      &.menu {
+                        &.submenu {
+                          li {
+                            a {
+                              padding-left: 56px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .pca-content {
+    padding: 0;
+    .basic-body {
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      @include breakpoint(medium) {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem;
+      }
+    }
+    .grid-x {
+      &.grid-padding-x {
+        &:not(.full) {
+          .basic-body {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: teaser_call_out
+label: 'Teaser Call Out (1200 x 466)'
+effects:
+  0f3ac155-e133-4f9b-9b5e-21def3d2a59c:
+    uuid: 0f3ac155-e133-4f9b-9b5e-21def3d2a59c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 466
+      crop_type: focal_point

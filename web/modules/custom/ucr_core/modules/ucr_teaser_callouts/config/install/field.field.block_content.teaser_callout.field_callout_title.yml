@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.teaser_callout
+    - field.storage.block_content.field_callout_title
+id: block_content.teaser_callout.field_callout_title
+field_name: field_callout_title
+entity_type: block_content
+bundle: teaser_callout
+label: 'Callout Title'
+description: 'The main title for the callout.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

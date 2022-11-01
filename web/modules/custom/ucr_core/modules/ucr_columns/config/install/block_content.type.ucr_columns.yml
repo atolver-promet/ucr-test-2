@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_columns
+label: 'Dynamic Columns'
+revision: 1
+description: 'Create a custom block that utilizes dynamic columns that can stack upon each other depending on the device screen size.'

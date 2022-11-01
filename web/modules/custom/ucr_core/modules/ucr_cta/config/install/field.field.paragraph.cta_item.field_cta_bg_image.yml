@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cta_bg_image
+    - media.type.image
+    - paragraphs.paragraphs_type.cta_item
+id: paragraph.cta_item.field_cta_bg_image
+field_name: field_cta_bg_image
+entity_type: paragraph
+bundle: cta_item
+label: 'Background Image'
+description: 'Select the image you want as the background.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

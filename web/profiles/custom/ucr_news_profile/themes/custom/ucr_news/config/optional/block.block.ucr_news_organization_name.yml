@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ucr_global
+  theme:
+    - ucr_news
+id: ucr_news_organization_name
+theme: ucr_news
+region: header_top
+weight: 0
+provider: null
+plugin: ucr_global_organization_name
+settings:
+  id: ucr_global_organization_name
+  label: 'UC Riverside Organization Name Block'
+  provider: ucr_global
+  label_display: '0'
+visibility: {  }

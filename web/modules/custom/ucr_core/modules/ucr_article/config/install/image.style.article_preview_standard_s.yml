@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_preview_standard_s
+label: 'Article Preview: Standard (S)'
+effects:
+  e3a294f8-0bce-43cd-b68f-6677da64bdea:
+    uuid: e3a294f8-0bce-43cd-b68f-6677da64bdea
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 767
+      height: 430
+      crop_type: focal_point

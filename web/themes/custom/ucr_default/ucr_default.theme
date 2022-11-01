@@ -1,0 +1,439 @@
+<?php
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\Messenger;
+use Drupal\Core\Messenger\MessengerInterface;
+
+function ucr_default_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+    $form['ucr_theme_menu_settings'] = array(
+        '#type'         => 'details',
+        '#title'        => t('Main Menu Options'),
+        '#open'         => FALSE,
+    );
+
+    $form['ucr_theme_menu_settings']['ucr_theme_sticky_nav'] = array(
+        '#type'         => 'checkbox',
+        '#title'        => t('Enable Sticky Desktop Navigation'),
+        '#description'  => t('Check if you would like the main navigation stay at the top of the browser as your users scroll through. <em>(Desktop Display)</em>'),
+        '#default_value' => theme_get_setting('ucr_theme_sticky_nav'),
+    );
+
+    $form['ucr_theme_menu_settings']['ucr_theme_meganav'] = array(
+        '#type'         => 'checkbox',
+        '#title'        => t('Enable Mega Navigation Display'),
+        '#description'  => t('Check if you would like the main navigation be rendered for a Mega Menu Display. <em>(Desktop Display)</em>'),
+        '#default_value' => theme_get_setting('ucr_theme_meganav'),
+    );
+
+    $form['ucr_theme_menu_settings']['ucr_theme_meganav_size'] = array(
+        '#type'         => 'checkbox',
+        '#title'        => t('Enable Fluid Mega Navigation'),
+        '#description'  => t('Check if you would like the main navigation be rendered as a full display width, instead of centered. <em>(Desktop Display)</em>'),
+        '#default_value' => theme_get_setting('ucr_theme_meganav_size'),
+    );
+
+    $form['ucr_theme_menu_settings']['ucr_theme_meganav_mobile_highlight'] = array(
+        '#type'         => 'checkbox',
+        '#title'        => t('Enable Special Highlight Mobile View'),
+        '#description'  => t('Check this if you would like the special container box to be only shown on the main navigation in mobile display. <strong>Note:</strong> Only the first Highlight box in the menu will be shown on Mobile view. <em>(Mobile Display)</em>'),
+        '#default_value' => theme_get_setting('ucr_theme_meganav_mobile_highlight'),
+    );
+
+    $form['ucr_theme_menu_settings']['ucr_theme_mobile_sticky_nav'] = array(
+        '#type'         => 'checkbox',
+        '#title'        => t('Disable Sticky Mobile Navigation'),
+        '#description'  => t('Check if you would like the main navigation <strong>not</strong> stick at the top when your users scroll through. <em>(Mobile Display)</em>'),
+        '#default_value' => theme_get_setting('ucr_theme_mobile_sticky_nav'),
+    );
+
+    $form['ucr_theme_advanced_settings'] = array(
+        '#type'         => 'details',
+        '#title'        => t('Advanced Options'),
+        '#open'         => FALSE,
+    );
+
+    $form['ucr_theme_advanced_settings']['ucr_theme_advanced_disclaimer'] = array(
+        '#markup'       => t('<div class="messages messages--warning"><strong>Warning:</strong> This section is for advanced users only. Any custom CSS or JavaScript you use within your site is not supported by ITS. By utilizing this area, you agree to take full responsibility for managing and debugging any issues that may arise from the custom modifications entered in below.</div>'),
+        '#allowed_tags' => ['div', 'p', 'strong'],
+    );
+
+    $form['ucr_theme_advanced_settings']['ucr_theme_external_css_url'] = array(
+        '#type'         => 'textarea',
+        '#title'        => t('External CSS'),
+        '#description'  => t('Provide the full url to a CSS file. <em>( Ex: https://example.com/custom.css )</em><br />Enter in each URL on a new line.'),
+        '#rows'         => 5,
+        '#cols'         => 60,
+        '#resizable'    => 'both',
+        '#default_value' => theme_get_setting('ucr_theme_external_css_url'),
+    );
+
+    $form['ucr_theme_advanced_settings']['ucr_theme_inline_css'] = array(
+        '#type'         => 'textarea',
+        '#title'        => t('Inline CSS'),
+        '#description'  => t('Enter in your custom CSS.'),
+        '#rows'         => 5,
+        '#cols'         => 60,
+        '#resizable'    => 'both',
+        '#default_value' => theme_get_setting('ucr_theme_inline_css'),
+    );
+
+    $form['ucr_theme_advanced_settings']['ucr_theme_external_js_url'] = array(
+        '#type'         => 'textarea',
+        '#title'        => t('External JavaScript'),
+        '#description'  => t('Provide the full url to a JavaScript file. <em>( Ex: https://example.com/custom.js )</em><br />Enter in each URL on a new line.'),
+        '#rows'         => 5,
+        '#cols'         => 60,
+        '#resizable'    => 'both',
+        '#default_value' => theme_get_setting('ucr_theme_external_js_url'),
+    );
+
+    $form['ucr_theme_advanced_settings']['ucr_theme_inline_js'] = array(
+        '#type'         => 'textarea',
+        '#title'        => t('Inline JavaScript'),
+        '#description'  => t('Enter in your custom JavaScript.'),
+        '#rows'         => 5,
+        '#cols'         => 60,
+        '#resizable'    => 'both',
+        '#default_value' => theme_get_setting('ucr_theme_inline_js'),
+    );
+
+    $form['ucr_theme_help'] = array(
+        '#type'         => 'details',
+        '#title'        => t('Theme Help'),
+        '#open'         => FALSE,
+    );
+    $form['ucr_theme_help']['help_text'] = array(
+        '#markup'       => t('<h3>General CSS</h3>
+<p>The following CSS Classes can be used to help enhance your website:</p>
+<ul>
+    <li><a href="#main-menu">Main Navigation Options</a></li>
+</ul>
+<hr />
+<ul>
+    <li><h5><a id="#main-menu"></a>Main Navigation Options</h5>
+    <p>Mega Nav Setup / Options:</p>
+    <ul>
+        <li>\' <code>route:&lt;nolink&gt;</code> \' OR \' <code>route:&lt;none&gt;</code> \' - Use either of these to create a link without any href or as a title or column for MegaNav</li>
+        <li>\' <code>meganav-highlight-block</code> \' - Add this CSS class to a MegaNav Column link to specify that the block of links should be "Highlighted".</li>
+        <li>\' <code>meganav-highlight-title</code> \' - Add this CSS class to a MegaNav Hight Block link to style it as a title.</li>
+        <li>\' <code>meganav-special-title</code> \' - Add this CSS class to a MegaNav link to have it styled as a title for a Column.</li>
+    </ul>
+    <p>If you would like to further enhance your Mega Nav, here are some additional options <em>(Note: This is for advanced use)</em></p>
+    <ul>
+        <li>\' <code>meganav-container:</code> \' - Use this prefix in front of a CSS class to add that CSS class to the entire MegaNav Container of a menu ( Ex: <code>meganav-container:medium-up-5</code> )</li>
+        <li>\' <code>meganav-column:</code> \' - Use this prefix in front of a CSS class to add that CSS class to the specific column of the MegaNav menu ( Ex: <code>meganav-column:my-custom-css-class</code> )</li>
+        <li>\' <code>meganav-item:</code> \' - Use this prefix in front of a CSS class to add that CSS class to a specific menu item ( Ex: <code>meganav-item:custom-highlight-my-link</code> )</li>
+    </ul>
+    </li>
+</ul>'),
+        '#allowed_tags' => ['div', 'p', 'ul', 'li', 'a', 'h3', 'h5', 'hr', 'strong', 'em', 'br', 'code'],
+    );
+
+    $form['#validate'][] = 'ucr_default_form_system_theme_settings_validate';
+}
+
+function ucr_default_form_system_theme_settings_validate(&$form, FormStateInterface $form_state) {
+    $messenger = \Drupal::messenger();
+
+    if(!empty($form['ucr_theme_advanced_settings']['ucr_theme_external_css_url']['#value'])) {
+        $to_check = $form['ucr_theme_advanced_settings']['ucr_theme_external_css_url']['#value'];
+        $files = explode("\n", $to_check);
+        $complete_check = "";
+        foreach($files as $filename) {
+            $file_to_check = trim($filename);
+            if(!empty($file_to_check)) {
+                $validate = pathinfo($file_to_check,  PATHINFO_EXTENSION);
+                if(strtolower($validate) !== "css") {
+                   $messenger->addError(t('The external CSS URL\'s must be to the CSS file itself: (Ex: https://example.com/custom.css)'));
+                   $response = new RedirectResponse(\Drupal::request()->getRequestUri());
+                   $response->send();
+                   exit;
+                }
+                $complete_check .= (!empty($complete_check) ? "\n" : "").$file_to_check;
+            }
+        }
+        $form_state->setValue('ucr_theme_external_css_url', $complete_check);
+    }
+
+    if(!empty($form['ucr_theme_advanced_settings']['ucr_theme_external_js_url']['#value'])) {
+        $to_check = $form['ucr_theme_advanced_settings']['ucr_theme_external_js_url']['#value'];
+        $files = explode("\n", $to_check);
+        $complete_check = "";
+        foreach($files as $filename) {
+            $file_to_check = trim($filename);
+            if(!empty($file_to_check)) {
+                $validate = pathinfo($file_to_check,  PATHINFO_EXTENSION);
+                if(strtolower($validate) !== "js") {
+                    $messenger->addError(t('The external JavaScript URL\'s must be to the JavaScript file itself: (Ex: https://example.com/custom.js)'));
+                    $response = new RedirectResponse(\Drupal::request()->getRequestUri());
+                    $response->send();
+                    exit;
+                }
+                $complete_check .= (!empty($complete_check) ? "\n" : "").$file_to_check;
+            }
+        }
+        $form_state->setValue('ucr_theme_external_js_url', $complete_check);
+    }
+}
+/*
+ * Modify the library to dynamically add the lists of external CSS and / or JavaScripts. Will only add once the active theme's set data.
+*/
+function ucr_default_library_info_alter(&$libraries, $extension) {
+    $current_theme = \Drupal::config('system.theme')->get('default');
+    if($extension == $current_theme) {
+        foreach(array_keys($libraries) as $name) {
+            if(preg_match("/css/", $name)) {
+                foreach(array_keys($libraries[$name]['css']) as $css_types) {
+                    if($css_types == "theme") {
+                        $css_files = theme_get_setting('ucr_theme_external_css_url');
+                        if(!empty($css_files)) {
+                            $files = explode("\n", $css_files);
+                            foreach($files as $css_file) {
+                                $libraries[$name]['css'][$css_types][$css_file] = [
+                                    'type' => 'external'
+                                ];
+                            }
+                        }
+                    }
+                }
+            }
+            if(preg_match("/js/", $name)) {
+                $js_files = theme_get_setting('ucr_theme_external_js_url');
+                if(!empty($js_files)) {
+                    $files = explode("\n", $js_files);
+                    foreach($files as $js_file) {
+                        $libraries[$name]['js'][$js_file] = [
+                            'type' => 'external'
+                        ];
+                    }
+                }
+            }
+        }
+    }
+}
+
+function ucr_default_preprocess_menu__main(&$variables) {
+    $set_meganav = theme_get_setting('ucr_theme_meganav');
+    $set_meganav_size = theme_get_setting('ucr_theme_meganav_size');
+    $set_meganav_highlights = theme_get_setting('ucr_theme_meganav_mobile_highlight');
+    $variables['meganav'] = $set_meganav;
+    $variables['meganav_size'] = $set_meganav_size;
+    $variables['meganav_special_highlight'] = $set_meganav_highlights;
+
+    if($set_meganav) {
+        $variables['items'] = ucr_default_custom_meganav_menu_class_checks($variables['items']);
+    }
+}
+
+function ucr_default_custom_meganav_menu_class_checks($items) {
+    foreach($items as $item) {
+        $replace = array();
+        $meganav_variables = [
+            'container_css' => [],
+            'column_css' => [],
+            'item_css' => [],
+        ];
+
+        $options = $item['url']->getOption('attributes');
+        if(is_array($options)) {
+            if(array_key_exists('class', $options)) {
+                foreach($options['class'] as $class_names) {
+                    if(!empty($class_names)) {
+                        if(preg_match('/^meganav-container:/i', $class_names)) {
+                            $meganav_variables['container_css'][] = substr($class_names, strlen('meganav-container:'));
+                        } elseif(preg_match('/^meganav-column:/i', $class_names)) {
+                            $meganav_variables['column_css'][] = substr($class_names, strlen('meganav-column:'));
+                        } elseif(preg_match('/^meganav-item:/i', $class_names)) {
+                            $meganav_variables['item_css'][] = substr($class_names, strlen('meganav-item:'));
+                        } else {
+                            $replace[] = $class_names;
+                        }
+                    }
+                }
+                if(count($replace) > 0) {
+                    $options['class'] = $replace;
+                    $item['url']->setOption('attributes', $options);
+                }
+            }
+        }
+
+        $meganav_variables['container_css'] = (count($meganav_variables['container_css']) > 0 ? implode(" ", $meganav_variables['container_css']) : "");
+        $meganav_variables['column_css'] = (count($meganav_variables['column_css']) > 0 ? implode(" ", $meganav_variables['column_css']) : "");
+        $meganav_variables['item_css'] = (count($meganav_variables['item_css']) > 0 ? implode(" ", $meganav_variables['item_css']) : "");
+
+        $item['url']->setOption('ucr_meganav', $meganav_variables);
+
+        if($item['below']) {
+            $item['below'] = ucr_default_custom_meganav_menu_class_checks($item['below']);
+        }
+    }
+
+    return $items;
+}
+
+// Add your custom theme override functions here.
+/**
+ * Implements hook_preprocess_block()
+ */
+function ucr_default_preprocess_block(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function ucr_default_preprocess_field(&$variables) {
+	if ($variables['field_name'] == "field_galleria_images") {
+		foreach ($variables['items'] as $key => $item) {
+			$fid = $item['content']['#item']->target_id;//The file ID
+			$file = \Drupal\file\Entity\File::load($fid);
+			$path = $file->getFileUri();
+			$variables['items'][$key]['thumbnail'] = ImageStyle::load('gallery_thumbnail_131x131_')->buildUrl($path);
+			$variables['items'][$key]['full'] = file_create_url($path);
+		}
+	}
+}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Adds additional classes
+ */
+function ucr_default_preprocess_html(&$variables) {
+    $css_inline = theme_get_setting('ucr_theme_inline_css');
+    $clean_inline = trim($css_inline);
+    if(!empty($clean_inline)) {
+        $variables['ucr_inline_css'] = $clean_inline;
+    }
+
+    $js_inline = theme_get_setting('ucr_theme_inline_js');
+    $clean_inline = trim($js_inline);
+    if(!empty($clean_inline)) {
+        $variables['ucr_inline_js'] = $clean_inline;
+    }
+}
+
+/**
+ * Implements template_preprocess_node
+ *
+ * Add template suggestions and classes
+ */
+function ucr_default_preprocess_node(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_page
+ *
+ * Add convenience variables and template suggestions
+ */
+function ucr_default_preprocess_page(&$variables) {
+    $variables['ucr_theme_sticky_nav'] = theme_get_setting('ucr_theme_sticky_nav');
+    $variables['ucr_theme_mobile_sticky_nav'] = theme_get_setting('ucr_theme_mobile_sticky_nav');
+
+    $messenger = \Drupal::messenger();
+    $available_messages = $messenger->all();
+    $variables['available_messages'] = (count($available_messages) == 0 ? false : true);
+}
+
+/**
+ * Implements template_preprocess_pager
+ *
+ * Add the total page count to the display of the pager.
+ */
+function ucr_default_preprocess_pager(&$variables) {
+    global $pager_total;
+    $element = $variables['pager']['#element'];
+
+    $pager_max = $pager_total[$element];
+    $variables['total_num_pages'] = $pager_max;
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function ucr_default_preprocess_views_view(&$variables) {
+	//load block field for vertical tabs into views template
+	if ($variables['id'] == "accordion" and isset($variables['view_array']['#arguments'][0]) and $variables['view_array']['#arguments'][0] > 0) {
+		$bid = $variables['view_array']['#arguments'][0];
+		$block = \Drupal\block_content\Entity\BlockContent::load($bid);
+		$val = $block->field_options->getValue();
+		$variables['accordion_option'] = '';
+		if (isset($val[0]['value']) and $val[0]['value'] == "multi-expand") {
+			$variables['accordion_option'] = 'data-multi-expand="true"';
+		} else if (isset($val[0]['value']) and $val[0]['value'] == "closed") {
+			$variables['accordion_option'] = 'data-allow-all-closed="true"';
+		} else if (isset($val[0]['value']) and $val[0]['value'] == "disabled") {
+			$variables['accordion_option'] = 'disabled';
+		}
+	}
+	//load block field for accordion options into views template
+	if ($variables['id'] == "horizontal_tabs" and isset($variables['view_array']['#arguments'][0]) and $variables['view_array']['#arguments'][0] > 0) {
+		$bid = $variables['view_array']['#arguments'][0];
+		$block = \Drupal\block_content\Entity\BlockContent::load($bid);
+		$val = $block->field_vertical_tab_option->getValue();
+		if (isset($val[0]['value']) and $val[0]['value'] == 1) {
+			$variables['vertical_tab'] = true;
+
+		} else {
+			$variables['vertical_tab'] = false;
+		}
+	}
+	if ($variables['id'] == "galleria" and isset($variables['view_array']['#arguments'][0]) and $variables['view_array']['#arguments'][0] > 0) {
+		$bid = $variables['view_array']['#arguments'][0];
+		$block = \Drupal::EntityTypeManagerInterface()->getStorage('block_content')->load($bid);
+    $block_content = \Drupal::EntityTypeManagerInterface()->getViewBuilder('block_content')->view($block);
+    $variables['gallery_block'] = $block_content;
+	}
+}
+
+/**
+ * Implements template_preprocess_views_view_field().
+ */
+function ucr_default_preprocess_views_view_field(&$variables) {
+    $view_name = $variables['view']->id();
+    $field_name = $variables['field']->realField;
+
+    // Only do the following on the personnel profile view.
+    if($view_name == "personnel_profile") {
+        // If the field is the profession / job titles, process the length.
+        if($field_name == 'field_profession_titles_value') {
+            $field_value = trim($variables['field']->getValue($variables['row']));
+            $explode = explode(PHP_EOL, $field_value);
+            $field_value = implode(', ', $explode);
+
+            $field_value = (strlen($field_value) > 45 ? substr($field_value, 0, 42)."..." : $field_value);
+
+            $variables['output'] = $field_value;
+        }
+
+        // If the field is the Taxonomy field (Dept / Programs), process the length.
+        if($field_name == "field_departments_programs_target_id") {
+            $field_value = html_entity_decode(trim($variables['field']->advancedRender($variables['row'])));
+            $field_value = (strlen($field_value) > 45 ? substr($field_value, 0, 42)."..." : $field_value);
+
+            $variables['output'] = $field_value;
+        }
+    }
+
+    if($view_name == "horizontal_tabs") {
+	    if($field_name == 'field_tab_title_value') {
+		    $row_id = $variables['row']->paragraphs_item_field_data_block_content__field_tabs_id;
+		    $field_value = trim($variables['field']->getValue($variables['row']));
+		    $path = '#panel'.$row_id; // prefixed with /
+				$url = Url::fromUri('internal:'.$path);
+				$link = Link::fromTextAndUrl($field_value, $url);
+				$link = $link->toRenderable();
+				$output = render($link);
+		    $variables['output'] = $output;
+		  }
+	  }
+}
+
+function ucr_default_preprocess_paragraph__carousel_slider(&$variables) {
+    $paragraph = $variables['paragraph'];
+    $is_video = ($paragraph->field_media->isEmpty() ? false : true);
+    $variables['is_video_slide'] = $is_video;
+}

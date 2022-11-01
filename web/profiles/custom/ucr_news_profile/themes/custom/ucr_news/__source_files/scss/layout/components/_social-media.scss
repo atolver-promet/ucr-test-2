@@ -1,0 +1,110 @@
+.primary-content-area {
+  .social-media-header {
+    .footer-item {
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      margin-bottom: 0.8rem;
+      float: inherit;
+      @include breakpoint(medium) {
+        float: right;
+      }
+      .social-title {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-size: 11px;
+        font-family: $font-family-roboto-slab;
+        font-weight: bold;
+        color: #414141;
+        text-transform: uppercase;
+      }
+      .social-link {
+        display: inline-block;
+        max-width: 200px;
+        margin: 0;
+        padding: 0;
+        a {
+          display: inline-block;
+          color: $white;
+          font-size: 20px;
+          padding: 5px;
+          border-radius: 50%;
+          margin: 0 0 0.2rem 4px;
+          &::after {
+            display: none;
+          }
+          &.mdi-facebook {
+            background-color: $social-facebook;
+            &:hover, &:focus {
+              background-color: $social-facebook;
+            }
+          }
+
+          &.mdi-twitter {
+            background-color: $social-twitter;
+            &:hover, &:focus {
+              background-color: $social-twitter;
+            }
+          }
+
+          &.mdi-youtube-play {
+            background-color: $social-youtube;
+            &:hover, &:focus {
+              background-color: $social-youtube;
+            }
+          }
+
+          &.mdi-instagram {
+            background-color: $social-instagram;
+            &:hover, &:focus {
+              background-color: $social-instagram;
+            }
+          }
+
+          &.mdi-linkedin {
+            background-color: $social-linkedin;
+            &:hover, &:focus {
+              background-color: $social-linkedin;
+            }
+          }
+
+          &.mdi-camera-iris {
+            background-color: $social-flickr;
+            &:hover, &:focus {
+              background-color: $social-flickr;
+            }
+          }
+
+          &.mdi-rss {
+            background-color: $social-rss;
+            &:hover, &:focus {
+              background-color: $social-rss;
+            }
+          }
+          &.mdi-reddit {
+            background-color: darken($social-reddit, 10%);
+            border-color: darken($social-reddit, 10%);
+            &:hover, &:focus {
+              background-color: $social-reddit;
+            }
+          }
+          &.mdi-discord {
+            background-color: darken($social-discord, 10%);
+            border-color: darken($social-discord, 10%);
+            &:hover, &:focus {
+              background-color: $social-discord;
+            }
+          }
+          &.mdi-music-box {
+            background-color: darken($social-tiktok, 10%);
+            border-color: darken($social-tiktok, 10%);
+            &:hover, &:focus {
+              background-color: $social-tiktok;
+            }
+          }
+        }
+      }
+    }
+  }
+}

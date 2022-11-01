@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.link_columns
+    - field.storage.block_content.field_columns
+    - paragraphs.paragraphs_type.link_column
+  module:
+    - entity_reference_revisions
+id: block_content.link_columns.field_columns
+field_name: field_columns
+entity_type: block_content
+bundle: link_columns
+label: Column
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      link_column: link_column
+    target_bundles_drag_drop:
+      accordion:
+        weight: 15
+        enabled: false
+      box:
+        weight: 16
+        enabled: false
+      box_info:
+        weight: 17
+        enabled: false
+      bubbles:
+        weight: 18
+        enabled: false
+      carousel_slider:
+        weight: 19
+        enabled: false
+      column:
+        weight: 20
+        enabled: false
+      hero_slides:
+        weight: 21
+        enabled: false
+      hero_slideshow:
+        weight: 22
+        enabled: false
+      info_card:
+        weight: 23
+        enabled: false
+      link_column:
+        enabled: true
+        weight: 24
+      statistic:
+        weight: 25
+        enabled: false
+      tab:
+        weight: 26
+        enabled: false
+      testimonial_slider:
+        weight: 27
+        enabled: false
+      video:
+        weight: 28
+        enabled: false
+field_type: entity_reference_revisions

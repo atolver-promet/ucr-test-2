@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_preview_box_images_l
+label: 'Article Preview: Box Images (L)'
+effects:
+  43fe7c8b-50cf-4da6-9520-a95838537563:
+    uuid: 43fe7c8b-50cf-4da6-9520-a95838537563
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 370
+      height: 420
+      crop_type: focal_point

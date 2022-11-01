@@ -1,0 +1,61 @@
+.button-bar {
+  .cell {
+    .button-item {
+      width: 100%;
+      padding: 0;
+      a {
+        padding: 1rem;
+        color: #ffffff;
+        text-decoration: none;
+        display: block;
+        &::after {
+          content: "";
+          display: none;
+        }
+      }
+    }
+    .btn-ucr-outline {
+      a {
+        color: #FA5151;
+        &:hover {
+          color: #FA5151;
+        }
+      }
+    }
+  }
+}
+
+.btn-fixed-268 {
+  .cell {
+    .button-item {
+      width: 100%;
+      max-width: 268px;
+    }
+  }
+}
+
+.btn-fixed-368 {
+  .cell {
+    .button-item {
+      width:100%;
+      max-width: 368px;
+    }
+  }
+}
+
+.btn-fixed-568 {
+  .cell {
+    .button-item {
+      width:100%;
+      max-width: 568px;
+    }
+  }
+}
+
+.btn-justified-100 {
+  .cell {
+    .button-item {
+      width: 100%;
+    }
+  }
+}

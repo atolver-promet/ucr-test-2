@@ -1,0 +1,141 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.hero_slider_medium
+    - field.field.paragraph.homepage_callout_slider.field_callout_content_alignment
+    - field.field.paragraph.homepage_callout_slider.field_callout_description
+    - field.field.paragraph.homepage_callout_slider.field_callout_overlay_colour
+    - field.field.paragraph.homepage_callout_slider.field_callout_text_colour
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_button
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_button_te
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_image
+    - field.field.paragraph.homepage_callout_slider.field_homepage_callout_title
+    - paragraphs.paragraphs_type.homepage_callout_slider
+    - responsive_image.styles.hero_slider_medium
+  module:
+    - color_field
+    - fences
+    - link
+    - responsive_image
+    - text
+id: paragraph.homepage_callout_slider.hero_slider_medium
+targetEntityType: paragraph
+bundle: homepage_callout_slider
+mode: hero_slider_medium
+content:
+  field_callout_content_alignment:
+    weight: 5
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_callout_description:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: text_default
+    region: content
+  field_callout_overlay_colour:
+    weight: 2
+    label: hidden
+    settings:
+      format: rgb
+      opacity: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: color_field_formatter_text
+    region: content
+  field_callout_text_colour:
+    weight: 1
+    label: hidden
+    settings:
+      format: rgb
+      opacity: '1'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: color_field_formatter_text
+    region: content
+  field_homepage_callout_button:
+    type: link
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+  field_homepage_callout_button_te:
+    type: string
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_homepage_callout_image:
+    weight: 3
+    label: hidden
+    settings:
+      responsive_image_style: hero_slider_medium
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: responsive_image
+    region: content
+  field_homepage_callout_title:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: text_default
+    region: content
+hidden:
+  scheduled_publication: true

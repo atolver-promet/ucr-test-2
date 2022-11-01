@@ -1,0 +1,23 @@
+@mixin line-separator($direction, $line-color: $light-blue-800) {
+  @if $direction == "before" or $direction == "after" {
+    &:#{$direction} {
+      background: $line-color;
+      content: " ";
+      display: block;
+      height: 3px;
+      width: 5rem;
+      @if $direction == "before" {
+        margin-bottom: .375rem;
+        margin-top: 1em;
+      }
+      @else {
+        margin-bottom: 1em;
+        margin-top: .375rem;
+      }
+      @content;
+    }
+  }
+  @else {
+    @warn "`#{$direction}` is not a valid pseudo-element.";
+  }
+}

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: scale_733
+label: 'WYSIWYG Scale - 733px'
+effects:
+  899435a8-3c8a-45ed-9edf-07d2b8102f1c:
+    uuid: 899435a8-3c8a-45ed-9edf-07d2b8102f1c
+    id: image_scale
+    weight: 1
+    data:
+      width: 733
+      height: 733
+      upscale: false

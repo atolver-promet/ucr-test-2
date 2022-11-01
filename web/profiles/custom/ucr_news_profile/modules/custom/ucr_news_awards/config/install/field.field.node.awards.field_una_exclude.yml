@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_exclude
+  - node.type.awards
+id: node.awards.field_una_exclude
+field_name: field_una_exclude
+entity_type: node
+bundle: awards
+label: 'Exclude from Frontpage?'
+description: '<em>( Optional ):</em> Check this box if you do not want this award to show up in the ''Latest Awards'' on the Frontpage.'
+required: false
+translatable: true
+default_value:
+-
+  value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

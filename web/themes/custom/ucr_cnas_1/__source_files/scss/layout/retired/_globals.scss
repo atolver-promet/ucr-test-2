@@ -1,0 +1,379 @@
+// Define a font-size for HTML for consistent REM unuits
+html {
+  font-size: 100%; //16px on most browsers
+  height: 100%;
+}
+.no-js [data-responsive-menu] ul {
+  display: none;
+}
+.no-js .main-nav-bar {
+    display: none;
+    @include breakpoint (medium) {
+      display: block;
+  }
+}
+body {
+  font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 100%;
+  line-height: 1.5;
+  color: $black;
+  background: $white;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  > div {
+    &.dialog-off-canvas-main-canvas {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+a[href*="//"]:after {
+  display: inline-block;
+  font: normal normal normal 24px/1 "Material Design Icons";
+  font-size: inherit;
+  text-rendering: auto;
+  line-height: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\F3CC";
+  padding-left: 4px;
+}
+
+.grid-container { max-width: 75rem; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $trade-gothic;
+  font-weight: normal;
+  font-style: normal;
+  color: #666666;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+h1, h2 {
+  // margin-bottom: 2rem;
+  font-weight:300;
+}
+
+table {
+  thead {
+    tr {
+      th {
+        border-right: 1px solid $white;
+        &:last-child {
+          border-right: 0;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      th {
+        background-color: $color-picton-blue;
+        color: $white;
+        border-top: 1px solid $white;
+        border-bottom: 1px solid $white;
+        border-right: 1px solid $color-ghost;
+      }
+      td {
+        border: 1px solid $color-ghost;
+      }
+      &:last-child {
+        th {
+          border-bottom: 0;
+        }
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  &.no-styles {
+    width: inherit;
+    thead {
+      background: none;
+      color: $color-primary-content;
+      border: none;
+      tr {
+        th {
+          border: none;
+          padding: 0;
+          font-weight: normal;
+        }
+      }
+    }
+    tbody {
+      background: none;
+      color: $color-primary-content;
+      border: none;
+      tr {
+        td {
+          border: none;
+          padding: 0;
+        }
+        &:last-child {
+          td {
+            border: none;
+          }
+        }
+        &:nth-child(2n) {
+          background: none;
+        }
+      }
+    }
+    tfoot {
+      background: none;
+      color: $color-primary-content;
+      border: none;
+      tr {
+        td {
+          border: none;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.ucr-custom-block {
+  margin-bottom: 1.5rem !important;
+}
+
+// Module Override Styles:
+.color_field_widget_box__square {
+  border:1px solid #666666;
+}
+
+.separator-line-before {
+  @include line-separator('before');
+}
+
+.separator-line-after {
+  @include line-separator('after');
+}
+
+.separator-line-maroon-before {
+  @include line-separator('before', $color-cerise-red);
+}
+
+.separator-line-maroon-after {
+  @include line-separator('after', $color-cerise-red);
+}
+
+.separator-line-dark-before {
+  @include line-separator('before', $color-astronaut);
+}
+
+.separator-line-dark-after {
+  @include line-separator('after', $color-astronaut);
+}
+
+.btn-ucr {
+  display: inline-block;
+  text-decoration: none !important;
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+  background-color: $color-picton-blue;
+  color: $white !important;
+  font-size: 1rem!important;
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($color-picton-blue, 20%);
+  }
+}
+.btn-ucr-alt {
+  @extend .btn-ucr;
+  background-color: $color-cerise-red;
+  &:hover {
+    background-color: darken($color-cerise-red, 20%);
+  }
+}
+.btn-ucr-split {
+  @extend .btn-ucr;
+  position: relative;
+  background-color: $white;
+  color: $color-picton-blue !important;
+  border: 2px solid darken($color-picton-blue, 20%);
+  &:after {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: 1.5rem !important;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\F142" !important;
+    position: absolute;
+    top: -2px;
+    left: 100%;
+    padding: 0.1rem 0.4rem;
+    border: 2px solid darken($color-picton-blue, 20%);
+    padding-bottom:3px;
+    height: calc(100% + 4px);
+  }
+  &:hover {
+    background-color: $color-picton-blue;
+    color: $white !important;
+    &:after {
+      background-color: $color-picton-blue;
+    }
+  }
+}
+.btn-ucr-outline {
+  @extend .btn-ucr;
+  background-color: #fefefe;
+  border: 1px solid #8c8c8c;
+  color: #FA5151;
+  &:hover {
+    border: 1px solid #FA5151;
+    background-color: #fefefe;
+    color: #FA5151;
+  }
+}
+
+a {
+  &.btn-ucr-split {
+    &:after {
+      content: "\F142" !important;
+    }
+  }
+  &.btn-ucr-outline {
+    color: #FA5151;
+    &:hover {
+      color: #FA5151;
+    }
+  }
+}
+
+.list-arrow {
+  list-style: none;
+  li {
+    &:before {
+      display: inline-block;
+      font: normal normal normal 24px/1 "Material Design Icons";
+      font-size: inherit;
+      text-rendering: auto;
+      line-height: inherit;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      content: "\F733";
+      padding-right: .25em;
+    }
+    ul {
+      list-style-type: none;
+      li {
+        &:before {
+          color: lighten($color-primary-content, 15%);
+        }
+        ul {
+          li {
+            &:before {
+              color: lighten($color-primary-content, 30%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.list-arrow-alt {
+  list-style: none;
+  li {
+    &:before {
+      display: inline-block;
+      font: normal normal normal 24px/1 "Material Design Icons";
+      font-size: inherit;
+      text-rendering: auto;
+      line-height: inherit;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      content: "\F142";
+      padding-right: .25em;
+    }
+    ul {
+      list-style-type: none;
+      li {
+        &:before {
+          color: lighten($color-primary-content, 15%);
+        }
+        ul {
+          li {
+            &:before {
+              color: lighten($color-primary-content, 30%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Styles for global view-generated pagers (note: mini-pager comes from taxonomy view)
+
+nav.pager {
+  ul.pager__items {
+    list-style-type: none;
+    list-style-type: none;
+    margin: 0 auto;
+    display: block;
+    width: 660px;
+    li.pager__item {
+      float: left;
+      text-align: center;
+      &--first,
+      &--last {
+        display:none;
+        }
+      a {
+        display:block;
+        width: 30px;
+        height: 30px;
+        margin-left: 1em;
+        border: 1px solid $gray6;
+        text-decoration: none;
+        color: $gray6;
+        font-family: $adelle;
+        &:hover {
+          background-color: $gray6;
+          color: white;
+        }
+        // &:visited {
+        //   background-color: $near-black;
+        //   border-color: $near-black;
+        //   color: white;
+        // }
+      }
+      &.is-active a {
+        background-color: $gray6;
+        color: white;
+      }
+      &--previous,
+      &--next {
+        a {
+          color: $title-blue;
+          border-color: $title-blue;
+          &:hover {
+            color: white;
+            background-color: $title-blue;
+          }
+          span {
+            display: table;
+            margin-top: -13px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: -8px;
+          }
+        }
+      }
+    }
+  }
+}

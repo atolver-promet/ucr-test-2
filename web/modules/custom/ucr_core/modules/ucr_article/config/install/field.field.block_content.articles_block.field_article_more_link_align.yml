@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.articles_block
+    - field.storage.block_content.field_article_more_link_align
+  module:
+    - options
+id: block_content.articles_block.field_article_more_link_align
+field_name: field_article_more_link_align
+entity_type: block_content
+bundle: articles_block
+label: 'Align Link'
+description: 'Select the position you want the link to be displayed.'
+required: true
+translatable: false
+default_value:
+  -
+    value: right
+default_value_callback: ''
+settings: {  }
+field_type: list_string

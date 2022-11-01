@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Article Types'
+vid: article_types
+description: 'Define the different kinds of Articles that can be made (blog, news, etc.)'
+hierarchy: 0
+weight: 0

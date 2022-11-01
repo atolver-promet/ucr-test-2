@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.teaser_callout_slider
+    - field.field.block_content.teaser_callout_slider.field_tea
+    - field.field.block_content.teaser_callout_slider.field_view
+  module:
+    - paragraphs
+    - viewfield
+id: block_content.teaser_callout_slider.default
+targetEntityType: block_content
+bundle: teaser_callout_slider
+mode: default
+content:
+  field_tea:
+    type: entity_reference_paragraphs
+    weight: 26
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_view:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: viewfield_select
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

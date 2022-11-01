@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: expanding_card_block
+label: 'Expanding Card'
+revision: 1
+description: 'Makes an info card grid with expanding caption section.'

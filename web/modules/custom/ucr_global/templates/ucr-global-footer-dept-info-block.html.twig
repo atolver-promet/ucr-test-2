@@ -1,0 +1,77 @@
+{% block content %}
+    {% set first_email = "" %}
+    {% set second_email = "" %}
+    {% set third_email = "" %}
+    {% set first_email_label = "email" %}
+    {% set second_email_label = "alt email" %}
+    {% set third_email_label = "tertiary email" %}
+    {% set first_phone = "" %}
+    {% set second_phone = "" %}
+    {% set primary_phone_label = "tel" %}
+    {% set second_phone_label = "alt tel" %}
+    {% set fax_label = "fax" %}
+    {% if primary_email is not empty %}
+        {% set first_email = primary_email %}
+        {% set second_email = alternate_email %}
+        {% set third_email = tertiary_email %}
+    {% elseif alternate_email is not empty %}
+        {% set first_email = alternate_email %}
+    {% endif %}
+
+    {% if custom_primary_email_label is not empty %}
+        {% set first_email_label = custom_primary_email_label %}
+    {% endif %}
+
+    {% if custom_alternate_email_label is not empty %}
+        {% set second_email_label = custom_alternate_email_label %}
+    {% endif %}
+
+    {% if custom_tertiary_email_label is not empty %}
+        {% set third_email_label = custom_tertiary_email_label %}
+    {% endif %}
+
+
+    {% if primary_phone is not empty %}
+        {% set first_phone = primary_phone %}
+        {% set second_phone = alternate_phone %}
+    {% elseif alternate_phone is not empty %}
+        {% set first_phone = alternate_phone %}
+    {% endif %}
+
+    {% if custom_primary_phone_label is not empty %}
+        {% set primary_phone_label = custom_primary_phone_label %}
+    {% endif %}
+
+    {% if custom_alternate_phone_label is not empty %}
+        {% set second_phone_label = custom_alternate_phone_label %}
+    {% endif %}
+
+    {% if custom_fax_label is not empty %}
+        {% set fax_label = custom_fax_label %}
+    {% endif %}
+
+
+    <h2>{{ dept_name }}</h2>
+    <address class="address_2">
+       <p> {% if campus_map is not empty %}<a href="{{ campus_map }}" target="_blank">{% endif %}
+            {{ address_1 }}
+            {% if address_2 is not empty %}<br />{{ address_2 }} {% endif %}
+            {% if address_3 is not empty %}<br />{{ address_3 }} {% endif %}
+            {% if campus_map is not empty %}</a>{% endif %}</p>
+    {% if (first_email is not empty) or (first_phone is not empty) %}
+		<p>{% if first_phone is not empty %} {{ primary_phone_label }}: {{ first_phone }}<br />{% endif %}
+        {% if second_phone is not empty %} {{ second_phone_label }}: {{ second_phone }}<br /> {% endif %}
+        {% if fax is not empty %} {{ fax_label }}: {{ fax }}<br /> {% endif %}
+        {% if first_email is not empty %}{{ first_email_label }}: <a href="mailto:{{ first_email }}">{{ first_email }}</a>{% endif %}
+        {% if second_email is not empty %}<br />{{ second_email_label }}: <a href="mailto:{{ second_email }}">{{ second_email }}</a> {% endif %}
+        {% if third_email is not empty %}<br />{{ third_email_label }}: <a href="mailto:{{ third_email }}">{{ third_email }}</a> {% endif %}</p>
+
+    {% endif %}
+    </address>
+    {% if (campus_map is not empty) and (show_campus_map != 0) %}
+    <p>
+        <a class="link-img link-img-location" href="{{ campus_map }}" target="_blank"> Find Us{% if show_campus_map == 2 %}<br /><br />
+            <img src="/themes/custom/ucr_default/images/googlemap.png" alt="Campus map image">{% endif %}</a>
+    </p>
+    {% endif %}
+{% endblock %}

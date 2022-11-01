@@ -1,0 +1,14 @@
+uuid: c1679cd8-751e-4ee2-a1ef-82121c3e28a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - media
+third_party_settings:
+  lightning_core:
+    description: ''
+id: media.ucr_news_articles_featured
+label: 'Articles - Featured'
+targetEntityType: media
+cache: true

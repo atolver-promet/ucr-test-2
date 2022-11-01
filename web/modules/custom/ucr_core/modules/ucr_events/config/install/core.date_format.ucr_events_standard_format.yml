@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_events_standard_format
+label: 'Events - Standard Format'
+locked: false
+pattern: 'F d, Y @ g:i a'

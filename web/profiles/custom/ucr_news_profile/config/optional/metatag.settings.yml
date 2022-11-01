@@ -1,0 +1,30 @@
+entity_type_groups:
+  consumer:
+    consumer:
+      basic: basic
+  media:
+    document:
+      basic: basic
+    image:
+      basic: basic
+    video:
+      basic: basic
+    video_file:
+      basic: basic
+  node:
+    gcs:
+      basic: basic
+    page:
+      basic: basic
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+  redirect:
+    redirect:
+      basic: basic
+  oauth2_token:
+    access_token:
+      basic: basic
+    auth_code:
+      basic: basic
+    refresh_token:
+      basic: basic

@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.home_hero_option
+    - field.storage.block_content.field_home_hero_view
+    - views.view.home_hero_option
+  module:
+    - viewfield
+id: block_content.home_hero_option.field_home_hero_view
+field_name: field_home_hero_view
+entity_type: block_content
+bundle: home_hero_option
+label: 'Home Hero View'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    token_help: ''
+    display_id: default
+    arguments: ''
+    target_uuid: 27dc119a-f3a9-4d50-82bb-31a95a3b88c3
+default_value_callback: ''
+settings:
+  force_default: 1
+  allowed_views:
+    home_hero_option: home_hero_option
+    articles: 0
+    contact_messages: 0
+    content: 0
+    block_content: 0
+    event_list: 0
+    files: 0
+    frontpage: 0
+    header_banner: 0
+    hero_slideshow: 0
+    image_randomizer: 0
+    latest_events: 0
+    media: 0
+    moderation_history: 0
+    user_admin_people: 0
+    people_profiles: 0
+    content_recent: 0
+    redirect: 0
+    redirect_404: 0
+    search: 0
+    taxonomy_term: 0
+    teaser_callout_slider: 0
+    testimonial_slider: 0
+    watchdog: 0
+    who_s_new: 0
+    who_s_online: 0
+  allowed_display_types:
+    block: 0
+    entity_browser: 0
+    feed: 0
+    default: 0
+    page: 0
+  handler: 'default:view'
+  handler_settings: {  }
+field_type: viewfield

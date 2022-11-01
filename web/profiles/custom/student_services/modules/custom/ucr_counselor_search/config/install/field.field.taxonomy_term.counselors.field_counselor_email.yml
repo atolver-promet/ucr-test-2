@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.taxonomy_term.field_counselor_email
+  - taxonomy.vocabulary.counselors
+id: taxonomy_term.counselors.field_counselor_email
+field_name: field_counselor_email
+entity_type: taxonomy_term
+bundle: counselors
+label: 'Email:'
+description: 'Provide the Counselor''s email.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

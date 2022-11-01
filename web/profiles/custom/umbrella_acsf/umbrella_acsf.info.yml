@@ -1,0 +1,94 @@
+name: 'UCR Profile - Umbrella'
+type: profile
+version: 8.x-dev
+description: 'Site Factory Sub-Profile of Lightning, Umbrella site. This profile includes Acquia ACSF modules & is meant for production use.'
+core: '8.x'
+package: Profiles
+base profile: lightning
+install:
+  - acquia_purge
+  - acsf
+  - acsf_sso
+  - admin_toolbar
+  - admin_toolbar_links_access_filter
+  - admin_toolbar_tools
+  - big_pipe
+  - block_class
+  - block_content_permissions
+  - block_region_permissions
+  - cas
+  - ckeditor_markdown
+  - color_field
+  - colorbox
+  - colorbox_inline
+  - colorbox_load
+  - colorbutton
+  - conditional_fields
+  - diff
+  - dynamic_page_cache
+  - easy_breadcrumb
+  - editor_advanced_link
+  - entity_browser_entity_form
+  - field_group
+  - flexslider
+  - flexslider_views
+  - focal_point
+  - google_analytics
+  - imagemagick
+  - inline_form_errors
+  - linkit
+  - link_attributes
+  - menu_admin_per_menu
+  - menu_block
+  - menu_position
+  - paragraphs
+  - pathauto
+  - purge
+  - purge_drush
+  - purge_ui
+  - purge_processor_cron
+  - purge_processor_lateruntime
+  - purge_queuer_coretags
+  - redirect
+  - redirect_404
+  - redirect_domain
+  - responsive_image
+  - role_delegation
+  - slick
+  - slick_extras
+  - slick_paragraphs
+  - slick_ui
+  - slick_views
+  - statistics
+  - syslog
+  - telephone
+  - ucr_accordions
+  - ucr_article
+  - ucr_bubble_grid
+  - ucr_carousel_slider
+  - ucr_core
+  - ucr_events
+  - ucr_expanding_card
+  - ucr_galleria
+  - ucr_global
+  - ucr_info_card
+  - ucr_people_profiles
+  - ucr_statistics_grid
+  - ucr_tabs
+  - ucr_teaser_callouts
+  - ucr_view_block_bg
+  - vppr
+exclude:
+  - lightning_roles
+  - lightning_landing_page
+  - lightning_media_instagram
+  - lightning_media_twitter
+  - lightning_media_audio
+  - lightning_media_slideshow
+  - media_entity_twitter
+  - media_entity_instagram
+  - dblog
+  - update
+themes:
+  - seven
+  - ucr_umbrella

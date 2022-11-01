@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: news_article_featured_m
+label: 'News Article - Featured (M)'
+effects:
+  64b86633-e8fb-4cbf-a91d-1dbeaf3cecd7:
+    uuid: 64b86633-e8fb-4cbf-a91d-1dbeaf3cecd7
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1023
+      height: 450
+      crop_type: focal_point

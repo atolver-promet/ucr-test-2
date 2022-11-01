@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_caption_overlay_color
+    - paragraphs.paragraphs_type.bubbles
+  module:
+    - options
+id: paragraph.bubbles.field_caption_overlay_color
+field_name: field_caption_overlay_color
+entity_type: paragraph
+bundle: bubbles
+label: 'Caption Overlay Color'
+description: 'Caption overlay color will only appear if caption placement is centered'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

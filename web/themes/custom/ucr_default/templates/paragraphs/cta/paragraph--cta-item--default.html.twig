@@ -1,0 +1,104 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set ctaItemID = "ctaItem_" ~ random() %}
+{%
+    set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    'cell',
+    'cta-item',
+    ctaItemID,
+]
+%}
+{% block paragraph %}
+    {% set modalID = 'ctaModalReveal_' ~ random() %}
+    {% set do_modal = (content.field_cta_open_modal|render|striptags|trim == 1 ? true : false) %}
+    {% set cta_url = content.field_cta_url.0["#url"] %}
+    {% set cta_target = content.field_cta_url.0["#options"].attributes.target %}
+    {% set cta_overlay_color = content.field_cta_overlay_color|render|striptags|trim %}
+    {% set cta_font_color = content.field_cta_font_color|render|striptags|trim %}
+    {% block content %}
+        <div{{ attributes.addClass(classes) }}>
+            <a{% if do_modal == false %} href="{{ cta_url }}" target="{{ cta_target }}"{% endif %}{% if do_modal %} data-open="{{ modalID }}"{% endif %}>
+                <div class="cta-bg-image">
+                    {{ content.field_cta_bg_image }}
+                    <div class="cta-bg-dark-overlay"></div>
+                </div>
+                <div class="cta-bg-color-overlay" style="background-color: {{ cta_overlay_color }};"></div>
+                <div class="cta-text-area">
+                    <div class="cta-title">
+                        <div>{{ content.field_cta_title }}</div>
+                        <span class="cta-title-border"></span>
+                    </div>
+                    <div class="cta-description">{{ content.field_cta_description }}</div>
+                </div>
+                <div class="cta-caption-bar" style="background-color: {{ cta_overlay_color }}; color: {{ cta_font_color }};">
+                    <div class="cta-caption">{{ content.field_cta_caption }}</div>
+                </div>
+            </a>
+            {% if do_modal %}
+            <div id="{{ modalID }}" class="reveal large cta-modal" data-reveal aria-labelledby="CTA Modal Title" aria-hidden="true" role="dialog">
+                <div class="cta-modal-header">
+                    <button class="close-button" data-close aria-label="Close modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ cta_modal_html }}
+            </div>
+            {% endif %}
+        </div>
+        <style type="text/css">
+            <!--
+            .cta-image-color-display .{{ ctaItemID }} a .cta-text-area { color: {{ cta_font_color }}; }
+            .cta-image-color-display .{{ ctaItemID }} a .cta-text-area .cta-title .cta-title-border { background-color: {{ cta_font_color }}; }
+
+            .cta-image-display .{{ ctaItemID }} a .cta-text-area { color: #FEF4F6; }
+            .cta-image-display .{{ ctaItemID }} a .cta-text-area .cta-title .cta-title-border { background-color: #FEF4F6; }
+            .cta-image-display .{{ ctaItemID }} a:hover .cta-text-area { color: {{ cta_font_color }}; }
+            .cta-image-display .{{ ctaItemID }} a:hover .cta-text-area .cta-title .cta-title-border { background-color: {{ cta_font_color }}; }
+
+            .cta-color-display .{{ ctaItemID }} a .cta-text-area { color: {{ cta_font_color }}; }
+            .cta-color-display .{{ ctaItemID }} a .cta-text-area .cta-title .cta-title-border { background-color: {{ cta_font_color }}; }
+            -->
+        </style>
+    {% endblock %}
+{% endblock paragraph %}

@@ -1,0 +1,173 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.button_bar
+    - field.field.block_content.button_bar.body
+    - field.field.block_content.button_bar.field_block_margin_bottom
+    - field.field.block_content.button_bar.field_block_margin_left
+    - field.field.block_content.button_bar.field_block_margin_right
+    - field.field.block_content.button_bar.field_block_margin_top
+    - field.field.block_content.button_bar.field_button_sizes
+    - field.field.block_content.button_bar.field_button_urls_styles
+    - field.field.block_content.button_bar.field_counter
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_group
+    - paragraphs
+    - text
+third_party_settings:
+  field_group:
+    group_form_tabs:
+      children:
+        - group_button_bar_info
+        - group_intro_header
+        - group_style_options
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Form Tabs'
+      region: content
+    group_intro_header:
+      children:
+        - body
+      parent_name: group_form_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        formatter: closed
+        description: '<em>( Optional )</em> Enter in content that will be displayed above the Button Bar.'
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Introduction
+      region: content
+    group_button_bar_info:
+      children:
+        - field_counter
+        - field_button_sizes
+        - field_button_urls_styles
+      parent_name: group_form_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'Button Bar Info'
+      region: content
+    group_style_options:
+      children:
+        - group_margin_options
+      parent_name: group_form_tabs
+      weight: 23
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Style Options'
+      region: content
+    group_margin_options:
+      children:
+        - field_block_margin_bottom
+        - field_block_margin_top
+        - field_block_margin_left
+        - field_block_margin_right
+      parent_name: group_style_options
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Margin Options'
+      region: content
+id: block_content.button_bar.default
+targetEntityType: block_content
+bundle: button_bar
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 4
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_block_margin_bottom:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_left:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_right:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_top:
+    weight: 28
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_button_sizes:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_button_urls_styles:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_counter:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 2
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden: {  }

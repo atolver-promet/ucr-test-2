@@ -1,0 +1,290 @@
+// SASS file to cover the general CSS needed for the Primary Content area and the possible Block Layout 3 Columns (Not The Layouts!)
+// -------------------------------------------
+$main-page-title-color: $blue-600;
+$main-header-colors: #003DA5;
+$main-pre-background: $light-blue-100;
+$main-pre-border: darken($blue-900, 5%);
+$main-figure-object-border: $ucr-blue;
+
+$general-menu-background: $body-background;
+$general-menu-border-top: $light-blue-a200;
+$general-menu-text: $body-color;
+$general-menu-hover: $main-header-colors;
+$general-menu-seperator: $blue-grey-400;
+$general-menu-title-text: lighten($body-color, 7%);
+$general-menu-title-background: $body-background;
+$general-menu-mobile-title-background: #4B6E9D;
+$general-menu-mobile-title-text: $white;
+main {
+  > div {
+    &#content-container {
+      div {
+        &.primary-content-area {
+          a{
+            text-decoration: underline;
+            color: #F4002B;
+          }
+          h1 {
+            color: $main-header-colors;
+            font-weight: 300;
+            font-size: 2.375rem;
+            line-height: 1.10526;
+            font-family: "Fira Sans Regular", sans-serif !important;
+            &.page-title {
+              color: $main-header-colors;
+              margin-bottom: 2rem;
+            }
+          }
+          h2 {
+            @extend h1;
+            font-size: 2.125rem;
+          }
+          h3 {
+            @extend h1;
+            font-weight: 400;
+            font-size: 1.875rem;
+          }
+          h4 {
+            @extend h1;
+            font-weight: 400;
+            font-size: 1.625rem;
+          }
+          h5 {
+            @extend h1;
+            font-weight: 400;
+            font-size: 1.375rem;
+          }
+          h6 {
+            @extend h1;
+            font-weight: 400;
+            font-size: 1.125rem;
+          }
+          pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: $main-pre-background;
+            border: 1px solid $main-pre-border;
+          }
+          figure {
+            display: table;
+            figcaption {
+              display: table-caption;
+              caption-side: bottom;
+              font-size: 0.775rem;
+              text-align: center;
+              font-weight: bold;
+              margin: 0.25rem 0.25rem 1rem 0.25rem;
+              border-bottom: 2px solid $main-figure-object-border;
+            }
+            &.embedded-entity {
+              &.align-center {
+                text-align: center;
+              }
+              &.align-left {
+                figcaption {
+                  margin-right: 1.25rem;
+                }
+                img {
+                  margin-right: 1rem;
+                }
+              }
+              &.align-right {
+                figcaption {
+                  margin-left: 1.25rem;
+                }
+                img {
+                  margin-left: 1rem;
+                }
+              }
+            }
+            article {
+              p {
+                margin: 0;
+              }
+            }
+          }
+          .video-embed-field-responsive-video{
+            width: 35rem;
+          }
+          article {
+            &.embedded-entity {
+              width: 25rem;
+              &.align-center {
+                text-align: center;
+                img {
+                  margin-bottom: 1rem;
+                }
+              }
+              &.align-left {
+                img {
+                  margin-right: 1rem;
+                  margin-bottom: 1rem;
+                }
+              }
+              &.align-right {
+                img {
+                  margin-left: 1rem;
+                  margin-bottom: 1rem;
+                }
+              }
+            }
+          }
+          div {
+            &.embedded-entity {
+              &.align-center {
+                text-align: center;
+                img {
+                  margin-bottom: 1rem;
+                }
+              }
+              &.align-left {
+                img {
+                  margin-right: 1rem;
+                  margin-bottom: 1rem;
+                }
+              }
+              &.align-right {
+                img {
+                  margin-left: 1rem;
+                  margin-bottom: 1rem;
+                }
+              }
+            }
+          }
+          .general-menu {
+            background-color: $general-menu-background;
+            padding-bottom: 32px;
+            @include breakpoint(medium) {
+              border-top: 5px solid $general-menu-border-top;
+              padding-bottom: 64px;
+            }
+            h2 {
+              background-color: $general-menu-mobile-title-background;
+              border-top: none;
+              color: $general-menu-mobile-title-text;
+              cursor: pointer;
+              font-family: "Avenir Next W01";
+              font-size: 14px;
+              font-weight: 900;
+              margin-bottom: 0;
+              padding:12px 20px 12px 40px;
+              position: relative;
+              text-align: left;
+              text-transform: uppercase;
+              z-index: 9;
+              &:after {
+                background: url('../images/bkg-quicklinks-down-arrow.png') no-repeat 0 0 transparent;
+                content: "";
+                display: inline-block;
+                height: 20px;
+                margin-left: 30px;
+                position: absolute;
+                right: 20px;
+                top: 9px;
+                width: 20px;
+              }
+              @include breakpoint(medium) {
+                font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+                font-size: 1.45rem;
+                font-weight: 400;
+                color: $general-menu-title-text;
+                line-height: 2rem;
+                text-align: center;
+                border-bottom: 1px solid $general-menu-seperator;
+                padding: 16px 0 18px 0;
+                margin: 0;
+                background-color: $general-menu-title-background;
+                &:after {
+                  display:none;
+                }
+              }
+            }
+            ul {
+              &.menu {
+                &.vertical {
+                  li {
+                    a {
+                      font-weight: bold;
+                      border-bottom: 1px solid $general-menu-seperator;
+                      text-decoration: none;
+                      color: $general-menu-text;
+                      padding: 16px 24px;
+                      &::after {
+                        content: "\F13E";
+                        display: inline-block;
+                        font: normal normal normal 24px/1 "Material Design Icons";
+                        font-size: 24px;
+                        line-height: 1;
+                        font-size: inherit;
+                        text-rendering: auto;
+                        line-height: inherit;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        padding-left: 4px;
+                      }
+                      &:hover {
+                        color: $general-menu-hover;
+                      }
+                    }
+                    ul {
+                      &.menu {
+                        &.submenu {
+                          li {
+                            a {
+                              padding-left: 40px;
+                              &::before {
+                                content: "\F130";
+                                display: inline-block;
+                                font: normal normal normal 8px/1 "Material Design Icons";
+                                text-rendering: auto;
+                                line-height: inherit;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                                padding-right: 8px;
+                                margin-bottom: 3px;
+                                vertical-align: middle;
+                              }
+                            }
+                            ul {
+                              &.menu {
+                                &.submenu {
+                                  li {
+                                    a {
+                                      padding-left: 56px;
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+body {
+  &.cke_editable {
+    @extend .primary-content-area;
+    div {
+      drupal-entity {
+        @extend figure;
+        @extend article;
+      }
+    }
+    padding: 1rem;
+    min-height: inherit;
+    @include breakpoint(medium) {
+      min-height: inherit;
+    }
+  }
+}

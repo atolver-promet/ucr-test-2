@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_uen_site_name
+    - node.type.news_externals
+id: node.news_externals.field_uen_site_name
+field_name: field_uen_site_name
+entity_type: node
+bundle: news_externals
+label: 'External Site Name'
+description: 'Enter in the name of the site that the external content is from.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,9 @@
+name: 'Custom Backgrounds for View Blocks'
+type: module
+description: 'Custom extension of the Chaos Tools Views Module. Adds the ability to customize background for a block generated from a view.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - ctools
+  - ctools_views

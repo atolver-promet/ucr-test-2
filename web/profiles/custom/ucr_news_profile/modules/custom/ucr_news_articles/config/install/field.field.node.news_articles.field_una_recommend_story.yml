@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_una_recommend_story
+    - node.type.news_articles
+id: node.news_articles.field_una_recommend_story
+field_name: field_una_recommend_story
+entity_type: node
+bundle: news_articles
+label: 'Recommended Story?'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

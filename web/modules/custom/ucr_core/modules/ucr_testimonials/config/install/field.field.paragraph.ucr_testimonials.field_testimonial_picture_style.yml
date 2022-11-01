@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_testimonial_picture_style
+    - paragraphs.paragraphs_type.ucr_testimonials
+  module:
+    - options
+id: paragraph.ucr_testimonials.field_testimonial_picture_style
+field_name: field_testimonial_picture_style
+entity_type: paragraph
+bundle: ucr_testimonials
+label: 'Picture Style'
+description: 'Please select the style of the picture.'
+required: true
+translatable: false
+default_value:
+  -
+    value: circle
+default_value_callback: ''
+settings: {  }
+field_type: list_string

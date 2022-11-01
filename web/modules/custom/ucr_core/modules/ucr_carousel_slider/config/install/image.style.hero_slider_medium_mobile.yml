@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: hero_slider_medium_mobile
+label: 'Hero Slider Medium (Mobile) - (768 x 450)'
+effects:
+  e3da663b-bee2-4b82-a5f0-285736504fc9:
+    uuid: e3da663b-bee2-4b82-a5f0-285736504fc9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 450
+      crop_type: focal_point

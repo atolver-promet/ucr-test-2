@@ -1,0 +1,28 @@
+name: 'Local Articles Component'
+type: module
+description: 'Provides Article content type and related configuration. An article can be an internet link, a blog post, a news article, or whatever you need it to be.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block
+  - ctools
+  - datetime
+  - entity_browser
+  - field
+  - field_group
+  - file
+  - focal_point
+  - image
+  - menu_ui
+  - node
+  - options
+  - path
+  - pathauto
+  - taxonomy
+  - text
+  - ucr_core
+  - user
+  - views
+  - tvi
+  - views_taxonomy_term_name_depth

@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - feeds.feed_type.ucr_rss_feed_importer
+  module:
+  - user
+id: feeds_feed.ucr_rss_feed_importer.default
+targetEntityType: feeds_feed
+bundle: ucr_rss_feed_importer
+mode: default
+content:
+  imported:
+    type: timestamp
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  next:
+    type: timestamp
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+  source:
+    label: hidden
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden: {  }

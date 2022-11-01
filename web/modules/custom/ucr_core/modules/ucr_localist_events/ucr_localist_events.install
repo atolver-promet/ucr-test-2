@@ -1,0 +1,70 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_localist_events_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * October 2018 - Add the Full View Display. This is for the UCR Default Profile Only.
+ */
+function ucr_localist_events_update_8001() {
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // *** Add the new View Display.
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $acceptable_profiles = array('ucr_profile', 'ucr_profile_local');
+    if(in_array($profile_name, $acceptable_profiles)) {
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_localist_events/config/install/core.entity_view_display.block_content.ucr_localist_events.center.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_display = Yaml::decode($file_contents);
+
+        $new_config_display = $config->getEditable('core.entity_view_display.block_content.ucr_localist_events.center');
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $new_display);
+        $new_config_display->setData($full_array)->save(TRUE);
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_localist_events_update_8002() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.ucr_localist_events.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_localist_events', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_localist_events_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_localist_events']['8001'] = [
+        'ucr_core' => '8004'
+    ];
+    return $dependencies;
+}

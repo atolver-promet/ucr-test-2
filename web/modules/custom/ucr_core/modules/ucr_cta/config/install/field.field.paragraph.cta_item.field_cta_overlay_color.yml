@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cta_overlay_color
+    - paragraphs.paragraphs_type.cta_item
+  module:
+    - color_field
+id: paragraph.cta_item.field_cta_overlay_color
+field_name: field_cta_overlay_color
+entity_type: paragraph
+bundle: cta_item
+label: Color
+description: 'Select the color you wish to have this item displayed with.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 0
+field_type: color_field_type

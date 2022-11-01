@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: scale_367
+label: 'WYSIWYG Scale - 367px'
+effects:
+  7e4c3f4b-e7f9-4d00-b62b-1eb3935da6c4:
+    uuid: 7e4c3f4b-e7f9-4d00-b62b-1eb3935da6c4
+    id: image_scale
+    weight: 1
+    data:
+      width: 367
+      height: 367
+      upscale: false

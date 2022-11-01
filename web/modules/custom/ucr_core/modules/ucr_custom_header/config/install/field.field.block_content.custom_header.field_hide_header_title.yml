@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.custom_header
+    - field.storage.block_content.field_hide_header_title
+id: block_content.custom_header.field_hide_header_title
+field_name: field_hide_header_title
+entity_type: block_content
+bundle: custom_header
+label: 'Hide Header Title'
+description: 'Enabling this option hides the H1 title of the Custom Header & Title Block'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

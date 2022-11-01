@@ -1,0 +1,145 @@
+main {
+  > div {
+    &#content-container {
+      .una-articles-featured-slider {
+        overflow: hidden;
+        position: relative;
+        button {
+          &.slick-arrow {
+            z-index: 9;
+            cursor: pointer;
+          }
+          &.slick-prev {
+            left: 0 !important;
+          }
+          &.slick-next {
+            right: 0 !important;
+          }
+        }
+        .featured-item {
+          font-family: $articles-featured-slider-font;
+          color: $articles-featured-slider-font-color;
+          position: relative;
+          max-height: 476px;
+          .slider-background-image {
+          }
+          .slider-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0, 0.85), rgba(0,0,0, 0));
+            transition: background 0.5s ease;
+            &:hover, &:focus {
+              background-color: rgba(0,0,0, 0.65);
+            }
+            .slider-overlay-content {
+              position: relative;
+              width: 100%;
+              min-height: 100%;
+              .slider-category-display {
+                position: absolute;
+                top: 0;
+                left: 0;
+                .taxonomy-ucr-news-article-category {
+                  div {
+                    font-family: $font-family-roboto;
+                    font-weight: 700;
+                    line-height: 19px;
+                    font-size: 16px;
+                    min-width: 272px;
+                    text-align: left;
+                    padding: 10px;
+                  }
+                }
+              }
+              .slider-title-content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                font-size: 18px;
+                line-height: 24px;
+                @include breakpoint(large) {
+                  font-size: 20px;
+                  line-height: 24px;
+                }
+                .slider-link-to-content {
+                  display: block;
+                  margin: 0 50px 25px 50px;
+                  text-decoration: none;
+                  color: $articles-featured-slider-font-color;
+                  @include breakpoint(large) {
+                    margin: 0 75px 50px 75px;
+                  }
+                  &:hover {
+                    text-decoration: none;
+                    color: $articles-featured-slider-font-color;
+                  }
+                  .slider-title-date {
+                    font-family: $font-family-montserrat;
+                    font-size: 11px;
+                    line-height: 14px;
+                    display: inline-block;
+                    padding-bottom: 8px;
+                    margin-bottom: 24px;
+                    border-bottom: 3px solid;
+                    @include breakpoint(large) {
+                      font-size: 16px;
+                      line-height: 16px;
+                    }
+                  }
+                  h2 {
+                    font-weight: bold;
+                    color: $articles-featured-slider-font-color;
+                    margin: 0;
+                    padding: 0 0 16px 0;
+                    font-size: 24px;
+                    line-height: 30px;
+                    @include breakpoint(large) {
+                      font-size: 32px;
+                      line-height: 36px;
+                    }
+                  }
+                  .slider-title-subtitle {
+                    display: none;
+                    @include breakpoint(medium) {
+                      display: block;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        ul {
+          &.slick-dots {
+            position: relative;
+            li {
+              margin: 0;
+              button {
+                padding-top:8px;
+                &::before {
+                  font-family: "Material Design Icons";
+                  font-size: 13px;
+                  content: "\F130";
+                  color: $articles-featured-slider-dots-color !important;
+                }
+              }
+              &.slick-active {
+                button {
+                  &::before {
+                    color: $articles-featured-slider-dots-active-color !important;
+                    content: "\F12F";
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

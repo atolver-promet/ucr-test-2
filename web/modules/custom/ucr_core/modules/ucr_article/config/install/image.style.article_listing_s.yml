@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_listing_s
+label: 'Article Listing (S)'
+effects:
+  3a48710e-11ba-4960-ab01-9a147ff5483a:
+    uuid: 3a48710e-11ba-4960-ab01-9a147ff5483a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 767
+      height: 767
+      crop_type: focal_point

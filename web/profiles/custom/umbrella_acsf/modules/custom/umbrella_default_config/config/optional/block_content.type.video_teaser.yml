@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: video_teaser
+label: 'Video Teaser'
+revision: 1
+description: 'Video Teaser Block'

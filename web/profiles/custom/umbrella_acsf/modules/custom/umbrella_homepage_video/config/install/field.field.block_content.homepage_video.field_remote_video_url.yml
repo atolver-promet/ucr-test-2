@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.homepage_video
+    - field.storage.block_content.field_remote_video_url
+  module:
+    - link
+id: block_content.homepage_video.field_remote_video_url
+field_name: field_remote_video_url
+entity_type: block_content
+bundle: homepage_video
+label: 'Remote Video URL'
+description: 'Add the URL to a video (directly to the video itself). This can be from a remote hosting service, like Vimeo.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

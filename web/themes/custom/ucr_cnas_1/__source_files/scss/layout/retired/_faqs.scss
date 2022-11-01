@@ -1,0 +1,36 @@
+.faq-question-accordion {
+  ul {
+    &.accordion {
+      li {
+        &.accordion-item {
+          a {
+            &:hover {
+              background: #234674;
+              color: #ffffff;
+              border-bottom: solid 1px #dcdcdc;
+            }
+          }
+          p {
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+        &.is-active {
+          a.accordion-title {
+            background: #234674;
+            color: #ffffff;
+          }
+        }
+      }
+      margin-bottom: 0;
+    }
+  }
+  h4 {
+    &.faq-group-title {
+      color: #1F7DAF;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+}

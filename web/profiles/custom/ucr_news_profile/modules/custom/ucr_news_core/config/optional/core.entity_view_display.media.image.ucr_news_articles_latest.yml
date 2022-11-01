@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.ucr_news_articles_latest
+    - field.field.media.image.field_media_in_library
+    - field.field.media.image.image
+    - media.type.image
+    - responsive_image.styles.news_article_latest
+  module:
+    - responsive_image
+id: media.image.ucr_news_articles_latest
+targetEntityType: media
+bundle: image
+mode: ucr_news_articles_latest
+content:
+  image:
+    type: responsive_image
+    weight: 0
+    label: hidden
+    settings:
+      responsive_image_style: news_article_latest
+      image_link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  addtoany: true
+  created: true
+  field_media_in_library: true
+  name: true
+  thumbnail: true
+  uid: true

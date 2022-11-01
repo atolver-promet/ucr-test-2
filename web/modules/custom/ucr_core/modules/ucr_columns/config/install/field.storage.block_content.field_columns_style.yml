@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - options
+id: block_content.field_columns_style
+field_name: field_columns_style
+entity_type: block_content
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: dc-standard
+      label: 'Simple Style'
+    -
+      value: dc-shadowbox
+      label: 'Box Shadow'
+    -
+      value: dc-columnborder
+      label: 'Column Border'
+    -
+      value: dc-shadowborder
+      label: 'Box Shadow & Column Border'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,12 @@
+ucr_articles_slick:
+  version: VERSION
+  css:
+    theme:
+      /libraries/slick/slick/slick-theme.css: {}
+  js:
+    js/ucr_articles-slick.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once
+    - slick/slick.theme

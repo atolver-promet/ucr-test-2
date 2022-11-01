@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_events_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_events_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_events_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('node_event_form', 'node_event_edit_form'))) {
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => t('Content Keywords'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 100,
+      '#optional' => true,
+      '#open' => true,
+    ];
+
+    $form['field_content_keywords']['#group'] = 'keywords';
+  }
+
+  return $form;
+}

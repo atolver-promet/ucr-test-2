@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: news_article_listing_m_up
+label: 'News Article - Listing (M-Up)'
+effects:
+  db87b67a-8f6d-43d0-b335-155185f911d1:
+    uuid: db87b67a-8f6d-43d0-b335-155185f911d1
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 168
+      height: 168
+      crop_type: focal_point

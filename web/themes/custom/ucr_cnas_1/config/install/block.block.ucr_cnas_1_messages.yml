@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - system
+  theme:
+  - ucr_cnas_1
+id: ucr_cnas_1_messages
+theme: ucr_cnas_1
+region: drupal_messages
+weight: -10
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_news_core_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+
+    $config = \Drupal::configFactory();
+
+    // Append the TVI Settings for the 3 different taxonomies needed.
+    // Tags Taxonomy
+    $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_core/config/optional/tvi.taxonomy_vocabulary.tags.yml';
+    $file_contents = file_get_contents($file_path);
+    $content_yml = Yaml::decode($file_contents);
+
+    $settings = $config->getEditable('tvi.taxonomy_vocabulary.tags');
+    $settings->setData($content_yml)->save(TRUE);
+
+    // Authors Taxonomy
+    $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_core/config/optional/tvi.taxonomy_vocabulary.ucr_news_article_authors.yml';
+    $file_contents = file_get_contents($file_path);
+    $content_yml = Yaml::decode($file_contents);
+
+    $settings = $config->getEditable('tvi.taxonomy_vocabulary.ucr_news_article_authors');
+    $settings->setData($content_yml)->save(TRUE);
+
+    // Custom Taxonomy
+    $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_core/config/optional/tvi.taxonomy_vocabulary.custom_rss.yml';
+    $file_contents = file_get_contents($file_path);
+    $content_yml = Yaml::decode($file_contents);
+
+    $settings = $config->getEditable('tvi.taxonomy_vocabulary.custom_rss');
+    $settings->setData($content_yml)->save(TRUE);
+}
+
+/**
+ * December 2018 - Enable the Depths for Custom RSS Taxonomy Views.
+ */
+function ucr_news_core_update_8001() {
+    $config = \Drupal::configFactory();
+
+    $file_path = DRUPAL_ROOT . '/profiles/custom/ucr_news_profile/modules/custom/ucr_news_core/config/install/views.view.news_general_view.yml';
+    $file_contents = file_get_contents($file_path);
+    $config_yml = Yaml::decode($file_contents);
+
+    $current_yml = $config->getEditable('views.view.news_general_view');
+    $current_yml->set('display', $config_yml['display'])->save(TRUE);
+}
+
+function ucr_news_core_update_dependencies() {
+    $dependencies = array();
+
+    return $dependencies;
+}

@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+  - ucr_default
+id: ucr_default_local_tasks
+theme: ucr_default
+region: admin_controls
+weight: -11
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

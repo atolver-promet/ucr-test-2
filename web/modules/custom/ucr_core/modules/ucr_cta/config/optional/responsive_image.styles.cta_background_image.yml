@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.cta_image_large
+    - image.style.cta_image_medium
+    - image.style.cta_image_small
+  theme:
+    - ucr_default
+id: cta_background_image
+label: 'CTA Background Image'
+image_style_mappings:
+  -
+    breakpoint_id: ucr_default.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: cta_image_large
+  -
+    breakpoint_id: ucr_default.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: cta_image_large
+  -
+    breakpoint_id: ucr_default.tablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: cta_image_medium
+  -
+    breakpoint_id: ucr_default.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: cta_image_small
+breakpoint_group: ucr_default
+fallback_image_style: cta_image_small

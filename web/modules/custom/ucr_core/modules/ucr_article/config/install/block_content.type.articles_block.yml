@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: articles_block
+label: 'Articles Preview'
+revision: 1
+description: 'The ability to display a block of articles. The display can be narrowed down to the different Article Types, Featured, or Spotlight.'

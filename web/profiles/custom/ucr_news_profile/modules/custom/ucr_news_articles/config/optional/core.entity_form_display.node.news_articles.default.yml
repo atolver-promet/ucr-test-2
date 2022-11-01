@@ -1,0 +1,372 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_browser
+    - field.field.node.news_articles.body
+    - field.field.node.news_articles.field_content_keywords
+    - field.field.node.news_articles.field_meta_tags
+    - field.field.node.news_articles.field_una_additional_content
+    - field.field.node.news_articles.field_una_authored_by
+    - field.field.node.news_articles.field_una_authored_on
+    - field.field.node.news_articles.field_una_custom_rss
+    - field.field.node.news_articles.field_una_exclude
+    - field.field.node.news_articles.field_una_featured
+    - field.field.node.news_articles.field_una_featured_header
+    - field.field.node.news_articles.field_una_header_image
+    - field.field.node.news_articles.field_una_header_video
+    - field.field.node.news_articles.field_una_icon
+    - field.field.node.news_articles.field_una_media_contacts
+    - field.field.node.news_articles.field_una_recommend_header
+    - field.field.node.news_articles.field_una_recommend_story
+    - field.field.node.news_articles.field_una_tags
+    - field.field.node.news_articles.field_una_title_teaser
+    - field.field.node.news_articles.field_una_topic_category
+    - node.type.news_articles
+  module:
+    - content_moderation
+    - datetime
+    - entity_browser
+    - field_group
+    - link
+    - metatag
+    - paragraphs
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_article_tabs:
+      children:
+        - group_primary_content
+        - group_frontpage_options
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Article Tabs'
+      region: content
+    group_primary_content:
+      children:
+        - group_header_content
+        - group_body_content
+      parent_name: group_article_tabs
+      weight: 29
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+      label: 'Primary Content'
+      region: content
+    group_frontpage_options:
+      children:
+        - group_latest_options
+        - group_featured_options
+        - group_recommend_options
+      parent_name: group_article_tabs
+      weight: 30
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: 'Frontpage Options'
+      region: content
+    group_header_content:
+      children:
+        - field_una_header_image
+        - field_una_header_video
+        - field_una_icon
+      parent_name: group_primary_content
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Header Content'
+      region: content
+    group_body_content:
+      children:
+        - body
+        - field_una_additional_content
+      parent_name: group_primary_content
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Body Content'
+      region: content
+    group_featured_options:
+      children:
+        - field_una_featured
+        - field_una_featured_header
+      parent_name: group_frontpage_options
+      weight: 22
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Featured Options'
+      region: content
+    group_recommend_options:
+      children:
+        - field_una_recommend_story
+        - field_una_recommend_header
+      parent_name: group_frontpage_options
+      weight: 23
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Recommend Options'
+      region: content
+    group_latest_options:
+      children:
+        - field_una_exclude
+      parent_name: group_frontpage_options
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Latest Options'
+      region: content
+id: node.news_articles.default
+targetEntityType: node
+bundle: news_articles
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 0
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_content_keywords:
+    type: entity_reference_autocomplete
+    weight: 14
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_una_additional_content:
+    type: paragraphs
+    weight: 1
+    region: content
+    settings:
+      title: Content
+      title_plural: Contents
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+        add_above: '0'
+    third_party_settings: {  }
+  field_una_authored_by:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_una_authored_on:
+    type: datetime_default
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_una_custom_rss:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_una_exclude:
+    type: boolean_checkbox
+    weight: 21
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_una_featured:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_una_featured_header:
+    type: entity_browser_entity_reference
+    weight: 1
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      field_widget_replace: false
+      open: false
+    region: content
+    third_party_settings: {  }
+  field_una_header_image:
+    type: entity_browser_entity_reference
+    weight: 0
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      field_widget_replace: false
+      open: false
+    region: content
+    third_party_settings: {  }
+  field_una_header_video:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_una_icon:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_una_media_contacts:
+    type: entity_reference_autocomplete
+    weight: 13
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_una_recommend_header:
+    type: entity_browser_entity_reference
+    weight: 1
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      field_widget_replace: false
+      open: false
+    region: content
+    third_party_settings: {  }
+  field_una_recommend_story:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_una_tags:
+    type: entity_reference_autocomplete_tags
+    weight: 11
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_una_title_teaser:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_una_topic_category:
+    type: entity_reference_autocomplete
+    weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 7
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 8
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  promote: true
+  sticky: true
+  uid: true

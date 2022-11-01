@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr-related-links-menu
+label: 'UC Riverside - Related Links'
+description: 'Manage the Related Links within the Footer Area of the Website.'
+locked: false

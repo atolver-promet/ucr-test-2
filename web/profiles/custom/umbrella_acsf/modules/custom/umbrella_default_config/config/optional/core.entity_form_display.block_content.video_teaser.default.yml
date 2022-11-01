@@ -1,0 +1,107 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_teaser
+    - field.field.block_content.video_teaser.body
+    - field.field.block_content.video_teaser.field_button_url
+    - field.field.block_content.video_teaser.field_callout_color
+    - field.field.block_content.video_teaser.field_callout_text_color
+    - field.field.block_content.video_teaser.field_image
+    - field.field.block_content.video_teaser.field_orientation
+    - field.field.block_content.video_teaser.field_section_title
+    - field.field.block_content.video_teaser.field_title
+    - field.field.block_content.video_teaser.field_video_embed
+  module:
+    - color_field
+    - content_moderation
+    - datetime
+    - link
+    - text
+    - video_embed_field
+id: block_content.video_teaser.default
+targetEntityType: block_content
+bundle: video_teaser
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 7
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_button_url:
+    weight: 8
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_callout_color:
+    weight: 3
+    settings:
+      default_colors: "#000000\n#1D3A61\n#234674\n#637EA4\n#4DADF7\n#3AA4DC\n#329AF0\n#802244\n#D6336C\n#FFFFFF\n#1D3661\n#637EA4\n#39B1EF\n#91AFCC\n#A5C8EA\n#D6336B\n#14AABE\n#FA5151\n#A3E24A"
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_callout_text_color:
+    weight: 4
+    settings:
+      default_colors: '#FFFFFF, #000000'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_orientation:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_section_title:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_title:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_video_embed:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: video_embed_field_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 10
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_image: true

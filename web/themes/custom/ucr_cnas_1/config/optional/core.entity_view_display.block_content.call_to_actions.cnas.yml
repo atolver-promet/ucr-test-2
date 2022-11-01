@@ -1,0 +1,83 @@
+uuid: 436e8188-feee-46a5-a5ed-b998bf9260ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.call_to_actions
+    - core.entity_view_mode.block_content.cnas
+    - field.field.block_content.call_to_actions.body
+    - field.field.block_content.call_to_actions.field_block_margin_bottom
+    - field.field.block_content.call_to_actions.field_block_margin_left
+    - field.field.block_content.call_to_actions.field_block_margin_right
+    - field.field.block_content.call_to_actions.field_block_margin_top
+    - field.field.block_content.call_to_actions.field_counter
+    - field.field.block_content.call_to_actions.field_cta_items
+    - field.field.block_content.call_to_actions.field_cta_style
+  module:
+    - entity_reference_revisions
+    - options
+    - text
+id: block_content.call_to_actions.cnas
+targetEntityType: block_content
+bundle: call_to_actions
+mode: cnas
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_block_margin_bottom:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_left:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_right:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_top:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_counter:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: number_unformatted
+    region: content
+  field_cta_items:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_cta_style:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+hidden: {  }

@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_custom_alerts_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_custom_alerts_update_8001() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.custom_alert.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_custom_alerts', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_custom_alerts_update_dependencies() {
+    $dependencies = array();
+    return $dependencies;
+}

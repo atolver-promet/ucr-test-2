@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button_text_and_url
+    - paragraphs.paragraphs_type.box_info
+  module:
+    - link
+id: paragraph.box_info.field_button_text_and_url
+field_name: field_button_text_and_url
+entity_type: paragraph
+bundle: box_info
+label: 'Button Text and URL'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

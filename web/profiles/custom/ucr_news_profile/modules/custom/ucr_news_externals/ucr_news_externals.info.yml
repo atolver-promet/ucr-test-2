@@ -1,0 +1,21 @@
+name: 'UCR News External Articles'
+type: module
+description: 'Create the UCR News External Article Content Type and its related content.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - content_moderation
+  - datetime
+  - entity_browser
+  - field
+  - link
+  - media
+  - menu_ui
+  - node
+  - path
+  - pathauto
+  - text
+  - user
+  - ucr_core
+  - ucr_news_core

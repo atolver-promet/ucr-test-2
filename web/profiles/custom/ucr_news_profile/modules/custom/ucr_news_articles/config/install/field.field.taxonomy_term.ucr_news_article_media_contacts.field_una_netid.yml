@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_una_netid
+    - taxonomy.vocabulary.ucr_news_article_media_contacts
+id: taxonomy_term.ucr_news_article_media_contacts.field_una_netid
+field_name: field_una_netid
+entity_type: taxonomy_term
+bundle: ucr_news_article_media_contacts
+label: 'UCR Net ID'
+description: 'Please enter in the persons'' UCR Net ID.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

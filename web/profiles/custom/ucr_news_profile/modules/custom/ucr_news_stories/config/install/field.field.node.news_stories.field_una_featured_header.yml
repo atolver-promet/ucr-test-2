@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_featured_header
+  - media.type.image
+  - node.type.news_stories
+id: node.news_stories.field_una_featured_header
+field_name: field_una_featured_header
+entity_type: node
+bundle: news_stories
+label: 'Featured Header Image'
+description: '<em>( Optional )</em> Select or upload an image that you want to have displayed when you select this Story as an Featured Story. If none is selected, then the default Header Image will be used.<br /><small>Recommended Minimum Size: 1280 x 960</small>'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_columns
+label: 'Dynamic Column Content'
+icon_uuid: null
+description: 'Column content that will be displayed dynamically.'
+behavior_plugins: {  }

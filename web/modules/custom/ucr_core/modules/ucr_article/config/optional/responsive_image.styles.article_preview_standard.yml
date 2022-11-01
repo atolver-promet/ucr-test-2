@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.article_preview_standard_l
+    - image.style.article_preview_standard_s
+  theme:
+    - ucr_default
+id: article_preview_standard
+label: 'Article Preview: Standard'
+image_style_mappings:
+  -
+    breakpoint_id: ucr_default.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_l
+  -
+    breakpoint_id: ucr_default.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_l
+  -
+    breakpoint_id: ucr_default.tablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_l
+  -
+    breakpoint_id: ucr_default.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: article_preview_standard_s
+breakpoint_group: ucr_default
+fallback_image_style: article_preview_standard_l

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.taxonomy_term.field_feed_item_description
+  - taxonomy.vocabulary.feeds_items
+  module:
+  - text
+id: taxonomy_term.feeds_items.field_feed_item_description
+field_name: field_feed_item_description
+entity_type: taxonomy_term
+bundle: feeds_items
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

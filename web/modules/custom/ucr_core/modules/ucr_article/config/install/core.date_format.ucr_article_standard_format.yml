@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_article_standard_format
+label: 'Articles - Standard Format'
+locked: false
+pattern: 'F d, Y'

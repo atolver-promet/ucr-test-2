@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: galleria_thumbnail
+label: 'Galleria Thumbnail - (100 x 100)'
+effects:
+  213dc2a6-2d62-4f99-8442-53c8fe727719:
+    uuid: 213dc2a6-2d62-4f99-8442-53c8fe727719
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 100
+      height: 100
+      crop_type: focal_point

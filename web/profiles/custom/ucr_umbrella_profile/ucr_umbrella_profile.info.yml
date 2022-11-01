@@ -1,0 +1,27 @@
+name: 'UCR - Umbrella'
+type: profile
+version: '8.9.x'
+description: 'UCR Main Website (Umbrella) Profile. Sub-Profile of UCR Default.'
+core: '8.x'
+core_version_requirement: ^8 || ^9
+package: Profiles
+base profile: ucr_profile
+exclude:
+  - dblog
+  - lightning_banner_block
+  - lightning_landing_page
+  - lightning_layout
+  - lightning_map_block
+  - lightning_media_instagram
+  - lightning_media_twitter
+  - lightning_media_slideshow
+  - lightning_media_audio
+  - lightning_roles
+  - media_entity_twitter
+  - media_entity_instagram
+  - panelizer
+  - update
+  - ucr_design_1
+themes:
+  - ucr_umbrella_theme
+  - claro

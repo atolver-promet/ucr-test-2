@@ -1,0 +1,208 @@
+main {
+  > div {
+    &#content-container {
+      .button-bar {
+        .cell {
+          .button-item {
+            width: 100%;
+            padding: 0;
+            a {
+              padding: 1rem;
+              color: $white;
+              text-decoration: none;
+              display: block;
+              text-transform: uppercase;
+              font-weight: bold;
+              &::after {
+                content: "";
+                display: none;
+              }
+            }
+          }
+          .btn-ucr-outline {
+            a {
+              color: $ucr-peach;
+              &:hover {
+                color: $ucr-peach;
+              }
+            }
+          }
+          .btn-ucr-outline-lt-blue {
+            a{
+              background-color: $body-background;
+              border: 1px solid $ucr-alt-blue-5;
+              color: $ucr-alt-blue-5!important;
+              &:hover {
+                border: 1px solid $ucr-alt-blue-5;
+                background-color: $ucr-alt-blue-5;
+                color: $body-background!important;
+              }
+            }
+          }
+          .btn-ucr-outline-green {
+            a{
+              background-color: $body-background;
+              border: 1px solid $teal-700;
+              color: $teal-700!important;
+              &:hover {
+                border: 1px solid $teal-700;
+                background-color: $teal-700;
+                color: $body-background!important;
+              }
+            }
+          }
+          .btn-ucr-outline-md-blue {
+            a{
+              background-color: $body-background;
+              border: 1px solid $blue-700;
+              color: $blue-700 !important;
+              &:hover {
+                border: 1px solid $blue-700;
+                background-color: $blue-700;
+                color: $body-background !important;
+              }
+            }
+          }
+          .btn-ucr-outline-dk-blue {
+            a{
+              background-color: $body-background;
+              border: 1px solid $ucr-alt-blue-1;
+              color: $ucr-alt-blue-1!important;
+              &:hover {
+                border: 1px solid $ucr-alt-blue-1;
+                background-color: $ucr-alt-blue-1;
+                color: $body-background!important;
+              }
+            }
+          }
+          .btn-ucr-outline-pink {
+            a{
+              background-color: $body-background;
+              border: 1px solid #D6336B;
+              color: #D6336B!important;
+              &:hover {
+                border: 1px solid #D6336B;
+                background-color: #D6336B;
+                color: $body-background!important;
+              }
+            }
+          }
+          .btn-ucr-outline-red {
+            a{
+              @extend .btn-ucr;
+              background-color: $body-background;
+              border: 1px solid $red;
+              color: $red!important;
+              &:hover {
+                border: 1px solid $red;
+                background-color: $red;
+                color: $body-background!important;
+              }
+            }
+          }
+          .btn-ucr-outline-burgundy {
+            a{
+              background-color: $body-background;
+              border: 1px solid $ucr-red-2;
+              color: $ucr-red-2!important;
+              &:hover {
+                border: 1px solid $ucr-red-2;
+                background-color: $ucr-red-2;
+                color: $body-background!important;
+              }
+            }
+          }
+          .btn-ucr-outline-gold {
+           a{
+             background-color: $body-background;
+             border: 1px solid $ucr-gold;
+             color: $ucr-gold!important;
+             &:hover {
+               border: 1px solid $ucr-gold;
+               background-color: $ucr-gold;
+               color:$body-background!important;
+             }
+           }
+          }
+          .btn-ucr-outline-orange {
+            a{
+              background-color: $body-background;
+              border: 1px solid $ucr-orange;
+              color: $ucr-orange!important;
+              &:hover {
+                border: 1px solid $ucr-orange;
+                background-color: $ucr-orange;
+                color: $body-background!important;
+              }
+            }
+          }
+          .btn-grid-ucr-split{
+            a{
+              position: relative;
+              background-color: $white;
+              color: $ucr-alt-blue-3 !important;
+              border: 1px solid darken($ucr-alt-blue-3, 20%) !important;
+              max-width: 100%;
+              margin-right: 2.35em;
+              &:after {
+                display: inline-block;
+                font: normal normal normal 24px/1 "Material Design Icons";
+                font-size: 1.5rem !important;
+                text-rendering: auto;
+                line-height: inherit;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                content: "\F142" !important;
+                position: absolute;
+                top: -1px;
+                left: 100%;
+                padding: 0.5rem 0.4rem;
+                border: 1px solid darken($ucr-alt-blue-3, 20%);
+                padding-bottom: 3px;
+                height: calc(100% + 2px);
+              }
+              &:hover {
+                background-color: $ucr-alt-blue-3;
+                color: $white !important;
+                &:after {
+                  background-color: $ucr-alt-blue-3;
+                }
+              }
+            }
+          }
+        }
+      }
+      .btn-fixed-268 {
+        .cell {
+          .button-item {
+            width: 100%;
+            max-width: 268px;
+          }
+        }
+      }
+      .btn-fixed-368 {
+        .cell {
+          .button-item {
+            width:100%;
+            max-width: 368px;
+          }
+        }
+      }
+      .btn-fixed-568 {
+        .cell {
+          .button-item {
+            width:100%;
+            max-width: 568px;
+          }
+        }
+      }
+      .btn-justified-100 {
+        .cell {
+          .button-item {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

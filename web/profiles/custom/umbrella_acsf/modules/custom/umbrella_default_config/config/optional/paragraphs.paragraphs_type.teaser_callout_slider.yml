@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: teaser_callout_slider
+label: 'Teaser Callout Slider'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

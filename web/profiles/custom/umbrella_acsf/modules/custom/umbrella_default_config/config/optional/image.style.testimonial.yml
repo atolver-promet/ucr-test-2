@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: testimonial
+label: 'Testimonial (256 x 256)'
+effects:
+  292af4d0-47e8-46a2-9752-d228994e5229:
+    uuid: 292af4d0-47e8-46a2-9752-d228994e5229
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 256
+      height: 256
+      crop_type: focal_point

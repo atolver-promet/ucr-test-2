@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_type_list
+    - node.type.article
+  module:
+    - options
+id: node.article.field_article_type_list
+field_name: field_article_type_list
+entity_type: node
+bundle: article
+label: 'RETIRED - Article Type'
+description: 'Choose the type of article you want to create.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

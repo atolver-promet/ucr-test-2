@@ -1,0 +1,169 @@
+<?php
+
+/**
+ * @file
+ * Contains ucr_collections.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\ucr_collections\Entity\CollectionsEntityInterface;
+use Drupal\ucr_collections\Entity\CollectionsEntityType;
+
+use Drupal\media\Entity\Media;
+use Drupal\file\Entity\File;
+
+/**
+ * Implements hook_help().
+ */
+function ucr_collections_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ucr_collections module.
+    case 'help.page.ucr_collections':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Collections Entity Type') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ucr_collections_theme() {
+  $theme = [];
+  $theme['ucr_collections'] = [
+    'render element' => 'children',
+  ];
+  $theme['collections'] = [
+    'render element' => 'elements',
+    'file' => 'collections.page.inc',
+    'template' => 'collections',
+  ];
+  $theme['collections_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'collections.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function ucr_collections_theme_suggestions_collections(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#collections'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'collections__' . $sanitized_view_mode;
+  $suggestions[] = 'collections__' . $entity->bundle();
+  $suggestions[] = 'collections__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'collections__' . $entity->id();
+  $suggestions[] = 'collections__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function ucr_collections_theme_suggestions_views_view(array $variables) {
+  $view = $variables['view'];
+  $id = $view->storage->id();
+  $current_display = strtr($view->current_display, '.', '_');
+
+  $suggestions = [];
+  $suggestions[] = 'views_view__collections';
+  $suggestions[] = 'views_view__collections__'.$id;
+  $suggestions[] = 'views_view__collections__'.$id."__".$current_display;
+  $suggestions[] = 'views_view__collections__'.$current_display;
+
+  return $suggestions;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function ucr_collections_theme_suggestions_views_view_unformatted(array $variables) {
+  $view = $variables['view'];
+  $id = $view->storage->id();
+  $current_display = strtr($view->current_display, '.', '_');
+
+  $suggestions = [];
+  $suggestions[] = 'views_view_unformatted__collections';
+  $suggestions[] = 'views_view_unformatted__collections__'.$id;
+  $suggestions[] = 'views_view_unformatted__collections__'.$id."__".$current_display;
+  $suggestions[] = 'views_view_unformatted__collections__'.$current_display;
+
+  return $suggestions;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function ucr_collections_theme_suggestions_views_view_fields(array $variables) {
+  $view = $variables['view'];
+  $id = $view->storage->id();
+  $current_display = strtr($view->current_display, '.', '_');
+
+  $suggestions = [];
+  $suggestions[] = 'views_view_fields__collections';
+  $suggestions[] = 'views_view_fields__collections__'.$id;
+  $suggestions[] = 'views_view_fields__collections__'.$id."__".$current_display;
+  $suggestions[] = 'views_view_fields__collections__'.$current_display;
+
+  return $suggestions;
+}
+
+function ucr_collections_get_type_label(CollectionsEntityInterface $collectionsEntity) {
+  $type = CollectionsEntityType::load($collectionsEntity->bundle());
+  return $type ? $type->label() : FALSE;
+}
+
+function ucr_collections_preprocess_views_view_field(&$variables){
+  $view = $variables['view'];
+
+  $variables['field']->getValue($variables['row']);
+  $variables['fields'] = array();
+  $view_id = $view->storage->id();
+  $current_display = $view->current_display;
+
+
+  if(strpos($view_id,"collection__" ) > -1 && $current_display == "default_page"){
+
+    $field = $variables['field'];
+    if($field->field == "field_collection_item_media") {
+
+     $default_array = $field->getValue($variables['row']);
+
+      //document ID
+      $media_id = $default_array[0];
+      $media = Media::load($media_id);
+      if(empty($media)){
+        return NULL;
+      }
+      else{
+        $fid = $media->getSource()->getSourceFieldValue($media);
+        $file = File::load($fid);
+      }
+
+      //get public url
+      $file_url=$file->getFileUri();
+      //build actual URL
+       $url = file_create_url($file_url);
+
+      //send to twig for use
+      $variables["output"] = $url;
+
+    }
+
+
+  }
+
+
+
+
+
+
+}

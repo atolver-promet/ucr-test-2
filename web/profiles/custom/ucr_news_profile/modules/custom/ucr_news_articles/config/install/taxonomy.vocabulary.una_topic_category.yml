@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Topics Category'
+vid: una_topic_category
+description: 'The primary collection of topic''s that each News Article will be associated with.'
+hierarchy: 0
+weight: 0

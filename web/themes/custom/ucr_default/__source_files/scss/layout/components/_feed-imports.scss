@@ -1,0 +1,124 @@
+$feed-article-type-title: $blue-grey-500;
+$feed-block-border: $ucr-white-4;
+$feed-block-date-border: #FF8B1C;
+$feed-block-date: #777777;
+$feed-block-title: #003DA5;
+$feed-block-link: $ucr-alt-blue-3;
+$feed-block-link-background: $ucr-white-4;
+$feed-block-link-hover-border: $ucr-grey-3;
+main {
+  > div {
+    &#content-container {
+      //*******  Globals **********//
+      h3 {
+        &.article-type {
+          color: $feed-article-type-title;
+        }
+      }
+      div {
+        &.more-link {
+          margin-right: 2.5em;
+          text-align: right;
+          clear:both;
+          a {
+            @extend .btn-ucr-split;
+            background-color: #003DA5;
+            color: #fff !important;
+            border: 1px solid #003da5 !important;
+            &:after {
+              background-color: #003DA5;
+              color: #fff !important;
+            }
+            &:hover {
+              background-color: darken(#003DA5, 3%) !important;
+              color: $white !important;
+              &:after {
+                background-color: darken(#003DA5, 3%) !important;
+              }
+            }
+          }
+        }
+      }
+      // ********* Feed Import - Main Feed Page *********** //
+      .feeds_feed__content {
+        .item-count {
+          div {
+            display: inline-block;
+          }
+        }
+      }
+      // ********* Feed Import - Blocks *********** //
+      .feed-import-view-container {
+        .feed-article {
+          position: relative;
+          border: 1px solid $feed-block-border;
+          @include breakpoint(medium) {
+            min-height:291px;
+            height: 100%;
+            max-height:591px;
+            overflow: hidden;
+          }
+          .article-image {
+            border: none;
+            display: block;
+            margin: 0;
+            text-align: center;
+          }
+          .article-date {
+            display: block;
+            margin: 1rem 1rem 0.5rem 1rem;
+            .date {
+              display: inline-block;
+              padding-bottom: 2px;
+              font-size: 1rem;
+              border-bottom: 3px solid $feed-block-date-border;
+              color: $feed-block-date;
+            }
+          }
+          .article-title {
+            margin: 0.5rem 1rem;
+            font-weight:300;
+            font-size: 1.3rem;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            color: $feed-block-title;
+          }
+          .article-body {
+            font-size:.9em;
+            padding: 0.5rem 1rem 1rem 1rem;
+            @include breakpoint(medium) {
+              margin-bottom: 1.9rem;
+              padding-bottom: 2.5rem;
+            }
+          }
+          .article-link {
+            display: block;
+            width: 100%;
+            @include breakpoint(medium) {
+              position: absolute;
+              bottom: 0;
+            }
+            a {
+              display: block;
+              font-family: "Fira Sans Regular",sans-serif;
+              font-size: .75rem;
+              font-weight: 600;
+              color: #fff;
+              text-transform: uppercase;
+              padding: .5em 1.25rem;
+              background: #003DA5;
+              border: 1px solid #003DA5;
+              text-decoration: none;
+              &:hover{
+                border-color: $feed-block-link-hover-border;
+                color: #fff;
+              }
+              &::after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

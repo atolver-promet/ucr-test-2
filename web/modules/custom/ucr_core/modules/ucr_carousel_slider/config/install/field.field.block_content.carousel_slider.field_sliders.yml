@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.carousel_slider
+    - field.storage.block_content.field_sliders
+    - paragraphs.paragraphs_type.carousel_slider
+  module:
+    - entity_reference_revisions
+id: block_content.carousel_slider.field_sliders
+field_name: field_sliders
+entity_type: block_content
+bundle: carousel_slider
+label: Slides
+description: 'Add and arrange the different slides.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      carousel_slider: carousel_slider
+    target_bundles_drag_drop:
+      carousel_slider:
+        enabled: true
+        weight: 3
+      demo_type:
+        weight: 4
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: 16_9_m
+label: '16:9 M - 470×264'
+effects:
+  ed67e9d9-a81f-4717-af66-200b4530acbf:
+    uuid: ed67e9d9-a81f-4717-af66-200b4530acbf
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 470
+      height: 264
+      crop_type: focal_point

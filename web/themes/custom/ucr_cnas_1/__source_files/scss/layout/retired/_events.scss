@@ -1,0 +1,289 @@
+//*******  Globals ********//
+div {
+  &.more-link {
+    margin-right: 2.5em;
+    text-align: right;
+    a {
+      @extend .btn-ucr-split
+    }
+  }
+}
+// ********* Events - Details Page *********** //
+.event-information {
+  border: 1px solid $gray4;
+  border-bottom: 2px solid $gray4;
+  margin-bottom: 2rem;
+  .event-image {
+    padding-bottom: 1rem;
+  }
+  .event-date {
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.2rem;
+    padding: 0 1rem;
+    &::before {
+      display: inline-block;
+      font-family: "Material Design Icons";
+      font-size: 1.15rem;
+      text-rendering: auto;
+      line-height: inherit;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-right: 4px;
+      color: #1F7DAF;
+      vertical-align: middle;
+      content: "\F150";
+    }
+  }
+  .event-additional-dates {
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 0 1rem;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      line-height: 1.2rem;
+      li {
+        margin: 0;
+        padding: 0;
+        &::before {
+          display: inline-block;
+          font-family: "Material Design Icons";
+          font-size: 1.15rem;
+          text-rendering: auto;
+          line-height: inherit;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          padding-right: 4px;
+          color: #1F7DAF;
+          vertical-align: middle;
+          content: "\F150";
+        }
+      }
+    }
+  }
+  .event-location {
+    padding: 1rem;
+    font-size: 0.8rem;
+    &::before {
+      display: inline-block;
+      font-family: "Material Design Icons";
+      font-size: 1.15rem;
+      text-rendering: auto;
+      line-height: inherit;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-right: 4px;
+      color: #1F7DAF;
+      vertical-align: middle;
+      content: "\F34E";
+    }
+    a {
+      text-decoration: none;
+      &::after {
+        content: "";
+        display: none;
+      }
+    }
+  }
+  .event-social-media {
+    padding: 0 1rem 1rem 1rem;
+    a {
+      &::after {
+        content: "";
+        display: none;
+      }
+    }
+  }
+  .event-body {
+    padding: 0 1rem 2.5rem 1rem;
+  }
+  .event-contact {
+    padding: 0 1rem 1rem 1rem;
+    h5 {
+      text-transform: uppercase;
+    }
+  }
+}
+.event-details {
+  background-color: #e6e6e6;
+  .event-foot-item {
+    margin: 2.5rem 0 0.5rem 0;
+    padding: 0.5rem;
+    border-top: 1px solid $gray5;
+    .event-foot-item-title {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+// ********* Events - Listing Page *********** //
+.events-listings {
+  .event-list-row {
+    .event-list-separator {
+      border-top: 2px solid $gray4;
+    }
+    .event-list-image {
+      display: inline-block;
+      border: 1px solid $gray8;
+    }
+    .event-title {
+      color: $title-blue;
+      font-size: 1.33em;
+      padding-bottom: 0.25rem;
+      a {
+        color: $title-blue;
+        text-decoration: none;
+        &:hover {
+          color: $link-red;
+          text-decoration: underline;
+        }
+      }
+    }
+    .separator-line-before, .separator-line-dark-before, .separator-line-maroon-before {
+      &::before {
+        margin-top: 0 !important;
+      }
+    }
+    .event-date {
+      font-family: $trade-gothic;
+      font-weight: 400;
+      &::before {
+        display: inline-block;
+        font-family: "Material Design Icons";
+        font-size: 1.15rem;
+        text-rendering: auto;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-right: 4px;
+        color: #1F7DAF;
+        vertical-align: middle;
+        content: "\F150";
+      }
+    }
+    .event-location {
+      &::before {
+        display: inline-block;
+        font-family: "Material Design Icons";
+        font-size: 1.15rem;
+        text-rendering: auto;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-right: 4px;
+        color: #1F7DAF;
+        vertical-align: middle;
+        content: "\F34E";
+      }
+    }
+    .event-summary {
+      margin: 0.5rem 0;
+    }
+  }
+}
+// ********* Events - Blocks *********** //
+.events-container {
+  .event-block-item {
+    position: relative;
+    border: 1px solid #f0f0f0;
+    @include breakpoint(medium) {
+      min-height:591px;
+    }
+    .event-image {
+      border: none;
+      display: block;
+      margin: 0;
+      text-align: center;
+    }
+    .event-title {
+      margin: 1rem 1rem 0.5rem 1rem;
+      color: $title-blue;
+      font-size: 1.33em;
+      padding-bottom: 0.25rem;
+      a {
+        color: $title-blue;
+        text-decoration: none;
+        &:hover {
+          color: $link-red;
+          text-decoration: underline;
+        }
+      }
+    }
+    .event-date {
+      margin: 0.5rem 1rem;
+      font-family: $trade-gothic;
+      font-weight: 400;
+      font-size: 0.8rem;
+      line-height: normal;
+      &::before {
+        display: inline-block;
+        font-family: "Material Design Icons";
+        font-size: 1.15rem;
+        text-rendering: auto;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-right: 4px;
+        color: #1F7DAF;
+        vertical-align: middle;
+        content: "\F150";
+      }
+    }
+    .event-location {
+      margin: 0.5rem 1rem;
+      font-size: 0.8rem;
+      line-height: normal;
+      &::before {
+        display: inline-block;
+        font-family: "Material Design Icons";
+        font-size: 1.15rem;
+        text-rendering: auto;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-right: 4px;
+        color: #1F7DAF;
+        vertical-align: middle;
+        content: "\F34E";
+      }
+    }
+    .separator-line-before, .separator-line-dark-before, .separator-line-maroon-before {
+      &::before {
+        margin-top: 0 !important;
+      }
+    }
+    .event-body {
+      font-size:.9em;
+      margin: 0.5rem 1rem 1rem 1rem;
+    }
+    .event-link {
+      display: block;
+      width: 100%;
+      @include breakpoint(medium) {
+        position: absolute;
+        bottom: 0;
+      }
+      a {
+        display: block;
+        font-family: Avenir Next W01,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+        font-size: .75rem;
+        font-weight: 600;
+        color: #39afef;
+        text-transform: uppercase;
+        padding: .5em 1.25rem;
+        background: #f0f0f0;
+        border: 1px solid #f0f0f0;
+        text-decoration: none;
+        &:hover{
+          border-color: #666666;
+          color: #39afef;
+        }
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}

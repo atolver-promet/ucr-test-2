@@ -1,0 +1,42 @@
+uuid: 61bd9c63-b199-4ad4-bcff-2541375d7760
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.custom_header
+    - core.entity_view_mode.block_content.cnas
+    - field.field.block_content.custom_header.field_header_image
+    - field.field.block_content.custom_header.field_header_video_url
+    - field.field.block_content.custom_header.field_hide_overlay_title
+    - field.field.block_content.custom_header.field_secondary_title
+    - field.field.block_content.custom_header.field_title
+    - field.field.block_content.custom_header.field_title_link
+    - field.field.block_content.custom_header.field_title_placement
+id: block_content.custom_header.cnas
+targetEntityType: block_content
+bundle: custom_header
+mode: cnas
+content:
+  field_header_image:
+    type: entity_reference_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: general_header
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_header_video_url: true
+  field_hide_overlay_title: true
+  field_secondary_title: true
+  field_title_link: true
+  field_title_placement: true

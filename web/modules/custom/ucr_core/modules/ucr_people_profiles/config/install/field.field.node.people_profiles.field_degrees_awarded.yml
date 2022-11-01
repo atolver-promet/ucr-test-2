@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_degrees_awarded
+    - node.type.people_profiles
+  module:
+    - text
+id: node.people_profiles.field_degrees_awarded
+field_name: field_degrees_awarded
+entity_type: node
+bundle: people_profiles
+label: 'Education / Degree''s Earned'
+description: '<em>( Optional )</em> Please enter in the education / degree''s the person has earned.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

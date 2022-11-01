@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - node
+third_party_settings:
+  lightning_core:
+    description: ''
+id: node.article_preview_standard_alt
+label: 'Article Preview: Standard Alt'
+targetEntityType: node
+cache: true

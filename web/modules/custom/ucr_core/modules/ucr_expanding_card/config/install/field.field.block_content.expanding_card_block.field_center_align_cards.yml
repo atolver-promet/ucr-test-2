@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.expanding_card_block
+    - field.storage.block_content.field_center_align_cards
+id: block_content.expanding_card_block.field_center_align_cards
+field_name: field_center_align_cards
+entity_type: block_content
+bundle: expanding_card_block
+label: 'Center Align Cards'
+description: 'Enabling this option centers "leftover" cards instead of aligning them to the left of the grid.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

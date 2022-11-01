@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_brand_color
+    - taxonomy.vocabulary.article_categories
+  module:
+    - options
+id: taxonomy_term.article_categories.field_brand_color
+field_name: field_brand_color
+entity_type: taxonomy_term
+bundle: article_categories
+label: 'Brand Color'
+description: 'Choose a color to organize your categories.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

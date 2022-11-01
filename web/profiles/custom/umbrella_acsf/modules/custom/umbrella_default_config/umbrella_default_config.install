@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function umbrella_default_config_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}

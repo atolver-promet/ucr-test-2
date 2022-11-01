@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.news_article_listing_m_up
+    - image.style.news_article_listing_s
+  theme:
+    - ucr_news
+id: news_article_listing
+label: 'News Article - Listing'
+image_style_mappings:
+  -
+    breakpoint_id: ucr_news.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: news_article_listing_m_up
+  -
+    breakpoint_id: ucr_news.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: news_article_listing_m_up
+  -
+    breakpoint_id: ucr_news.tablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: news_article_listing_m_up
+  -
+    breakpoint_id: ucr_news.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: news_article_listing_s
+breakpoint_group: ucr_news
+fallback_image_style: news_article_listing_s

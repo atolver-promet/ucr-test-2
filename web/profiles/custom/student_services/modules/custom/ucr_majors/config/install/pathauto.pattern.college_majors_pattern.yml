@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - ctools
+  - taxonomy
+id: college_majors_pattern
+label: 'College Major''s Pattern'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/colleges/majors/[term:name]'
+selection_criteria:
+  90eca5ce-15ce-49e6-85b3-40d006ee0bb2:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      majors: majors
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 90eca5ce-15ce-49e6-85b3-40d006ee0bb2
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: article_types
+label: 'Article Types'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/article-type/[term:name]'
+selection_criteria:
+  da8b27e8-7c5c-4a84-876c-0fb751b450a8:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      article_types: article_types
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: da8b27e8-7c5c-4a84-876c-0fb751b450a8
+selection_logic: and
+weight: -5
+relationships: {  }

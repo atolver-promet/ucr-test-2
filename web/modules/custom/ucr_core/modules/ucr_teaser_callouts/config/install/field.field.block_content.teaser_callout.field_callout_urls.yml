@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.teaser_callout
+    - field.storage.block_content.field_callout_urls
+  module:
+    - link
+id: block_content.teaser_callout.field_callout_urls
+field_name: field_callout_urls
+entity_type: block_content
+bundle: teaser_callout
+label: Links
+description: 'Please enter in any links that you want within the callout. They will appear below the text.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

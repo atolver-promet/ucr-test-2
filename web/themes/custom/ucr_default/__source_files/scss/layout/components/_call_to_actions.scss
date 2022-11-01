@@ -1,0 +1,417 @@
+$cta-box-shadow: $ucr-grey-4;
+$cta-border: $ucr-grey-1;
+$cta-image-title: $ucr-white-2;
+$cta-image-title-border: $ucr-white-2;
+$cta-image-description: $ucr-white-2;
+$cta-detail-title: $ucr-white-2;
+$cta-detail-title-border: $ucr-white-2;
+$cta-detail-description: $ucr-white-2;
+main {
+  > div {
+    &#content-container {
+      .cta-modal {
+        box-shadow: 0 0 10px $cta-box-shadow;
+        .cta-modal-header {
+          height: 30px;
+          margin-bottom: 10px;
+          border-bottom: 1px solid $cta-border;
+        }
+      }
+      .cta-item {
+        @include breakpoint(large) {
+          max-height: 400px;
+          overflow: hidden;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+          display: block;
+          &:hover {
+            color: inherit;
+            text-decoration: none;
+          }
+          &::after {
+            display: none;
+            content: "";
+          }
+        }
+      }
+      // Default View
+      .cta-image-color-display {
+        .cta-item {
+          position: relative;
+          .cta-bg-image {
+            .cta-bg-dark-overlay {
+              display: none;
+            }
+          }
+          .cta-bg-color-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.75;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+          }
+          .cta-text-area {
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding-bottom: 45px;
+            .cta-title {
+              padding: 0 30px;
+              width: 100%;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-size: 32px;
+              font-weight: 200;
+              line-height: 1.1em;
+              align-self: center;
+              span {
+                &.cta-title-border {
+                  height: 5px;
+                  width: 100px;
+                  display: inline-block;
+                  text-align: center;
+                  margin: 0 auto;
+                  position: relative;
+                  bottom: 15px;
+                }
+              }
+            }
+            .cta-description {
+              display: none;
+            }
+          }
+          .cta-caption-bar {
+            z-index: 3;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 13px 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-size: 13px;
+            line-height: normal;
+          }
+          a {
+            &:hover {
+              .cta-bg-color-overlay {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+      // Image to Color Filled Overlay
+      .cta-image-display {
+        .cta-item {
+          position: relative;
+          .cta-bg-image {
+            position: relative;
+            .cta-bg-dark-overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5);
+              overflow: hidden;
+              z-index: 1;
+            }
+          }
+          .cta-bg-color-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s linear;
+            z-index: 2;
+          }
+          .cta-text-area {
+            z-index: 3;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding-bottom: 45px;
+            transition: color 0.3s ease;
+            .cta-title {
+              padding: 0 30px;
+              width: 100%;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-size: 32px;
+              font-weight: 200;
+              line-height: 1.1em;
+              align-self: center;
+              span {
+                &.cta-title-border {
+                  height: 5px;
+                  width: 100px;
+                  display: inline-block;
+                  text-align: center;
+                  margin: 0 auto;
+                  position: relative;
+                  bottom: 15px;
+                  transition: background-color 0.3s ease;
+                }
+              }
+            }
+            .cta-description {
+              display: none;
+            }
+          }
+          .cta-caption-bar {
+            z-index: 4;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 13px 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-size: 13px;
+            line-height: normal;
+          }
+          a {
+            &:hover {
+              .cta-bg-color-overlay {
+                height: 100%;
+              }
+            }
+          }
+        }
+      }
+      // Image w/ Description Overlay
+      .cta-image-describe-display {
+        .cta-item {
+          position: relative;
+          .cta-bg-image {
+            position: relative;
+            .cta-bg-dark-overlay {
+              display: none;
+            }
+          }
+          .cta-bg-color-overlay {
+            display: none;
+          }
+          .cta-text-area {
+            z-index: 3;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            padding: 25px 15px 60px 15px;
+            background-color: rgba(0, 0, 0, 0.6);
+            .cta-title {
+              color: $cta-image-title;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-size: 16px;
+              font-weight: bold;
+              line-height: 20px;
+              display: inline-block;
+              margin-bottom: 8px;
+              padding-bottom: 8px;
+              border-bottom: 3px solid $cta-image-title-border;
+              span {
+                display: none;
+              }
+            }
+            .cta-description {
+              color: $cta-image-description;
+              line-height: 20px;
+              font-size: 16px;
+              font-weight: bold;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            }
+          }
+          .cta-caption-bar {
+            z-index: 4;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            padding: 13px 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-size: 13px;
+            line-height: normal;
+          }
+        }
+      }
+      // Full Colorized Boxes
+      .cta-color-display {
+        .cta-item {
+          position: relative;
+          .cta-bg-image {
+            visibility: hidden;
+            opacity: 0;
+            .cta-bg-dark-overlay {
+              display: none;
+            }
+          }
+          .cta-bg-color-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.75;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+          }
+          .cta-text-area {
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            padding-bottom: 45px;
+            .cta-title {
+              padding: 0 30px;
+              width: 100%;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-size: 32px;
+              font-weight: 200;
+              line-height: 1.1em;
+              align-self: center;
+              span {
+                &.cta-title-border {
+                  height: 5px;
+                  width: 100px;
+                  display: inline-block;
+                  text-align: center;
+                  margin: 0 auto;
+                  position: relative;
+                  bottom: 15px;
+                }
+              }
+            }
+            .cta-description {
+              display: none;
+            }
+          }
+          .cta-caption-bar {
+            z-index: 3;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 13px 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-size: 13px;
+            line-height: normal;
+          }
+          a {
+            &:hover {
+              .cta-bg-color-overlay {
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+      // Full Colorized Boxes w/ Description Overlay
+      .cta-color-describe-display {
+        .cta-item {
+          position: relative;
+          .cta-bg-image {
+            visibility: hidden;
+            opacity: 0;
+            .cta-bg-dark-overlay {
+              display: none;
+            }
+          }
+          .cta-bg-color-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.75;
+            z-index: 1;
+          }
+          .cta-text-area {
+            z-index: 3;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            padding: 25px 15px 60px 15px;
+            background-color: rgba(0, 0, 0, 0.6);
+            .cta-title {
+              color: $cta-detail-title;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+              font-size: 16px;
+              font-weight: bold;
+              line-height: 20px;
+              display: inline-block;
+              margin-bottom: 8px;
+              padding-bottom: 8px;
+              border-bottom: 3px solid $cta-detail-title-border;
+              span {
+                display: none;
+              }
+            }
+            .cta-description {
+              color: $cta-detail-description;
+              line-height: 20px;
+              font-size: 16px;
+              font-weight: bold;
+              font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            }
+          }
+          .cta-caption-bar {
+            z-index: 4;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            padding: 13px 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            font-size: 13px;
+            line-height: normal;
+          }
+        }
+      }
+      div.field--type-color-field-type input.color_field_widget_box__color {
+        display:none !important;
+      }
+    }
+  }
+}

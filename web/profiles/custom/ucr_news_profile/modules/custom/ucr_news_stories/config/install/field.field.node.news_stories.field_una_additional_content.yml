@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_additional_content
+  - node.type.news_stories
+  - paragraphs.paragraphs_type.una_gallery_view
+  - paragraphs.paragraphs_type.una_general_content
+  module:
+  - entity_reference_revisions
+id: node.news_stories.field_una_additional_content
+field_name: field_una_additional_content
+entity_type: node
+bundle: news_stories
+label: 'Additional Content'
+description: '<em>( Optional )</em> Add a gallery slider teaser view and / or additional body fields.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      una_gallery_view: una_gallery_view
+      una_general_content: una_general_content
+    target_bundles_drag_drop:
+      galleria_items:
+        weight: 4
+        enabled: false
+      una_gallery_view:
+        enabled: true
+        weight: 5
+      una_general_content:
+        enabled: true
+        weight: 6
+field_type: entity_reference_revisions

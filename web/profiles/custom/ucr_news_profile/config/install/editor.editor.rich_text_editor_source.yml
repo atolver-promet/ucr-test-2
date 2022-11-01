@@ -1,0 +1,100 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.rich_text_editor_source
+  module:
+    - ckeditor
+format: rich_text_editor_source
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Underline
+            - Strike
+            - '-'
+            - Superscript
+            - Subscript
+            - RemoveFormat
+        -
+          name: Alignment
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+        -
+          name: Modifications
+          items:
+            - Undo
+            - Redo
+            - '-'
+            - Cut
+            - Copy
+            - Paste
+            - PasteText
+            - PasteFromWord
+        -
+          name: 'Special Characters'
+          items:
+            - SpecialChar
+            - Markdown
+      -
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+            - Outdent
+            - Indent
+        -
+          name: Links
+          items:
+            - Linkit
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Media
+          items:
+            - Table
+            - HorizontalRule
+            - Blockquote
+            - media_browser
+        -
+          name: 'Format Selectors'
+          items:
+            - Format
+            - '-'
+            - Styles
+            - '-'
+            - TextColor
+            - BGColor
+        -
+          name: Tools
+          items:
+            - ShowBlocks
+            - Maximize
+            - Source
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: "a.btn-ucr-lt-blue|Lt. Blue Button\r\na.btn-ucr|Md. Blue Button\r\na.btn-ucr-dk-blue|Dk. Blue Button\r\na.btn-ucr-alt|Pink Button\r\na.btn-ucr-red|Red Button\r\na.btn-ucr-burgundy|Burgundy Button\r\na.btn-ucr-gold|Gold Button\r\na.btn-ucr-orange|Orange Button\r\na.btn-ucr-green|Green Button\r\na.btn-ucr-brand-blue|Brand Blue Button\r\na.btn-ucr-outline-lt-blue|Lt. Blue Outline Button\r\na.btn-ucr-outline-md-blue|Md. Blue Outline Button\r\na.btn-ucr-outline-dk-blue|Dk. Blue Outline Button\r\na.btn-ucr-outline-pink|Pink Outline Button\r\na.btn-ucr-outline-red|Red Outline Button\r\na.btn-ucr-outline-burgundy|Burgundy Outline Button\r\na.btn-ucr-outline-gold|Gold Outline Button\r\na.btn-ucr-outline-orange|Orange Outline Button\r\na.btn-ucr-outline-green|Green Outline Button\r\na.btn-ucr-split|Arrow Button (Blue\r\nul.list-arrow|List Arrows\r\nul.list-arrow-alt|Carat Arrows\r\nul.list-arrow-marks|List Arrow Marks\r\np.separator-line-before|Default Separator Above\r\np.separator-line-after|Default Separator Below\r\np.separator-line-maroon-before|Alt 1 Separator Above\r\np.separator-line-maroon-after|Alt 1 Separator Below\r\np.separator-line-dark-before|Alt 2 Separator Above\r\np.separator-line-dark-after|Alt 2 Separator Below\r\np.separator-line-blue-below | Brand Blue Separator Below\r\np.separator-line-blue-after | Brand Blue Separator Above\r\np.separator-line-gold-below | Brand Gold Separator Below\r\np.separator-line-gold-after | Brand Gold Separator Above\r\np.separator-line-lt-blue-below | Light Blue Separator Below\r\np.separator-line-lt-blue-after | Light Blue Separator Above\r\ntable.no-styles|No Style\r\ntable.datatables|Make Table Sortable\r\ntable.no-stripes|No Stripes"
+    colorbutton:
+      colors: '000000,1D3A61,234674,637EA4,4DADF7,3AA4DC,329AF0,802244,D6336C,FFFFFF,003DA5,FFB81C'
+    linkit:
+      linkit_profile: linkit_default_profile
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

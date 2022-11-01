@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: ucr_news_topics
+label: 'UCR News Topics'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/topic/[term:name]'
+selection_criteria:
+  20faa3bc-e980-47c4-90b9-74ecd397617a:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      una_topic_category: una_topic_category
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 20faa3bc-e980-47c4-90b9-74ecd397617a
+selection_logic: and
+weight: -3
+relationships: {  }

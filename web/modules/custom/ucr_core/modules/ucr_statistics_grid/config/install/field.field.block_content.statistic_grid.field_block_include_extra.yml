@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.statistic_grid
+  - field.storage.block_content.field_block_include_extra
+id: block_content.statistic_grid.field_block_include_extra
+field_name: field_block_include_extra
+entity_type: block_content
+bundle: statistic_grid
+label: 'Include Title & Intro'
+description: '<em>( Optional ):</em> Check this box if you would like the font, background, padding, and margin options to also include the Title & Introduction Text.'
+required: false
+translatable: false
+default_value:
+-
+  value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

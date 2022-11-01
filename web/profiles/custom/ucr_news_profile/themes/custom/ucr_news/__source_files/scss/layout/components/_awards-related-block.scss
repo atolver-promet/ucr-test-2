@@ -1,0 +1,127 @@
+main {
+  > div {
+    &#content-container {
+      .ral-wrapper {
+        @include breakpoint(medium) {
+          margin-top: 42px !important;
+        }
+      }
+      .una-awards-related {
+        justify-content: center;
+      }
+      .related-awards-list {
+        @include breakpoint(medium) {
+          min-height:100px;
+          height: 100%;
+          max-height:591px;
+          overflow: hidden;
+        }
+        a {
+          &.ral-link-url {
+            color: #414141;
+            text-decoration: none;
+            &:hover {
+              color: #414141;
+              text-decoration: none;
+            }
+          }
+        }
+        .ral-background-image {
+          position: relative;
+          overflow: hidden;
+          .articles-media {
+            z-index: 4;
+            top: inherit;
+            left: inherit;
+            bottom: 0;
+            right: 0;
+          }
+          .ral-category-display {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            color: $white;
+            width: 100%;
+            .category-box {
+              background-color: #215AA7;
+              font-family: $font-family-roboto;
+              font-weight: 700;
+              line-height: 19px;
+              font-size: 16px;
+              min-width: 272px;
+              min-height: 39px;
+              text-align: left;
+              padding: 10px;
+              width: 100%;
+            }
+          }
+        }
+        .ral-title-content {
+          padding: 8px 8px 0 8px;
+          h3 {
+            line-height: 26px;
+            font-size: 20px;
+            color: $body-color;
+            font-family: $font-family-roboto;
+            font-weight: 700;
+            margin: 0;
+            padding: 0 0 4px 0;
+            @include breakpoint(medium) {
+              padding: 0 0 16px 0;
+            }
+          }
+        }
+        .ral-item-container {
+          height: 100%;
+          overflow: hidden;
+          position: relative;
+          border: 1px solid #215AA7;
+          .ral-category-display {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            color: $white;
+            width: 100%;
+            .category-box {
+              background-color: #215AA7;
+              font-family: $font-family-roboto;
+              font-weight: 700;
+              line-height: 19px;
+              font-size: 16px;
+              min-width: 272px;
+              min-height: 39px;
+              text-align: left;
+              padding: 10px;
+              width: 100%;
+            }
+          }
+          .ral-title-content {
+            //margin-top: 44px;
+            padding: 12px 12px 0;
+          }
+          .ral-date-content {
+            padding: 0 12px;
+            font-size: 0.8rem;
+            color: $ucr-grey-2;
+            font-weight: 200;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+          }
+          .ral-read-more-content {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            padding: 0 12px 8px;
+            color: #215AA7;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

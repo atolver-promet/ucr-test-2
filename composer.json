@@ -1,34 +1,37 @@
 {
-    "name": "pantheon-upstreams/drupal-composer-managed",
+    "name": "pantheon-upstreams/drupal-project",
     "description": "Install Drupal 9 with Composer on Pantheon.",
     "type": "project",
     "license": "MIT",
-    "repositories": [
-        {
+    "repositories": {
+        "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+          },
+          "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         },
-        {
+        "pantheon": {
             "type": "path",
             "url": "upstream-configuration"
         }
-    ],
+    },
     "require": {
-        "pantheon-upstreams/upstream-configuration": "dev-main",
+        "pantheon-upstreams/upstream-configuration": "self.version",
         "composer/installers": "^1.9",
-        "drupal/core-composer-scaffold": "^9.2",
-        "drupal/core-recommended": "^9.2",
+        "drupal/core-recommended": "9.2.15",
         "pantheon-systems/drupal-integrations": "^9",
         "cweagans/composer-patches": "^1.7",
-        "drush/drush": "^11 || ^12"
+        "drush/drush": "^10"
     },
     "require-dev": {
-        "drupal/core-dev": "^9.2"
+        "drupal/core-dev": "9.2.15"
     },
     "conflict": {
             "drupal/drupal": "*"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
         "drupal-scaffold": {
@@ -56,38 +59,45 @@
             "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
         },
-        "composer-exit-on-patch-failure": true,
+        "composer-exit-on-patch-failure": false,
         "patchLevel": {
             "drupal/core": "-p2"
+        },
+        "patches": {
+            "drupal/core": {
+              "Expand Taxonomy Term View Mode Suggestions": "https://www.drupal.org/files/issues/core-theme-suggestion-for-taxonomy-view-modes-2767243-14.patch",
+              "Remove empty lines when filtering in Layout Builder": "https://www.drupal.org/files/issues/2021-08-11/3223048-5.patch",
+              "[subprofile support] 1356276 - Allow profiles to define a base/parent profile and load them in the correct order / 2914389 - Allow profiles to exclude dependencies of their parent": "https://www.drupal.org/files/issues/2021-05-20/3143958-14-subprofile-support-9.2.x.patch"
+            },
+            "drupal/conditional_fields" : {
+              "Clear notice trying to access offset on value of type null message" : "https://www.drupal.org/files/issues/2021-01-21/3191984-3-notice-trying-to-access-offset-on-value-of-type-null.patch"
+            },
+            "drupal/video_embed_field" : {
+              "Fix for ENHC0010135. Add aria-label to embed play button" : "https://www.drupal.org/files/issues/2021-05-11/video_embed_field-add-accessible-names-to-buttons-3193601-4.patch"
+            }
+        },
+        "patches-ignore": {
+            "acquia/lightning": {
+                "drupal/core": {
+                    "SQLite - Patch fails to apply on drupal 9.3.x": "https://www.drupal.org/files/issues/2021-02-07/2031261-137.patch",
+                    "subprofile": "https://www.drupal.org/files/issues/2021-01-21/3143958-12-change-profile-config-sync-9.1.x.patch",
+                    "subprofile2": "https://www.drupal.org/files/issues/2869592-remove-update-warning-7.patch"
+                }
+            }
         }
-    },
-    "autoload": {
-        "classmap": [
-            "upstream-configuration/scripts/ComposerScripts.php"
-        ]
-    },
-    "scripts": {
-        "pre-update-cmd": [
-            "DrupalComposerManaged\\ComposerScripts::preUpdate"
-        ],
-        "upstream-require": [
-            "DrupalComposerManaged\\ComposerScripts::upstreamRequire"
-        ]
-    },
-    "scripts-descriptions": {
-        "upstream-require": "Add a dependency to an upstream. See https://pantheon.io/docs/create-custom-upstream for information on creating custom upstreams."
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": false,
+        "sort-packages": true,
         "platform": {
-            "php": "7.4"
+            "php": "8.0"
         },
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/core-composer-scaffold": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "oomphinc/composer-installers-extender": true
         }
     }
 }

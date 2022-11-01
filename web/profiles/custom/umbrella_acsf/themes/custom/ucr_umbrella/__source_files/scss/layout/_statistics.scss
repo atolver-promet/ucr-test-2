@@ -1,0 +1,40 @@
+.stat-container {
+  background: rgba(96, 96, 97, 1);
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  justify-content: center;
+  background-size: cover;
+  padding: 0.9375rem;
+  .stat {
+    background: rgba(255, 255, 255, 0.64);
+    margin: 0.9375rem auto;
+    padding: .5em .75em;
+    min-height: 239px;
+    max-width: 570px;
+    text-align: center;
+  }
+  .stat-number {
+    margin-top:1rem;
+    font-size: 4.75rem;
+    font-weight:300;
+    &:after {
+      position: relative;
+      width: 50%;
+      content: "";
+      border-bottom: 2px solid currentColor;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 12px;
+      margin-top:12px;
+    }
+  }
+  .stat-description {
+    font-family: "Adelle W01", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: .875rem;
+    line-height: 1.64;
+    font-weight:700;
+    text-transform: uppercase;
+    padding: 0 0 1.5em 0;
+  }
+}

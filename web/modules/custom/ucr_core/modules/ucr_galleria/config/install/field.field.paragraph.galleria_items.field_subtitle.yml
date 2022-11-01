@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_subtitle
+    - paragraphs.paragraphs_type.galleria_items
+id: paragraph.galleria_items.field_subtitle
+field_name: field_subtitle
+entity_type: paragraph
+bundle: galleria_items
+label: 'Image Description'
+description: '<em>( Optional )</em> Provide a small description of the image.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

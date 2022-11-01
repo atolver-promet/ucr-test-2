@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.statistic_grid
+  - field.storage.block_content.field_statistic_box_color
+  module:
+  - options
+id: block_content.statistic_grid.field_statistic_box_color
+field_name: field_statistic_box_color
+entity_type: block_content
+bundle: statistic_grid
+label: 'Stat Box Color'
+description: '<em>( Optional ):</em> Please select what color you would like the background of the statistic blocks to be.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

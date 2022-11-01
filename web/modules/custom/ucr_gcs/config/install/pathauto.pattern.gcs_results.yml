@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - node
+id: gcs_results
+label: 'GCS Results'
+type: 'canonical_entities:node'
+pattern: '/[node:title]'
+selection_criteria:
+  07eaf9b6-5a0d-4e92-8e41-3d0c9e115873:
+    id: node_type
+    bundles:
+      gcs: gcs
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 07eaf9b6-5a0d-4e92-8e41-3d0c9e115873
+selection_logic: and
+weight: -5
+relationships: {  }

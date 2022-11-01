@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Install, update, and uninstall functions for Pathauto.
+ *
+ * @ingroup pathauto
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function ucr_global_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+function ucr_global_uninstall() {
+  \Drupal::configFactory()->getEditable('system.menu.audience-links')->delete();
+  \Drupal::configFactory()->getEditable('block.block.audiencelinks')->delete();
+  \Drupal::configFactory()->getEditable('system.menu.related-links')->delete();
+  \Drupal::configFactory()->getEditable('block.block.relatedlinks')->delete();
+}
+
+/**
+  * October 2018 - Update the config to include the new configuration, as well as add the new content type. New Content Type will only be added for non-umbrella sites.
+  */
+ function ucr_global_update_8001() {
+     $config = \Drupal::configFactory();
+     $profile_name = $config->getEditable('core.extension')->get('profile');
+
+     $ucr_globals = $config->getEditable('ucr_global.settings');
+     $ucr_globals->set('enable_site_search', 0)
+         ->set('site_search_domain', '')
+         ->set('search_results_page', NULL)->save(TRUE);
+
+     $umbrella_profiles = array('umbrella_local', 'umbrella_acsf');
+     if(in_array($profile_name, $umbrella_profiles)) { // If the profile is the Umbrella site, then we do not want to run the module install as it'll error out since the content type already exists.
+         // Set the values for saving that the module is installed manually.
+         $extensions = $config->getEditable('core.extension');
+         $lightning = $config->getEditable('lightning_core.versions');
+
+         $extensions->set('module.ucr_gcs', 0)->save(TRUE);
+         $lightning->set('ucr_gcs', '0.0.0')->save(TRUE);
+
+         \Drupal::keyValue('system.schema')->set('ucr_gcs', '8000');
+     } else {
+         $moduleHandler = \Drupal::service('module_handler');
+
+         if (!$moduleHandler->moduleExists('ucr_gcs')) {
+             \Drupal::service('module_installer')->install(['ucr_gcs']);
+         }
+     }
+ }
+
+ /**
+  * December 2019 - add new custom label fields for email and phone for footer dept info
+  */
+ function ucr_global_update_8002() {
+   $config = \Drupal::configFactory();
+   $profile_name = $config->getEditable('core.extension')->get('profile');
+
+   $umbrella_profiles = array('umbrella_local', 'umbrella_acsf');
+   if(in_array($profile_name, $umbrella_profiles)) { // Do not run this on the Umbrella Site.
+     $ucr_globals = $config->getEditable('ucr_global.settings');
+     $ucr_globals->set('dept_custom_primary_email_label', 'email')
+       ->set('dept_custom_alternate_email_label', '')
+       ->set('dept_custom_tertiary_email_label', '')
+       ->set('dept_tertiary_email', '')
+       ->set('dept_custom_primary_phone_label', 'tel')
+       ->set('dept_custom_alternate_phone_label', '')
+       ->set('dept_custom_fax_label', '')->save(TRUE);
+   }
+ }
+
+function ucr_global_update_dependencies() {
+    $dependencies = array();
+    return $dependencies;
+}

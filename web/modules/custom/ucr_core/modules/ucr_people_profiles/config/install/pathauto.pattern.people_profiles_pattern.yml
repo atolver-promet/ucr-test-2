@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: people_profiles_pattern
+label: 'Personnel Profile Pattern'
+type: 'canonical_entities:node'
+pattern: '/people/[node:field_first_name]-[node:field_last_name]'
+selection_criteria:
+  67e0dcde-046f-44e7-a55e-cb8fde4d1c3f:
+    id: node_type
+    bundles:
+      people_profiles: people_profiles
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 67e0dcde-046f-44e7-a55e-cb8fde4d1c3f
+selection_logic: and
+weight: -9
+relationships: {  }

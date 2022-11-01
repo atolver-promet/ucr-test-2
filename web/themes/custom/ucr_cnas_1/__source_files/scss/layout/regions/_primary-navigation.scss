@@ -1,0 +1,294 @@
+// File contains CSS for the Main Navigation Bar. For the bar, this deals with both Desktop & Mobile views.
+// The Search Bar CSS & Audience Menu Dropdown in here is for primarily Mobile views. For the Desktop views, look in the 'masthead-audience.scss' file.
+// -------------------------------------------
+div.main-nav-bar {
+  font-family: "Fira Sans Regular", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 2em;
+  position: relative;
+  background-color: $primary-menu-mobile-background;
+  box-shadow: 0 2px 3px $drop-shadow-color;
+  z-index: inherit;
+  max-height: 350px !important;
+  overflow-y: scroll;
+  @media screen and #{breakpoint(medium)} {
+    overflow: visible;
+    max-height: initial;
+    padding-top: 9px;
+  }
+
+  .accordion-menu {
+    margin: 0 -10px;
+    li {
+      border-top: 1px solid $audience-border;
+      position: relative;
+      a {
+        color: $white;
+        &:hover, &:active {
+          color: $white;
+        }
+      }
+      &.is-submenu-item {
+        background-color: #657E9E;
+      }
+      &.is-accordion-submenu-parent {
+        background-color: $color-cello;
+        &[aria-expanded='true'] {
+          > a {
+              &::after {
+                font-family: "Material Design Icons";
+                font-size: 1.3rem;
+                font-weight: normal;
+                content: "\F374";
+                display: block;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+                border:none;
+                position: absolute;
+                top:50%;
+                right:.62rem;
+                height: auto;
+                width:auto;
+                margin-top: 0;
+              }
+
+          }
+        }
+        &[aria-expanded='false'] {
+          > a {
+            &::after {
+              font-family: "Material Design Icons";
+              font-size: 1.3rem;
+              font-weight: normal;
+              content: "\F415";
+              display: block;
+              -webkit-transform: translateY(-50%);
+              -moz-transform: translateY(-50%);
+              -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+              border:none;
+              position: absolute;
+              top:50%;
+              right:.62rem;
+              height: auto;
+              width:auto;
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
+  } // end accordion-menu
+
+  .google-search {
+    text-align: center;
+
+    #audience-search {
+      width: 60%;
+      display: inline-block;
+      margin: 7px;
+      padding: 0;
+      vertical-align: middle;
+      background: url("../images/google-search-top.png") no-repeat;
+      background-color: $white;
+      background-position: 50% 50%;
+
+      &:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
+        background: $white;
+      }
+
+      &::placeholder {
+        opacity: 1;
+        position: relative;
+        border: none;
+        box-shadow: none;
+        margin-bottom: 0;
+      }
+
+      @-moz-document url-prefix() {
+        &::placeholder {
+          left: -14px;
+        }
+      }
+
+      &:focus::placeholder {
+        background-image: none;
+      }
+    }
+    button {
+      margin: 0;
+    }
+
+  }
+
+  #audience-links-mobile-view {
+    a {
+      background-color: $gray2;
+      color: $gray6;
+    }
+    .is-accordion-submenu-parent {
+      &:not(.has-submenu-toggle) {
+        > a {
+          background-color: white;
+          color: $audience-menu-mobile-color;
+          &::after {
+            position: absolute;
+            top: 50%;
+            margin-top: 0;
+            right: 1rem;
+            @include css-triangle($accordionmenu-arrow-size, $audience-menu-mobile-color, down);
+          }
+          &:hover {
+            &::after {
+              @include css-triangle($accordionmenu-arrow-size, $audience-menu-mobile-color, down);
+            }
+          }
+          &:active {
+            &::after {
+              @include css-triangle($accordionmenu-arrow-size, $audience-menu-mobile-color, down);
+            }
+          }
+        }
+        .is-accordion-submenu {
+          a {
+            &:hover,
+            &:active {
+              background-color: $gray5;
+              &::after {
+                transform: none;
+                transform-origin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    .is-accordion-submenu-parent[aria-expanded='true'] {
+      > a {
+        &:hover, &:active {
+          &::after {
+            position: absolute;
+            top: 50%;
+            margin-top: 0;
+            right: 1rem;
+            @include css-triangle($accordionmenu-arrow-size, $audience-menu-mobile-color, up);
+          }
+        }
+      }
+    }
+  }
+
+  @include breakpoint(medium) {
+    background-color: $primary-menu-bg;
+
+    #main-menu {
+      background-color: $primary-menu-bg;
+    }
+
+    .dropdown {
+      &.menu {
+        .is-active {
+          > a {
+            color: $white;
+          }
+        }
+      }
+      >li {
+        box-shadow: inset 0 0.9375rem 0 0 $primary-menu-bg, inset 0px -0.9375rem 0 0 $primary-menu-bg, inset 1px 0 0 0 $masthead-border;
+        margin-left: 1px;
+        padding-left: 1px;
+        &:first-child {
+          box-shadow: none;
+          margin-left: 0;
+          padding-left: 0;
+        }
+      }
+      a {
+        padding: 1.05rem 1rem 0.8rem;
+        color: $white;
+        border-bottom: 4px solid $primary-menu-bg;
+        &::after {
+          right: 11px !important;
+          border-color: $white transparent transparent !important;
+        }
+        &:hover, &:focus {
+          border-bottom: 4px solid $white;
+        }
+      }
+      .is-dropdown-submenu-parent {
+        a {
+          padding-right: 2rem !important;
+        }
+      }
+      .is-active {
+        > a {
+          border-bottom: 4px solid $white;
+          &::after {
+            right: 11px !important;
+            border-color: $white transparent transparent !important;
+          }
+        }
+      }
+      .is-dropdown-submenu {
+        background-color: $color-cello;
+        border: 1px solid $primary-menu-sub-border;
+        box-shadow: 2px 2px 4px $drop-shadow-color;
+        li.is-dropdown-submenu-parent.opens-right {
+          border-bottom: 1px solid $primary-menu-sub-border;
+          box-shadow: none;
+          margin-left: 0;
+          padding-left: 0;
+          &:last-child {
+            border-bottom: none;
+          }
+          a {
+            &::after {
+              border-color: transparent transparent transparent $white !important;
+            }
+            &:hover {
+              &::after {
+                border-color: transparent transparent transparent $masthead-border !important;
+              }
+            }
+          }
+        }
+        a {
+          padding: 0.9rem 1rem;
+          position: relative;
+          border-bottom: none;
+          &:hover {
+            color: $masthead-border;
+          }
+        }
+        .is-active {
+          > a {
+            color: $white;
+            &::after {
+              border-color: transparent transparent transparent $pirmary-menu-sub-hover-color !important;
+            }
+            &:hover {
+              color: $masthead-border;
+              &::after {
+                border-color: transparent transparent transparent $masthead-border !important;
+              }
+            }
+          }
+        }
+        .is-submenu-item {
+          border-bottom: 1px solid $primary-menu-sub-border;
+        }
+        ul:not(.first-sub) li.is-submenu-item.is-dropdown-submenu-item a:hover {
+          color: $masthead-border;
+          //background-color: $darkerer-blue;
+        }
+      }
+    }
+  }
+}

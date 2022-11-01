@@ -1,0 +1,53 @@
+uuid: e503cdba-e6a5-4b84-9077-a85d09b32109
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.carousel_slider
+    - core.entity_view_mode.block_content.hero_slider_cnas_no_banner
+    - field.field.block_content.carousel_slider.body
+    - field.field.block_content.carousel_slider.field_sliders
+  module:
+    - slick_paragraphs
+    - text
+_core:
+  default_config_hash: 4eQGNir0pong3NvhCrj3fxXfm6mN24DXo7RWpSt8u6A
+id: block_content.carousel_slider.hero_slider_cnas_no_banner
+targetEntityType: block_content
+bundle: carousel_slider
+mode: hero_slider_cnas_no_banner
+content:
+  body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_sliders:
+    type: slick_paragraphs_vanilla
+    weight: 1
+    label: hidden
+    settings:
+      optionset: hero_slider_ui
+      skin: grid
+      view_mode: default
+      cache: 0
+      current_view_mode: default
+      override: false
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      skin_arrows: ''
+      skin_dots: ''
+      style: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  scheduled_publication: true

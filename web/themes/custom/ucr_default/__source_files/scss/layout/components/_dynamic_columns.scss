@@ -1,0 +1,91 @@
+$dynamic-columns-border: $blue-grey-400;
+main {
+  > div {
+    &#content-container {
+      .dynamic-columns {
+        > div {
+          &.grid-container {
+            > div {
+              &.align-left {
+                float: none !important;
+              }
+              &.align-right {
+                float: none !important;
+              }
+            }
+          }
+        }
+      }
+      .primary-content-area {
+        .grid-container {
+              &.full {
+
+            .dynamic-columns {
+              &.dc-full {
+                &.padding-horizontal-1 {
+                  padding-left: 0 !important;
+                  padding-right: 0 !important;
+                }
+              }
+            }
+          }
+          .dynamic-columns {
+            &.dc-centered {
+              .grid-container {
+                .grid-x {
+                  &.padding-horizontal-1 {
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .dc-standard {
+      }
+      .dc-shadowbox {
+        box-shadow: 1px -6px 6px rgba(0, 0, 0, 0.16)
+      }
+      .dc-columnborder-template {
+        .cell {
+          border-top: 1px solid $dynamic-columns-border;
+        }
+      }
+      .ucr-custom-block {
+        &.dc-columnborder {
+          .dynamic-columns {
+            @extend .dc-columnborder-template;
+          }
+        }
+        .dynamic-columns {
+          &.dc-columnborder {
+            @extend .dc-columnborder-template;
+          }
+        }
+      }
+      .dc-shadowborder {
+        @extend .dc-shadowbox;
+        @extend .dc-columnborder;
+      }
+      .paragraph--type--ucr-columns{
+        ul{
+          li{
+            a{
+              color: $ucr-red-1;
+              text-decoration: none;
+              &:after {
+                content: url("../images/ul-arrow-pink.svg");
+                display: inline-block;
+                height: 15px;
+                width: 15px;
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,152 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Config\FileStorage;
+use Drupal\ucr_core\UCRCustoms;
+/**
+ * Implements hook_install().
+ */
+function ucr_custom_header_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_custom_header_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_custom_header']['8001'] = [
+        'ucr_core' => '8007'
+    ];
+    return $dependencies;
+}
+
+/**
+ *  December 2018 - Adding video options to the Custom Header and Image Block
+ */
+function ucr_custom_header_update_8001() {
+
+    $config = \Drupal::configFactory();
+    $module_handler = \Drupal::moduleHandler();
+    $uuid_service = \Drupal::service('uuid');
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+
+        //create the new storage spaces.
+        //Storage fields for the Basic block
+        $custom_header_storage = [
+            'field.storage.block_content.field_header_video_url',
+            'field.storage.block_content.field_hide_overlay_title',
+            'field.storage.block_content.field_secondary_title',
+            'field.storage.block_content.field_title_link',
+            'field.storage.block_content.field_title_placement',
+            'core.entity_view_mode.block_content.header_with_video',
+            'field.field.block_content.custom_header.field_header_video_url',
+            'field.field.block_content.custom_header.field_hide_overlay_title',
+            'field.field.block_content.custom_header.field_secondary_title',
+            'field.field.block_content.custom_header.field_title_link',
+            'field.field.block_content.custom_header.field_title_placement',
+            'block_content.type.custom_header',
+            'core.entity_form_display.block_content.custom_header.default',
+            'core.entity_view_display.block_content.custom_header.default',
+            'core.entity_view_display.block_content.custom_header.header_with_video',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_custom_header', $custom_header_storage);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ *  July 2019 - Update to the Form Displays.
+ */
+function ucr_custom_header_update_8002() {
+
+    $config = \Drupal::configFactory();
+    $module_handler = \Drupal::moduleHandler();
+    $uuid_service = \Drupal::service('uuid');
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+
+        //create the new storage spaces.
+        //Storage fields for the Basic block
+        $custom_header_storage = [
+            'core.entity_form_display.block_content.custom_header.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_custom_header', $custom_header_storage);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ *  July 2020 - Added option to hide header title
+ */
+function ucr_custom_header_update_8003() {
+
+    $config = \Drupal::configFactory();
+    $module_handler = \Drupal::moduleHandler();
+    $uuid_service = \Drupal::service('uuid');
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+
+        //create the new storage spaces.
+        //Storage fields for the Basic block
+        $custom_header_storage = [
+            'field.storage.block_content.field_hide_header_title',
+            'field.field.block_content.custom_header.field_hide_header_title',
+            'core.entity_view_display.block_content.custom_header.default',
+            'core.entity_view_display.block_content.custom_header.header_with_video',
+            'core.entity_form_display.block_content.custom_header.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_custom_header', $custom_header_storage);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ *  January 2021 - Update help text on Header Video URL
+ */
+function ucr_custom_header_update_8004() {
+
+    $config = \Drupal::configFactory();
+    $module_handler = \Drupal::moduleHandler();
+    $uuid_service = \Drupal::service('uuid');
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+
+        //create the new storage spaces.
+        //Storage fields for the Basic block
+        $custom_header_storage = [
+            'field.field.block_content.custom_header.field_header_video_url',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_custom_header', $custom_header_storage);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}

@@ -1,0 +1,86 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.taxonomy_term.feeds_items.feeds_item
+  - field.field.taxonomy_term.feeds_items.field_feed_item_author
+  - field.field.taxonomy_term.feeds_items.field_feed_item_description
+  - field.field.taxonomy_term.feeds_items.field_feed_item_id
+  - field.field.taxonomy_term.feeds_items.field_feed_item_pub_date
+  - field.field.taxonomy_term.feeds_items.field_feed_item_url
+  - field.field.taxonomy_term.feeds_items.field_feed_url
+  - taxonomy.vocabulary.feeds_items
+  module:
+  - datetime
+  - link
+  - path
+  - text
+id: taxonomy_term.feeds_items.default
+targetEntityType: taxonomy_term
+bundle: feeds_items
+mode: default
+content:
+  field_feed_item_author:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_feed_item_description:
+    weight: 5
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_feed_item_id:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_feed_item_pub_date:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_feed_item_url:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_feed_url:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  feeds_item: true

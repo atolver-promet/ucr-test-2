@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - taxonomy.vocabulary.event_type
+id: taxonomy_term.event_type.default
+targetEntityType: taxonomy_term
+bundle: event_type
+mode: default
+content: {  }
+hidden:
+  description: true

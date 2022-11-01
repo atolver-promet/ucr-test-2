@@ -1,0 +1,36 @@
+<header>
+    <div class="grid-container full">
+        <div class="grid-x">
+            <div class="cell small-order-2 medium-order-1 audience-container">
+                <div class="grid-container">
+                    <div class="grid-x align-middle">
+                        {{ include header-audience-parent-org.html }}
+                        {{ include header-audience-menu.html }}
+                        {{ include header-audience-search.html }}
+                        <div class="cell shrink hide-for-medium" data-responsive-toggle="main-menu-container" data-hide-for="medium">
+                            <button class="mdi mdi-menu button mobile-menu-expander" type="button" data-toggle="main-menu-container">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cell small-order-1 medium-order-2 masthead-container">
+                <div class="grid-container">
+                    <div class="grid-x align-middle">
+                        {{ include header-site-title.html }}
+                        {{ include header-site-slogan.html }}
+                    </div>
+                </div>
+            </div>
+            <div class="cell small-order-3 medium-order-3 main-nav-bar">
+                <div class="grid-container" id="main-menu-container" data-animate="fade-in fade-out">
+                    <div class="grid-x">
+                        {{ include primary-nav-mobile-search.html }}
+                        {{ include primary-nav-main-menu.html }}
+                        {{ include primary-nav-audience-menu.html }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

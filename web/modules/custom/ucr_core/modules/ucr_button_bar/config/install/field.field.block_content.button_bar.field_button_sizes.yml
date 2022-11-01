@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.button_bar
+  - field.storage.block_content.field_button_sizes
+  module:
+  - options
+id: block_content.button_bar.field_button_sizes
+field_name: field_button_sizes
+entity_type: block_content
+bundle: button_bar
+label: 'Button Sizes'
+description: 'Select the size of the buttons in this button bar.'
+required: true
+translatable: false
+default_value:
+-
+  value: justify-100
+default_value_callback: ''
+settings: {  }
+field_type: list_string

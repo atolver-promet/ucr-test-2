@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_homepage_callout_title
+    - paragraphs.paragraphs_type.homepage_callout_slider
+  module:
+    - text
+id: paragraph.homepage_callout_slider.field_homepage_callout_title
+field_name: field_homepage_callout_title
+entity_type: paragraph
+bundle: homepage_callout_slider
+label: 'Homepage Callout Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text
+cardinality_number_fake: 0

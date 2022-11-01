@@ -1,0 +1,13 @@
+main {
+  > div {
+    &#content-container {
+      .scotmemo-image-align-left {
+        float: left;
+        margin: 0 10px;
+      }
+      #edit-scotmemo-content-format {
+        display:none !important;
+      }
+    }
+  }
+}

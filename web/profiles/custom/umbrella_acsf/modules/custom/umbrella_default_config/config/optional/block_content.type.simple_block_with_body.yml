@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: simple_block_with_body
+label: 'Simple Block with Body'
+revision: 1
+description: 'Build out this block body with WYSIWYG editor'

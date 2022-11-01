@@ -1,0 +1,54 @@
+name: 'UCR - Default'
+description: "Default Theme for UC Riverside Websites, and what all other sub-themes are based off of."
+core: 8.x
+core_version_requirement: ^8 || ^9
+type: theme
+base theme: stable
+
+# Image appears on admin/appearance
+screenshot: images/screenshot.png
+
+# Uncomment these lines and change "ucr_default" to your theme name if you
+# need to add custom CSS or JS
+libraries:
+  - ucr_default/global-css
+  - ucr_default/global-js
+
+ckeditor_stylesheets:
+  - css/editor.min.css
+
+# Regions are output in the page.html.twig
+regions:
+  emergency: 'UCR Emergency Notifications'
+  site_alerts: 'Site Notifications'
+  header_top: 'Header Top'
+  header: 'Header Main'
+  primary_menu: 'Primary Menu'
+  hero_content: 'Hero Panel Content'
+  drupal_messages: 'Drupal Messages'
+  content_header: 'Content Header'
+  admin_controls: 'Admin Controls'
+  left_sidebar: 'Left Sidebar'
+  content: 'Primary Content'
+  right_sidebar: 'Right Sidebar'
+  content_footer: 'Content Footer'
+  footer_top: 'Footer Top'
+  footer_first: 'Footer First Column'
+  footer_second: 'Footer Second Column'
+  footer_third: 'Footer Third Column'
+  footer_fourth: 'Footer Fourth Column'
+regions_hidden:
+  page_top: 'Page Top'
+  page_bottom: 'Page Bottom'
+
+# Hidden regions
+# regions_hidden[]: Page top
+# regions_hidden[]: Page bottom
+
+#features:
+#  - logo
+#  - name
+#  - slogan
+#  - favicon
+#  - comment_user_picture
+#  - node_user_picture

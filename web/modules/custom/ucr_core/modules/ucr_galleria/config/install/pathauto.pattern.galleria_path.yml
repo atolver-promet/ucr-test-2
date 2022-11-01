@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: galleria_path
+label: 'Galleria Path'
+type: 'canonical_entities:node'
+pattern: '/galleria/[node:title]'
+selection_criteria:
+  bb2f91eb-dacd-40a8-aafa-bee87b26a089:
+    id: node_type
+    bundles:
+      galleria: galleria
+    negate: false
+    context_mapping:
+      node: node
+    uuid: bb2f91eb-dacd-40a8-aafa-bee87b26a089
+selection_logic: and
+weight: -5
+relationships: {  }

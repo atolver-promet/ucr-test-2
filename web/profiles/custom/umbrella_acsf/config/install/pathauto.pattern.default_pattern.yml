@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: default_pattern
+label: 'Default Pattern'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  e29ba3cc-b2ab-4475-8900-316bec8e961e:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: e29ba3cc-b2ab-4475-8900-316bec8e961e
+selection_logic: and
+weight: -5
+relationships: {  }

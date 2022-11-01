@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.bubbles.field_bubble_caption_placement
+    - field.field.paragraph.bubbles.field_bubble_link
+    - field.field.paragraph.bubbles.field_caption_overlay_color
+    - field.field.paragraph.bubbles.field_image
+    - field.field.paragraph.bubbles.field_link
+    - field.field.paragraph.bubbles.field_title
+    - image.style.bubble
+    - paragraphs.paragraphs_type.bubbles
+  module:
+    - image
+    - link
+    - options
+id: paragraph.bubbles.default
+targetEntityType: paragraph
+bundle: bubbles
+mode: default
+content:
+  field_bubble_caption_placement:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_bubble_link:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_caption_overlay_color:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: bubble
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_link: true
+  scheduled_publication: true
+  search_api_excerpt: true

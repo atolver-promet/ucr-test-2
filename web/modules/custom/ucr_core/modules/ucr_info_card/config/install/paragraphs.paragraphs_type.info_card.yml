@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: info_card
+label: 'Info Card'
+icon_uuid: null
+description: 'Create an information card for the Info Card listing.'
+behavior_plugins: {  }

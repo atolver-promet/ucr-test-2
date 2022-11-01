@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.expanding_card_block
+    - field.storage.block_content.field_counter
+id: block_content.expanding_card_block.field_counter
+field_name: field_counter
+entity_type: block_content
+bundle: expanding_card_block
+label: 'Cards per Row'
+description: 'Enter a number from 1 to 4 for how many cards will appear per row.'
+required: true
+translatable: true
+default_value:
+  -
+    value: 4
+default_value_callback: ''
+settings:
+  min: 1
+  max: 4
+  prefix: ''
+  suffix: ''
+field_type: integer

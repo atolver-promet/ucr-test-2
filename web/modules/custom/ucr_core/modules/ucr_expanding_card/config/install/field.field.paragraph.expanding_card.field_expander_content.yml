@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_expander_content
+    - paragraphs.paragraphs_type.expanding_card
+  module:
+    - text
+id: paragraph.expanding_card.field_expander_content
+field_name: field_expander_content
+entity_type: paragraph
+bundle: expanding_card
+label: 'Expander Content'
+description: 'Add the content for your expander area, visible when the card is clicked.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

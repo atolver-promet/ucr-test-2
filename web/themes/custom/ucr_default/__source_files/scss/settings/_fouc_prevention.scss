@@ -1,0 +1,24 @@
+// Code in here is to help stop of flash of unstyled content.
+.no-js {
+  div {
+    #main-menu-container {
+      display: none;
+      @include breakpoint('medium') {
+        display: block;
+      }
+    }
+    &.main-nav-bar {
+      nav {
+        &#primary-site-menu {
+          > ul {
+            > li {
+              > ul {
+                display: none !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

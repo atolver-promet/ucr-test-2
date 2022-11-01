@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_office_location
+    - node.type.people_profiles
+id: node.people_profiles.field_office_location
+field_name: field_office_location
+entity_type: node
+bundle: people_profiles
+label: 'Office Location'
+description: '<em>( Optional )</em> Please enter in their office address location.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_tabs_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_tabs_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_tabs_preprocess_block(&$variables) {
+    if(isset($variables['elements']['content']['#block_content'])) {
+        $bundle = $variables['elements']['content']['#block_content']->bundle();
+        if(strtolower($bundle) == "tabs") {
+            $tab_titles = array();
+            $tabs_unique_id = md5(uniqid(rand(), true));
+
+            $tabs = $variables['elements']['content']['#block_content']->get('field_tabs');
+
+
+            foreach($tabs as $key => $pc) {
+                $clean_title = "";
+                $origin_title = $pc->get('entity')->getTarget()->getValue()->get('field_title')->getValue();
+                $active_state = $pc->get('entity')->getTarget()->getValue()->get('field_status')->getValue();
+
+                $active = $active_state[0]['value'];
+
+                $title = $origin_title[0]['value'];
+                if(!empty($title)) {
+                    $clean_title = str_replace(' ', '_', $title);
+                    $clean_title = preg_replace('/[^A-Za-z0-9\_]/', '', $clean_title);
+                    $clean_title = preg_replace('/_+/', '_', $clean_title);
+                }
+
+                $tab_titles[] = array(
+                    'id' => '#'.strtolower($clean_title),
+                    'title' => $title,
+                    'status' => $active
+                );
+            }
+
+            $variables['tabs_unique_id'] = "tabs-".$tabs_unique_id;
+            $variables['tabs_title_build'] = $tab_titles;
+        }
+    }
+}
+
+function ucr_tabs_preprocess_paragraph__tab(&$variables) {
+    $clean_title = "";
+    $display_status = "";
+
+    if(array_key_exists(0, $variables['elements']['field_title'])) {
+        $title = $variables['elements']['field_title'][0]['#context']['value'];
+
+        if(!empty($title)) {
+            $clean_title = str_replace(' ', '_', $title);
+            $clean_title = preg_replace('/[^A-Za-z0-9\_]/', '', $clean_title);
+            $clean_title = preg_replace('/_+/', '_', $clean_title);
+        }
+    }
+    if(array_key_exists(0, $variables['elements']['field_status'])) {
+        $display_status = $variables['elements']['field_status'][0]['#markup'];
+    }
+
+    $variables['tabs_title_id'] = strtolower($clean_title);
+    $variables['tabs_display_status'] = $display_status;
+}

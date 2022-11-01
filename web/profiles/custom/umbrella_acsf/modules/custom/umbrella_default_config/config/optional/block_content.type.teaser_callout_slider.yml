@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: teaser_callout_slider
+label: 'Teaser Callout Slider'
+revision: 1
+description: ''

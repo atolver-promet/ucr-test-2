@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.custom_alert
+  - field.storage.block_content.body
+  module:
+  - text
+id: block_content.custom_alert.body
+field_name: body
+entity_type: block_content
+bundle: custom_alert
+label: Body
+description: 'Please enter the text you want in your alert / announcement.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

@@ -1,0 +1,458 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Riverside installation profile.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\layout_builder\Entity\LayoutBuilderEntityViewDisplay;
+use Drupal\ucr_core\UCRCustoms;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_install().
+ */
+function student_services_install() {
+    // Don't do anything during config sync.
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+
+/**
+ * December 2018 - Introducing Webforms with recaptcha
+ */
+function student_services_update_8001() {
+    // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * January 2019 - Adding the Varnish Cache Purge
+ */
+function student_services_update_8002() {
+    // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * February 2019 - Update all of the Role Permissions.
+ */
+function student_services_update_8003() {
+    // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * March 2019 - Add new Slider Testimonial.
+ */
+function student_services_update_8004() {
+    // Removed to clean up code. Check the Git History for code if needed.
+}
+
+/**
+ * June 2019 - Update CKEditor Filters
+ */
+function student_services_update_8005() {
+    $config_files = [
+        'filter.format.rich_text_editor_source',
+        'filter.format.rich_text_editor_limited',
+        'user.role.editors',
+    ];
+
+    $completed = UCRCustoms::updateConfigFromStorage('ucr_profile', $config_files, 'profile');
+    if(!$completed){
+        throw new UpdateException('The Editor update failed');
+    }
+}
+
+/**
+ * July 2019 - Enable new Layout Builder, and Update Configurations
+ */
+function student_services_update_8006() {
+    $config = \Drupal::configFactory();
+
+    $config_files = [
+        'addtoany.settings',
+        'metatag.settings',
+        'metatag.metatag_defaults.global',
+        'metatag.metatag_defaults.403',
+        'metatag.metatag_defaults.404',
+        'metatag.metatag_defaults.front',
+        'metatag.metatag_defaults.node',
+        'metatag.metatag_defaults.taxonomy_term',
+        'metatag.metatag_defaults.user',
+        'workflows.workflow.editorial',
+        'editor.editor.rich_text_editor_source',
+        'editor.editor.rich_text_editor_limited',
+    ];
+
+    $completed = UCRCustoms::updateConfigFromStorage('ucr_profile', $config_files, 'profile');
+    if(!$completed){
+        throw new UpdateException('The Editor update failed');
+    }
+
+    $skip_type = 'page';
+
+    // Add all content types to the workflow editorial.
+    $workflow_config_dependencies = array();
+    $all_node_types = Drupal::entityTypeManager()->getStorage('node_type')->loadMultiple();
+    $node_types = array();
+    foreach($all_node_types as $n_type) {
+        if($n_type->id() !== $skip_type) {
+            $node_types[] = $n_type->id();
+            $workflow_config_dependencies[] = 'node.type.'.$n_type->id();
+        }
+    }
+
+    if(count($node_types) > 0) {
+        Drupal::configFactory()->getEditable('workflows.workflow.editorial')
+            ->set('type_settings.entity_types.node', $node_types)
+            ->save(TRUE);
+    }
+
+    // Add all custom block types to the workflow editorial.
+    $all_block_types = Drupal::entityTypeManager()->getStorage('block_content_type')->loadMultiple();
+    $block_types = array();
+    foreach($all_block_types as $b_type) {
+        $block_types[] = $b_type->id();
+        $workflow_config_dependencies[] = 'block_content.type.'.$b_type->id();
+    }
+
+    if(count($block_types) > 0) {
+        Drupal::configFactory()->getEditable('workflows.workflow.editorial')
+            ->set('type_settings.entity_types.block_content', $block_types)
+            ->save(TRUE);
+    }
+
+    if(count($workflow_config_dependencies) > 0) {
+        Drupal::configFactory()->getEditable('workflows.workflow.editorial')
+            ->set('dependencies.config', $workflow_config_dependencies)
+            ->save(TRUE);
+    }
+}
+
+/**
+ * August 2019 - Enable new Layout Builder & Update Permissions
+ */
+function student_services_update_8007() {
+    $config = Drupal::configFactory();
+    $moduleHandler = Drupal::service('module_handler');
+
+    if(!$moduleHandler->moduleExists('layout_builder')) {
+        Drupal::service('module_installer')->install(['layout_builder']);
+    }
+    if(!$moduleHandler->moduleExists('layout_builder_restrictions')) {
+        Drupal::service('module_installer')->install(['layout_builder_restrictions']);
+    }
+    if(!$moduleHandler->moduleExists('layout_builder_modal')) {
+        Drupal::service('module_installer')->install(['layout_builder_modal']);
+    }
+    if(!$moduleHandler->moduleExists('ucr_layouts')) {
+        Drupal::service('module_installer')->install(['ucr_layouts']);
+    }
+    if($moduleHandler->moduleExists('lightning_layout')) {
+        Drupal::service('module_installer')->uninstall(['lightning_layout']);
+    }
+    if($moduleHandler->moduleExists('layout_library')) {
+        Drupal::service('module_installer')->uninstall(['layout_library']);
+    }
+    if($moduleHandler->moduleExists('layout_builder_st')) {
+        Drupal::service('module_installer')->uninstall(['layout_builder_st']);
+    }
+
+    LayoutBuilderEntityViewDisplay::load('node.page.default')
+        ->enableLayoutBuilder()
+        ->setOverridable()
+        ->save(TRUE);
+
+    $page_default = $config->getEditable('core.entity_view_display.node.page.default');
+    $page_default->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Auto Blocks", ['views_block:content_views-content_head_image_title_block','views_block:event_list-events_latest_block'])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Chaos tools", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Content", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Content fields", ['field_block:node:page:body'])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Custom Site Configuration", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Entity Block", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Help", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Lists (Views)", ['views_block:who_s_online-who_s_online_block'])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.Moderation Dashboard", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.System", ['system_powered_by_block','system_branding_block'])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.User", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.User fields", [])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_blocks.core", ['page_title_block'])
+        ->set("third_party_settings.layout_builder_restrictions.entity_view_mode_restriction.allowed_layouts", [
+            'lb_one_column',
+            'lb_two_column',
+            'lb_three_column',
+            'lb_four_column',
+        ])
+        ->save(TRUE);
+
+    // Update permissions for roles so that way they are all up-to-date for default permissions.
+    $roles = Role::loadMultiple();
+    $permissions = [
+        'anonymous' => [
+            'view trumba spud blocks',
+        ],
+        'authenticated' => [
+            'opt-in or out of google analytics tracking',
+            'view trumba spud blocks',
+        ],
+        'contributors' => [
+            'access administration pages',
+            'access ckeditor_media_browser entity browser pages',
+            'administer article_types vocabulary terms',
+            'configure all page node layout overrides',
+            'configure editable page node layout overrides',
+            'create and edit custom blocks',
+            'create audio_file media',
+            'create terms in article_types',
+            'delete own audio_file media',
+            'edit own audio_file media',
+            'edit terms in article_types',
+            'exclude from cookieconsent',
+            'view own unpublished media',
+        ],
+        'editors' => [
+            'access ckeditor_media_browser entity browser pages',
+            'administer article_types vocabulary terms',
+            'administer block classes',
+            'configure all page node layout overrides',
+            'configure editable page node layout overrides',
+            'create and edit custom blocks',
+            'create articles_block block content',
+            'create audio_file media',
+            'create terms in article_types',
+            'delete any articles_block block content',
+            'delete any audio_file media',
+            'delete any text block content',
+            'delete own audio_file media',
+            'delete terms in article_types',
+            'edit any audio_file media',
+            'edit own audio_file media',
+            'edit terms in article_types',
+            'exclude from cookieconsent',
+            'update any articles_block block content',
+            'update any text block content',
+            'view own unpublished media',
+        ],
+        'site_builders' => [
+            'access ckeditor_media_browser entity browser pages',
+            'access protected page password screen',
+            'add trumba spud blocks',
+            'administer article_types vocabulary terms',
+            'administer block classes',
+            'administer cookieconsent settings',
+            'administer protected pages configuration',
+            'bypass pages password protection',
+            'configure all page node layout overrides',
+            'configure editable page node layout overrides',
+            'create and edit custom blocks',
+            'create articles_block block content',
+            'create audio_file media',
+            'create terms in article_types',
+            'create text block content',
+            'delete any articles_block block content',
+            'delete any audio_file media',
+            'delete any text block content',
+            'delete own audio_file media',
+            'delete terms in article_types',
+            'edit any audio_file media',
+            'edit own audio_file media',
+            'edit terms in article_types',
+            'exclude from cookieconsent',
+            'update any articles_block block content',
+            'update any text block content',
+            'view own unpublished media',
+        ],
+    ];
+
+    foreach ($roles as $role) {
+        $role_id = $role->id();
+        if (array_key_exists($role_id, $permissions)) {
+            if (count($permissions[$role_id]) > 0) {
+                foreach ($permissions[$role_id] as $perm) {
+                    $role->grantPermission($perm)->save(TRUE);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * October 2019 - Check if sites have new CK Editor Entity Browser and Update Accordingly. Add new Admin Theme (Claro). Remove Themes that should not be used (Bartik & Seven)
+ */
+function student_services_update_8008() {
+    // Update the ck editor media entity browser.
+    $current_config = Drupal::configFactory()->getEditable('entity_browser.browser.ckeditor_media_browser');
+    if(!$current_config->isNew()) {
+        $widgets = $current_config->get('widgets');
+        foreach ($widgets as $widget_uuid => $widget_data) {
+            if ($widget_data['id'] == 'view') {
+                $current_config->set('widgets.' . $widget_uuid . '.settings.view_display', 'entity_browser_1')->save(TRUE);
+            }
+        }
+    }
+
+    \Drupal::service('theme_installer')->install(['claro']);
+    \Drupal::service('theme_installer')->uninstall(['bartik']);
+}
+
+/**
+ * April 2020 - Enable XML sitemap Search Engine for all profiles
+ */
+function student_services_update_8009() {
+       $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+       // Install the new modules needed.
+       if(!$moduleHandler->moduleExists('xmlsitemap_engines')) {
+           \Drupal::service('module_installer')->install(['xmlsitemap_engines']);
+       }
+
+
+   	$config_files = [
+   	    'xmlsitemap.settings',
+     		'xmlsitemap.settings.media.document',
+     		'xmlsitemap.settings.media.image',
+     		'xmlsitemap.settings.node.article',
+     		'xmlsitemap.settings.node.event',
+     		'xmlsitemap.settings.node.galleria',
+     		'xmlsitemap.settings.node.gcs',
+     		'xmlsitemap.settings.node.page',
+     		'xmlsitemap.settings.node.people_profiles',
+           'xmlsitemap_engines.settings',
+       ];
+
+   	// Update the XML Sitemap configurations.
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/optional/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+}
+
+/**
+ * March 2021 - Disable or uninstall Statistics
+ */
+function student_services_update_8010() {
+    $config = \Drupal::configFactory();
+    $moduleHandler = \Drupal::service('module_handler');
+
+    if($moduleHandler->moduleExists('statistics')) {
+        Drupal::service('module_installer')->uninstall(['statistics']);
+    }
+
+}
+
+/**
+ * June 2021 - Install Antibot and Honeybot
+ */
+function student_services_update_8011() {
+    $config = \Drupal::configFactory();
+    $moduleHandler = \Drupal::service('module_handler');
+
+     if(!$moduleHandler->moduleExists('antibot')) {
+          \Drupal::service('module_installer')->install(['antibot']);
+      }
+      if(!$moduleHandler->moduleExists('honeypot')) {
+          \Drupal::service('module_installer')->install(['honeypot']);
+      }
+
+}
+
+/**
+ * July 2021 - Limit Layout Builder options for Basic pages
+ */
+function student_services_update_8012() {
+       $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+
+  	$config_files = [
+      	    'core.entity_view_display.node.page.default',
+          ];
+
+   	// Update the XML Sitemap configurations.
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/optional/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+}
+
+/**
+ * August 2021 - Update Header styles in WYSIWYG Editors
+ */
+function student_services_update_8013() {
+       $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+
+  	$$config_files = [
+           	    'editor.editor.rich_text_editor_source',
+                  'editor.editor.rich_text_editor_limited',
+               ];
+   	// Update the XML Sitemap configurations.
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/install/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+}
+
+/**
+ * October 2021 - Update linkit default profile to add email matcher. Enabled linkit for use in source text editor
+ */
+function student_services_update_8014() {
+       $config = \Drupal::configFactory();
+       $moduleHandler = \Drupal::service('module_handler');
+
+
+    	$config_files = [
+        	    'linkit.linkit_profile.linkit_default_profile',
+        	    'editor.editor.rich_text_editor_source',
+            ];
+
+   	foreach($config_files as $file_name){
+   		$file_path = DRUPAL_ROOT . '/profiles/custom/ucr_profile/config/install/'.$file_name.'.yml';
+   		$file_contents = file_get_contents($file_path);
+   		$new_yaml = Yaml::decode($file_contents);
+
+   		$current_config = $config->getEditable($file_name);
+   		$current_config->setData($new_yaml)->save(TRUE);
+   	}
+}
+
+/**
+ * November 2021 - Install and enable transliterate_filenames module
+ */
+function student_services_update_8015() {
+    $config = \Drupal::configFactory();
+    $moduleHandler = \Drupal::service('module_handler');
+
+     if(!$moduleHandler->moduleExists('transliterate_filenames')) {
+          \Drupal::service('module_installer')->install(['transliterate_filenames']);
+      }
+
+
+}
+
+function student_services_update_dependencies() {
+    $dependencies = array();
+
+    $dependencies['student_services']['8007'] = [
+        'lightning_layout' => '8010'
+    ];
+
+    return $dependencies;
+}

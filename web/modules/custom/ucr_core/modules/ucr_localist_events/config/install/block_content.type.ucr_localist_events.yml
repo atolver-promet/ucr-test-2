@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_localist_events
+label: 'Localist Events'
+revision: 1
+description: 'A Custom Block to be able to embed the Widget Code from events.ucr.edu (Localist).'

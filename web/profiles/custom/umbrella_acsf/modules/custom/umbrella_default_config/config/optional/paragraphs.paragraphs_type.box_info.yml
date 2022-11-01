@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: box_info
+label: 'Box Info'
+icon_uuid: null
+description: 'Box Info for Colorblock CTA'
+behavior_plugins: {  }

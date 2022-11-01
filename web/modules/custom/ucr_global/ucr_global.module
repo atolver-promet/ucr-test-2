@@ -1,0 +1,153 @@
+<?php
+
+/**
+ * @file
+ * Module file for ucr_global.
+ */
+
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_block_view_alter().
+ */
+function ucr_global_block_view_alter(array &$build, BlockPluginInterface $block) {
+
+}
+
+function ucr_global_preprocess_page(&$variables) {
+    $config = \Drupal::config('ucr_global.settings');
+    $enable_search = $config->get('enable_site_search');
+    $internal_domain = $config->get('site_search_domain');
+    $internal_page = $config->get('search_results_page');
+
+    $internal_path = "";
+    $q_var = "";
+
+    if(!empty($internal_page)) {
+        $internal_path = Node::load($internal_page);
+        if($internal_path) {
+            $internal_path = $internal_path->toUrl()->toString();
+        } else {
+            $internal_path = "";
+        }
+    }
+
+    if(isset($_GET['q'])) {
+        if(!empty($internal_domain)) {
+            $q_var = preg_replace("/^site:".$internal_domain." /", "", $_GET['q']);
+        } else {
+            $q_var = $_GET['q'];
+        }
+    }
+
+    $variables['enable_site_search'] = ($enable_search ? true : false);
+    $variables['internal_domain_name'] = $internal_domain;
+    $variables['internal_results_page'] = $internal_path;
+    $variables['get'] = array(
+        'search_params' => array(
+            'q' => $q_var,
+            'by' => (isset($_GET['search-by']) ? $_GET['search-by'] : NULL),
+        ),
+    );
+}
+
+/**
+  The following functions are to hook theme blocks to module overrides,
+  so we can use twig templates in our module.
+**/
+/** Global Branding Block */
+function ucr_global_theme($existing, $type, $theme, $path) {
+    return [
+    'ucr_global_organization_name_block' => [
+        'variables' => [
+            'org_name' => NULL,
+            'org_url' => NULL,
+
+            'attributes' => [
+                'class' => ['UcrGlobalOrganizationNameBlock'],
+            ],
+        ],
+    ],
+
+    'ucr_global_audience_search_block' => [
+        'variables' => [
+
+            'attributes' => [
+                'class' => ['UcrGlobalAudienceSearchBlock'],
+            ],
+        ],
+    ],
+
+    /** Footer Wide Search Block */
+    'ucr_global_footer_search_block' => [
+      'variables' => [
+
+          // define defaults for any variables you want in the twig file
+        'attributes' => [
+           'class' => ['UcrGlobalFooterSearchBlock'],
+         ], //etc
+      ],
+    ],
+
+    /** Footer Branding Block */
+    'ucr_global_footer_branding_block' => [
+      'variables' => [
+          'show_ucr_links' => NULL,
+        // define defaults for any variables you want in the twig file
+        'attributes' => [
+           'class' => ['UcrGlobalFooterBrandingBlock'],
+         ], //etc
+      ],
+    ],
+
+    /** Footer Dept Contact Block */
+    /** define variable (and default values you may want to appear in the twig file if not filled by configuration) (these values are overridden elsewhwere) */
+    'ucr_global_footer_dept_info_block' => [
+      'variables' => [
+        'dept_name' => NULL,
+        'address_1' => NULL,
+        'address_2' => NULL,
+        'address_3' => NULL,
+        'primary_email' => NULL,
+        'alternate_email' => NULL,
+        'tertiary_email' => NULL,
+        'custom_primary_email_label' => NULL,
+        'custom_alternate_email_label' => NULL,
+        'custom_tertiary_email_label' => NULL,
+        'primary_phone' => NULL,
+        'alternate_phone' => NULL,
+        'custom_primary_phone_label' => NULL,
+        'custom_alternate_phone_label' => NULL,
+        'custom_fax_label' => NULL,
+        'fax' => NULL,
+        'campus_map' => NULL,
+        'show_campus_map' => NULL,
+
+        'attributes' => [
+           'class' => ['UcrGlobalFooterDeptInfoBlock'],
+         ], //etc
+      ],
+    ],
+
+    /** Footer Follow Us Block */
+    'ucr_global_footer_follow_us_block'     => [
+      'variables' => [
+        'social_links' => NULL,
+        // define defaults for any variables you want in the twig file
+        'attributes' => [
+           'class' => ['UcrGlobalFooterFollowUsBlock'],
+         ], //etc
+      ],
+    ],
+    /** UCR Global Newsletter block */
+      'ucr_global_footer_newsletter_block'     => [
+      'variables' => [
+        // define defaults for any variables you want in the twig file
+        'attributes' => [
+           'class' => ['UcrGlobalFooterNewsletterBlock'],
+         ], //etc
+      ],
+    ],
+  ];
+}

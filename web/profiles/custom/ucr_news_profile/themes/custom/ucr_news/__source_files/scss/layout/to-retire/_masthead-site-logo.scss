@@ -1,0 +1,82 @@
+// File contains CSS for the Site Logo, Site Title, and the Slogan Text. For Desktop & Mobile Views.
+// -------------------------------------------
+header {
+  position: fixed;
+  z-index: 99;
+  flex-shrink: 0;
+  @include breakpoint(medium) {
+    position: relative;
+  }
+}
+
+.masthead-container {
+  padding: 11px 0 10px 0;
+  background-color: white;
+  .masthead-logo {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-align: right !important;
+    width: 78px;
+    height: 39px;
+    background: url('../images/ucr_mono_rgb.svg') no-repeat;
+
+    @include breakpoint(medium) {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      text-align: left !important;
+      width: 78px;
+      height: 39px;
+      background: url('../images/ucr_mono_rgb.svg') no-repeat;
+    }
+  }
+  .masthead-title {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    font-family: "Fira Sans REgular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.08;
+    padding-left: 7px;
+    margin-bottom: 0;
+
+    @include breakpoint(medium) {
+      font-size: 1.85rem;
+      padding-left: 12px;
+      margin-bottom: 7px;
+    }
+
+    a {
+      color: $ucr-blue;
+
+      &:hover {
+        color: $ucr-blue;
+      }
+    }
+  }
+
+  .slogan {
+    position: relative;
+    text-align: right;
+    color: $slogan-color;
+    font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 1.375rem;
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: 1.65px;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+  }
+}
+header {
+  width: 100%;
+}
+header + #content-container {
+  padding-top: 106px;
+  @include breakpoint(medium) {
+    padding-top: 0;
+  }
+}

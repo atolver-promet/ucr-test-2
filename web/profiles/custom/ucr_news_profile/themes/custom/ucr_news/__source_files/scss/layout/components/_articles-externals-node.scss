@@ -1,0 +1,66 @@
+main {
+  > div {
+    &#content-container {
+      .uen-article-full {
+        .uen-authoring-info {
+          padding-bottom: 24px;
+          font-family: $font-family-roboto;
+          font-size: 15px;
+          line-height: 19px;
+          .uen-author-name {
+            a {
+              color: #d6336c;
+              text-decoration: none;
+              &:hover {
+                color: #2D6CC0;
+              }
+              &::after {
+                content: "";
+                padding-left: 0;
+                display: none;
+              }
+            }
+          }
+          .uen-author-date {
+            font-family: $font-family-montserrat;
+            font-weight: normal;
+            font-size: 14px;
+            color: #636b72;
+          }
+        }
+        .uen-article-teaser {
+          font-family: $font-family-roboto;
+          font-size: 18px;
+          line-height: 24px;
+          color: #606060;
+          padding-bottom: 40px;
+        }
+        .uen-article-readmore {
+          a {
+            border: 1px solid #d6336c;
+            background-color: $white;
+            color: #d6336c;
+            size: 16px;
+            line-height: 24px;
+            padding: 5px 52px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            @include breakpoint(medium) {
+              display: inline-block;
+            }
+            &:hover {
+              color: $white;
+              background-color: #d6336c;
+            }
+            &::after {
+              content: "";
+              padding-left: 0;
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+uuid: 4ef53287-4b16-4c4f-893d-c48435824ce7
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.custom_header
+    - core.entity_view_mode.block_content.cnas_video
+    - field.field.block_content.custom_header.field_header_image
+    - field.field.block_content.custom_header.field_header_video_url
+    - field.field.block_content.custom_header.field_hide_overlay_title
+    - field.field.block_content.custom_header.field_secondary_title
+    - field.field.block_content.custom_header.field_title
+    - field.field.block_content.custom_header.field_title_link
+    - field.field.block_content.custom_header.field_title_placement
+  module:
+    - link
+    - options
+id: block_content.custom_header.cnas_video
+targetEntityType: block_content
+bundle: custom_header
+mode: cnas_video
+content:
+  field_header_image:
+    type: entity_reference_entity_view
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: header_with_video
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_header_video_url:
+    type: link
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+  field_hide_overlay_title:
+    type: boolean
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+  field_secondary_title:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_title_link:
+    type: link
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+  field_title_placement:
+    type: list_key
+    weight: 6
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

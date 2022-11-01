@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.basic
+  - field.storage.block_content.field_block_bg_color
+  module:
+  - color_field
+id: block_content.basic.field_block_bg_color
+field_name: field_block_bg_color
+entity_type: block_content
+bundle: basic
+label: 'Background Color'
+description: '<em>( Optional ):</em> Please select a color / opacity for the background. For Opacity, please enter from 0 (hidden) to 1 (fully visible).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 1
+field_type: color_field_type

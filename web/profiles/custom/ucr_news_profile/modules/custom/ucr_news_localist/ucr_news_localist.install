@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_news_localist_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_news_localist_update_dependencies() {
+    $dependencies = array();
+
+    return $dependencies;
+}

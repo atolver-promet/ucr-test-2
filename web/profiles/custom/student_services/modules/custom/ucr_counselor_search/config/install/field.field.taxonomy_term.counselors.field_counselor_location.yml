@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.taxonomy_term.field_counselor_location
+  - taxonomy.vocabulary.counselors
+id: taxonomy_term.counselors.field_counselor_location
+field_name: field_counselor_location
+entity_type: taxonomy_term
+bundle: counselors
+label: 'Counselor Location'
+description: 'County in which counselor supports'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

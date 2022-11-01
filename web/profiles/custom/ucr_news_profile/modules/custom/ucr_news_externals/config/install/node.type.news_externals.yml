@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'External News'
+type: news_externals
+description: 'Create a piece of content that is associated with an external article. You will need to provide the images, URL, and an intro text from the external article manually.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

@@ -1,0 +1,66 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.node.awards.body
+  - field.field.node.awards.field_content_keywords
+  - field.field.node.awards.field_meta_tags
+  - field.field.node.awards.field_social_media_image
+  - field.field.node.awards.field_una_additional_content
+  - field.field.node.awards.field_una_authored_by
+  - field.field.node.awards.field_una_authored_on
+  - field.field.node.awards.field_una_exclude
+  - field.field.node.awards.field_una_header_image
+  - field.field.node.awards.field_una_tags
+  - node.type.awards
+  module:
+  - entity_reference_revisions
+  - metatag
+  - text
+  - user
+id: node.awards.default
+targetEntityType: node
+bundle: awards
+mode: default
+content:
+  addtoany:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_meta_tags:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_una_additional_content:
+    weight: 3
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_content_keywords: true
+  field_social_media_image: true
+  field_una_authored_by: true
+  field_una_authored_on: true
+  field_una_exclude: true
+  field_una_header_image: true
+  field_una_tags: true

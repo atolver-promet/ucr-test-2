@@ -1,0 +1,19 @@
+name: 'Custom Header Image & Title'
+description: 'Provide a custom block type with the ability to have an image and title displayed.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - entity_reference_revisions
+  - field
+  - text
+  - ucr_core
+  - focal_point
+  - field_group
+  - pathauto
+  - responsive_image
+  - media
+  - views
+  - config

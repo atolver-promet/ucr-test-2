@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Install and uninstall functions for the local installation profile.
+ */
+
+function ucr_umbrella_local_install() {
+    // Don't do anything during config sync.
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_una_topic_category
+    - node.type.news_articles
+    - taxonomy.vocabulary.una_topic_category
+id: node.news_articles.field_una_topic_category
+field_name: field_una_topic_category
+entity_type: node
+bundle: news_articles
+label: 'Topic Category'
+description: 'Select the Category that the News Article will belong to.<br /><br />You can manage the Topic Category Taxonomy <a href="/admin/structure/taxonomy/manage/una_topic_category/overview" target="_blank">here</a>.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      una_topic_category: una_topic_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

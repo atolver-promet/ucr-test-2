@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_image_600x338
+label: 'Article Image - (600 x 338)'
+effects:
+  0e359629-dec6-42df-a6a4-d5902fde14c0:
+    uuid: 0e359629-dec6-42df-a6a4-d5902fde14c0
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 338
+      crop_type: focal_point

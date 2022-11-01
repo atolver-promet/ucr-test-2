@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_testimonial_text_orient
+    - paragraphs.paragraphs_type.ucr_testimonials
+  module:
+    - options
+id: paragraph.ucr_testimonials.field_testimonial_text_orient
+field_name: field_testimonial_text_orient
+entity_type: paragraph
+bundle: ucr_testimonials
+label: 'Text Orientation'
+description: 'Please select the orientation of the text.'
+required: true
+translatable: false
+default_value:
+  -
+    value: right
+default_value_callback: ''
+settings: {  }
+field_type: list_string

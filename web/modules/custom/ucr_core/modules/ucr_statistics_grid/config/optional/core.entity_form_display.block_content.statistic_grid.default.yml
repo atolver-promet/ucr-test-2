@@ -1,0 +1,283 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.statistic_grid
+    - entity_browser.browser.media_browser
+    - field.field.block_content.statistic_grid.body
+    - field.field.block_content.statistic_grid.field_block_bg_color
+    - field.field.block_content.statistic_grid.field_block_bg_image
+    - field.field.block_content.statistic_grid.field_block_include_extra
+    - field.field.block_content.statistic_grid.field_block_margin_bottom
+    - field.field.block_content.statistic_grid.field_block_margin_left
+    - field.field.block_content.statistic_grid.field_block_margin_right
+    - field.field.block_content.statistic_grid.field_block_margin_top
+    - field.field.block_content.statistic_grid.field_block_padding_horizontal
+    - field.field.block_content.statistic_grid.field_block_padding_vertical
+    - field.field.block_content.statistic_grid.field_counter
+    - field.field.block_content.statistic_grid.field_statistic
+    - field.field.block_content.statistic_grid.field_statistic_box_color
+    - field.field.block_content.statistic_grid.field_statistic_box_opacity
+    - field.field.block_content.statistic_grid.field_statistic_font_color
+    - workflows.workflow.editorial
+  module:
+    - color_field
+    - content_moderation
+    - entity_browser
+    - field_group
+    - paragraphs
+    - text
+third_party_settings:
+  field_group:
+    group_stat_grid_form_tabs:
+      children:
+        - group_stat_grid_info
+        - group_introduction
+        - group_style_options
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Stat Grid Form Tabs'
+      region: content
+    group_stat_grid_info:
+      children:
+        - field_counter
+        - field_statistic
+      parent_name: group_stat_grid_form_tabs
+      weight: 7
+      format_type: tab
+      format_settings:
+        formatter: open
+        description: ''
+        required_fields: true
+        id: ''
+        classes: ''
+      label: Statistics
+      region: content
+    group_introduction:
+      children:
+        - body
+      parent_name: group_stat_grid_form_tabs
+      weight: 8
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: '<em>( Optional )</em> Enter in content that will be displayed above the Statistic Grid.'
+        required_fields: true
+      label: Introduction
+      region: content
+    group_style_options:
+      children:
+        - group_statistic_options
+        - group_background_options
+        - group_padding_options
+        - group_margin_options
+      parent_name: group_stat_grid_form_tabs
+      weight: 9
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Style Options'
+      region: content
+    group_statistic_options:
+      children:
+        - field_block_include_extra
+        - field_statistic_font_color
+        - field_statistic_box_color
+        - field_statistic_box_opacity
+      parent_name: group_style_options
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Statistic Options'
+      region: content
+    group_background_options:
+      children:
+        - field_block_bg_color
+        - field_block_bg_image
+      parent_name: group_style_options
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Background Options'
+      region: content
+    group_padding_options:
+      children:
+        - field_block_padding_horizontal
+        - field_block_padding_vertical
+      parent_name: group_style_options
+      weight: 22
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Padding Options'
+      region: content
+    group_margin_options:
+      children:
+        - field_block_margin_top
+        - field_block_margin_bottom
+        - field_block_margin_left
+        - field_block_margin_right
+      parent_name: group_style_options
+      weight: 23
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Margin Options'
+      region: content
+id: block_content.statistic_grid.default
+targetEntityType: block_content
+bundle: statistic_grid
+mode: default
+content:
+  body:
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_block_bg_color:
+    weight: 27
+    settings:
+      default_colors: '#E9EDF2,#CDD3DA,#868D96,#485057,#1D3661,#637EA4,#91AFCC,#A5C8EA,#2D6CC0,#329AF0,#39B1EF,#3AA4DC,#D6336B,#802244,#14AABE,#FA5151,#F18200,#003DA5,#FFB81C'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_block_bg_image:
+    type: entity_browser_entity_reference
+    weight: 28
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: false
+      field_widget_replace: false
+    region: content
+    third_party_settings: {  }
+  field_block_include_extra:
+    weight: 29
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_block_margin_bottom:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_left:
+    weight: 36
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_right:
+    weight: 37
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_top:
+    weight: 34
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_horizontal:
+    weight: 38
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_vertical:
+    weight: 39
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_counter:
+    weight: 3
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_statistic:
+    type: entity_reference_paragraphs
+    weight: 4
+    settings:
+      title: Statistic
+      title_plural: Statistics
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: statistic
+    third_party_settings: {  }
+    region: content
+  field_statistic_box_color:
+    weight: 31
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_statistic_box_opacity:
+    weight: 32
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_statistic_font_color:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 2
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden: {  }

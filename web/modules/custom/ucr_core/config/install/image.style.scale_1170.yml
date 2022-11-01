@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: scale_1170
+label: 'WYSIWYG Scale - 1170px'
+effects:
+  04f232e7-955b-44f0-9882-fbbbc6aef421:
+    uuid: 04f232e7-955b-44f0-9882-fbbbc6aef421
+    id: image_scale
+    weight: 1
+    data:
+      width: 1170
+      height: 1170
+      upscale: false

@@ -1,0 +1,97 @@
+// === Foundation Settings
+@import "../../../../ucr_default/__source_files/scss/settings/foundation_settings";
+
+// === Material Design Color Pallets
+@import "../../../../ucr_default/__source_files/scss/settings/material_design_palette";
+
+// === Font Families
+$font-family-monospace: Consolas, "Andale Mono WT", "Andale Mono", 'Liberation Mono', "Courier New", Courier, monospace !default;
+$font-family-roboto: 'Roboto', Helvetica, sans-serif;
+$font-family-montserrat: 'Montserrat', Helvetica, sans-serif;
+$font-family-roboto-slab: 'Roboto Slab', Helvetica, serif;
+
+// === Global Colors
+$ucr-gold: #f1ab00;
+$ucr-blue: #2d6cc0;
+
+$ucr-white-1: #F1F3F5;
+$ucr-white-2: #E9ECEF;
+$ucr-white-3: #DEE2E6;
+$ucr-white-4: #CED4DA;
+$ucr-grey-1: #ADB5BD;
+$ucr-grey-2: #868E96;
+$ucr-grey-3: #495057;
+$ucr-grey-4: #343A40;
+$ucr-grey-5: #212529;
+$ucr-alt-blue-1: #1D3661;
+$ucr-alt-blue-2: #637EA4;
+$ucr-alt-blue-3: #329AF0;
+$ucr-alt-blue-4: #3AA4DC;
+$ucr-alt-blue-5: #91AFCC;
+$ucr-alt-blue-6: #A5C8EA;
+$ucr-red-1: #D6336B;
+$ucr-red-2: #802244;
+$ucr-cyan: #14AABE;
+$ucr-peach: #FA5151;
+$ucr-orange: #F18200;
+
+$body-background: #fafafa; // Material Design $grey-50
+$body-color: #455a64; // Material Design $blue-grey-700
+$link-color: #d81b60; // Material Design $pink-600
+
+$alert-success: #009688; // Material Design $teal
+$alert-warning: #ffc107; // Material Design $amber
+$alert-error: #f44336; // Material Design $red
+$alert-info: #2196f3; // Material Design $blue
+$alert-blank: #607d8b; // Material Design $blue-grey
+
+$button-background: #798fac;
+$social-facebook: #3B5998;
+$social-twitter: #00acee;
+$social-youtube: #cd201f;
+$social-instagram: #125688;
+$social-linkedin: #0077b5;
+$social-flickr: #ff0084;
+$social-rss: #EC8500;
+$social-reddit: #ff6314;
+$social-discord: #738ADB;
+$social-tiktok: #69C9D0;
+
+$custom-content-editor-menu-bg: #fafafa;
+
+/* == Copy of the Foundation Variables to be overridden with our template CSS. */
+
+$table-background: $white;
+$table-color-scale: 5%;
+$table-border: 1px solid smart-scale($grey-400, $table-color-scale);
+$table-padding: rem-calc(8 10 10);
+$table-hover-scale: 2%;
+$table-row-hover: darken($table-background, $table-hover-scale);
+$table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
+$table-is-striped: true;
+$table-striped-background: smart-scale($grey-400, $table-color-scale);
+$table-stripe: even;
+$table-head-background: smart-scale($ucr-alt-blue-3, $table-color-scale / 2);
+$table-head-row-hover: darken($table-head-background, $table-hover-scale);
+$table-foot-background: smart-scale($table-background, $table-color-scale);
+$table-foot-row-hover: darken($table-foot-background, $table-hover-scale);
+$table-head-font-color: $white;
+$table-foot-font-color: $body-color;
+$show-header-for-stacked: false;
+$table-stack-breakpoint: medium;
+
+// ==== OVERRIDE OF FOUNDATION SETTINGS
+$body-font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+// Breakpoints
+// --------------
+$breakpoints: (
+        small: 0,
+        medium: 768px,
+        large: 1024px,
+        xlarge: 1200px,
+        xxlarge: 1440px,
+);
+$print-breakpoint: large;
+$breakpoint-classes: (small medium large xlarge xxlarge);
+
+$prototype-spacers-count: 6;

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_slider_orientation
+    - paragraphs.paragraphs_type.carousel_slider
+  module:
+    - options
+id: paragraph.carousel_slider.field_slider_orientation
+field_name: field_slider_orientation
+entity_type: paragraph
+bundle: carousel_slider
+label: 'Text Alignment'
+description: 'Please select the orientation of the text on the slide.'
+required: true
+translatable: false
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

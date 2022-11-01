@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event Contacts'
+vid: contact
+description: 'Contact Details for Events Content'
+hierarchy: 0
+weight: 0

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.custom_header
+    - field.storage.block_content.field_title_placement
+  module:
+    - options
+id: block_content.custom_header.field_title_placement
+field_name: field_title_placement
+entity_type: block_content
+bundle: custom_header
+label: 'Title Placement'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: bottom-left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

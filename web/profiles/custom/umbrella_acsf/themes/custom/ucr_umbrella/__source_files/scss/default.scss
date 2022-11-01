@@ -1,0 +1,33 @@
+// Let's import Foundation first, to avoid compile errors
+@import "layout/settings";
+@import "../../../../../../../../../npm_build/node_modules/foundation-sites/scss/foundation";
+@include foundation-everything;
+// UCR Design 8 Stuff
+@import "layout/mixins";
+@import "layout/fonts";
+@import "layout/settings";
+@import "layout/globals";
+@import "layout/alerts";
+@import "layout/masthead-audience";
+@import "layout/masthead-site-logo";
+@import "layout/primary-navigation";
+@import "layout/content-area";
+@import "layout/footer-area";
+@import "layout/breadcrumbs";
+@import "layout/primary-content";
+@import "layout/left-sidebar";
+@import "layout/right-sidebar";
+@import "layout/emergency";
+@import "layout/_panelizer-update.scss";
+@import "layout/statistics";
+@import "layout/bubbles";
+@import "layout/slick-slider";
+@import "layout/profile-card";
+@import "layout/profile-details";
+@import "layout/info-card";
+@import "layout/teaser-callout";
+@import "layout/articles";
+@import "layout/events";
+@import "layout/tabs";
+@import "layout/accordion";
+@import "layout/galleria";

@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Departments & Programs'
+vid: departments_programs
+description: 'A list of Departments and Programs associated with UCR.'
+hierarchy: 0
+weight: 0

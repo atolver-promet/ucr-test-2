@@ -1,0 +1,33 @@
+<?php
+ /**
+ * Implements hook_modules_installed().
+ */
+function ucr_counselor_search_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_counselor_search_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('node_college_page_form', 'node_college_page_edit_form'))) {
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => t('Content Keywords'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 100,
+      '#optional' => true,
+      '#open' => true,
+    ];
+
+    $form['field_content_keywords']['#group'] = 'keywords';
+  }
+
+  return $form;
+}

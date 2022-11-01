@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: hero_slider_large_narrow
+label: 'Hero Slider Large (Narrow Screen) - (1400 x 730)'
+effects:
+  7bc8cd84-f116-48fd-9a9c-06455d84edc5:
+    uuid: 7bc8cd84-f116-48fd-9a9c-06455d84edc5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1400
+      height: 730
+      crop_type: focal_point

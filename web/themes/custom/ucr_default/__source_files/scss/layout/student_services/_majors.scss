@@ -1,0 +1,16 @@
+.student_majors_selection {
+  .pre-text {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    @include breakpoint(medium) {
+      text-align: right;
+    }
+    p {
+      margin-bottom: 0;
+      @include breakpoint(medium) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

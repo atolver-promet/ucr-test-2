@@ -1,0 +1,50 @@
+// Let's import Foundation first, to avoid compile errors
+@import "settings/settings";
+@import "../../../../../../npm_build/node_modules/foundation-sites/scss/foundation";
+@include foundation-everything($prototype: true);
+@import "../../../ucr_default/__source_files/scss/settings/fouc_prevention";
+// UCR Design 8 Stuff
+@import "../../../ucr_default/__source_files/scss/layout/mixins";
+
+@import "../../../ucr_default/__source_files/scss/layout/globals";
+@import "../../../ucr_default/__source_files/scss/layout/alerts";
+@import "../../../ucr_default/__source_files/scss/layout/regions/emergency";
+
+
+
+@import "layout/regions/megamenu";
+@import "../../../ucr_default/__source_files/scss/layout/regions/hero-panel";
+@import "../../../ucr_default/__source_files/scss/layout/regions/content-header";
+@import "../../../ucr_default/__source_files/scss/layout/regions/content-area";
+@import "../../../ucr_default/__source_files/scss/layout/regions/column-primary";
+@import "../../../ucr_default/__source_files/scss/layout/regions/column-left";
+@import "../../../ucr_default/__source_files/scss/layout/regions/column-right";
+@import "../../../ucr_default/__source_files/scss/layout/regions/footer-area";
+@import "../../../ucr_default/__source_files/scss/layout/regions/panelizer-update";
+@import "../../../ucr_default/__source_files/scss/layout/components/essentials/slick-slider";
+@import "../../../ucr_default/__source_files/scss/layout/components/essentials/layout_builder";
+@import "../../../ucr_default/__source_files/scss/layout/components/gcs";
+@import "../../../ucr_default/__source_files/scss/layout/RETIRED/articles";
+@import "../../../ucr_default/__source_files/scss/layout/RETIRED/articles_taxonomy_list";
+@import "../../../ucr_default/__source_files/scss/layout/components/articles";
+@import "../../../ucr_default/__source_files/scss/layout/components/accordion";
+@import "../../../ucr_default/__source_files/scss/layout/components/bubbles";
+@import "../../../ucr_default/__source_files/scss/layout/components/button-bar";
+@import "../../../ucr_default/__source_files/scss/layout/components/call_to_actions";
+@import "../../../ucr_default/__source_files/scss/layout/components/custom-alerts";
+@import "../../../ucr_default/__source_files/scss/layout/components/dynamic_columns";
+@import "../../../ucr_default/__source_files/scss/layout/components/events";
+@import "../../../ucr_default/__source_files/scss/layout/components/faqs";
+@import "../../../ucr_default/__source_files/scss/layout/components/feed-imports";
+@import "../../../ucr_default/__source_files/scss/layout/components/galleria";
+@import "../../../ucr_default/__source_files/scss/layout/components/info-card";
+@import "../../../ucr_default/__source_files/scss/layout/components/localist-events";
+@import "../../../ucr_default/__source_files/scss/layout/components/profile-card";
+@import "../../../ucr_default/__source_files/scss/layout/components/profile-details";
+@import "../../../ucr_default/__source_files/scss/layout/components/statistics";
+@import "../../../ucr_default/__source_files/scss/layout/components/tabs";
+@import "../../../ucr_default/__source_files/scss/layout/components/teaser-callout";
+@import "../../../ucr_default/__source_files/scss/layout/components/testimonials";
+@import "../../../ucr_default/__source_files/scss/layout/components/taxonomies/tags";
+@import "../../../ucr_default/__source_files/scss/layout/student_services/majors";
+@import "../../../ucr_default/__source_files/scss/layout/student_services/counselors";

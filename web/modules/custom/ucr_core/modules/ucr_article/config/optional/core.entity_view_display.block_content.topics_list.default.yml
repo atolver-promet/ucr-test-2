@@ -1,0 +1,106 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.topics_list
+    - field.field.block_content.topics_list.body
+    - field.field.block_content.topics_list.field_block_margin_bottom
+    - field.field.block_content.topics_list.field_block_margin_left
+    - field.field.block_content.topics_list.field_block_margin_right
+    - field.field.block_content.topics_list.field_block_margin_top
+    - field.field.block_content.topics_list.field_block_padding_bottom
+    - field.field.block_content.topics_list.field_block_padding_left
+    - field.field.block_content.topics_list.field_block_padding_right
+    - field.field.block_content.topics_list.field_block_padding_top
+    - field.field.block_content.topics_list.field_list_by
+    - field.field.block_content.topics_list.field_show_count
+  module:
+    - options
+    - text
+id: block_content.topics_list.default
+targetEntityType: block_content
+bundle: topics_list
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_block_margin_bottom:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_left:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_right:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_top:
+    weight: 6
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_bottom:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_left:
+    weight: 8
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_right:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_top:
+    weight: 10
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_list_by:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_show_count:
+    weight: 2
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+hidden:
+  search_api_excerpt: true

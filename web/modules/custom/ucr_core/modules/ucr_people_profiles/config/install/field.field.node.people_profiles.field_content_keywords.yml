@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_keywords
+    - node.type.people_profiles
+    - taxonomy.vocabulary.content_keywords
+id: node.people_profiles.field_content_keywords
+field_name: field_content_keywords
+entity_type: node
+bundle: people_profiles
+label: 'Content Keywords'
+description: '<em>( Optional ):</em> Add keywords for better content sorting / management. To manage all the keywords for your content, please see the Taxonomy Vocabulary: <a href="/admin/structure/taxonomy/manage/content_keywords/overview" target="_blank">Content Keywords</a>.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      content_keywords: content_keywords
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

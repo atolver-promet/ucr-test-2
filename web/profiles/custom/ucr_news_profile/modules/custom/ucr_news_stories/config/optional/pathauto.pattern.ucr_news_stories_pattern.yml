@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - node
+id: ucr_news_stories_pattern
+label: 'UCR News Stories Pattern'
+type: 'canonical_entities:node'
+pattern: '/stories/[node:field_una_authored_on:date:custom:Y]/[node:field_una_authored_on:date:custom:m]/[node:field_una_authored_on:date:custom:d]/[node:title]'
+selection_criteria:
+  5d3d8426-c14b-4ed2-bb39-a5bea633393a:
+    id: node_type
+    bundles:
+      news_stories: news_stories
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 5d3d8426-c14b-4ed2-bb39-a5bea633393a
+selection_logic: and
+weight: -5
+relationships: {  }

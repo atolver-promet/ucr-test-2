@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.ucr_columns.field_background_color
+    - field.field.paragraph.ucr_columns.field_body
+    - paragraphs.paragraphs_type.ucr_columns
+  module:
+    - color_field
+    - text
+_core:
+  default_config_hash: EaXRsFDjOPWCVl2NYiM-a77ibF-hNqrO3kQBLs3oKlw
+id: paragraph.ucr_columns.default
+targetEntityType: paragraph
+bundle: ucr_columns
+mode: default
+content:
+  field_background_color:
+    weight: 1
+    settings:
+      default_colors: '#E9EDF2,#CDD3DA,#868D96,#485057,#1D3661,#637EA4,#91AFCC,#A5C8EA,#2D6CC0,#329AF0,#39B1EF,#3AA4DC,#003DA5,#FFB81C'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_body:
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

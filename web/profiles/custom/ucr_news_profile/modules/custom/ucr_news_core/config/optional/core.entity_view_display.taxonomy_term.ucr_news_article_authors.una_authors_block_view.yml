@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.una_authors_block_view
+    - field.field.taxonomy_term.ucr_news_article_authors.field_una_authors_image
+    - taxonomy.vocabulary.ucr_news_article_authors
+id: taxonomy_term.ucr_news_article_authors.una_authors_block_view
+targetEntityType: taxonomy_term
+bundle: ucr_news_article_authors
+mode: una_authors_block_view
+content:
+  field_una_authors_image:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: author_avatar
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  description: true

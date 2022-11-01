@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - paragraphs
+third_party_settings:
+  lightning_core:
+    description: 'Default Hero Slider view. Max height: 250px.'
+id: paragraph.hero_slider
+label: 'Hero Slider (Default)'
+targetEntityType: paragraph
+cache: true

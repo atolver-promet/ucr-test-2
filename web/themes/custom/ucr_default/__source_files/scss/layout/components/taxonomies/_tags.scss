@@ -1,0 +1,96 @@
+$tags-border: $ucr-white-3;
+$tags-article-border: $grey-500;
+$tags-article-list-title-link: #003DA5;
+$tags-article-list-title-link-hover: $ucr-blue;
+$tags-article-list-about-link-hover: $ucr-blue;
+// For all general listing pages.
+.tags-listing {
+  .tags-listing--item {
+    border: 1px solid $tags-border;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @include breakpoint(medium) {
+      padding: 20px 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      border-bottom: 1px solid $tags-border;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+    }
+    &:first-child {
+      margin-top: 0;
+    }
+    .ucr-articles--page--list--thumbnail {
+      display: inline-block;
+      border: none;
+      @include breakpoint(medium) {
+        border: 1px solid $tags-article-border;
+      }
+      a {
+        text-decoration: none;
+        &::after {
+          display: none;
+          content: '';
+        }
+      }
+    }
+    h2 {
+      font-family: "Fira Sans Regular", sans-serif;
+      font-size: 28px;
+      line-height: 30px;
+      font-weight: bold;
+      margin-bottom: 0;
+      a {
+        color: $tags-article-list-title-link !important;
+        text-decoration: none !important;
+        padding: 0.8rem;
+        margin-bottom: 0;
+        display: block;
+        @include breakpoint(medium) {
+          padding: 0;
+          margin-bottom: 0.5rem;
+          display: inline-block;
+        }
+        &:hover {
+          color: $tags-article-list-title-link-hover;
+        }
+        &::after {
+          display: none;
+          content: '';
+        }
+      }
+    }
+    .ucr-articles--page--list--body {
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+    .ucr-articles--page--list--about {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid $tags-border;
+      font-family: "Fira Sans Regular", sans-serif;
+      font-weight: 100;
+      font-size: 14px;
+      line-height: 22px;
+      text-transform: uppercase;
+      display: inline-block;
+      color: #868d95;
+      .author-name {
+        font-family: "Fira Sans Regular", sans-serif;
+        font-weight: lighter;
+        text-transform: capitalize;
+      }
+      a {
+        text-decoration: none !important;
+        color: #d6336b !important;
+        &:hover {
+          color: $tags-article-list-about-link-hover;
+        }
+      }
+    }
+  }
+}

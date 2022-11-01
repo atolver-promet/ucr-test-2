@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_authored_by
+  - node.type.announcements
+  - taxonomy.vocabulary.news_announce_authors
+id: node.announcements.field_una_authored_by
+field_name: field_una_authored_by
+entity_type: node
+bundle: announcements
+label: 'Authored By'
+description: 'Start typing in the name of the Author for this Content. If the Author does not exist within the Announcement Author Vocabulary, <a href="/admin/structure/taxonomy/manage/news_announce_authors/add" target="_blank">please add them first</a>.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      news_announce_authors: news_announce_authors
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

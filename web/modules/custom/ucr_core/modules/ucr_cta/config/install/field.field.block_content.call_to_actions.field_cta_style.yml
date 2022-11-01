@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.call_to_actions
+    - field.storage.block_content.field_cta_style
+  module:
+    - options
+id: block_content.call_to_actions.field_cta_style
+field_name: field_cta_style
+entity_type: block_content
+bundle: call_to_actions
+label: 'Select Style'
+description: 'Please Select the style of the Call to Actions to look like.'
+required: true
+translatable: false
+default_value:
+  -
+    value: color
+default_value_callback: ''
+settings: {  }
+field_type: list_string

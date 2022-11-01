@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_image_listing
+label: 'Article Image Listing - (266 x 266)'
+effects:
+  13d0494b-dc91-42b3-9a66-8299ca2904d2:
+    uuid: 13d0494b-dc91-42b3-9a66-8299ca2904d2
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 266
+      height: 266
+      crop_type: focal_point

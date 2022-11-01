@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_uen_site_url
+    - node.type.news_externals
+  module:
+    - link
+id: node.news_externals.field_uen_site_url
+field_name: field_uen_site_url
+entity_type: node
+bundle: news_externals
+label: 'External Site URL'
+description: '<em>( Optional )</em>: Enter in the URL to the main site of the External News.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

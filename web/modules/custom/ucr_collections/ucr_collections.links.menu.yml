@@ -1,0 +1,15 @@
+# Collection Item menu items definition
+entity.collections.collection:
+  title: 'Collection Items'
+  route_name: entity.collections.collection
+  description: 'List Collection Items'
+  parent: system.admin_content
+  weight: 0
+
+# Collection Item type menu items definition
+entity.collections_type.collection:
+  title: 'Collection Groups'
+  route_name: entity.collections_type.collection
+  description: 'List Collection Groups (bundles)'
+  parent: system.admin_structure
+  weight: 0

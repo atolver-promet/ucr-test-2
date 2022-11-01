@@ -1,0 +1,75 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set background_image = file_url(content.field_callout_image.0['#item'].entity.uri.value) %}
+{% set background_color = content.field_callout_color|render|striptags|trim %}
+{% set background_style = "" %}
+{% if background_image != '' and background_image != '/' %}
+    {% set background_style = background_style ~ "background-image: url(" ~ background_image ~"); " %}
+{% endif %}
+{% if background_color is not empty %}
+    {% set background_style = background_style ~ "background-color: " ~ background_color ~ "; " %}
+    {% set background_font_color = "background-color: " ~ background_color ~ ";" %}
+{% endif %}
+
+{% set text_alignment = content.field_text_alignment.0 %}
+{% set text_alignment = content.field_text_alignment|render|striptags|trim|lower %}
+
+{% set font_color = content.field_callout_text_color|render|striptags|trim %}
+
+<div{{ attributes }}>
+    <div class="ucr-custom-block grid-container flex teaser-callout" style="{{ background_style }}">
+        <div class="grid-x grid-padding-x align-stretch">
+            {{ title_prefix }}
+            {% if label %}
+                <h2{{ title_attributes }}>{{ label }}</h2>
+            {% endif %}
+            {{ title_suffix }}
+            {% if text_alignment == "r" %}
+                <div class="auto cell ts-option">
+                    {{ content.field_optional_media }}
+                </div>
+                <div class="medium-5 cell ts-text" style="color: {{ font_color }}; {{ background_font_color }}">
+                    {{ content.field_callout_title }}
+                    {{ content.field_callout_body }}
+                    {{ content.field_callout_urls }}
+                </div>
+            {% else %}
+                <div class="medium-5 cell ts-text" style="color: {{ font_color }}; {{ background_font_color }}">
+                    {{ content.field_callout_title }}
+                    {{ content.field_callout_body }}
+                    {{ content.field_callout_urls }}
+                </div>
+                <div class="auto cell ts-option">
+                    {{ content.field_optional_media }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

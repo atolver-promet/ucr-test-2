@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\node\Entity\Node;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_gcs_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+
+    $optional_paths = array('/results', '/search-results', '/gcs-search-results');
+    foreach($optional_paths as $test_path) {
+        $tp = \Drupal::service('path.alias_manager')->getPathByAlias($test_path);
+        if($tp == $test_path) {
+            $new_path = $tp;
+            break;
+        }
+    }
+
+    if(!empty($new_path)) {
+        // Create a standard 404 Error Page and set the path of it to '/404', with its pathauto turned off.
+        $new_page = Node::create(['type' => 'gcs']);
+        $new_page->set('title', 'Search Results');
+        $new_page->set('path', ['alias' => $new_path, 'pathauto' => false]);
+        $new_page->status = 1;
+        $new_page->enforceIsNew();
+        $new_page->save();
+        $new_page->setPublished()->save();
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_gcs_update_8001() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.node.gcs.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_gcs', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_gcs_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_gcs']['8001'] = [
+        'node' => '8700',
+    ];
+    return $dependencies;
+}

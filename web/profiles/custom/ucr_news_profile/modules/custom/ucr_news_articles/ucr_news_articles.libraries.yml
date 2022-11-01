@@ -1,0 +1,16 @@
+ucr_news_slick:
+  version: VERSION
+  css:
+    theme:
+      /libraries/slick/slick/slick-theme.css: {}
+  js:
+    js/ucr_news_articles-slick.js: {}
+  dependencies:
+    - core/jquery
+    - slick/slick.theme
+ucr_news_media:
+  version: VERSION
+  js:
+    js/ucr_news_articles-media-contacts.js: {}
+  dependencies:
+    - core/jquery

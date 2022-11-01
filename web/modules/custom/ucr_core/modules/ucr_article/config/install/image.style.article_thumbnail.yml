@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_thumbnail
+label: 'Article Thumbnail - (83 x 83)'
+effects:
+  3072fff2-f852-4deb-b1e1-59dce854dcc5:
+    uuid: 3072fff2-f852-4deb-b1e1-59dce854dcc5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 83
+      height: 83
+      crop_type: focal_point

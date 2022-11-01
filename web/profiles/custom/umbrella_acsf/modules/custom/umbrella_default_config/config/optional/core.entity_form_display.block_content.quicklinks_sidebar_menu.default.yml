@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.quicklinks_sidebar_menu
+    - field.field.block_content.quicklinks_sidebar_menu.body
+    - field.field.block_content.quicklinks_sidebar_menu.field_quicklinks
+  module:
+    - paragraphs
+id: block_content.quicklinks_sidebar_menu.default
+targetEntityType: block_content
+bundle: quicklinks_sidebar_menu
+mode: default
+content:
+  field_quicklinks:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Quicklinks
+      title_plural: Quicklinks
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  body: true

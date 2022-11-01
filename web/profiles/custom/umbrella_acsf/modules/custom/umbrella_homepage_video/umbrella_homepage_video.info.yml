@@ -1,0 +1,19 @@
+name: 'Umbrella Homepage Video Custom Block'
+description: Module for the custom block for the homepage video display.
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - content_moderation
+  - datetime
+  - entity_browser
+  - fences
+  - field
+  - file
+  - image
+  - link
+  - responsive_image
+  - tb_megamenu
+  - ucr_carousel_slider

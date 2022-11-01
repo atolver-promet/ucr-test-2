@@ -1,0 +1,117 @@
+// File contains CSS for the Site Logo, Site Title, and the Slogan Text. For Desktop & Mobile Views.
+// -------------------------------------------
+$slogan-color: $white;
+$masthead-background: #003DA5;
+$masthead-border: #86BAFF;
+$masthead-title: $white;
+
+.masthead-container {
+  padding: 20px 0;
+  background-color: $masthead-background;
+  border-bottom: 1px solid $masthead-border;
+  transition: all 0.25s ease;
+  .masthead-logo {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-align: right !important;
+    width: 200px;
+    height: 60px;
+    background: url('../images/UC_Riverside_Horiz_BluBG.svg') no-repeat;
+    @include breakpoint(medium) {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      text-align: left !important;
+      width: 203px;
+      height: 60px;
+      background: url('../images/UC_Riverside_Horiz_BluBG.svg') no-repeat;
+      transition: all 0.25s ease;
+    }
+  }
+  .masthead-logo-line {
+    @extend .masthead-logo;
+    background: url('../images/UC_Riverside_Horiz_BluBG.svg') no-repeat;
+
+    @include breakpoint(medium) {
+      background: url('../images/ucr_logo-gold-white-line.svg') no-repeat;
+    }
+  }
+  .masthead-title {
+    vertical-align: top;
+    position: relative;
+    font-family: "Fira Sans Medium",sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.08;
+    padding-left: 7px;
+    margin-bottom: 0;
+    color: $masthead-title;
+    display: none;
+    @include breakpoint(medium) {
+      display: inline-block;
+      font-size: 1.85rem;
+      padding-left: 12px;
+      margin-bottom: 7px;
+      transition: all 0.25s ease;
+    }
+    a {
+      color: $masthead-title;
+
+      &:hover {
+        color: $masthead-title;
+      }
+    }
+  }
+  .slogan {
+    position: relative;
+    text-align: right;
+    color: $slogan-color;
+    font-family: "Fira Sans Medium", sans-serif;
+    font-size: 1.375rem;
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: 1.65px;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+    transition: all 0.25s ease;
+  }
+  .slogan-bold {
+    @extend .slogan;
+    font-weight: 400;
+    font-size: 1.5rem;
+    font-family: "Fira Sans Regular", sans-serif;
+  }
+}
+.sticky-shrink {
+  .masthead-container {
+    @include breakpoint(medium) {
+      padding: 8px 0 7px 0;
+    }
+    .masthead-logo {
+      @include breakpoint(medium) {
+        width: 120px;
+        height: 22px;
+      }
+    }
+    .masthead-title {
+      @include breakpoint(medium) {
+        font-size: 1.35rem;
+        padding-left: 5px;
+        margin-bottom: 3px;
+      }
+    }
+    .slogan {
+      @include breakpoint(medium) {
+        font-size: 0.95rem;
+      }
+    }
+  }
+}
+header + #content-container {
+  padding-top: 131px;
+  @include breakpoint(medium) {
+    padding-top: 0;
+  }
+}

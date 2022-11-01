@@ -1,0 +1,9 @@
+// Let's import Foundation first, to avoid compile errors
+@import "layout/settings";
+@import "../../../../../../npm_build/node_modules/foundation-sites/scss/foundation";
+@include foundation-everything;
+// UCR Design 8 Stuff
+@import "../../../ucr_default/__source_files/scss/layout/mixins";
+@import "../../../ucr_default/__source_files/scss/layout/fonts";
+@import "../../../ucr_default/__source_files/scss/layout/globals";
+@import "../../../ucr_default/__source_files/scss/layout/ck-editor";

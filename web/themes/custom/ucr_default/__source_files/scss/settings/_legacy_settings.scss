@@ -1,0 +1,233 @@
+@import "../../../../../../../../../themes/custom/ucr_default/__source_files/scss/settings/foundation_settings";
+
+// FONT FAMILIES
+$font-family-monospace: Consolas, "Andale Mono WT", "Andale Mono", 'Liberation Mono', "Courier New", Courier, monospace !default;
+$font-family-roboto: 'Roboto', Helvetica, sans-serif;
+$font-family-montserrat: 'Montserrat', Helvetica, sans-serif;
+$font-family-roboto-slab: 'Roboto Slab', Helvetica, serif;
+
+// MATERIAL DESIGN COLOR PALETTES
+@import "../../../../../../../../../themes/custom/ucr_default/__source_files/scss/settings/material_design_palette";
+// 57. Custom Variables
+// -- These Variables are to override some Foundation and are used for actual theming.
+// -----------------------------------------------------------------------------------
+
+//Grays:
+$gray0: #f8f9fa; //almost white
+$gray1: #f1f3f5;
+$gray2: #e9ecef;
+$gray3: #dee2e6;
+$gray4: #ced4da;
+$gray5: #adb5bd;
+$gray6: #6F7780;
+$gray6a: #7e7e7e;
+$gray6b: #6F7780;
+$gray7: #495057;
+$gray8: #343a40;
+$gray9: #212529; //almost black
+
+//New UCR Design 8 Colors:
+$color-primary-content: $gray6b;
+$color-picton-blue: #0979D0; //#4DADF7;//Light Blue (Cyan)
+$blue1: $color-picton-blue; // the primary theme blue
+$blue-accent: #0979D0; //#4DADF7; //$color-piction-blue;
+
+$color-curious-blue: #1F7DAF; //#3AA4DC;//Greenish Light Blue (Dark Cyan)
+$title-blue: $color-curious-blue; //(Same color, more memorable name)
+$color-astronaut: #234674;//Dark Blue
+$dark-blue: $color-astronaut;
+$color-cello: #1D3A61;//Dark, Dark blue
+$darkerer-blue: #152A45;// Darkerer blue (for submenu child hover)
+$color-polo-blue: #91AFCC;//Lt. Gray Blue
+$color-cornflower: #A5C8EA;//Lt. Blue-Gray
+$color-picton-blue-alt: #329AF0; //Medium-Light Blue (Royal Cyan)
+$lt-blue:$color-picton-blue-alt;
+$color-hoki: #637EA4;//Medium Gray Blue
+$color-crown-of-thorns: #802244;//Dark burgundy
+$color-cerise-red: #D6336C;//Magenta Red
+$link-red: $color-cerise-red;
+$color-warning-alert: #FCC419;
+$color-success-alert: #21A474;
+$color-error-alert: #DC1D1D;
+$color-info-alert: #68D3F8;
+$color-secondary-alert: #adb5bd;
+$color-ghost: $gray4;//Lt.-med. Gray
+$text-gray: $color-primary-content;
+
+// To help with Sass color variables - http://chir.ag/projects/name-that-color/
+$regal-blue: #234674;//astronaut
+$space-blue: #404B57;
+$sky-blue: #4AADE3;
+$roman-red: #E64C4E;
+$asparagus-green: #87A05C;
+$pine-green: #23ACA1;
+$deep-violet: #BD0FE1;
+$orange-peel: #E3723F;
+$warm-fuchsia: #AC176E;
+$aquamarine: #7FFFD4;
+
+$sun-yellow: #F1A900;
+$pomegranate-red: #CA2E2E;
+$pitch-black: #000000;
+$pure-white: #ffffff;
+$solid-gray: $gray6;
+$medium-gray: $gray5;
+
+$ucr-gold: #f1ab00;
+$ucr-blue: #2d6cc0;
+
+$ucr-secondary-color-1: #1D3661;
+$dk-blue:$ucr-secondary-color-1;
+$ucr-secondary-color-2: #637EA4;
+$ucr-secondary-color-3: #91AFCC;
+$ucr-secondary-color-4: #A5C8EA;
+
+$ucr-tertiary-color-1: #329AF0;
+$ucr-tertiary-color-2: #39B1EF;
+$ucr-tertiary-color-3: #3AA4DC;
+$ucr-tertiary-color-4: #D6336B;
+$pink: $ucr-tertiary-color-4;
+$ucr-tertiary-color-5: #802244;
+$burgundy:$ucr-tertiary-color-5;
+$ucr-tertiary-color-6: #14AABE;
+$teal-green: $ucr-tertiary-color-6;
+$ucr-tertiary-color-7: #FA5151;
+$red:$ucr-tertiary-color-7;
+$ucr-tertiary-color-8: #F18200;
+$orange:$ucr-tertiary-color-8;
+$tangerine:#EB9800;
+
+$ucr-grey-color-1: #FEF4F6;
+$ucr-grey-color-2: #D2D8DD;
+$ucr-grey-color-3: #AEB6BE;
+$ucr-grey-color-4: #5E6A71;
+$ucr-grey-color-5: #37424B;
+$ucr-grey-color-6: #293134;
+
+// Passes new colors to override template swatch defaults. Outputs DRY CSS.
+$primary: $regal-blue !default;
+$secondary: $space-blue !default;
+$alternate: $sky-blue !default;
+$accent: $roman-red !default;
+$success: $asparagus-green !default;
+$warning: $sun-yellow !default;
+$alert: $pomegranate-red !default;
+$dark: $gray9 !default;//$pitch-black !default;
+$light: $gray0 !default;
+$shades: $solid-gray !default;
+$black: #000000 !default;
+$white: #ffffff !default;
+$near-black: $gray9;
+
+$icon-width: 16px !default;
+$icon-height: 16px !default;
+$icon-fill: $black !default;
+$icon-stroke: $black !default;
+$icon-color: $black !default;
+$icon-stroke-width: 0 !default;
+$icon-stroke-dash: 0 !default;
+
+$audience-border: #c6c6c6; //#52719a;
+$parent-org-color: #8d8d8d;
+$slogan-color: #98a4b5;
+$drop-shadow-color: #666666;
+
+$masthead-background: $ucr-blue;
+$masthead-border: #86BAFF;
+
+$audience-menu-button-bg: #007CC0; //#39B1EF;
+$audience-menu-button-bg-hover: #277AA3;
+$audience-menu-background: #E9ECEF;
+$audience-menu-border: #ADB5BD;
+$audience-menu-shadow: #999999;
+$audience-menu-link: #74777A; //#868E96;
+$audience-menu-hover: $white;
+$audience-menu-link-hover-bg: #9EA1A3;
+
+$primary-menu-bg: $ucr-blue;
+$primary-menu-hover: $white;
+$primary-menu-hover-color: $white;
+
+$primary-menu-sub-background: $color-astronaut;
+$primary-menu-sub-border: $color-hoki;
+
+$primary-menu-sub-color: $white;
+$primary-menu-sub-hover: #6f7f90;
+$pirmary-menu-sub-hover-color: $primary-menu-hover-color;
+
+$primary-menu-mobile-background: $color-astronaut;
+$primary-menu-mobile-hover-background: $color-cello;
+
+$audience-menu-mobile-color: #4aade3;
+$audience-menu-mobile-hover-background: #7a7a7a;
+$audience-menu-mobile-button: #454545;
+
+$footer-background: #08172b;
+$footer-cell-border: #8193ac;
+$footer-text-color: #d8e4f3;
+$footer-image-border: #cacaca;
+
+$footer-button-color: #798fac;
+$footer-button-facebook: #3B5998;
+$footer-button-twitter: #00acee;
+$footer-button-youtube: #cd201f;
+$footer-button-instagram: #125688;
+$footer-button-linkedin: #0077b5;
+$footer-button-flickr: #ff0084;
+$footer-button-rss: #EC8500;
+
+$footer-input-background: #0c1c31;
+
+$page-footer-links-bkg: $primary !default;
+$page-footer-links-color: #8fbcf9;
+$page-footer-links-hover-color: #fec780;
+
+$footer-border-color-1: #454f5a;
+$footer-ucr-info-line-color: #d8e4f3;
+$footer-ucr-info-links-hover-background: #4c4c4c;
+
+$footer-legal-background: #234674;
+$footer-legal-color: #d8e4f3;
+
+$breadcrumb-border-color: #cacaca;
+$breadcrumb-active-color: #999999;
+$breadcrumb-home-hover-color: #dfebf1;
+
+$custom-content-editor-menu-bg: #fafafa;
+
+/* == Copy of the Foundation Variables to be overridden with our template CSS. */
+
+$table-background: $white;
+$table-color-scale: 5%;
+$table-border: 1px solid smart-scale($color-ghost, $table-color-scale);
+$table-padding: rem-calc(8 10 10);
+$table-hover-scale: 2%;
+$table-row-hover: darken($table-background, $table-hover-scale);
+$table-row-stripe-hover: darken($table-background, $table-color-scale + $table-hover-scale);
+$table-is-striped: true;
+$table-striped-background: smart-scale($color-ghost, $table-color-scale);
+$table-stripe: even;
+$table-head-background: smart-scale($color-picton-blue, $table-color-scale / 2);
+$table-head-row-hover: darken($table-head-background, $table-hover-scale);
+$table-foot-background: smart-scale($table-background, $table-color-scale);
+$table-foot-row-hover: darken($table-foot-background, $table-hover-scale);
+$table-head-font-color: $white;
+$table-foot-font-color: $body-font-color;
+$show-header-for-stacked: false;
+$table-stack-breakpoint: medium;
+
+// ==== OVERRIDE OF FOUNDATION SETTINGS
+$body-font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+// Breakpoints
+// --------------
+$breakpoints: (
+        small: 0,
+        medium: 768px,
+        large: 1024px,
+        xlarge: 1200px,
+        xxlarge: 1440px,
+);
+$print-breakpoint: large;
+$breakpoint-classes: (small medium large xlarge xxlarge);
+
+$prototype-spacers-count: 6;

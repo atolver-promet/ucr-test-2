@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_preview_slideshow_s
+label: 'Article Preview: Slideshow (S)'
+effects:
+  dc57a687-e07a-4d21-99c6-8586f391ecbb:
+    uuid: dc57a687-e07a-4d21-99c6-8586f391ecbb
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 767
+      height: 767
+      crop_type: focal_point

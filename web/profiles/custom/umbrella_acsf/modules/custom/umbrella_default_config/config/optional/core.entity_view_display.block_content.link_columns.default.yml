@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.link_columns
+    - field.field.block_content.link_columns.field_columns
+    - field.field.block_content.link_columns.field_title
+  module:
+    - entity_reference_revisions
+id: block_content.link_columns.default
+targetEntityType: block_content
+bundle: link_columns
+mode: default
+content:
+  field_columns:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+    region: content
+  field_title:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

@@ -1,0 +1,38 @@
+name: '(Local) UCR - Default'
+type: profile
+version: '8.7.x-6.1.x (Local)'
+description: 'Local Development Profile of UCR Default.'
+core: '8.x'
+core_version_requirement: ^8 || ^9
+package: Profiles
+base profile: ucr_profile
+install:
+  - dblog
+  - update
+exclude:
+  - acquia_purge
+  - acsf
+  - acsf_sso
+  - lightning_banner_block
+  - lightning_landing_page
+  - lightning_layout
+  - lightning_map_block
+  - lightning_media_instagram
+  - lightning_media_twitter
+  - lightning_media_slideshow
+  - lightning_media_audio
+  - lightning_roles
+  - media_entity_twitter
+  - media_entity_instagram
+  - panelizer
+  - purge
+  - purge_drush
+  - purge_ui
+  - purge_processor_cron
+  - purge_processor_lateruntime
+  - purge_queuer_coretags
+  - syslog
+themes:
+  - ucr_default
+  - ucr_design_1
+  - claro

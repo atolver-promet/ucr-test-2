@@ -1,0 +1,85 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.video.field_colo_palette
+    - field.field.paragraph.video.field_image
+    - field.field.paragraph.video.field_link
+    - field.field.paragraph.video.field_title
+    - field.field.paragraph.video.field_video_subtitle
+    - field.field.paragraph.video.field_video_url
+    - field.field.paragraph.video.field_youtube_url
+    - paragraphs.paragraphs_type.video
+  module:
+    - color_field
+    - entity_browser
+    - link
+    - video_embed_field
+id: paragraph.video.default
+targetEntityType: paragraph
+bundle: video
+mode: default
+content:
+  field_colo_palette:
+    weight: 3
+    settings:
+      default_colors: "#000000\n#1D3A61\n#234674\n#637EA4\n#4DADF7\n#3AA4DC\n#329AF0\n#802244\n#D6336C\n#FFFFFF\n#1D3661\n#637EA4\n#39B1EF\n#91AFCC\n#A5C8EA\n#D6336B\n#14AABE\n#FA5151\n#A3E24A"
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_image:
+    weight: 0
+    settings:
+      entity_browser: image_browser
+      field_widget_remove: true
+      selection_mode: selection_append
+      preview_image_style: thumbnail
+      field_widget_edit: true
+      open: false
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_browser_file
+    region: content
+  field_link:
+    type: link_default
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: 'Watch Video'
+    third_party_settings: {  }
+  field_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_video_subtitle:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_video_url:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: video_embed_field_textfield
+    region: content
+  field_youtube_url:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

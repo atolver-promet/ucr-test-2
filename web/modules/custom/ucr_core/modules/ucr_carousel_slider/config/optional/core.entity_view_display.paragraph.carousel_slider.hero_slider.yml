@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.paragraph.hero_slider
+  - field.field.paragraph.carousel_slider.field_image
+  - field.field.paragraph.carousel_slider.field_link
+  - field.field.paragraph.carousel_slider.field_media
+  - field.field.paragraph.carousel_slider.field_slider_button_text
+  - field.field.paragraph.carousel_slider.field_slider_orientation
+  - field.field.paragraph.carousel_slider.field_subtitle
+  - field.field.paragraph.carousel_slider.field_title
+  - paragraphs.paragraphs_type.carousel_slider
+  - responsive_image.styles.hero_slider_default
+  module:
+  - link
+  - options
+  - responsive_image
+id: paragraph.carousel_slider.hero_slider
+targetEntityType: paragraph
+bundle: carousel_slider
+mode: hero_slider
+content:
+  field_image:
+    type: responsive_image
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      responsive_image_style: hero_slider_default
+      image_link: ''
+    third_party_settings: {  }
+  field_link:
+    weight: 5
+    label: hidden
+    settings:
+      trim_length: null
+      url_plain: true
+      url_only: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_media:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: embedded
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_slider_orientation:
+    type: list_key
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_subtitle:
+    type: basic_string
+    weight: 4
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_title:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_slider_button_text: true
+  scheduled_publication: true

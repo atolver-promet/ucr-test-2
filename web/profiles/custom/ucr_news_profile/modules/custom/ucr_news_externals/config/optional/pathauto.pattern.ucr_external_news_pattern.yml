@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: ucr_external_news_pattern
+label: 'UCR External News Pattern'
+type: 'canonical_entities:node'
+pattern: '/external-news/[node:title]'
+selection_criteria:
+  cd9e7610-9fe2-42e9-b357-6e12f4ab8f22:
+    id: node_type
+    bundles:
+      news_externals: news_externals
+    negate: false
+    context_mapping:
+      node: node
+    uuid: cd9e7610-9fe2-42e9-b357-6e12f4ab8f22
+selection_logic: and
+weight: -9
+relationships: {  }

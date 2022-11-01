@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - system
+  theme:
+  - ucr_default
+id: ucr_default_messages
+theme: ucr_default
+region: drupal_messages
+weight: -11
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

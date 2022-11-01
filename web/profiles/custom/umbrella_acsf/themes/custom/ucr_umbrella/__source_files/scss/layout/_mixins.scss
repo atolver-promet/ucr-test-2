@@ -1,0 +1,359 @@
+@mixin line-separator($direction, $line-color: $color-curious-blue) {
+  @if $direction == "before" or $direction == "after" {
+    &:#{$direction} {
+      background: $line-color;
+      content: " ";
+      display: block;
+      height: 3px;
+      width: 5rem;
+      @if $direction == "before" {
+        margin-bottom: .375rem;
+        margin-top: 1em;
+      }
+      @else {
+        margin-bottom: 1em;
+        margin-top: .375rem;
+      }
+      @content;
+    }
+  }
+  @else {
+    @warn "`#{$direction}` is not a valid pseudo-element.";
+  }
+}
+
+@mixin ucr-icon($icon-fill, $icon-color: $icon-color, $icon-stroke: $icon-stroke, $icon-stroke-width: $icon-stroke-width, $icon-stroke-dash: $icon-stroke-dash) {
+  fill: $icon-fill;
+  stroke: $icon-stroke;
+  stroke-width: $icon-stroke-width;
+  stroke-dasharray: $icon-stroke-dash;
+  color: $icon-color;
+  background-size: inherit;
+  background-position: 50% 50%;
+}
+
+@mixin icon($icon, $c1: $primary, $c2: null, $w: 1em, $h: 1em, $x: null, $y: null, $type: null, $rotation: 0, $flip:null, $va: 1em, $ha: 1em, $sc: $icon-stroke, $sw: $icon-stroke-width, $sd: $icon-stroke-dash) {
+  position: relative;
+
+  //$icon is the hash grabbed from the svg symbols file.
+  //$c1 - color 1. (color variable)
+  //$c2 - color 2. If no color 2 is passed, color 2 inherits color 1 (color variable)
+
+  //$w - width. If no width is passed, width inherits 1em and icon is based off font size (pixel value)
+  //$h - height. If no height is passed, height inherits 1em and icon is based off font size. Height is only applicable to $type = graphic (pixel value)
+
+  //$x - horizontal offset for the icon (pixel value)
+  //$y - vertical offset for the icon (pixel value)
+
+  //$type:
+  //heading - Will append a line that splits in the center to make room for the icon. Should be used with specific center alignments
+  //graphic - Standalone graphic. Will encapsulate the icon inside of the element (usually a span) and use $w and $h to set the bounding box
+  //background - will inherit the width/height of the parent element
+
+  //$rotation: 0-360 - Rotate icon by degrees
+  //flip - true / false (will apply a negative scale to flip or invert the shape)
+
+  //$va - vertical alignment (top, middle, bottom). If no $va value is passed, vertical alignment will match baseline of text.
+  //$ha - Horizontal alignment (left, center, right)
+
+  //$sc - svg stroke color
+  //$sw - svg stroke width
+  //$sd - svg stroke dash (steps/breaks in the outline)
+
+
+  $flipValue:0;
+  @if $flip == true {
+    $flipValue: -1;
+  }
+  @else {
+    $flipValue: 1;
+  }
+  @if $type == heading {
+    &:after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity:.6;
+      background: linear-gradient(to right, currentColor 0%, currentColor calc(50% - (#{$w / 2}) - #{rem-calc(6px)}), transparent calc(50% - (#{$w / 2} + #{rem-calc(6px)})), transparent calc(50% + (#{$w / 2}) + #{rem-calc(6px)}), currentColor calc(50% + (#{$w / 2}) - #{rem-calc(6px)}), currentColor 100%);
+
+      @if $y {
+        margin-top: rem-calc($y);
+      }
+
+      @if $x {
+        margin-left: rem-calc($x);
+      }
+    }
+  }
+
+
+
+  @if $w != 1em {
+    &:before {
+      //should be the same as width for stupid IE scale bug.
+      height: rem-calc($w);
+      width: rem-calc($w);
+    }
+  }
+  @else {
+    &:before {
+      //inherits the size of the font
+      width: $w;
+      height: $w;
+    }
+  }
+
+  @if $va == top {
+    &:before {
+      top: -$w;
+    }
+
+    &:after {
+      top: -($w / 2);
+
+      // @if $y {
+      //     margin-top: rem-calc($y);
+      // }
+
+      // @if $x {
+      //     margin-left: rem-calc($x);
+      // }
+
+    }
+
+    &.button {
+      padding-top: $w * 2;
+
+      &:before {
+        top: $w / 2;
+      }
+    }
+  }
+
+  @if $va == middle {
+    &:before {
+      top: 50%;
+      transform: translateY(-50%) rotateZ(unquote("#{$rotation}deg")) scaleX($flipValue);
+    }
+
+    &:after {
+      top: 50%;
+
+      // @if $y {
+      //     margin-top: rem-calc($y);
+      // }
+
+      // @if $x {
+      //     margin-left: rem-calc($x);
+      // }
+
+    }
+  }
+
+  @if $va == bottom {
+    &:before {
+      top: 100%;
+    }
+
+    &:after {
+      top: calc(100% + ( #{$w / 2} ));
+
+      // @if $y {
+      //     margin-top: rem-calc($y);
+      // }
+
+      // @if $x {
+      //     margin-left: rem-calc($x);
+      // }
+
+    }
+
+    &.button {
+      padding-bottom: $w * 2;
+
+      &:before {
+        top: calc(100% - (#{$w} + ( #{$w} / 2 )));
+      }
+    }
+  }
+
+  @if $ha == left {
+    padding-left: $w;
+
+    &:before {
+      left: 0;
+    }
+
+    &.button {
+      padding-left: $w * 2 + $w / 2;
+
+      &:before {
+        left: $w;
+        margin-top: rem-calc(1px);
+
+        @if $y {
+          margin-top: rem-calc($y);
+        }
+      }
+    }
+  }
+
+  @if $ha == center {
+    &:before {
+      transform: translateX(-50%) rotateZ(unquote("#{$rotation}deg")) scaleX($flipValue);
+      left: 50%;
+    }
+  }
+
+  @if $ha == right {
+    padding-right: $w;
+
+    &:before {
+      right: 0;
+      margin-right: 0;
+    }
+
+    &.button {
+      padding-right: $w * 2 + $w / 2;
+
+      &:before {
+        @if $w != 1em {
+          right: rem-calc($w);
+        }
+        @else {
+          right: $w;
+        }
+
+        margin-top: rem-calc(1px);
+
+        @if $y {
+          margin-top: rem-calc($y);
+        }
+      }
+    }
+  }
+
+  @if $va == middle and $ha == center {
+    &:before {
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%) rotateZ(unquote("#{$rotation}deg")) scaleX($flipValue);
+    }
+  }
+
+  @if ($va == top or $va == bottom) and ($ha == left or $ha == right) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @if $type == graphic {
+    display: inline-block;
+    overflow: hidden;
+
+    //prevents text align from affecting alignment of icon.
+    text-align: left !important;
+
+    @if $w {
+      width: rem-calc($w);
+      height: rem-calc($h);
+
+      &:before {
+        min-height: rem-calc($w);
+
+        //should be the same as width for stupid IE scale bug.
+        min-width: rem-calc($w);
+
+        @media screen and (min-width: 0\0) {
+          //to fix blurry SVG on IE 11
+          min-width: $w * 2;
+          min-height: $w * 2;
+          transform: scale(0.5) translateY(-$w) rotateZ(unquote("#{$rotation}deg")) scaleX($flipValue);
+          transform-origin: left;
+        }
+
+        @supports (-ms-accelerator: true) {
+          //to fix blurry svg on IE Edge
+          min-width: $w * 2;
+          min-height: $w * 2;
+          transform: scale(0.5) translateY(-$w) rotateZ(unquote("#{$rotation}deg")) scaleX($flipValue);
+          transform-origin: left;
+        }
+      }
+    }
+    @else {
+      &:before {
+        width: $w;
+        height: $w;
+
+        @media screen and (min-width: 0\0) {
+          //to fix blurry SVG on IE 11
+          min-width: $w * 2;
+          min-height: $w * 2;
+          transform: scale(0.5) translateY(-$w) rotateZ(unquote("#{$rotation}deg")) scaleX($flipValue);
+          transform-origin: left;
+        }
+
+        @supports (-ms-accelerator: true) {
+          //to fix blurry svg on IE Edge
+          min-width: $w * 2;
+          min-height: $w * 2;
+          transform: scale(0.5) translateY(-$w) rotateZ(unquote("#{$rotation}deg")) scaleX($flipValue);
+          transform-origin: left;
+        }
+      }
+    }
+  }
+
+  @if $type == background {
+    width: 100%;
+    padding-top: 100%;
+    height: 0;
+    display: block;
+    background-size: 100%;
+
+    &:before {
+      padding-top: 100%;
+      background-size: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &:before {
+    @if $y {
+      margin-top: rem-calc($y);
+    }
+
+    @if $ha == right {
+      @if $x {
+        margin-right: rem-calc($x) * -1;
+      }
+    }
+    @else {
+      @if $x {
+        margin-left: rem-calc($x);
+      }
+    }
+
+    background: url("../../../../../dist/assets/img/sprite.icons.svg##{$icon}") no-repeat;
+    position: absolute;
+    content: "";
+    max-width: 100%;
+    max-height: 100%;
+
+    //@include transition;
+
+    //@if $c2 == null {
+    //  $c2: complement($c1);
+    //}
+
+    @include ucr-icon($c1, $c2, $sc, $sw, $sd);
+
+    background-size: 100%;
+  }
+}

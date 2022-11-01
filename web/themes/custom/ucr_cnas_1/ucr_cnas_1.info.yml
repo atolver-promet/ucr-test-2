@@ -1,0 +1,65 @@
+name: 'UC Riverside Drupal Theme CNAS'
+description: "This is a sub-theme of 'UCR Default'."
+core: 8.x
+core_version_requirement: ^8 || ^9
+type: theme
+base theme: ucr_default
+
+# Image appears on admin/appearance
+screenshot: images/screenshot.png
+
+# Uncomment these lines and change "ucr_default" to your theme name if you
+# need to add custom CSS or JS
+libraries:
+  - ucr_cnas_1/global-css
+  - ucr_cnas_1/global-js
+
+libraries-override:
+  ucr_default/global-css:
+    css:
+      theme:
+        css/default.min.css: false
+  ucr_default/global-js:
+    js:
+      js/megamenu.js: false
+      js/megamenu_init.js: false
+      js/default.min.js: false
+
+ckeditor_stylesheets:
+  - css/editor.min.css
+
+# Regions are output in the page.html.twig
+regions:
+  emergency: 'UCR Emergency Notifications'
+  site_alerts: 'Site Notifications'
+  header_top: 'Header Top'
+  header: 'Header Main'
+  primary_menu: 'Primary Menu'
+  hero_content: 'Hero Panel Content'
+  drupal_messages: 'Drupal Messages'
+  content_header: 'Content Header'
+  admin_controls: 'Admin Controls'
+  left_sidebar: 'Left Sidebar'
+  content: 'Primary Content'
+  right_sidebar: 'Right Sidebar'
+  content_footer: 'Content Footer'
+  footer_top: 'Footer Top'
+  footer_first: 'Footer First Column'
+  footer_second: 'Footer Second Column'
+  footer_third: 'Footer Third Column'
+  footer_fourth: 'Footer Fourth Column'
+regions_hidden:
+  page_top: 'Page Top'
+  page_bottom: 'Page Bottom'
+
+# Hidden regions
+# regions_hidden[]: Page top
+# regions_hidden[]: Page bottom
+
+#features:
+#  - logo
+#  - name
+#  - slogan
+#  - favicon
+#  - comment_user_picture
+#  - node_user_picture

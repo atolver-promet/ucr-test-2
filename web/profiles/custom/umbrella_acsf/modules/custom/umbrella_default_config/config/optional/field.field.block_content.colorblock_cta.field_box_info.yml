@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.colorblock_cta
+    - field.storage.block_content.field_box_info
+    - paragraphs.paragraphs_type.box_info
+  module:
+    - entity_reference_revisions
+id: block_content.colorblock_cta.field_box_info
+field_name: field_box_info
+entity_type: block_content
+bundle: colorblock_cta
+label: 'Box Info'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      box_info: box_info
+    target_bundles_drag_drop:
+      accordion:
+        weight: 12
+        enabled: false
+      box:
+        weight: 13
+        enabled: false
+      box_info:
+        enabled: true
+        weight: 14
+      bubbles:
+        weight: 15
+        enabled: false
+      carousel_slider:
+        weight: 16
+        enabled: false
+      column:
+        weight: 17
+        enabled: false
+      info_card:
+        weight: 18
+        enabled: false
+      statistic:
+        weight: 19
+        enabled: false
+      tab:
+        weight: 20
+        enabled: false
+      testimonial_slider:
+        weight: 21
+        enabled: false
+      video:
+        weight: 22
+        enabled: false
+field_type: entity_reference_revisions

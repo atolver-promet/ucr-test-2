@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.paragraph.field_cta_url
+  - paragraphs.paragraphs_type.cta_item
+  module:
+  - link
+id: paragraph.cta_item.field_cta_url
+field_name: field_cta_url
+entity_type: paragraph
+bundle: cta_item
+label: 'URL of the Item'
+description: 'Please enter in the URL of where this should link to.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

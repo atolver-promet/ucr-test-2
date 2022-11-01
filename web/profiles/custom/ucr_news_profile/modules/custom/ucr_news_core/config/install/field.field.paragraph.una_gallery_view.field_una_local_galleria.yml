@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_una_local_galleria
+    - node.type.galleria
+    - paragraphs.paragraphs_type.una_gallery_view
+id: paragraph.una_gallery_view.field_una_local_galleria
+field_name: field_una_local_galleria
+entity_type: paragraph
+bundle: una_gallery_view
+label: 'Local Galleria'
+description: 'Select the Galleria you want to show.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      galleria: galleria
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

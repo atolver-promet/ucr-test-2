@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: profile_page_268_x_268
+label: 'Profile Page (268 x 268)'
+effects:
+  028dfcbd-63e4-4f7d-8a5d-baa5e2ad5df1:
+    uuid: 028dfcbd-63e4-4f7d-8a5d-baa5e2ad5df1
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 268
+      height: 268
+      crop_type: focal_point

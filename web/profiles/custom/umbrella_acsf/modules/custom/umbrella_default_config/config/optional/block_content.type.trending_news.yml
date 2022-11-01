@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: trending_news
+label: 'Trending News'
+revision: 1
+description: 'Create a block with a news view reference'

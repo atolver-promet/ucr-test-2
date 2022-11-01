@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_email_address
+    - node.type.people_profiles
+id: node.people_profiles.field_email_address
+field_name: field_email_address
+entity_type: node
+bundle: people_profiles
+label: 'Email Address'
+description: 'Please enter the person''s contact email address.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

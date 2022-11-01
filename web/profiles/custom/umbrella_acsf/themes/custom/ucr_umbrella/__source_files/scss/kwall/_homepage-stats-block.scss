@@ -1,0 +1,165 @@
+.widget-title {
+  font-family: 'Avenir Next W01', 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #868E96;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.block-shadow {
+  -webkit-box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+}
+
+.block.block--stats-grid {
+  background: transparent;
+  padding: 32px 0;
+  .widget-title-icon-wrapper {
+    display: none;
+  }
+  .stats-button a {
+    display: block;
+    background: #39B1EF;
+    padding: 24px 15px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Avenir Next W01', 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+    -webkit-transition: background-color 0.25s ease-out;
+    -o-transition: background-color 0.25s ease-out;
+    transition: background-color 0.25s ease-out;
+    &:hover {
+      background: #14679e;
+    }
+  }
+  .ucr-custom-block {
+    padding: 0;
+    .stat-container {
+      /*background: transparent!important;*/
+      padding: 0;
+      margin-left: -0.9375rem;
+      margin-right: -0.9375rem;
+      > .cell {
+        width: 100%;
+        padding-left: 0.9375rem;
+        padding-right: 0.9375rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      &.large-up-1 {
+        > .cell {
+          width: 100%;
+          padding-left: 0.9375rem;
+          padding-right: 0.9375rem;
+          margin-left: 0;
+          margin-right: 0;
+        }
+        > .cell .stat {
+          border-bottom: none;
+        }
+      }
+      > .cell .stat {
+        border-bottom: none;
+      }
+      .stat {
+        background: transparent;
+        padding: 0px;
+        margin: 0;
+        min-height: 0;
+        border-top: solid 1px #39B1EF;
+        border-bottom: solid 1px #39B1EF;
+        max-width: none;
+        .stat-number {
+          padding: 16px 0 4px;
+          margin: 0;
+          font-family: 'Trade Gothic Next W01', 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
+          color: #39B1EF;
+          font-size: 64px;
+          line-height: 72px;
+          text-align: center;
+          &:after {
+            content: none;
+          }
+        }
+        .stat-description {
+          font-family: 'Trade Gothic Next W01', 'Helvetica Neue', Helvetica, 'Roboto', Arial, sans-serif;
+          color: #818181;
+          font-size: 22px;
+          line-height: 25px;
+          text-align: center;
+          font-weight: normal;
+          margin: 0;
+          padding-bottom: 28px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 48em) {
+  .block.block--stats-grid .ucr-custom-block .stat-container {
+    &.large-up-3 > .cell {
+      width: 33.33333%;
+    }
+    &.large-up-2 > .cell {
+      width: 50%;
+    }
+    > .cell .stat {
+      border-bottom: solid 1px #39B1EF;
+    }
+  }
+}
+
+.path-frontpage .block.block--stats-grid {
+  -webkit-box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  padding: 32px 24px;
+  margin-bottom: 32px;
+  text-align: center;
+  border: solid 1px #DBDBDB;
+  h2.block-title {
+    font-family: 'Avenir Next W01', 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #868E96;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 0 8px;
+  }
+  .widget-title-icon-wrapper {
+    overflow: hidden;
+    margin-bottom: 24px;
+    display: block;
+    span.widget-title-icon {
+      line-height: 0.5;
+      text-align: center;
+      display: inline-block;
+      position: relative;
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        border-bottom: 1px solid #DBDBDB;
+        top: 0;
+        width: 600px;
+      }
+      &:before {
+        right: 100%;
+        margin-right: 15px;
+      }
+      &:after {
+        left: 100%;
+        margin-left: 15px;
+      }
+    }
+  }
+}

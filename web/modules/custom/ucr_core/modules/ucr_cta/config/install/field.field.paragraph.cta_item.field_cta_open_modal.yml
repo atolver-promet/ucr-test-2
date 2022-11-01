@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.paragraph.field_cta_open_modal
+  - paragraphs.paragraphs_type.cta_item
+id: paragraph.cta_item.field_cta_open_modal
+field_name: field_cta_open_modal
+entity_type: paragraph
+bundle: cta_item
+label: 'Open in Modal'
+description: '<em>( Optional ):</em> Check this box to have the link open in a Modal pop-up window. This is best suited for Video''s and Direct Image Links.'
+required: false
+translatable: false
+default_value:
+-
+  value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

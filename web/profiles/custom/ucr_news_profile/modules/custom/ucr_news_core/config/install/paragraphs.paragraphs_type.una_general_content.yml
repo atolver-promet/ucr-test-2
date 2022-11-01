@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: una_general_content
+label: 'General Content'
+icon_uuid: null
+description: 'A general WYSIWYG body field to be added within the News Articles.'
+behavior_plugins: {  }

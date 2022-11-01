@@ -1,0 +1,105 @@
+.bubble-grid {
+  .bubble-item-wrapper {
+    .bubble-item {
+      /* min-width: 15rem;
+      max-height: 15rem;
+      margin: 40px auto;
+      position: relative;
+      text-align: center;
+      overflow-x: clip; */
+      //border-radius: 50%;
+      //width: 50%;
+      display: block;
+      width: 15rem;
+      height: 15rem;
+      margin: 0 auto;
+      text-decoration: none;
+      border-radius: 50%;
+      overflow: hidden;
+      .bubble-image {
+        @include box(15rem, $circle: true);
+        border: 1px solid lighten($body-color, 50%);
+        overflow: hidden;
+        margin: 0 auto;
+      }
+      .bubble-text {
+        /*position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $body-color;
+        font-size: .875rem;
+        font-weight: 400;
+        line-height:1.64;
+        padding: 1rem 1rem;
+        min-height: 74px;
+        background-color: rgba($body-background, .85);
+        width: 100%; */
+        position: relative;
+        top: -160px;
+        left: 0;
+        background-color: rgba($body-background, .85);
+        color: #333333;
+        padding: 36px 20px;
+        font-size: 18px;
+        font-weight: bold !important;
+        line-height: 18px;
+        min-height: 10px;
+        top: -160px;
+        text-decoration: none;
+      }
+      .bubble-overlay-gold{
+        @extend .bubble-text;
+        background-color: rgba(255, 184, 28, .85);
+      }
+      .bubble-overlay-blue{
+        @extend .bubble-text;
+        color: #fff !important;
+        background-color: rgba(0, 58, 213, .85);
+      }
+      .bubble-text-above {
+        position: relative;
+        top: -270px;
+        left: 0;
+        color: $body-color;
+        min-height: 74px;
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: bold;
+        padding: 0.25rem 0rem 0rem;
+      }
+
+      .bubble-text-below {
+        position: relative;
+        color: $body-color;
+        font-size: 18px;
+        line-height: 18px;
+        padding:.25rem 0rem 0rem;
+        min-height: 74px;
+        font-weight: bold;
+      }
+    }
+    a {
+      &.bubble-link {
+        display: block;
+        margin: 0 auto;
+        color: $body-color;
+        text-decoration: none !important;
+        &:hover .bubble-text, &:focus .bubble-text {
+          font-weight: 400;
+          color: $body-color;
+          text-decoration: none !important;
+        }
+        &:hover .bubble-image, &:focus .bubble-image {
+          opacity:.7;
+        }
+      }
+      &::after {
+        display: none;
+      }
+    }
+    .text-above, .text-below{
+      overflow: visible !important;
+    }
+  }
+}

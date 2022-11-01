@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.custom_header
+    - field.field.block_content.custom_header.field_header_image
+    - field.field.block_content.custom_header.field_header_video_url
+    - field.field.block_content.custom_header.field_hide_header_title
+    - field.field.block_content.custom_header.field_hide_overlay_title
+    - field.field.block_content.custom_header.field_secondary_title
+    - field.field.block_content.custom_header.field_title
+    - field.field.block_content.custom_header.field_title_link
+    - field.field.block_content.custom_header.field_title_placement
+id: block_content.custom_header.default
+targetEntityType: block_content
+bundle: custom_header
+mode: default
+content:
+  content_moderation_control:
+    weight: -20
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_header_image:
+    type: entity_reference_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: general_header
+      link: false
+    third_party_settings: {  }
+    region: content
+  field_hide_header_title:
+    weight: 2
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  field_header_video_url: true
+  field_hide_overlay_title: true
+  field_secondary_title: true
+  field_title_link: true
+  field_title_placement: true
+  search_api_excerpt: true

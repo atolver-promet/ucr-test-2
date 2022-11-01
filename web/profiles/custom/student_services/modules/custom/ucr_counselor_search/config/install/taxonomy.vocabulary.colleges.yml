@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Transfer Colleges'
+vid: colleges
+description: 'A list of colleges supported by our counselors'
+hierarchy: 0
+weight: 0

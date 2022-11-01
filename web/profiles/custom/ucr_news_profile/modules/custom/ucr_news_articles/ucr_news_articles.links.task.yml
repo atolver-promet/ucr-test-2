@@ -1,0 +1,12 @@
+ucr_news_articles.content.collection:
+  title: 'Articles'
+  route_name: ucr_news_articles.content
+  base_route: system.admin_content
+ucr_news_articles.overview.collection:
+  title: 'Overview'
+  route_name: ucr_news_articles.content
+  parent_id: ucr_news_articles.content.collection
+ucr_news_articles.moderated.collection:
+  title: 'Moderated articles'
+  route_name: ucr_news_articles.content_moderated
+  parent_id: ucr_news_articles.content.collection

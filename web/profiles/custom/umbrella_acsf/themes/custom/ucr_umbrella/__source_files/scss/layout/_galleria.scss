@@ -1,0 +1,159 @@
+.ucr-galleria-teaser {
+  .ucr-galleria-container {
+    .ucr-galleria-thumbnails {
+      width: 100%;
+      @media screen and #{breakpoint(medium)} {
+        max-width: 935px;
+      }
+    }
+    a {
+      &:after {
+        display: none;
+        content: '';
+        padding-left: 0;
+      }
+    }
+  }
+}
+.ucr-galleria-view-more {
+  text-align: center;
+  margin-top: 1.5rem;
+  @media screen and #{breakpoint(medium)} {
+    text-align: right;
+  }
+}
+.ucr-galleria-full {
+  .ucr-galleria-container {
+    .ucr-galleria-thumbnails {
+      width: 100%;
+    }
+    .slick-slider {
+      margin-top: 1.5rem !important;
+      .slick-list {
+        margin: 0 50px;
+        @media screen and #{breakpoint(medium)} {
+        }
+        @media screen and #{breakpoint(large)} {
+          margin: 0 50px;
+        }
+        .slick-slide {
+          width: 100px;
+          height: 100px;
+          margin: 0 10px;
+          @media screen and #{breakpoint(medium)} {
+          }
+          @media screen and #{breakpoint(large)} {
+            margin: 0 10px;
+          }
+          img {
+            &:hover {
+              opacity: 0.75;
+            }
+          }
+        }
+      }
+      .slick-arrow {
+        position: absolute;
+        top: 0;
+        background: none;
+        color: transparent;
+        width: 50px;
+        height: 100px;
+        cursor: pointer;
+        &::before {
+          position: absolute;
+          color: $color-hoki;
+          font-size: 6.25rem;
+          top: 0;
+          margin: 0;
+        }
+        &:hover, &:focus, &:active {
+          background: none;
+          &::before {
+            color: $color-astronaut;
+          }
+        }
+      }
+      .slick-prev {
+        left: 0;
+        &::before {
+          font-family: "Material Design Icons";
+          content: "\F141";
+          left: -30px;
+        }
+      }
+      .slick-next {
+        right: 0;
+        &::before {
+          font-family: "Material Design Icons";
+          content: "\F142";
+          width: 100px;
+          right: -30px;
+        }
+      }
+      .slick-dots {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        list-style-type: none;
+        li {
+          position: relative;
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          margin: 0 5px;
+          padding: 0;
+          cursor: pointer;
+          button {
+            font-size: 0;
+            line-height: 0;
+            display: block;
+            width: 20px;
+            height: 20px;
+            padding: 5px;
+            cursor: pointer;
+            color: transparent;
+            border: 0;
+            outline: none;
+            background: transparent;
+            &::before {
+              font-family: "Material Design Icons";
+              font-size: 1.125rem;
+              line-height: 20px;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 20px;
+              height: 20px;
+              content: "\F12F";
+              text-align: center;
+              color: $color-hoki !important;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+            }
+            &:hover {
+              &::before {
+                color: $color-astronaut !important;
+              }
+            }
+          }
+          &.slick-active {
+            button {
+              &::before {
+                color: $color-astronaut !important;
+              }
+            }
+          }
+        }
+      }
+    }
+    a {
+      &:after {
+        display: none;
+        content: '';
+        padding-left: 0;
+      }
+    }
+  }
+}

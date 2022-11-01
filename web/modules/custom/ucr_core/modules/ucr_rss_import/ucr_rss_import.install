@@ -1,0 +1,95 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_rss_import_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_rss_import_update_8001() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if (!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.feeds_display.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_rss_import', $config_files);
+        if (!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * April 2020 - Add new items_per_row field to RSS module
+ */
+function ucr_rss_import_update_8002() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if (!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.storage.block_content.field_items_per_row',
+            'field.field.block_content.feeds_display.field_items_per_row',
+            'core.entity_form_display.block_content.feeds_display.default',
+            'core.entity_view_display.block_content.feeds_display.default'
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_rss_import', $config_files);
+        if (!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * July 2021 - Update view to show reformatted date
+ */
+function ucr_rss_import_update_8003() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if (!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'views.view.feeds_import_display'
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_rss_import', $config_files);
+        if (!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_rss_import_update_dependencies() {
+    $dependencies = array();
+//    $dependencies['ucr_tabs']['8002'] = [
+//        'ucr_core' => '8004'
+//    ];
+    return $dependencies;
+}

@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_awards
+    - node.type.people_profiles
+  module:
+    - text
+id: node.people_profiles.field_awards
+field_name: field_awards
+entity_type: node
+bundle: people_profiles
+label: Awards
+description: '<em>( Optional )</em> Please enter in the awards you may have earned. If you leave this field blank, it will now show up on the profile.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

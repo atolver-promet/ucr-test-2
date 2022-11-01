@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.scotmemo_publishers_post_view
+    - taxonomy.vocabulary.scotmemo_publishers
+id: taxonomy_term.scotmemo_publishers.scotmemo_publishers_post_view
+targetEntityType: taxonomy_term
+bundle: scotmemo_publishers
+mode: scotmemo_publishers_post_view
+content: {  }
+hidden:
+  description: true

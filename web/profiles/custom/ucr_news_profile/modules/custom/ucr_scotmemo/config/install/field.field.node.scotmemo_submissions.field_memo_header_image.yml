@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_memo_header_image
+    - node.type.scotmemo_submissions
+id: node.scotmemo_submissions.field_memo_header_image
+field_name: field_memo_header_image
+entity_type: node
+bundle: scotmemo_submissions
+label: 'Header image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings: {  }
+field_type: entity_reference

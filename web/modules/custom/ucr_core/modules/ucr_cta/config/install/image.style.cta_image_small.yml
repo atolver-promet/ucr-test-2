@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: cta_image_small
+label: 'CTA Image (Small)'
+effects:
+  5df018bb-005d-4ee6-aa35-1863bcf9bac3:
+    uuid: 5df018bb-005d-4ee6-aa35-1863bcf9bac3
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 768
+      crop_type: focal_point

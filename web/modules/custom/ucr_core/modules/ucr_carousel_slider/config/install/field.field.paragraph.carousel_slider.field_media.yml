@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_media
+    - media.type.video
+    - paragraphs.paragraphs_type.carousel_slider
+id: paragraph.carousel_slider.field_media
+field_name: field_media
+entity_type: paragraph
+bundle: carousel_slider
+label: Video
+description: "<em>( Optional )</em> Select or embed the video you want to display as the slide.\r\n<br><b>NOTE:</b> This is for videos ONLY. If you want your slider to be images, please use the field above. It is recommended that you <b>do not</b> mix video and images together.\r\n<br><b>NOTE:</b> If you use a video as a slide, none of the text entered in the 'Text' area will be displayed for that slide."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      video: video
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

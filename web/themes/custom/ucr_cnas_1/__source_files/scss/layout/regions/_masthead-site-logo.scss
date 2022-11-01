@@ -1,0 +1,100 @@
+// File contains CSS for the Site Logo, Site Title, and the Slogan Text. For Desktop & Mobile Views.
+// -------------------------------------------
+header {
+  position: fixed;
+  z-index: 99;
+  flex-shrink: 0;
+  @media screen and #{breakpoint(medium)} {
+    position: relative;
+  }
+}
+
+.masthead-container {
+  padding: 20px 0;
+  background-color: $masthead-background;
+  border-bottom: 1px solid $masthead-border;
+  .masthead-logo {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-align: right !important;
+    width: 78px;
+    height: 60px;
+    background: url('../images/UCR-monogram-over-blue-bg.svg') no-repeat;
+
+    @media screen and #{breakpoint(medium)} {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      text-align: left !important;
+      width: 203px;
+      height: 60px;
+      background: url('../images//UC_Riverside_Horiz_BluBG.svg') no-repeat;
+    }
+  }
+  .masthead-logo-line {
+    @extend .masthead-logo;
+    background: url('../images/UCR-monogram-over-blue-bg.svg') no-repeat;
+
+    @media screen and #{breakpoint(medium)} {
+      background: url('../images/ucr_logo-gold-white-line.svg') no-repeat;
+    }
+  }
+  .masthead-title {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.08;
+    padding-left: 7px;
+    margin-bottom: 20px;
+    color: $white;
+    left: -20px;
+
+    @media screen and #{breakpoint(medium)} {
+      font-size: 1.85rem;
+      padding-left: 12px;
+      margin-bottom: 7px;
+    }
+
+    a {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .slogan {
+    position: relative;
+    /*max-width: 21.25rem;*/
+    text-align: right;
+    color: $white;
+    font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 1.375rem;
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: 1.65px;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+  }
+  .slogan-bold {
+    @extend .slogan;
+    font-weight: 400;
+    font-size: 1.65rem;
+    font-family: $trade-gothic;
+  }
+}
+header {
+  width: 100%;
+}
+header + #content-container {
+  padding-top: 131px;
+  @include breakpoint(medium) {
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cta_font_color
+    - paragraphs.paragraphs_type.cta_item
+  module:
+    - options
+id: paragraph.cta_item.field_cta_font_color
+field_name: field_cta_font_color
+entity_type: paragraph
+bundle: cta_item
+label: 'Font Color'
+description: 'Please select the font color.'
+required: true
+translatable: false
+default_value:
+  -
+    value: '#FEF4F6'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.tabs
+    - field.storage.block_content.field_tabs
+    - paragraphs.paragraphs_type.tab
+  module:
+    - entity_reference_revisions
+id: block_content.tabs.field_tabs
+field_name: field_tabs
+entity_type: block_content
+bundle: tabs
+label: 'Tab Items'
+description: 'Please add the different tab items you want.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      tab: tab
+    target_bundles_drag_drop:
+      accordion:
+        weight: 7
+        enabled: false
+      bubbles:
+        weight: 8
+        enabled: false
+      carousel_slider:
+        weight: 9
+        enabled: false
+      info_card:
+        weight: 10
+        enabled: false
+      statistic:
+        weight: 11
+        enabled: false
+      tab:
+        enabled: true
+        weight: 12
+field_type: entity_reference_revisions

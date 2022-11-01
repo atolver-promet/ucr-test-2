@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.galleria
+    - field.storage.block_content.field_galleria_preview
+    - node.type.galleria
+id: block_content.galleria.field_galleria_preview
+field_name: field_galleria_preview
+entity_type: block_content
+bundle: galleria
+label: 'Galleria Preview'
+description: 'Start typing in the name of the Gallery you wish to preview. The Gallery <strong>must</strong> exist first before you can place a preview block of it.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      galleria: galleria
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.una_gallery_view.field_una_local_galleria
+    - paragraphs.paragraphs_type.una_gallery_view
+id: paragraph.una_gallery_view.default
+targetEntityType: paragraph
+bundle: una_gallery_view
+mode: default
+content:
+  field_una_local_galleria:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  scheduled_publication: true

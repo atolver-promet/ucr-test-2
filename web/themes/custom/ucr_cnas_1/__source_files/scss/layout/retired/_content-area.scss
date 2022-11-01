@@ -1,0 +1,164 @@
+// File contains CSS for the overall content area. To change the different columns, please refer to their individual scss files.
+// -------------------------------------------
+.primary-content-header {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: $color-primary-content;
+  position: relative;
+  @include breakpoint(medium) {
+    position: inherit;
+    top: 0;
+  }
+  h1 {
+    color: $color-picton-blue-alt;
+    font-weight: 300;
+    font-size: 2.375rem;
+    line-height: 1.10526;
+    &.page-title {
+      color: $color-curious-blue;
+      margin-bottom: 2rem;
+    }
+  }
+}
+.primary-content-area {
+  //min-height: 200px;
+  color: $color-primary-content;
+  @include breakpoint(medium) {
+    //min-height: 300px;
+  }
+  a {
+    color: $color-cerise-red;
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      color: darken($color-cerise-red, 20%);
+    }
+    &:active {
+      color: $color-picton-blue;
+    }
+  }
+
+  h1 {
+    color: $color-picton-blue-alt;
+    font-weight: 300;
+    font-size: 2.375rem;
+    line-height: 1.10526;
+    &.page-title {
+      color: $color-curious-blue;
+      margin-bottom: 2rem;
+    }
+  }
+  h2 {
+    @extend h1;
+    font-size: 2.125rem;
+  }
+  h3 {
+    @extend h1;
+    font-size: 1.875rem;
+  }
+  h4 {
+    @extend h1;
+    font-size: 1.625rem;
+  }
+  h5 {
+    @extend h1;
+    font-size: 1.375rem;
+  }
+  h6 {
+    @extend h1;
+    font-size: 1.125rem;
+  }
+
+  pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background-color: lighten($color-cornflower, 13%);
+    border: 1px solid $color-cello;
+  }
+
+  figure {
+    figcaption {
+      font-size: 0.775rem;
+      text-align: center;
+      font-weight: bold;
+      margin: 0.25rem 0.25rem 1rem 0.25rem;
+    }
+
+    &.align-center {
+      text-align: center;
+    }
+
+    &.align-left {
+      figcaption {
+        margin-right: 1.25rem;
+      }
+      img {
+        margin-right: 1rem;
+      }
+    }
+
+    &.align-right {
+      figcaption {
+        margin-left: 1.25rem;
+      }
+      img {
+        margin-left: 1rem;
+      }
+    }
+
+    article {
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  article {
+    &.align-center {
+      text-align: center;
+      img {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &.align-left {
+      img {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    &.align-right {
+      img {
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+.content-editor-menu {
+  border-bottom: 1px solid $breadcrumb-border-color;
+  li {
+    a {
+      border: 1px solid $breadcrumb-border-color;
+      color: $color-picton-blue;
+      background-color: $custom-content-editor-menu-bg;
+      border-bottom: none;
+      -webkit-border-radius: 5px 5px 0 0;
+      -moz-border-radius: 5px 5px 0 0;
+      border-radius: 5px 5px 0 0;
+      margin-right: 7px;
+      text-decoration: none;
+      &:hover, &:focus {
+        border-bottom: none;
+      }
+    }
+  }
+}
+

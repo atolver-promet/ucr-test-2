@@ -1,0 +1,14 @@
+uuid: 0d909053-8355-4cc0-bd02-8abb2c150767
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.cnas
+label: CNAS
+targetEntityType: block_content
+cache: true

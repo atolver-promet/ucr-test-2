@@ -1,0 +1,383 @@
+$size: 50px;
+
+.slick-arrow {
+  background-color: $black;
+  background: rgba($black, 0.5);
+  &:hover, &:active, &:focus {
+    background: rgba(black, 0.75);
+    &::before {
+      color: $white;
+    }
+  }
+}
+
+.slick-prev {
+  height: $size;
+  width: $size / 2;
+  border-bottom-right-radius: $size * 2;
+  border-top-right-radius: $size * 2;
+  @include breakpoint(medium) {
+    height: $size * 1.5;
+    width: $size * 0.75;
+  }
+  @include breakpoint(large) {
+    height: $size * 2;
+    width: $size;
+  }
+
+  &::before {
+    font-family: "Material Design Icons";
+    content: "\F141";
+    color: $white;
+    position: absolute;
+    left: 0;
+    font-size: 2.5rem;
+    top: 0.35rem;
+    margin-left: -0.7rem;
+    @include breakpoint(medium) {
+      font-size: 4rem;
+      top: 0.35rem;
+      margin-left: -1rem;
+    }
+    @include breakpoint(large) {
+      font-size: 5rem;
+      top: 0.65rem;
+      margin-left: -1.25rem;
+    }
+  }
+}
+
+.slick-next {
+  height: $size;
+  width: $size / 2;
+  border-bottom-left-radius: $size * 2;
+  border-top-left-radius: $size * 2;
+  @include breakpoint(medium) {
+    height: $size * 1.5;
+    width: $size * 0.75;
+  }
+  @include breakpoint(large) {
+    height: $size * 2;
+    width: $size;
+  }
+
+  &::before {
+    font-family: "Material Design Icons";
+    content: "\F142";
+    color: $white;
+    position: absolute;
+    font-size: 2.5rem;
+    top: 0.35rem;
+    right: 0;
+    width: 31px;
+    overflow: hidden;
+    @include breakpoint(medium) {
+      font-size: 4rem;
+      top: 0.35rem;
+      width: 48px;
+    }
+    @include breakpoint(large) {
+      font-size: 5rem;
+      top: 0.65rem;
+      width: 60px;
+    }
+  }
+}
+.slick-dotted.slick-slider {
+  margin-bottom: 0;
+}
+.slick-dots {
+  bottom: 0;
+  li {
+    button {
+      &:before {
+        color: $white !important;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  img {
+    margin: 0 auto;
+  }
+  iframe {
+    margin: 0 auto;
+  }
+  &.hs-default {
+    .slider-text-bg-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      @include breakpoint(medium) {
+        width: 45%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .slider-text-container {
+        max-height: 250px;
+        position: relative;
+        height: 100%;
+        .slider-text-area {
+          position: relative;
+          width: 100%;
+          top: 50%;
+          transform: perspective(1px) translateY(-50%);
+          background: rgba(0, 0, 0, 0.5);
+          @include breakpoint(medium) {
+            background: none;
+          }
+          .slider-title {
+            font-family: "Adelle W01";
+            color: $white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 1.25rem;
+            line-height: 1.3125rem;
+            @include breakpoint(medium) {
+              font-size: 150%;
+              line-height: 1.8125rem;
+            }
+            @include breakpoint(large) {
+              font-size: 2rem;
+              line-height: 2.3125rem;
+            }
+          }
+          .slider-subtitle {
+            font-family: "Trade Gothic Next W01";
+            color: $white;
+            font-size: 1rem;
+            line-height: 1.25rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            @include breakpoint(medium) {
+              font-size: 1.125rem;
+              line-height: 1.5rem;
+              text-shadow: none;
+            }
+            @include breakpoint(large) {
+              font-size: 1.25rem;
+              line-height: 1.5rem;
+              text-shadow: none;
+            }
+            &:before {
+              background: $white;
+              content: " ";
+              display: block;
+              height: 2px;
+              width: 100px;
+              margin-bottom: 0.215rem;
+              margin-top: 0.5rem;
+              margin-left: auto;
+              margin-right: auto;
+              @include breakpoint(medium) {
+                height: 3px;
+                margin-bottom: 1.5rem;
+                margin-top: 2rem;
+                margin-left: 0;
+                margin-right: 0;
+              }
+              @include breakpoint(large) {
+                height: 3px;
+                margin-bottom: 1.5rem;
+                margin-top: 2rem;
+                margin-left: 0;
+                margin-right: 0;
+              }
+            }
+          }
+          .slider-button-area {
+            margin-top: 8px;
+            @include breakpoint(medium) {
+              margin-top: 16px;
+            }
+            @include breakpoint(large) {
+              margin-top: 32px;
+            }
+            .slider_button {
+              margin-bottom: 5px;
+              a {
+                font-family: "Fira Sans Regular";
+                text-transform: uppercase;
+                font-size: 0.8125rem;
+                font-weight: 600;
+                line-height: 0.8125rem;
+                display: inline-block;
+                color: $white;
+                border: 2px solid $white;
+                background-color: rgba(0, 0, 0, 0.5);
+                padding: 0.825rem 1.215rem;
+                width: 100%;
+                text-align: center;
+                &::after {
+                  content: "";
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.hs-medium {
+    @extend .hs-default;
+    .slider-text-bg-container {
+      .slider-text-container {
+        max-height: 450px;
+        .slider-text-area {
+          .slider-title {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 1.25rem;
+            line-height: 1.3125rem;
+            @include breakpoint(medium) {
+              font-size: 150%;
+              line-height: 1.8125rem;
+            }
+            @include breakpoint(large) {
+              font-size: 2rem;
+              line-height: 2.3125rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.hs-large {
+    @extend .hs-default;
+    .slider-text-bg-container {
+      .slider-text-container {
+        max-height: 730px;
+        .slider-text-area {
+          .slider-title {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 2rem;
+            line-height: 2.1125rem;
+            @include breakpoint(medium) {
+              font-size: 150%;
+              line-height: 1.8125rem;
+            }
+            @include breakpoint(large) {
+              font-size: 3rem;
+              line-height: 3.3125rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > .slider-text-bg-container {
+    &.hs-left {
+      top: 0;
+      left: 0;
+      .slider-text-container {
+        .slider-text-area {
+          padding: 12px 28px 32px 28px;
+          text-align: center;
+          @include breakpoint(medium) {
+            padding: 64px 32px 64px 96px;
+            text-align:left;
+          }
+          @include breakpoint(large) {
+            padding: 64px 32px 64px 96px;
+            text-align: left;
+          }
+          .slider-button-area {
+            .slider_button {
+              a {
+                @include breakpoint(medium) {
+                  width: 65%;
+                  margin-left: auto;
+                  margin-right: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.hs-right {
+      top: 0;
+      right: 0;
+      .slider-text-container {
+        .slider-text-area {
+          padding: 12px 28px 32px 28px;
+          text-align: center;
+          @include breakpoint(medium) {
+            padding: 64px 96px 64px 32px;
+            text-align: left;
+          }
+          @include breakpoint(large) {
+            padding: 64px 96px 64px 32px;
+            text-align: left;
+          }
+          .slider-button-area {
+            .slider_button {
+              a {
+                @include breakpoint(medium) {
+                  width: 65%;
+                  margin-left: auto;
+                  margin-right: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.hs-center {
+      top: 0;
+      left: 0;
+      @include breakpoint(medium) {
+        width: 100%;
+        background: none;
+      }
+      .slider-text-container {
+        .slider-text-area {
+          padding: 12px 28px 32px 28px;
+          text-align: center;
+          background: rgba(0, 0, 0, 0.5);
+          @include breakpoint(medium) {
+            padding: 32px;
+          }
+          @include breakpoint(large) {
+            padding: 32px;
+          }
+          .slider-subtitle {
+            &:before {
+              margin-left: auto;
+              margin-right: auto;
+            }
+          }
+          .slider-button-area {
+            .slider_button {
+              a {
+                @include breakpoint(medium) {
+                  width: 65%;
+                }
+                @include breakpoint(large) {
+                  width: 400px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.carousel-slider {
+  @extend .hero-slider;
+  @extend .hs-default;
+  .slider-text-bg-container {
+    .slider-text-container {
+      max-height: inherit;
+    }
+  }
+}

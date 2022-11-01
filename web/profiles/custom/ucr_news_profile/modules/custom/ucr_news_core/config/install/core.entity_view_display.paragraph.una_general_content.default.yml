@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.una_general_content.field_body
+    - paragraphs.paragraphs_type.una_general_content
+  module:
+    - text
+id: paragraph.una_general_content.default
+targetEntityType: paragraph
+bundle: una_general_content
+mode: default
+content:
+  field_body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden:
+  scheduled_publication: true

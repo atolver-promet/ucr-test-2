@@ -1,0 +1,236 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_news_awards_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_news_awards_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_news_awards_menu_local_actions_alter(&$local_actions) {
+}
+
+/**
+ * @param $view
+ * Implements hook_views_post_render().
+ * Used to update the title for the taxonomy view that is within the 'news_article_views' view.
+ */
+function ucr_news_awards_views_post_render($view) {
+  $id = $view->id();
+  if(strtolower($id) == "news_awards_views") {
+    $display = $view->current_display;
+    if(strtolower($display) == "awards_listing") {
+      $route_params = \Drupal::routeMatch()->getParameters();
+      $year = $route_params->get('arg_0');
+      $month = $route_params->get('arg_1');
+      $day = $route_params->get('arg_2');
+
+      $appending_title = "";
+      $day = (!is_numeric($day) ? "" : $day);
+      $month = (!is_numeric($month) ? "" : $month);
+      $year = (!is_numeric($year) ? "" : $year);
+      if(!empty($day) && !empty($month) && !empty($year)) {
+        $appending_title = " for ".date("F jS, Y", strtotime($year."-".$month."-".$day));
+      } elseif(!empty($month) && !empty($year)) {
+        $appending_title = " for ".date("F Y", strtotime($year."-".$month."-01"));
+      } elseif(!empty($year)) {
+        $appending_title = " for ".$year;
+      }
+
+      $view->setTitle("Awards" . $appending_title);
+    }
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function ucr_news_awards_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  $route_name = $route_match->getRouteName();
+  $links = $breadcrumb->getLinks();
+  if($links) {
+    $home_link = $links[0];
+  } else {
+    $home_link = array();
+  }
+
+  $types = array('view_id', 'taxonomy_term', 'node');
+  $type_name = "";
+  foreach($types as $type_to_try) {
+    $route_type = $route_match->getParameter($type_to_try);
+    if($route_type) {
+      $type_name = $type_to_try;
+      break;
+    }
+  }
+
+  switch($type_name) {
+    case "view_id": {
+      $view_name = $route_match->getParameter('view_id');
+      $view_display = $route_match->getParameter('display_id');
+
+      // Check and validate for the Breadcrumbs for the News Listing View.
+      if(($view_name == "news_awards_views") && ($view_display == "awards_listing")) {
+        $year = $route_match->getParameter('arg_0');
+        $month = $route_match->getParameter('arg_1');
+        $day = $route_match->getParameter('arg_2');
+
+        $appending_title = "";
+        $day = (!is_numeric($day) ? "" : $day);
+        $month = (!is_numeric($month) ? "" : $month);
+        $year = (!is_numeric($year) ? "" : $year);
+        if(!empty($day) && !empty($month) && !empty($year)) {
+          $appending_title = " for ".date("F jS, Y", strtotime($year."-".$month."-".$day));
+        } elseif(!empty($month) && !empty($year)) {
+          $appending_title = " for ".date("F Y", strtotime($year."-".$month."-01"));
+        } elseif(!empty($year)) {
+          $appending_title = " for ".$year;
+        }
+
+        $new_links = array();
+        $new_links[] = $home_link;
+        if(!empty($appending_title)) {
+          $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t("Awards"), Url::fromUserInput('/awards'));
+          $new_links[] = \Drupal\Core\Link::createFromRoute(t("Awards".$appending_title), "<none>");
+        } else {
+          $new_links[] = \Drupal\Core\Link::createFromRoute(t("Awards"), "<none>");
+        }
+        $breadcrumb = new Breadcrumb();
+        $breadcrumb->addCacheableDependency($route_name);
+        $breadcrumb->setLinks($new_links);
+      }
+      break;
+    }
+    case "taxonomy_term": {
+      break;
+    }
+    case "node": {
+      $bundle = $route_type->bundle();
+
+      // Modify the Breadcrumbs for the News Articles Content Type.
+      if(($bundle == "awards") && ($route_name == "entity.node.canonical")) {
+        $authored_date = $route_type->get('field_una_authored_on')->value;
+        $new_links = array();
+        $new_links[] = $home_link;
+        $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t("Awards"), Url::fromUserInput('/awards'));
+
+        if(!empty($authored_date)) {
+          $year = date('Y', strtotime($authored_date));
+          $month = date('m', strtotime($authored_date));
+          $day = date('d', strtotime($authored_date));
+          $display_date = date('F jS, Y', strtotime($authored_date));
+          $new_links[] = \Drupal\Core\Link::fromTextAndUrl(t($display_date), Url::fromUserInput('/awards/'.$year."/".$month."/".$day));
+        }
+        $new_links[] = \Drupal\Core\Link::createFromRoute(t($route_type->get('title')->value), "<none>");
+
+        $breadcrumb = new Breadcrumb();
+        $breadcrumb->addCacheableDependency($route_name);
+        $breadcrumb->setLinks($new_links);
+      }
+      break;
+    }
+  }
+}
+
+function ucr_news_awards_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('node_awards_form', 'node_awards_edit_form'))) {
+    $form['una_author_info'] = [
+      '#type' => 'details',
+      '#title' => t('Authoring Info'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 98,
+      '#optional' => false,
+      '#open' => false,
+    ];
+
+    $form['field_una_authored_by']['#group'] = 'una_author_info';
+    $form['field_una_authored_on']['#group'] = 'una_author_info';
+
+
+    /*   $form['una_topic_tags'] = [
+         '#type' => 'details',
+         '#title' => t('Tags'),
+         '#group' => 'advanced',
+         '#attributes' => [
+           'class' => ['node-form-options']
+         ],
+         '#attached' => [
+           'library' => ['node/drupal.node'],
+         ],
+         '#weight' => 100,
+         '#optional' => true,
+         '#open' => false,
+       ];
+
+       $form['field_una_tags']['#group'] = 'una_topic_tags'; */
+
+    $form['una_tags_rss'] = [
+      '#type' => 'details',
+      '#title' => t('Tags & Custom RSS'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 100,
+      '#optional' => true,
+      '#open' => false,
+    ];
+
+    $form['field_una_tags']['#group'] = 'una_tags_rss';
+    $form['field_una_custom_rss']['#group'] = 'una_tags_rss';
+
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => t('Content Keywords'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 101,
+      '#optional' => true,
+      '#open' => true,
+    ];
+
+    $form['field_content_keywords']['#group'] = 'keywords';
+  }
+
+  return $form;
+}

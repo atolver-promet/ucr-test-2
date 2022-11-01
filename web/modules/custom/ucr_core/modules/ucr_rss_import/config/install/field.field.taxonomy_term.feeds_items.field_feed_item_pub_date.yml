@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.taxonomy_term.field_feed_item_pub_date
+  - taxonomy.vocabulary.feeds_items
+  module:
+  - datetime
+id: taxonomy_term.feeds_items.field_feed_item_pub_date
+field_name: field_feed_item_pub_date
+entity_type: taxonomy_term
+bundle: feeds_items
+label: 'Publish Date'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

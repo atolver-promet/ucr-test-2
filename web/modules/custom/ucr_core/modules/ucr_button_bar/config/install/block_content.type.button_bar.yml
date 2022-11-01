@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: button_bar
+label: 'Button Bar'
+revision: 1
+description: 'A block that displays a group of linked buttons vertically and horizontally'

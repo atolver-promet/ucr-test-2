@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: galleria_items
+label: 'Galleria Image Info'
+icon_uuid: null
+description: 'Create the list of images and options to be displayed within a local Galleria.'
+behavior_plugins: {  }

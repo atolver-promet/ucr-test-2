@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.news_article_views
+  module:
+    - node
+    - views
+  theme:
+    - ucr_news
+id: ucr_news_article_author_info
+theme: ucr_news
+region: left_sidebar
+weight: 0
+provider: null
+plugin: 'views_block:news_article_views-ucr_news_articles_authoring'
+settings:
+  id: 'views_block:news_article_views-ucr_news_articles_authoring'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      news_articles: news_articles
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

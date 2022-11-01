@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.teaser_callout_slider
+    - field.field.block_content.teaser_callout_slider.field_tea
+    - field.field.block_content.teaser_callout_slider.field_view
+  module:
+    - viewfield
+id: block_content.teaser_callout_slider.default
+targetEntityType: block_content
+bundle: teaser_callout_slider
+mode: default
+content:
+  field_view:
+    weight: 0
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: 0
+      empty_view_title: hidden
+    third_party_settings: {  }
+    type: viewfield_default
+    region: content
+hidden:
+  field_tea: true

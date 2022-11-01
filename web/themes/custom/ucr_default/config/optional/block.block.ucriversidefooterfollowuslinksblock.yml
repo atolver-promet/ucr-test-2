@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ucr_global
+  theme:
+    - ucr_default
+id: ucriversidefooterfollowuslinksblock
+theme: ucr_default
+region: footer_fourth
+weight: 0
+provider: null
+plugin: ucr_global_footer_follow_us
+settings:
+  id: ucr_global_footer_follow_us
+  label: 'UC Riverside Footer Follow Us Links Block'
+  provider: ucr_global
+  label_display: '0'
+visibility: {  }

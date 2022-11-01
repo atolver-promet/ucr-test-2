@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.button_bar
+    - field.field.block_content.button_bar.field_button_url
+  module:
+    - link
+id: block_content.button_bar.default
+targetEntityType: block_content
+bundle: button_bar
+mode: default
+content:
+  field_button_url:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

@@ -1,0 +1,584 @@
+<?php
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Url;
+use Drupal\block_content\BlockContentInterface;
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\cache\CachePluginBase;
+use Drupal\user\Entity\Role;
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function ucr_core_library_info_alter(array &$libraries, $extension) {
+    $valid_admin_themes = ['seven', 'claro'];
+    if (in_array($extension, $valid_admin_themes)) { // Add this only to the seven theme.
+        $url = drupal_get_path('module', 'ucr_core') . '/css/components/icons.min.css';
+        $url = file_create_url($url);
+        $url = file_url_transform_relative($url);
+
+        $libraries['global-styling']['css']['component'][$url] = [];
+
+        $url = drupal_get_path('module', 'ucr_core') . '/css/components/media-browser.css';
+        $url = file_create_url($url);
+        $url = file_url_transform_relative($url);
+
+        $libraries['global-styling']['css']['component'][$url] = [];
+    }
+
+    $url = drupal_get_path('module', 'ucr_core') . '/css/components/cas-overwrite.css';
+    $url = file_create_url($url);
+    $url = file_url_transform_relative($url);
+
+    $libraries['global-styling']['css']['component'][$url] = [];
+}
+
+function ucr_core_form_alter(&$form, $form_state, $form_id) {
+    if (in_array($form_id, array('node_page_form', 'node_page_edit_form'))) {
+        $form['keywords'] = [
+            '#type' => 'details',
+            '#title' => t('Content Keywords'),
+            '#group' => 'advanced',
+            '#attributes' => [
+                'class' => ['node-form-options']
+            ],
+            '#attached' => [
+                'library' => ['node/drupal.node'],
+            ],
+            '#weight' => 100,
+            '#optional' => true,
+            '#open' => true,
+        ];
+
+        $form['field_content_keywords']['#group'] = 'keywords';
+    }
+
+  //kevinti: DFCT0010010 - disable save button on block layout for editors
+    $roles = \Drupal::currentUser()->getRoles();
+    if (in_array($form_id, array('block_admin_display_form'))) {
+        if(in_array("editors", $roles)){
+          //print_r($roles); //Array ( [0] => authenticated [1] => editors )
+          $form['actions']['submit']['#access'] = FALSE;
+        }
+
+    }
+
+    return $form;
+}
+
+
+/**
+ * Implements hook_layout_alter().
+ */
+function ucr_core_layout_alter(&$definitions) {
+    // Disable default layouts.
+    unset($definitions['layout_twocol']);
+    unset($definitions['layout_twocol_bricks']);
+    unset($definitions['layout_threecol_25_50_25']);
+    unset($definitions['layout_threecol_33_34_33']);
+    unset($definitions['layout_twocol_section']);
+    unset($definitions['layout_threecol_section']);
+    unset($definitions['layout_fourcol_section']);
+    unset($definitions['lightning_twocol']);
+    unset($definitions['lightning_threecol_25_50_25']);
+    unset($definitions['lightning_threecol_33_34_33']);
+
+    $moduleHandler = \Drupal::service('module_handler');
+    if (!$moduleHandler->moduleExists('panelizer')) {
+        $temp_def = $definitions;
+        $keep_layouts = array(
+            'layout_onecol',
+            'layout_builder_blank',
+            'lb_one_column',
+            'lb_two_column',
+            'lb_three_column',
+            'lb_four_column',
+            'moderation_dashboard',
+        );
+        foreach ($temp_def as $layout_id => $layout) {
+            if (!in_array($layout_id, $keep_layouts)) {
+                unset($definitions[$layout_id]);
+            }
+        }
+    }
+}
+
+function ucr_core_editor_js_settings_alter(array &$settings) {
+    foreach (array_keys($settings['editor']['formats']) as $text_format_id) {
+        if ($settings['editor']['formats'][$text_format_id]['editor'] === 'ckeditor') {
+            if (is_array($settings['editor']['formats'][$text_format_id]['editorSettings'])) {
+                if (array_key_exists('format_tags', $settings['editor']['formats'][$text_format_id]['editorSettings'])) {
+                    $original_formats = $settings['editor']['formats'][$text_format_id]['editorSettings']['format_tags'];
+                    $removed_h1_tag = preg_replace('/h1;/', '', $original_formats);
+                    $settings['editor']['formats'][$text_format_id]['editorSettings']['format_tags'] = $removed_h1_tag . ";address;div";
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for block templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function ucr_core_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+    if (isset($variables['elements']['content']['#block_content'])) {
+        $sanitized_view_mode = strtr($variables['elements']['#configuration']['view_mode'], '.', '_');
+        $sanitized_bundle = strtr($variables['elements']['content']['#block_content']->bundle(), '.', '_');
+
+        $add_suggestions = array(
+            'block__block_content__' . $sanitized_bundle,
+            'block__block_content__' . $sanitized_bundle . '__' . $sanitized_view_mode,
+            'block__bundle__' . $sanitized_bundle,
+        );
+
+        array_splice($suggestions, 2, 0, $add_suggestions);
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for field templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function ucr_core_theme_suggestions_field_alter(array &$suggestions, array $variables) {
+    $field_theme = strtr($variables['element']['#theme'], '.', '_');
+    $view_mode = strtr($variables['element']['#view_mode'], '.', '_');
+    $field_name = strtr($variables['element']['#field_name'], '.', '_');
+    $entity_type = strtr($variables['element']['#entity_type'], '.', '_');
+    $bundle = strtr($variables['element']['#bundle'], '.', '_');
+    if (!empty($view_mode)) {
+        $add_suggestions = array(
+            $field_theme . "__" . $entity_type . "__" . $field_name . "__" . $bundle . "__" . $view_mode
+        );
+
+        array_splice($suggestions, count($suggestions), 0, $add_suggestions);
+    }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function ucr_core_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+    $entity_type = "";
+    $trimmed_form_id = "";
+    $theme_suggestions = array();
+    $full_suggestions = array();
+
+    $build_id = strtr($variables['element']['#build_id'], array('.' => '_', '-' => '_'));
+    $form_id = strtr($variables['element']['#id'], array('.' => '_', '-' => '_'));
+
+    if (!empty($variables['element']['#entity_type'])) {
+        $entity_type = strtr($variables['element']['#entity_type'], array('.' => '_', '-' => '_'));
+    }
+    if (!empty($entity_type)) {
+        $trimmed_form_id = substr($form_id, strlen($entity_type . "_"));
+    }
+
+    if (is_array($variables['element']['#theme'])) {
+        if (count($variables['element']['#theme']) > 0) {
+            foreach ($variables['element']['#theme'] as $k => $val) {
+                if ($val != $form_id) {
+                    $theme_suggestions[] = $val;
+                }
+            }
+        }
+    } else {
+        if (!empty($variables['element']['#theme'])) {
+            $theme_suggestions[] = $variables['element']['#theme'];
+        }
+    }
+
+    if (!empty($entity_type)) {
+        $full_suggestions[] = 'form__' . $entity_type;
+        $full_suggestions[] = 'form__' . $entity_type . "__" . $trimmed_form_id;
+        if (count($theme_suggestions) > 0) {
+            foreach ($theme_suggestions as $suggest) {
+                $full_suggestions[] = 'form__' . $entity_type . "__" . $suggest;
+                $full_suggestions[] = 'form__' . $entity_type . "__" . $suggest . "__" . $trimmed_form_id;
+            }
+        }
+    } else {
+        if (count($theme_suggestions) > 0) {
+            foreach ($theme_suggestions as $suggest) {
+                $full_suggestions[] = 'form__' . $suggest;
+                $full_suggestions[] = 'form__' . $suggest . "__" . $form_id;
+            }
+        }
+    }
+
+    $full_suggestions[] = 'form__' . $form_id;
+    $full_suggestions[] = 'form__' . $build_id;
+    array_splice($suggestions, count($suggestions), 0, $full_suggestions);
+}
+
+function ucr_core_theme_suggestions_container_alter(array &$suggestions, array $variables) {
+    $element = $variables['element'];
+
+    if (isset($element['#type']) && $element['#type'] == 'view') {
+        $suggestions[] = 'container__' . $element['#name'];
+        $suggestions[] = 'container__' . $element['#name'] . '__' . $element['#display_id'];
+    }
+
+    if (isset($element['#type']) && $element['#type'] == 'container' && isset($element['children']['#type'])) {
+        $suggestions[] = 'container__' . $element['children']['#type'];
+    }
+}
+
+function ucr_core_theme_suggestions_views_view_unformatted_alter(array &$suggestions, array $variables) {
+    $view_id = \Drupal::routeMatch()->getParameter('view_id');
+    if ($view_id) {
+        switch ($view_id) {
+            case "taxonomy_term":
+            {
+                $taxonomy = \Drupal::routeMatch()->getParameter('taxonomy_term');
+                $bundle = $taxonomy->bundle();
+                $new_suggestion = array('views_view_unformatted__taxonomy_term__' . $bundle);
+                array_splice($suggestions, count($suggestions), 0, $new_suggestion);
+            }
+        }
+    }
+}
+
+function ucr_core_preprocess_html(&$variables) {
+    $view_id = \Drupal::routeMatch()->getParameter('view_id');
+    if ($view_id) {
+        $site_name = \Drupal::config('system.site')->get('name');
+
+        switch ($view_id) {
+            case "taxonomy_term":
+            {
+                $taxonomy = \Drupal::routeMatch()->getParameter('taxonomy_term');
+                $bundle = $taxonomy->bundle();
+                if (in_array($bundle, array("tags"))) {
+                    $variables['head_title']['title'] = t('Content Marked with: ' . $taxonomy->name->value . " | " . $site_name);
+                }
+                break;
+            }
+        }
+    }
+}
+
+/**
+ * Implements hook_preprocess_page_title().
+ */
+function ucr_core_preprocess_page_title(&$variables) {
+    $node = \Drupal::request()->attributes->get('node');
+    if (is_object($node)) {
+        if ($node->hasField('field_header_image')) {
+            $header_image = $node->get('field_header_image')->getValue();
+            if (is_array($header_image) && !empty($header_image)) {
+                $variables['hidden_title'] = $variables['title'];
+                $variables['title'] = NULL;
+            }
+        }
+    }
+}
+
+function ucr_core_preprocess_block(&$variables) {
+    $content = $variables['elements']['content'];
+    if (isset($content['#block_content']) && $content['#block_content'] instanceof BlockContentInterface) {
+        $addon_css = array('font' => array(), 'margin' => array(), 'padding' => array());
+        $font_color = NULL;
+        $include_extras = NULL;
+
+        $padding_top = NULL;
+        $padding_bottom = NULL;
+        $padding_left = NULL;
+        $padding_right = NULL;
+        $padding_horizontal = NULL;
+        $padding_vertical = NULL;
+
+        $margin_top = NULL;
+        $margin_bottom = NULL;
+        $margin_left = NULL;
+        $margin_right = NULL;
+        $margin_horizontal = NULL;
+        $margin_vertical = NULL;
+
+        $block = $content['#block_content'];
+        if ($block->hasField('field_block_font_color')) {
+            $font_color = (isset($block->field_block_font_color->value) ? $block->field_block_font_color->value : NULL);
+        }
+
+        if ($block->hasField('field_block_padding_top')) {
+            $padding_top = (isset($block->field_block_padding_top->value) ? $block->field_block_padding_top->value : NULL);
+        }
+        if ($block->hasField('field_block_padding_bottom')) {
+            $padding_bottom = (isset($block->field_block_padding_bottom->value) ? $block->field_block_padding_bottom->value : NULL);
+        }
+        if ($block->hasField('field_block_padding_left')) {
+            $padding_left = (isset($block->field_block_padding_left->value) ? $block->field_block_padding_left->value : NULL);
+        }
+        if ($block->hasField('field_block_padding_right')) {
+            $padding_right = (isset($block->field_block_padding_right->value) ? $block->field_block_padding_right->value : NULL);
+        }
+        if ($block->hasField('field_block_padding_horizontal')) {
+            $padding_horizontal = (isset($block->field_block_padding_horizontal->value) ? $block->field_block_padding_horizontal->value : NULL);
+        }
+        if ($block->hasField('field_block_padding_vertical')) {
+            $padding_vertical = (isset($block->field_block_padding_vertical->value) ? $block->field_block_padding_vertical->value : NULL);
+        }
+
+        if ($block->hasField('field_block_margin_top')) {
+            $margin_top = (isset($block->field_block_margin_top->value) ? $block->field_block_margin_top->value : NULL);
+        }
+        if ($block->hasField('field_block_margin_bottom')) {
+            $margin_bottom = (isset($block->field_block_margin_bottom->value) ? $block->field_block_margin_bottom->value : NULL);
+        }
+        if ($block->hasField('field_block_margin_left')) {
+            $margin_left = (isset($block->field_block_margin_left->value) ? $block->field_block_margin_left->value : NULL);
+        }
+        if ($block->hasField('field_block_margin_right')) {
+            $margin_right = (isset($block->field_block_margin_right->value) ? $block->field_block_margin_right->value : NULL);
+        }
+        if ($block->hasField('field_block_margin_horizontal')) {
+            $margin_horizontal = (isset($block->field_block_margin_horizontal->value) ? $block->field_block_margin_horizontal->value : NULL);
+        }
+        if ($block->hasField('field_block_margin_vertical')) {
+            $margin_vertical = (isset($block->field_block_margin_vertical->value) ? $block->field_block_margin_vertical->value : NULL);
+        }
+
+        // Add the font color css.
+        if (isset($font_color)) {
+            $addon_css['font'][] = $font_color;
+        }
+
+        // A padding was selected. Go ahead and process them.
+        if (isset($padding_right) || isset($padding_left) || isset($padding_bottom) || isset($padding_top)) {
+            $paddings = array($padding_top, $padding_bottom, $padding_left, $padding_right);
+            // If they are all equal...
+            if (count(array_unique($paddings)) === 1) {
+                $addon_css['padding'][] = 'padding-' . $padding_top;
+            } else { // They are not all equal so check for horizontal and vertical.
+                if (($padding_top === $padding_bottom) && (isset($padding_top))) {
+                    $addon_css['padding'][] = 'padding-vertical-' . $padding_top;
+                } else {
+                    if (isset($padding_top)) {
+                        $addon_css['padding'][] = 'padding-top-' . $padding_top;
+                    }
+                    if (isset($padding_bottom)) {
+                        $addon_css['padding'][] = 'padding-bottom-' . $padding_bottom;
+                    }
+                }
+                if (($padding_left === $padding_right) && (isset($padding_left))) {
+                    $addon_css['padding'][] = 'padding-horizontal-' . $padding_left;
+                } else {
+                    if (isset($padding_left)) {
+                        $addon_css['padding'][] = 'padding-left-' . $padding_left;
+                    }
+                    if (isset($padding_right)) {
+                        $addon_css['padding'][] = 'padding-right-' . $padding_right;
+                    }
+                }
+            }
+        }
+        if (isset($padding_horizontal)) {
+            $addon_css['padding'][] = 'padding-horizontal-' . $padding_horizontal;
+        }
+        if (isset($padding_vertical)) {
+            $addon_css['padding'][] = 'padding-vertical-' . $padding_vertical;
+        }
+
+        // A margin was selected. Go ahead and process them.
+        if (isset($margin_right) || isset($margin_left) || isset($margin_bottom) || isset($margin_top)) {
+            $margins = array($margin_top, $margin_bottom, $margin_left, $margin_right);
+            // If they are all equal...
+            if (count(array_unique($margins)) === 1) {
+                $addon_css['margin'][] = 'margin-' . $margin_top;
+            } else { // They are not all equal so check for horizontal and vertical.
+                if (($margin_top === $margin_bottom) && (isset($margin_top))) {
+                    $addon_css['margin'][] = 'margin-vertical-' . $margin_top;
+                } else {
+                    if (isset($margin_top)) {
+                        $addon_css['margin'][] = 'margin-top-' . $margin_top;
+                    }
+                    if (isset($margin_bottom)) {
+                        $addon_css['margin'][] = 'margin-bottom-' . $margin_bottom;
+                    }
+                }
+                if (($margin_left === $margin_right) && (isset($margin_left))) {
+                    $addon_css['margin'][] = 'medium-margin-horizontal-' . $margin_left;
+                } else {
+                    if (isset($margin_left)) {
+                        $addon_css['margin'][] = 'medium-margin-left-' . $margin_left;
+                    }
+                    if (isset($margin_right)) {
+                        $addon_css['margin'][] = 'medium-margin-right-' . $margin_right;
+                    }
+                }
+            }
+        }
+        if (isset($margin_horizontal)) {
+            $addon_css['margin'][] = 'medium-margin-horizontal-' . $margin_horizontal;
+        }
+        if (isset($margin_vertical)) {
+            $addon_css['margin'][] = 'margin-vertical-' . $margin_vertical;
+        }
+
+        $core_css = array();
+        $core_css[] = 'ucr-custom-block';
+        if (count($addon_css['margin']) > 0) {
+            $core_css[] = 'ucr-custom-block-custom-margins';
+        }
+        if (count($addon_css['padding']) > 0) {
+            $core_css[] = 'ucr-custom-block-custom-paddings';
+        }
+
+        if (array_key_exists('attributes', $variables)) {
+            if (array_key_exists('class', $variables['attributes'])) {
+                $new_classes = array_unique(array_merge($variables['attributes']['class'], $core_css));
+            } else {
+                $new_classes = array_unique($core_css);
+            }
+        } else {
+            $new_classes = array_unique($core_css);
+        }
+
+        $variables['attributes']['class'] = $new_classes;
+        $full_addon_css_array = array();
+        foreach ($addon_css as $type => $items) {
+            $full_addon_css_array = array_merge($full_addon_css_array, $items);
+        }
+        $full_addon_css_array = array_unique($full_addon_css_array);
+        $variables['ucr_custom_css']['class'] = $full_addon_css_array;
+        $variables['ucr_custom_css']['build'] = implode(' ', $full_addon_css_array);
+    }
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function ucr_core_preprocess_field(&$variables) {
+    switch ($variables['entity_type']) {
+        case "media":
+        {
+            // Change it for the Image Field in the Media Entity Type
+            if (($variables['field_name'] == "image") && ($variables['element']['#view_mode'] == "full")) {
+                foreach ($variables['items'] as $key => $contents) {
+                    if (array_key_exists('#type', $contents['content'])) {
+                        if ($contents['content']['#type'] == "link") {
+                            $url_object = $contents['content']['#url'];
+                            $route_name = $url_object->getRouteName();
+                            if ($route_name == "media_entity_download.download") {
+                                $variables['items'][$key]['content']["#title"] = 'Please Click Here to Download the Image';
+                            }
+                        }
+                    }
+                }
+            }
+            // Change it for the Document Field in the Media Entity Type
+            if (($variables['field_name'] == "field_document") && ($variables['element']['#view_mode'] == "full")) {
+                foreach ($variables['items'] as $key => $contents) {
+                    if (array_key_exists('#type', $contents['content'])) {
+                        if ($contents['content']['#type'] == "link") {
+                            $url_object = $contents['content']['#url'];
+                            $route_name = $url_object->getRouteName();
+                            if ($route_name == "media_entity_download.download") {
+                                $variables['items'][$key]['content']['#show_for_download'] = true;
+                                $file_name = $variables['items'][$key]['content']["#title"];
+                                $variables['items'][$key]['content']["#title"] = 'Please Click Here to Download the File';
+                                $variables['items'][$key]['content']["#file_name"] = $file_name;
+                            }
+                        }
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+/**
+ * @param $view
+ * Implements hook_views_post_render().
+ * Used to update the title for the taxonomy view that is within the 'taxonomy_term' view.
+ */
+function ucr_core_views_post_render(ViewExecutable $view, &$output, CachePluginBase $cache) {
+    $id = $view->id();
+    if (strtolower($id) == "taxonomy_term") {
+        $display = $view->current_display;
+        if (strtolower($display) == "page_1") {
+            $title = $view->getTitle();
+            $new_title = "Content Marked with: " . $title;
+
+            $view->setTitle(t($new_title));
+        }
+    }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function ucr_core_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+    $route_name = $route_match->getRouteName();
+    $links = $breadcrumb->getLinks();
+    if ($links) {
+        $home_link = $links[0];
+    } else {
+        $home_link = array();
+    }
+
+    $types = array('view_id', 'taxonomy_term', 'node');
+    $type_name = "";
+    foreach ($types as $type_to_try) {
+        $route_type = $route_match->getParameter($type_to_try);
+        if ($route_type) {
+            $type_name = $type_to_try;
+            break;
+        }
+    }
+
+    switch ($type_name) {
+        case "view_id":
+        {
+            $view_name = $route_match->getParameter('view_id');
+            $view_display = $route_match->getParameter('display_id');
+
+            // Check and validate for the Breadcrumbs for the News Listing View.
+            if (($view_name == "taxonomy_term")) { // If the view is for the Taxonomy View.
+                $taxonomy = $route_match->getParameter('taxonomy_term');
+                $bundle = $taxonomy->bundle();
+
+                if (in_array($bundle, array("tags"))) {
+                    $new_links = array();
+                    $new_links[] = $home_link;
+                    $new_links[] = \Drupal\Core\Link::createFromRoute(t("Content Marked with: " . $taxonomy->name->value), "<none>");
+
+                    $breadcrumb = new Breadcrumb();
+                    $breadcrumb->addCacheableDependency($route_name);
+                    $breadcrumb->setLinks($new_links);
+                }
+            }
+            break;
+        }
+    }
+}
+
+/**
+ * Implements hook_entity_presave(). This is for Layout Builder - Paragraphs Fix until it can be done internally for the Paragraphs
+ */
+function ucr_core_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+    // Fix langcode is empty when you use entity browser x inline entity form.
+    if ($entity->getEntityType()->id() == 'paragraph') {
+        $langcode_key = $entity->getEntityType()->getKey('langcode');
+        if (!empty($langcode_key)) {
+            $lang_value = $entity->get($langcode_key)->getLangcode();
+            if (!empty($lang_value)) {
+                $entity->set($langcode_key, $lang_value);
+            }
+        }
+    }
+}

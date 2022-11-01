@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: info_card_grid
+label: 'Info Card Grid'
+revision: 1
+description: 'Create a grid with an informational card display.'

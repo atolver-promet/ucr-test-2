@@ -1,0 +1,138 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use \Drupal\block_content\BlockContentInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Entity\NodeType;
+
+/**
+ * These variables are to be used for the paragraph type only.
+ */
+global $ucr_galleria_data_image_title;
+global $ucr_galleria_data_image_description;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_galleria_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_galleria_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_galleria_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('node_galleria_form', 'node_galleria_edit_form'))) {
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => t('Content Keywords'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 100,
+      '#optional' => true,
+      '#open' => true,
+    ];
+
+    $form['field_content_keywords']['#group'] = 'keywords';
+  }
+
+  return $form;
+}
+
+function ucr_galleria_preprocess_node(&$variables) {
+  $node_type = $variables["node"]->getType();
+  $view_mode = $variables["elements"]["#view_mode"];
+
+  if(strtolower($node_type) == "galleria") {
+    $gallery_unique_id = md5(uniqid(rand(), true));
+    if(strtolower($view_mode) == "teaser") {
+      $field = $variables['elements']['field_galleria_image_items'];
+      if($field) {
+        $max_per_row = 6;
+        $selected_to_view = 0;
+        $selected_gallery_images = FALSE;
+        $selected_object = array();
+        $first_object = array();
+        $first_to_view = 0;
+        $max_to_display = $variables['elements']['#node']->get('field_counter')->value;
+        foreach ($field as $key => $property) {
+          if (is_numeric($key)) {
+            if ($first_to_view < $max_to_display) {
+              $first_object[] = $field[$key];
+              $first_to_view++;
+            }
+            $check_value = $field[$key]['#paragraph']->get('field_status')->value;
+            if ($check_value) {
+              $selected_gallery_images = TRUE;
+              $selected_object[] = $field[$key];
+              $selected_to_view++;
+            }
+          }
+        }
+        if ($selected_gallery_images) {
+          $images_to_display = $selected_object;
+          $max_up = ($selected_to_view >= $max_per_row ? $max_per_row : $selected_to_view);
+        }
+        else {
+          $images_to_display = $first_object;
+          $max_up = ($max_to_display >= $max_per_row ? $max_per_row : $max_to_display);
+        }
+
+        $variables['galleria_teaser_image_render'] = $images_to_display;
+        $variables['galleria_teaser_view_selected'] = $selected_gallery_images;
+        $variables['galleria_view_per_row'] = $max_up;
+      }
+    }
+
+    $variables['galleria_id'] = "galleria_id-".$gallery_unique_id;
+  }
+}
+
+function ucr_galleria_preprocess_paragraph__galleria_items(&$variables) {
+  global $ucr_galleria_data_image_title, $ucr_galleria_data_image_description;
+  $title = "";
+  $subtitle = "";
+
+  if(array_key_exists(0, $variables['elements']['field_title'])) {
+    $title = $variables['elements']['field_title'][0]['#context']['value'];
+  }
+  if(array_key_exists(0, $variables['elements']['field_subtitle'])) {
+    $subtitle = $variables['elements']['field_subtitle'][0]['#context']['value'];
+  }
+
+  $ucr_galleria_data_image_title = htmlentities($title);
+  $ucr_galleria_data_image_description = htmlentities($subtitle);
+
+}
+
+function ucr_galleria_preprocess_image(&$variables) {
+  global $ucr_galleria_data_image_title, $ucr_galleria_data_image_description;
+  if(!empty($ucr_galleria_data_image_title)) {
+    $variables['attributes']['data-title'] = $ucr_galleria_data_image_title;
+  }
+  if(!empty($ucr_galleria_data_image_description)) {
+    $variables['attributes']['data-description'] = $ucr_galleria_data_image_description;
+  }
+}

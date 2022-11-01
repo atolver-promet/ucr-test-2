@@ -1,0 +1,29 @@
+<?php
+/**
+ * @file
+ * Extends the color field palette of ucr color_field
+ */
+
+define("UCR_CNAS_COLORS", ['#2D6CC0','#234674','#F1AB00','#78AF05']);
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function cnas_color_field_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context)
+{
+
+  if (get_class($context['widget']) === 'Drupal\color_field\Plugin\Field\FieldWidget\ColorFieldWidgetBox') {
+
+    try {
+      //the color field key changes based on the block or element.
+      $color_field_key = key($element['#attached']['drupalSettings']['color_field']['color_field_widget_box']['settings']);
+      $palette = $element['#attached']['drupalSettings']['color_field']['color_field_widget_box']['settings'][$color_field_key]['palette'];
+      $element['#attached']['drupalSettings']['color_field']['color_field_widget_box']['settings'][$color_field_key]['palette'] = array_merge($palette, UCR_CNAS_COLORS);
+      return;
+    } catch (Exception $e) {
+      \Drupal::logger('cnas_color_field : Caught exception:')->error($e->getMessage());
+
+    }
+  }
+
+}

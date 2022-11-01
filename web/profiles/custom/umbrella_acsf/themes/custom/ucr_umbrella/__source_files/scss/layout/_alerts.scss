@@ -1,0 +1,67 @@
+.callout {
+  padding: 0;
+  &.success {
+    background-color: lighten($color-success-alert, 48%);
+    border: 1px solid darken($color-success-alert, 25%);;
+    color: darken($color-success-alert, 25%);
+    div {
+      &:first-child {
+        border-left: 5px solid $color-success-alert;
+        padding: 1rem 0 1rem 1rem;
+      }
+    }
+    button {
+      &.close-button {
+        color: darken($color-success-alert, 25%);
+      }
+    }
+  }
+  &.error {
+    background-color: lighten($color-error-alert, 45%);
+    border: 1px solid darken($color-error-alert, 25%);;
+    color: darken($color-error-alert, 25%);
+    div {
+      &:first-child {
+        border-left: 5px solid $color-error-alert;
+        padding: 1rem 0 1rem 1rem;
+      }
+    }
+    button {
+      &.close-button {
+        color: darken($color-error-alert, 25%);
+      }
+    }
+  }
+  &.warning {
+    background-color: lighten($color-warning-alert, 45%);
+    border: 1px solid darken($color-warning-alert, 25%);;
+    color: darken($color-warning-alert, 25%);
+    div {
+      &:first-child {
+        border-left: 5px solid $color-warning-alert;
+        padding: 1rem 0 1rem 1rem;
+      }
+    }
+    button {
+      &.close-button {
+        color: darken($color-warning-alert, 25%);
+      }
+    }
+  }
+  &.info {
+    background-color: lighten($color-info-alert, 25%);
+    border: 1px solid darken($color-info-alert, 25%);;
+    color: darken($color-info-alert, 25%);
+    div {
+      &:first-child {
+        border-left: 5px solid $color-info-alert;
+        padding: 1rem 0 1rem 1rem;
+      }
+    }
+    button {
+      &.close-button {
+        color: darken($color-info-alert, 25%);
+      }
+    }
+  }
+}

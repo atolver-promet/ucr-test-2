@@ -1,0 +1,173 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.call_to_actions
+    - field.field.block_content.call_to_actions.body
+    - field.field.block_content.call_to_actions.field_block_margin_bottom
+    - field.field.block_content.call_to_actions.field_block_margin_left
+    - field.field.block_content.call_to_actions.field_block_margin_right
+    - field.field.block_content.call_to_actions.field_block_margin_top
+    - field.field.block_content.call_to_actions.field_counter
+    - field.field.block_content.call_to_actions.field_cta_items
+    - field.field.block_content.call_to_actions.field_cta_style
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_group
+    - paragraphs
+    - text
+third_party_settings:
+  field_group:
+    group_group_items:
+      children:
+        - group_general
+        - group_introduction
+        - group_style_options
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Group Items'
+      region: content
+    group_general:
+      children:
+        - field_cta_style
+        - field_counter
+        - field_cta_items
+      parent_name: group_group_items
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: 'General Options'
+      region: content
+    group_introduction:
+      children:
+        - body
+      parent_name: group_group_items
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Introduction
+      region: content
+    group_style_options:
+      children:
+        - group_margin_options
+      parent_name: group_group_items
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Style Options'
+      region: content
+    group_margin_options:
+      children:
+        - field_block_margin_bottom
+        - field_block_margin_top
+        - field_block_margin_left
+        - field_block_margin_right
+      parent_name: group_style_options
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Margin Options'
+      region: content
+id: block_content.call_to_actions.default
+targetEntityType: block_content
+bundle: call_to_actions
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_block_margin_bottom:
+    weight: 26
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_left:
+    weight: 29
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_right:
+    weight: 30
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_top:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_counter:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_cta_items:
+    type: entity_reference_paragraphs
+    weight: 6
+    settings:
+      title: Item
+      title_plural: Items
+      edit_mode: closed
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: cta_item
+    third_party_settings: {  }
+    region: content
+  field_cta_style:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 2
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden: {  }

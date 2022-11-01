@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - ctools
+  - taxonomy
+id: ucr_news_announcement_authors
+label: 'UCR News Announcement Authors'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/announce-authors/[term:name]'
+selection_criteria:
+  83c30689-685b-4448-a285-5d0784cc2ebc:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      news_announce_authors: news_announce_authors
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: 83c30689-685b-4448-a285-5d0784cc2ebc
+selection_logic: and
+weight: -5
+relationships: {  }

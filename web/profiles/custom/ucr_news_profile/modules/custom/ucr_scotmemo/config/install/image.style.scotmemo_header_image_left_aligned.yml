@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: scotmemo_header_image_left_aligned
+label: 'Scotmemo Header Image - Left Aligned'
+effects:
+  8b62a7f8-cea5-4b4c-8c16-bda7cfc26e38:
+    uuid: 8b62a7f8-cea5-4b4c-8c16-bda7cfc26e38
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 350
+      height: 500
+      crop_type: focal_point

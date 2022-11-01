@@ -1,0 +1,11 @@
+name: 'Teaser Callouts Component'
+type: module
+description: 'Provide a Custom Block configuration to create a callout with text, media, and background.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - field_group
+  - color_field
+  - media
+  - ucr_core

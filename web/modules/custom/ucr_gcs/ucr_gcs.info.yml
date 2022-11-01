@@ -1,0 +1,14 @@
+name: 'Google Custom Search Results'
+type: module
+description: 'Provides a Content Type that allows for displaying the Google Custom Search Results. The Results Code is held within the twig files of your template.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - pathauto
+  - user
+  - metatag
+  - node
+  - taxonomy
+  - config
+  - ucr_core

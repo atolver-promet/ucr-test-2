@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: content_header_xlarge
+label: 'Content - Header (X-Large)'
+effects:
+  9f571252-6532-4282-b4b3-181947381ac5:
+    uuid: 9f571252-6532-4282-b4b3-181947381ac5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 2440
+      height: 578
+      crop_type: focal_point

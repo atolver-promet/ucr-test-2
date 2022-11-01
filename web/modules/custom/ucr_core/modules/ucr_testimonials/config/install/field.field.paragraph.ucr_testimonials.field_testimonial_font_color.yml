@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_testimonial_font_color
+    - paragraphs.paragraphs_type.ucr_testimonials
+  module:
+    - options
+id: paragraph.ucr_testimonials.field_testimonial_font_color
+field_name: field_testimonial_font_color
+entity_type: paragraph
+bundle: ucr_testimonials
+label: 'Font Color'
+description: 'Please select the color of the font.<br /><strong>Note:</strong> This will only take effect if you have a picture selected with the style of ''Cover the Entire Slide''.'
+required: true
+translatable: false
+default_value:
+  -
+    value: light
+default_value_callback: ''
+settings: {  }
+field_type: list_string

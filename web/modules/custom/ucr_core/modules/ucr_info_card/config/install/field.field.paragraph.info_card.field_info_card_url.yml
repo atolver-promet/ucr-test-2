@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.paragraph.field_info_card_url
+  - paragraphs.paragraphs_type.info_card
+  module:
+  - link
+id: paragraph.info_card.field_info_card_url
+field_name: field_info_card_url
+entity_type: paragraph
+bundle: info_card
+label: 'Link Card'
+description: '<em>( Optional ):</em> Please enter in an URL if you wish to have the entire card be a link.<br/><small><strong>Note:</strong> Doing so may cause any links within the body of the card to not work.</small>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

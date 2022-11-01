@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_rss_import_day_month
+label: 'Feeds Import - Day / Month Format'
+locked: false
+pattern: 'd M'

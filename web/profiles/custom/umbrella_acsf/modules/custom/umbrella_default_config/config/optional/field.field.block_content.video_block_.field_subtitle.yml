@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_block_
+    - field.storage.block_content.field_subtitle
+id: block_content.video_block_.field_subtitle
+field_name: field_subtitle
+entity_type: block_content
+bundle: video_block_
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

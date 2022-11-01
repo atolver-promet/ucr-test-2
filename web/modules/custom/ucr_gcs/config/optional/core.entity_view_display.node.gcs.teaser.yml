@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.node.teaser
+  - field.field.node.gcs.field_content_keywords
+  - node.type.gcs
+  module:
+  - user
+id: node.gcs.teaser
+targetEntityType: node
+bundle: gcs
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  field_content_keywords: true

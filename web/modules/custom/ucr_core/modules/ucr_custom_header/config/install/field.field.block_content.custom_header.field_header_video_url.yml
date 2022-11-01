@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.custom_header
+    - field.storage.block_content.field_header_video_url
+  module:
+    - link
+id: block_content.custom_header.field_header_video_url
+field_name: field_header_video_url
+entity_type: block_content
+bundle: custom_header
+label: 'Header video url'
+description: 'Provide a direct URL to an MP4 video. If using Vimeo, a Pro account is needed. YouTube embeds should not be used.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

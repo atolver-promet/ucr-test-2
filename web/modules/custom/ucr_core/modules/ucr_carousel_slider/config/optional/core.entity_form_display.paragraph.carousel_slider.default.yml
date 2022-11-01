@@ -1,0 +1,106 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - entity_browser.browser.media_browser
+    - field.field.paragraph.carousel_slider.field_image
+    - field.field.paragraph.carousel_slider.field_link
+    - field.field.paragraph.carousel_slider.field_media
+    - field.field.paragraph.carousel_slider.field_slider_button_text
+    - field.field.paragraph.carousel_slider.field_slider_orientation
+    - field.field.paragraph.carousel_slider.field_subtitle
+    - field.field.paragraph.carousel_slider.field_title
+    - paragraphs.paragraphs_type.carousel_slider
+  module:
+    - entity_browser
+    - link_attributes
+id: paragraph.carousel_slider.default
+targetEntityType: paragraph
+bundle: carousel_slider
+mode: default
+content:
+  field_image:
+    weight: 1
+    settings:
+      entity_browser: image_browser
+      field_widget_remove: true
+      selection_mode: selection_append
+      preview_image_style: thumbnail
+      field_widget_edit: true
+      field_widget_replace: false
+      open: false
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_browser_file
+    region: content
+  field_link:
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+  field_media:
+    type: entity_browser_entity_reference
+    weight: 2
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      field_widget_replace: false
+      open: false
+    region: content
+    third_party_settings: {  }
+  field_slider_orientation:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_subtitle:
+    weight: 4
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_title:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 1
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_slider_button_text: true
+  status: true
+  uid: true

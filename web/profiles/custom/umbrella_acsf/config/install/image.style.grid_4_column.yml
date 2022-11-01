@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: grid_4_column
+label: 'Grid 4 Column (325 x 325)'
+effects:
+  d0419011-b1fb-4f69-81a6-fa5be9fa253e:
+    uuid: d0419011-b1fb-4f69-81a6-fa5be9fa253e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 325
+      height: 325
+      crop_type: focal_point

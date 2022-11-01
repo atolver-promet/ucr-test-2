@@ -1,0 +1,117 @@
+.latest-events-view {
+  ol {
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+  }
+  .event {
+    border-top: 0px none;
+    margin-bottom: 0;
+  }
+  header {
+    background: none;
+    box-shadow: none;
+  }
+  .cell {
+    position: relative;
+  }
+  img {
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    @include breakpoint(medium) {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .link-wrapper {
+    a {
+      display: block;
+      font-size: 0;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 3;
+    }
+  }
+  .event-card {
+    height: 352px;
+    position: relative;
+    overflow: hidden;
+    @include breakpoint(medium) {
+      height: 292.5px;
+    }
+    &:hover {
+      .event-overview {
+        background: rgba(0, 0, 0, 0.7);
+        min-height: 100%;
+      }
+      .more-text {
+        max-height: 300px;
+        opacity: 1;
+      }
+    }
+  }
+  .event-overview {
+    background: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    box-sizing: border-box;
+    color: #fff;
+    min-height: 0;
+    left: 0;
+    padding: 30px;
+    position: absolute;
+    transition: all 0.75s ease;
+    width: 100%;
+    z-index: 2;
+  }
+  .more-text {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+  }
+  .month {
+    font-family: 'Fira Sans Regular';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1em;
+    margin-bottom: 3px;
+  }
+  .time {
+    font-family: 'Fira Sans Regular';
+    font-size: 16px;
+    line-height: 1em;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2em;
+  }
+  .body {
+    font-size: 16px;
+    margin-bottom: 6px;
+    margin-top: 10px;
+    max-height: 75px;
+    overflow: hidden;
+  }
+  .event-link {
+    a {
+      color: #F45858;
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 8px;
+      text-decoration: none;
+      &::after {
+        display: none;
+        content: "";
+      }
+    }
+  }
+}

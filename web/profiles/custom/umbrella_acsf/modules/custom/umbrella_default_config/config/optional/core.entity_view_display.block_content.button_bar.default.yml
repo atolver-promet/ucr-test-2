@@ -1,0 +1,34 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.button_bar
+    - field.field.block_content.button_bar.field_button_url
+  module:
+    - fences
+    - link
+id: block_content.button_bar.default
+targetEntityType: block_content
+bundle: button_bar
+mode: default
+content:
+  field_button_url:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings:
+      fences:
+        fences_field_tag: none
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: none
+        fences_label_classes: ''
+    type: link
+    region: content
+hidden: {  }

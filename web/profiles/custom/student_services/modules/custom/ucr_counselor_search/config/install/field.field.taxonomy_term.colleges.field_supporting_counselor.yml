@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.taxonomy_term.field_supporting_counselor
+  - taxonomy.vocabulary.colleges
+  - taxonomy.vocabulary.counselors
+id: taxonomy_term.colleges.field_supporting_counselor
+field_name: field_supporting_counselor
+entity_type: taxonomy_term
+bundle: colleges
+label: 'Supporting Counselor'
+description: 'Please provide a counselor'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      counselors: counselors
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

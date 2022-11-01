@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.una_topic_category.field_una_color
+    - taxonomy.vocabulary.una_topic_category
+  module:
+    - color_field
+    - path
+id: taxonomy_term.una_topic_category.default
+targetEntityType: taxonomy_term
+bundle: una_topic_category
+mode: default
+content:
+  field_una_color:
+    weight: 1
+    settings:
+      default_colors: '#D6336C,#DF3333,#657F34,#0979D0,#8319BA,#0A819E,#215AA7,#9F6C1B'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true

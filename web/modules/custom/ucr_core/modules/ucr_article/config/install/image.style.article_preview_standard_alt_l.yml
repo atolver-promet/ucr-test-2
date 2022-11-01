@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_preview_standard_alt_l
+label: 'Article Preview: Standard Alt (L)'
+effects:
+  8c97fcbd-5719-4171-91cd-131e4000fd69:
+    uuid: 8c97fcbd-5719-4171-91cd-131e4000fd69
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 300
+      height: 200
+      crop_type: focal_point

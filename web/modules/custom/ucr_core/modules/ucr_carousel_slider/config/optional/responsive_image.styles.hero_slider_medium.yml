@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.hero_slider_medium_mobile
+    - image.style.hero_slider_medium_narrow
+    - image.style.hero_slider_medium_tablet
+    - image.style.hero_slider_medium_wide
+  theme:
+    - ucr_default
+id: hero_slider_medium
+label: 'Hero Slider (Medium)'
+image_style_mappings:
+  -
+    breakpoint_id: ucr_default.wide
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: hero_slider_medium_wide
+  -
+    breakpoint_id: ucr_default.narrow
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: hero_slider_medium_narrow
+  -
+    breakpoint_id: ucr_default.tablet
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: hero_slider_medium_tablet
+  -
+    breakpoint_id: ucr_default.mobile
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: hero_slider_medium_mobile
+breakpoint_group: ucr_default
+fallback_image_style: hero_slider_medium_wide

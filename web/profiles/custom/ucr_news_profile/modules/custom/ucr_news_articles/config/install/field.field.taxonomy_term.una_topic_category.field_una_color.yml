@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_una_color
+    - taxonomy.vocabulary.una_topic_category
+  module:
+    - color_field
+id: taxonomy_term.una_topic_category.field_una_color
+field_name: field_una_color
+entity_type: taxonomy_term
+bundle: una_topic_category
+label: 'Topic''s Color'
+description: 'Select the color that will be associated with the Topic.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 0
+field_type: color_field_type

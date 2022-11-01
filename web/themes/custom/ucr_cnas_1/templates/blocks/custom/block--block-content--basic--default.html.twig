@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set background_style = "" %}
+{% set catch_cache = content.field_block_bg_image|render %}
+{% set background_image = file_url(content.field_block_bg_image|field_target_entity.image.entity.uri.value) %}
+{% set background_color = content.field_block_bg_color|field_value|render %}
+{% if background_color is not empty %}
+    {% set background_style = background_style ~ (background_style is not empty ? ', ' : 'background: ') ~ "linear-gradient(" ~ background_color ~ "," ~ background_color ~ ")" %}
+{% endif %}
+{% if background_image != '' and background_image != '/' %}
+    {% set background_style = background_style ~ (background_style is not empty ? ', ' : 'background: ') ~ "url(" ~ background_image ~")" %}
+{% endif %}
+{% if background_style is not empty %}
+    {% set background_style = background_style ~ ';' %}
+{% endif %}
+{% block content %}
+    <div{{ attributes.addClass(ucr_custom_css.class) }}{% if background_style is not empty %} style="{{ background_style }} background-size: cover;"{% endif %}>
+        <div class="grid-container basic-block full">
+            <div class="grid-x grid-padding-x">
+                {{ title_prefix }}
+                {% if label %}
+                <div class="cell"><h2{{ title_attributes }}>{{ label }}</h2></div>
+                {% endif %}
+                {{ title_suffix }}
+                <div class="cell">
+                    {{ content.body|field_value }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

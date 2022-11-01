@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: homepage_video
+label: 'Homepage Video'
+revision: 1
+description: 'Custom block type for the main UCR homepage.'

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: content_header_medium
+label: 'Content - Header (Medium)'
+effects:
+  a0b68117-64cf-4640-85a2-54288f393a7f:
+    uuid: a0b68117-64cf-4640-85a2-54288f393a7f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 400
+      crop_type: focal_point

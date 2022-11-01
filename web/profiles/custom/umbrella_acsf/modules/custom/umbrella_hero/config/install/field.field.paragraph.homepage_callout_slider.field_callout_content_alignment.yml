@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_callout_content_alignment
+    - paragraphs.paragraphs_type.homepage_callout_slider
+id: paragraph.homepage_callout_slider.field_callout_content_alignment
+field_name: field_callout_content_alignment
+entity_type: paragraph
+bundle: homepage_callout_slider
+label: 'Homepage Callout content align to right'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Right
+  off_label: Left
+field_type: boolean

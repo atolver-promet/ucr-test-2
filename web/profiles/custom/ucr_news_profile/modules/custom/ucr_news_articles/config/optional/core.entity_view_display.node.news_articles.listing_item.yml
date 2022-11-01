@@ -1,0 +1,116 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.node.listing_item
+  - field.field.node.news_articles.body
+  - field.field.node.news_articles.field_content_keywords
+  - field.field.node.news_articles.field_meta_tags
+  - field.field.node.news_articles.field_una_additional_content
+  - field.field.node.news_articles.field_una_authored_by
+  - field.field.node.news_articles.field_una_authored_on
+  - field.field.node.news_articles.field_una_custom_rss
+  - field.field.node.news_articles.field_una_exclude
+  - field.field.node.news_articles.field_una_featured
+  - field.field.node.news_articles.field_una_featured_header
+  - field.field.node.news_articles.field_una_header_image
+  - field.field.node.news_articles.field_una_header_video
+  - field.field.node.news_articles.field_una_icon
+  - field.field.node.news_articles.field_una_media_contacts
+  - field.field.node.news_articles.field_una_recommend_header
+  - field.field.node.news_articles.field_una_recommend_story
+  - field.field.node.news_articles.field_una_tags
+  - field.field.node.news_articles.field_una_title_teaser
+  - field.field.node.news_articles.field_una_topic_category
+  - node.type.news_articles
+  module:
+  - datetime
+  - options
+  - smart_trim
+  - user
+id: node.news_articles.listing_item
+targetEntityType: node
+bundle: news_articles
+mode: listing_item
+content:
+  body:
+    type: smart_trim
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 350
+      trim_type: chars
+      trim_suffix: ...
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      summary_handler: trim
+      trim_options:
+        text: true
+        trim_zero: false
+      wrap_output: false
+      more_link: false
+    third_party_settings: {  }
+  content_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_una_authored_by:
+    type: entity_reference_label
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+  field_una_authored_on:
+    type: datetime_default
+    weight: 4
+    region: content
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: ucr_news_articles_default_date
+    third_party_settings: {  }
+  field_una_header_image:
+    type: entity_reference_entity_view
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      view_mode: ucr_news_articles_listing
+      link: false
+    third_party_settings: {  }
+  field_una_icon:
+    type: list_key
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  field_una_topic_category:
+    type: entity_reference_label
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  field_content_keywords: true
+  field_meta_tags: true
+  field_una_additional_content: true
+  field_una_custom_rss: true
+  field_una_exclude: true
+  field_una_featured: true
+  field_una_featured_header: true
+  field_una_header_video: true
+  field_una_media_contacts: true
+  field_una_recommend_header: true
+  field_una_recommend_story: true
+  field_una_tags: true
+  field_una_title_teaser: true
+  links: true

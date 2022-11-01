@@ -1,0 +1,55 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.thumbnail
+  module:
+    - file
+    - image
+    - node
+id: linkit_default_profile
+label: 'Default Profile'
+description: ''
+matchers:
+  f2b03d93-9e9f-4690-a03a-7a9152da977e:
+    uuid: f2b03d93-9e9f-4690-a03a-7a9152da977e
+    id: 'entity:node'
+    weight: -10
+    settings:
+      bundles: {  }
+      group_by_bundle: true
+      include_unpublished: false
+      substitution_type: canonical
+      metadata: 'Last updated on: [node:changed]'
+      limit: 100
+  26b2f069-ec9e-4c95-898b-e8faad9c43b3:
+    uuid: 26b2f069-ec9e-4c95-898b-e8faad9c43b3
+    id: 'entity:media'
+    weight: -9
+    settings:
+      bundles: {  }
+      group_by_bundle: true
+      substitution_type: canonical
+      metadata: 'Last Updated on: [media:changed]'
+      limit: 100
+  9da4ad76-491c-4fb3-aa99-494423e89d93:
+    uuid: 9da4ad76-491c-4fb3-aa99-494423e89d93
+    id: 'entity:file'
+    weight: -8
+    settings:
+      bundles: null
+      group_by_bundle: null
+      images:
+        show_dimensions: false
+        show_thumbnail: true
+        thumbnail_image_style: thumbnail
+      substitution_type: file
+      metadata: '<strong>Updated:</strong> [file:changed:custom:m]/[file:changed:custom:d]/[file:changed:custom:Y] @ [file:changed:custom:g]:[file:changed:custom:i] [file:changed:custom:a] - <strong>File Size:</strong> [file:size] - <em>( [file:mime] )</em>'
+      file_extensions: ''
+      file_status: 1
+      limit: 100
+  f6eb3b2c-32f4-4b26-ad41-be22e9e1d1ce:
+    uuid: f6eb3b2c-32f4-4b26-ad41-be22e9e1d1ce
+    id: email
+    weight: 0
+    settings: {  }

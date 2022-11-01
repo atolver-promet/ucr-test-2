@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.articles_block
+    - field.storage.block_content.field_article_type
+    - taxonomy.vocabulary.article_types
+id: block_content.articles_block.field_article_type
+field_name: field_article_type
+entity_type: block_content
+bundle: articles_block
+label: 'Article Type'
+description: '<em>( Optional ):</em> Select the type of Article you wish to display. If you want to show all, then leave this field blank.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      article_types: article_types
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

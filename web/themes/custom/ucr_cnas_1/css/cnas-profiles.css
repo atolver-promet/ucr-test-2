@@ -1,0 +1,116 @@
+/*
+$primary: #003da5;
+$secondary: #EEA74D;
+$cnas_blue: #003da5;
+$cnas_yellow: #EEA74D;
+$cnas_gray: #393B41;
+*/
+
+/* CNAS PROFILES FROM PROFILES.UCR.EDU */
+
+.row[_ngcontent-c0] {
+	margin: 0px auto !important;
+}
+
+/* ALPHABAR AND FILTER OPTIONS */
+
+ul[_ngcontent-c1] a[_ngcontent-c1] { /* alphabar */
+	color: #003da5 !important;
+	font-family: "Trade Gothic Next W01", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif !important;
+	font-size: 18px !important;
+}
+.row[_ngcontent-c0] .large-4 { /* filter form wrapper  */
+	width: 100% !important;
+	max-width: 100% !important;
+	text-align: center;
+	flex: none;
+}
+.mat-input-container {
+	width: 50% !important;
+	display: block;
+	margin: 0px auto !important;
+}
+
+/* PROFILE CARDS */
+.mat-card:not([class*="mat-elevation-z"]) { /* profile box */
+	box-shadow: 0 2px 3px rgba(0,0,0,.3);
+	border: 1px solid #cacaca;
+	font-family: "Trade Gothic Next W01", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif !important;
+}
+.row[_ngcontent-c4] {
+	margin-bottom: 1em;
+}
+.header-details[_ngcontent-c4] h5[_ngcontent-c4] { /* name */
+	color: #EEA74D;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	line-height: 1em !important;
+}
+.header-details[_ngcontent-c4] li[_ngcontent-c4] { /* title */
+	font-size: 18px !important;
+	text-transform: uppercase;
+	color: #003da5 !important;
+	line-height: 1.2em !important;
+}
+.header-details[_ngcontent-c4] li[_ngcontent-c4] strong {
+	font-weight: 300 !important;
+}
+.header-details[_ngcontent-c4] li[_ngcontent-c4] em {
+	font-style: normal !important;
+}
+.header-details[_ngcontent-c5] h5[_ngcontent-c5] {
+	color: #003da5;
+	font-weight: 600;
+	font-size: 1.4em;
+	line-height: 1em;
+}
+
+ul.border-separated-list[_ngcontent-c5] li[_ngcontent-c5], ul.comma-separated[_ngcontent-c5] li[_ngcontent-c5] {
+	color: #234674;
+}
+.content-detail[_ngcontent-c5] span[_ngcontent-c5] {
+	color: #234674;
+}
+.research-areas[_ngcontent-c5] h5[_ngcontent-c5] {
+	color: #234674;
+}
+.content-detail[_ngcontent-c5] .mat-icon[_ngcontent-c5], .research-areas[_ngcontent-c5] .mat-icon[_ngcontent-c5] {
+	color: #003da5;
+}
+.mat-card {
+	color: #234674;
+}
+
+@media all and (max-width:400px) {
+	.header-details {
+		width: 100%;
+		clear: both;
+		float: none;
+		flex: none;
+	}
+}
+
+.content-detail[_ngcontent-c4] { /* contact info */
+	padding: 8px 0 !important;
+	font-size: 18px !important;
+	border-top: none !important;
+	color: #003da5 !important;
+}
+.content-detail[_ngcontent-c4] a {
+	color: #003da5 !important;
+}
+
+/* button */
+.mat-raised-button:not([class*="mat-elevation-z"]) { box-shadow: none !important; }
+.mat-fab.mat-accent, .mat-mini-fab.mat-accent, .mat-raised-button.mat-accent {
+	font-family: "Trade Gothic Next W01", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif !important;
+	background-color: #003da5 !important;
+	font-size: 16px !important;
+	text-transform: uppercase !important;
+	font-weight: 600 !important;
+	padding: 0 20px;
+	border-radius: 0px;
+}
+.mat-card-actions[_ngcontent-c4] {
+	bottom: 1em !important;
+}

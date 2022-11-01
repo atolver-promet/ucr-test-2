@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_authored_on
+  - node.type.announcements
+  module:
+  - datetime
+id: node.announcements.field_una_authored_on
+field_name: field_una_authored_on
+entity_type: node
+bundle: announcements
+label: 'Authored On'
+description: 'Select the date that you want to have displayed as the publishing date of this content.'
+required: true
+translatable: true
+default_value:
+-
+  default_date_type: now
+  default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

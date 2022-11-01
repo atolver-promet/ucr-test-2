@@ -1,0 +1,126 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_news_core_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_news_core_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * @param $view
+ * Implements hook_views_post_render().
+ * Used to update the title for the taxonomy view that is within the 'news_article_views' view.
+ */
+function ucr_news_core_views_post_render($view) {
+    $id = $view->id();
+    if(strtolower($id) == "news_general_view") {
+        $display = $view->current_display;
+        $taxonomy_views = array('authors_news_list', 'tags_news_list', 'custom_news_list');
+        if(in_array(strtolower($display), $taxonomy_views)) {
+            $title = $view->getTitle();
+            if (is_numeric($title)) { // If the Taxonomy ID was passed, then get the name.
+                $taxonomy_title = \Drupal\taxonomy\Entity\Term::load($title)->name->value;
+            }
+            else {
+                $taxonomy_title = $title;
+            }
+            if (strtolower($display) == "tags_news_list") {
+                $new_title = "Content Tagged with: ";
+            }
+            if (strtolower($display) == "authors_news_list") {
+                $new_title = "Content Authored by: ";
+            }
+            if (strtolower($display) == "custom_news_list") {
+                $new_title = $taxonomy_title." Latest News";
+                $taxonomy_title = "";
+            }
+
+            $view->setTitle($new_title . $taxonomy_title);
+        }
+    }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function ucr_news_core_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  $route_name = $route_match->getRouteName();
+  $links = $breadcrumb->getLinks();
+  if($links) {
+    $home_link = $links[0];
+  } else {
+    $home_link = array();
+  }
+
+  $types = array('view_id', 'taxonomy_term', 'node');
+  $type_name = "";
+  foreach($types as $type_to_try) {
+    $route_type = $route_match->getParameter($type_to_try);
+    if($route_type) {
+      $type_name = $type_to_try;
+      break;
+    }
+  }
+
+  switch($type_name) {
+    case "view_id": {
+      $view_name = $route_match->getParameter('view_id');
+
+      // Check and validate for the Breadcrumbs for the News Listing View.
+      if(($view_name == "taxonomy_term")) { // If the view is for the Taxonomy View.
+        $taxonomy = $route_match->getParameter('taxonomy_term');
+        $bundle = $taxonomy->bundle();
+
+        // Only do this for the Topic's and Tag's Taxonomy views.
+        if(in_array($bundle, array("tags", "ucr_news_article_authors", 'custom_rss'))) {
+          switch(strtolower($bundle)) {
+            case "tags": { $link_title = "Content Tagged with: ".$taxonomy->name->value; break; }
+            case "ucr_news_article_authors": { $link_title = "Content Authored by: ".$taxonomy->name->value; break; }
+            case "custom_rss": { $link_title = $taxonomy->name->value." Latest News"; break; }
+          }
+          $new_links = array();
+          $new_links[] = $home_link;
+          $new_links[] = \Drupal\Core\Link::createFromRoute(t($link_title), "<none>");
+
+          $breadcrumb = new Breadcrumb();
+          $breadcrumb->addCacheableDependency($route_name);
+          $breadcrumb->setLinks($new_links);
+        }
+      }
+    break;
+    }
+    case "taxonomy_term": {
+    break;
+    }
+    case "node": {
+    break;
+    }
+  }
+}

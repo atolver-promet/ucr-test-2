@@ -1,0 +1,28 @@
+name: 'Local Events Component'
+description: 'Provide a Content Type to create a local listing of events.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - conditional_fields
+  - datetime
+  - datetime_range
+  - entity_browser
+  - field
+  - field_group
+  - file
+  - focal_point
+  - image
+  - link
+  - menu_ui
+  - node
+  - options
+  - path
+  - pathauto
+  - taxonomy
+  - telephone
+  - text
+  - user
+  - views
+  - ucr_core

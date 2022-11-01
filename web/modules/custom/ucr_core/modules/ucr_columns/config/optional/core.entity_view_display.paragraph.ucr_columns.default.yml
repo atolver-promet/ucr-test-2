@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.ucr_columns.field_background_color
+    - field.field.paragraph.ucr_columns.field_body
+    - paragraphs.paragraphs_type.ucr_columns
+  module:
+    - color_field
+    - text
+id: paragraph.ucr_columns.default
+targetEntityType: paragraph
+bundle: ucr_columns
+mode: default
+content:
+  field_background_color:
+    weight: 1
+    label: hidden
+    settings:
+      format: rgb
+      opacity: '1'
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+  field_body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

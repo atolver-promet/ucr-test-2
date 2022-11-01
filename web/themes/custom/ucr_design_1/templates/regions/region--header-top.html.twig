@@ -1,0 +1,23 @@
+<div class="cell small-order-2 medium-order-1 audience-container">
+    <div class="grid-container audience-menu-bar">
+        <div class="grid-x align-middle">
+            <div class="cell medium-shrink show-for-medium global-header-menu">
+              <a class="skip-main" href="#main">Skip to main content</a>
+                <nav aria-label="global header menu">
+                    <ul class="menu">
+                        <li><a href="https://www.ucr.edu/alpha" target="_blank">A to Z Listing</a></li>
+                        <li><a href="https://campusmap.ucr.edu" target="_blank">Campus Map</a></li>
+                        <li><a href="https://profiles.ucr.edu" target="_blank">Find People</a></li>
+                        <li><a href="https://news.ucr.edu" target="_blank">News</a></li>
+                        <li><a href="https://www.ucr.edu" target="_blank">UCR Home</a></li>
+                    </ul>
+                </nav>
+            </div>
+            {% if content %} {{ content }} {% endif %}
+            <div class="cell shrink hide-for-medium" data-responsive-toggle="main-menu-container" data-hide-for="medium">
+                <button class="mdi mdi-menu button mobile-menu-expander" id="mobile-menu-expander" type="button" data-toggle="main-menu-container">
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

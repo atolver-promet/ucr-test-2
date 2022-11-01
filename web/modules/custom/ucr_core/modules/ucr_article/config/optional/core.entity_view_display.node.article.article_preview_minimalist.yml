@@ -1,0 +1,108 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.article_preview_minimalist
+    - field.field.node.article.body
+    - field.field.node.article.field_article_alt_url
+    - field.field.node.article.field_article_author
+    - field.field.node.article.field_article_date
+    - field.field.node.article.field_article_featured
+    - field.field.node.article.field_article_header_image
+    - field.field.node.article.field_article_header_video
+    - field.field.node.article.field_article_hide_on_latest
+    - field.field.node.article.field_article_image
+    - field.field.node.article.field_article_image_caption
+    - field.field.node.article.field_article_location
+    - field.field.node.article.field_article_special_image
+    - field.field.node.article.field_article_spotlight
+    - field.field.node.article.field_article_subtitle
+    - field.field.node.article.field_article_type_list
+    - field.field.node.article.field_article_types
+    - field.field.node.article.field_category
+    - field.field.node.article.field_content_keywords
+    - field.field.node.article.field_image_credit
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_open_article_in_new_tab
+    - field.field.node.article.field_social_media_image
+    - field.field.node.article.field_tags
+    - field.field.node.article.panelizer
+    - node.type.article
+  module:
+    - datetime
+    - link
+    - panelizer
+    - user
+third_party_settings:
+  panelizer:
+    enable: false
+    custom: false
+    allow: false
+    default: default
+id: node.article.article_preview_minimalist
+targetEntityType: node
+bundle: article
+mode: article_preview_minimalist
+content:
+  field_article_alt_url:
+    type: link
+    weight: 3
+    region: content
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+  field_article_author:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_article_date:
+    weight: 2
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: ucr_article_standard_format
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_article_subtitle:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  body: true
+  content_moderation_control: true
+  field_article_featured: true
+  field_article_header_image: true
+  field_article_header_video: true
+  field_article_hide_on_latest: true
+  field_article_image: true
+  field_article_image_caption: true
+  field_article_location: true
+  field_article_special_image: true
+  field_article_spotlight: true
+  field_article_type_list: true
+  field_article_types: true
+  field_category: true
+  field_content_keywords: true
+  field_image_credit: true
+  field_meta_tags: true
+  field_open_article_in_new_tab: true
+  field_social_media_image: true
+  field_tags: true
+  links: true
+  panelizer: true
+  search_api_excerpt: true

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.galleria_items
+id: paragraph.galleria_items.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: galleria_items
+label: 'Image Title'
+description: '<em>( Optional )</em> Provide a brief title of the image.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

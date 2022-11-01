@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function umbrella_hero_install() {
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+  $config = \Drupal::configFactory();
+  $uuid_service = \Drupal::service('uuid');
+
+  // Update the Basic Page Form & Display.
+  $file_path = DRUPAL_ROOT . '/profiles/custom/umbrella_acsf/modules/custom/umbrella_hero/config/optional/core.entity_form_display.node.page.default.yml';
+  $file_contents = file_get_contents($file_path);
+  $page_form_yml = Yaml::decode($file_contents);
+
+  $get_page_form = $config->getEditable('core.entity_form_display.node.page.default');
+  $current_view_id = $get_page_form->get('uuid');
+  if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+      $uuid = $uuid_service->generate();
+      $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+      $get_page_form->setData($full_array)->save(TRUE);
+  } else { // A custom one exists, so update the parts needed.
+      $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+      $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+      $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+  }
+
+    // Update the Basic Page Form & Display.
+    $file_path = DRUPAL_ROOT . '/profiles/custom/umbrella_acsf/modules/custom/umbrella_hero/config/optional/core.entity_view_display.node.page.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $page_form_yml = Yaml::decode($file_contents);
+
+    $get_page_form = $config->getEditable('core.entity_view_display.node.page.default');
+    $current_view_id = $get_page_form->get('uuid');
+    if(!$current_view_id) { // Custom Form does not exist. So create a new one.
+        $uuid = $uuid_service->generate();
+        $full_array = array_merge(array('uuid' => $uuid), $page_form_yml);
+        $get_page_form->setData($full_array)->save(TRUE);
+    } else { // A custom one exists, so update the parts needed.
+        $get_page_form->set('dependencies', $page_form_yml['dependencies'])->save(TRUE);
+        $get_page_form->set('content', $page_form_yml['content'])->save(TRUE);
+        $get_page_form->set('hidden', $page_form_yml['hidden'])->save(TRUE);
+    }
+}

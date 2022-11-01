@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.statistic_grid
+  - field.storage.block_content.field_statistic_box_opacity
+  module:
+  - options
+id: block_content.statistic_grid.field_statistic_box_opacity
+field_name: field_statistic_box_opacity
+entity_type: block_content
+bundle: statistic_grid
+label: 'Stat Box Opacity'
+description: '<em>( Optional ):</em> Please select the opacity of the statistic boxes.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

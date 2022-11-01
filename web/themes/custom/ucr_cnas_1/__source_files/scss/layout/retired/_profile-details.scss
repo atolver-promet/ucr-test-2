@@ -1,0 +1,126 @@
+// Define the styles for the profile details page.
+.profile-name {
+  color: $color-curious-blue;
+  line-height: 1.11765;
+  font-size: 1.85em;
+  font-weight: 400;
+}
+
+.profile-image {
+  text-align: center;
+}
+
+.contact-title {
+  text-transform: uppercase;
+  line-height: normal;
+  font-size: .9em;
+  font-weight: 700;
+  padding: .5em;
+  background-color: $color-astronaut;
+  color: $white;
+  text-align: left;
+  margin: 1em 0;
+}
+.profile-depts {
+  font-size: .895rem;
+  line-height: 1.2rem;
+  margin-bottom: 1em;
+}
+.profile-office-location, .profile-office-telephone, .profile-office-email, .profile-office-hours {
+  font-size: .895rem;
+  line-height: 1.2;
+  border-bottom: 1px solid hsla(0,0%,50%,.2);
+  padding: .5em 0;
+  &:before {
+    display: inline-block;
+    font-family: "Material Design Icons";
+    font-size: 1.15rem;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-right: 4px;
+    color: $color-curious-blue;
+    vertical-align: middle;
+  }
+}
+.profile-office-location {
+  &:before {
+    content: "\F34E";
+  }
+}
+.profile-office-telephone {
+  &:before {
+    content: "\F3F2";
+  }
+}
+.profile-office-email {
+  &:before {
+    content: "\F1EE";
+  }
+}
+.profile-office-hours {
+  &:before {
+    content: "\F150";
+  }
+}
+.profile-body-area {
+  @include line-separator('before');
+  padding-top: 15px;
+}
+.research-area-container, .courses-area-container {
+  padding-left: .5em;
+  border-left: 2px solid $color-polo-blue;
+  .research-area-title, .courses-area-title {
+    color: $color-polo-blue;
+    font-size: 1.1em;
+    line-height: 1.3333;
+    font-weight: 700;
+    margin-bottom: .75rem;
+  }
+}
+
+.profile-awards-container, .profile-publications-container {
+  &:before {
+    background: $color-polo-blue;
+    content: " ";
+    display: block;
+    height: 3px;
+    margin-bottom: .375rem;
+    margin-top: 1em;
+    width: 5rem;
+  }
+  .profile-awards-title, .profile-publications-title {
+    color: $color-polo-blue;
+    font-size: 1.1em;
+    line-height: 1.3333;
+    font-weight: 700;
+    margin-bottom: .75rem;
+  }
+}
+.profile-personal-website, .profile-cv-file {
+  border-bottom: 1px solid hsla(0,0%,50%,.2);
+  padding: .5em 0;
+  &:before {
+    display: inline-block;
+    font-family: "Material Design Icons";
+    font-size: 1.15rem;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-right: 4px;
+    color: $color-curious-blue;
+    vertical-align: middle;
+  }
+}
+.profile-personal-website {
+  &:before {
+    content: "\F59F";
+  }
+}
+.profile-cv-file {
+  &:before {
+    content: "\F214";
+  }
+}

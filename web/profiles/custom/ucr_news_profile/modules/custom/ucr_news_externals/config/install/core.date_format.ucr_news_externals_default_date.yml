@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_news_externals_default_date
+label: 'Externals - Default Date'
+locked: false
+pattern: 'F j, Y'

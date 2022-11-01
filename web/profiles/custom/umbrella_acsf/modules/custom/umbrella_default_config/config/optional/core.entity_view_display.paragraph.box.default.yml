@@ -1,0 +1,73 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.box.field_button_text_and_url
+    - field.field.paragraph.box.field_colo_palette
+    - field.field.paragraph.box.field_image
+    - field.field.paragraph.box.field_title
+    - image.style.grid_4_column
+    - paragraphs.paragraphs_type.box
+  module:
+    - color_field
+    - fences
+    - image
+    - link
+id: paragraph.box.default
+targetEntityType: paragraph
+bundle: box
+mode: default
+content:
+  field_button_text_and_url:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_colo_palette:
+    weight: 1
+    label: hidden
+    settings:
+      opacity: '1'
+      format: hex
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: color_field_formatter_text
+    region: content
+  field_image:
+    weight: 2
+    label: hidden
+    settings:
+      image_style: grid_4_column
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: image
+    region: content
+  field_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

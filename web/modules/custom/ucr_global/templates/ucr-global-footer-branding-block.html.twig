@@ -1,0 +1,21 @@
+{% block content %}
+    <section class="footer-item ucr-footer-info">
+        <span class="footer-logo"><span class="show-for-sr">University of California, Riverside</span></span>
+        <address>
+         <p>900 University Ave.<br />
+            Riverside, CA 92521</p>
+        <p>Tel: (951) 827-1012</p>
+        </address>
+        {% if show_ucr_links == 1 %}
+        <ul class="footer-links">
+            <li><a href="https://library.ucr.edu/" target="_blank">UCR Library</a></li>
+            <li><a href="https://campusstatus.ucr.edu/" target="_blank">Campus Status</a></li>
+            <li><a href="https://ucr.bncollege.com/shop/ucr/home" target="_blank">Campus Store</a></li>
+            <li><a href="https://jobs.ucr.edu" target="_blank">Career Opportunities</a></li>
+            <li><a href="https://diversity.ucr.edu/" target="_blank">Diversity</a></li>
+            <li><a href="https://campusmap.ucr.edu/" target="_blank">Maps and Directions</a></li>
+            <li><a href="https://www.ucr.edu/about/visitors" target="_blank">Visit UCR</a></li>
+        </ul>
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,14 @@
+uuid: 99c80ef1-0106-42e1-bcb1-327861b4a163
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.cnas_video
+label: 'CNAS Video'
+targetEntityType: block_content
+cache: true

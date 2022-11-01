@@ -1,0 +1,202 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.topics_list
+    - field.field.block_content.topics_list.body
+    - field.field.block_content.topics_list.field_block_margin_bottom
+    - field.field.block_content.topics_list.field_block_margin_left
+    - field.field.block_content.topics_list.field_block_margin_right
+    - field.field.block_content.topics_list.field_block_margin_top
+    - field.field.block_content.topics_list.field_block_padding_bottom
+    - field.field.block_content.topics_list.field_block_padding_left
+    - field.field.block_content.topics_list.field_block_padding_right
+    - field.field.block_content.topics_list.field_block_padding_top
+    - field.field.block_content.topics_list.field_list_by
+    - field.field.block_content.topics_list.field_show_count
+  module:
+    - content_moderation
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_article_list_tabs:
+      children:
+        - group_article_options
+        - group_introduction
+        - group_style_options
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Article List Tabs'
+      region: content
+    group_article_options:
+      children:
+        - field_list_by
+        - field_show_count
+      parent_name: group_article_list_tabs
+      weight: 20
+      format_type: tab
+      format_settings:
+        description: ''
+        formatter: open
+        required_fields: true
+        id: ''
+        classes: ''
+      label: 'List Options'
+      region: content
+    group_introduction:
+      children:
+        - body
+      parent_name: group_article_list_tabs
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Introduction
+      region: content
+    group_style_options:
+      children:
+        - group_padding_options
+        - group_margin_options
+      parent_name: group_article_list_tabs
+      weight: 22
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: 'Style Options'
+      region: content
+    group_padding_options:
+      children:
+        - field_block_padding_top
+        - field_block_padding_bottom
+        - field_block_padding_left
+        - field_block_padding_right
+      parent_name: group_style_options
+      weight: 20
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Padding Options'
+      region: content
+    group_margin_options:
+      children:
+        - field_block_margin_top
+        - field_block_margin_bottom
+        - field_block_margin_left
+        - field_block_margin_right
+      parent_name: group_style_options
+      weight: 21
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Margin Options'
+      region: content
+id: block_content.topics_list.default
+targetEntityType: block_content
+bundle: topics_list
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+  field_block_margin_bottom:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_left:
+    weight: 11
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_right:
+    weight: 12
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_margin_top:
+    weight: 9
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_bottom:
+    weight: 14
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_left:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_right:
+    weight: 16
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_block_padding_top:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_list_by:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_show_count:
+    weight: 4
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 5
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden: {  }

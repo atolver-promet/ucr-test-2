@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_colo_palette
+    - paragraphs.paragraphs_type.box_info
+  module:
+    - color_field
+id: paragraph.box_info.field_colo_palette
+field_name: field_colo_palette
+entity_type: paragraph
+bundle: box_info
+label: 'Box Color'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 0
+field_type: color_field_type

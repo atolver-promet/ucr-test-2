@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.teaser_callout
+  - field.storage.block_content.field_block_margin_right
+  module:
+  - options
+id: block_content.teaser_callout.field_block_margin_right
+field_name: field_block_margin_right
+entity_type: block_content
+bundle: teaser_callout
+label: 'Margin Right'
+description: '<em>( Optional ):</em> Please select the margin for the right.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

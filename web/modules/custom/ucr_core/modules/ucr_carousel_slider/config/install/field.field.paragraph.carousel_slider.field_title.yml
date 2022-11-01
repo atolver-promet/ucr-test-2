@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.carousel_slider
+id: paragraph.carousel_slider.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: carousel_slider
+label: 'Slide Caption'
+description: '<em>( Optional )</em> Enter in the caption that you want to show on the slide.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

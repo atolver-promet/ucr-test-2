@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.node.faq.body
+  - field.field.node.faq.field_content_keywords
+  - field.field.node.faq.field_faq_category
+  - field.field.node.faq.field_meta_tags
+  - field.field.node.faq.field_social_media_image
+  - node.type.faq
+  module:
+  - text
+  - user
+id: node.faq.default
+targetEntityType: node
+bundle: faq
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_faq_category:
+    weight: 1
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  field_content_keywords: true
+  field_meta_tags: true
+  field_social_media_image: true

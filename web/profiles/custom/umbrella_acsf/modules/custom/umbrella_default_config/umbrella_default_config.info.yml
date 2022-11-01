@@ -1,0 +1,25 @@
+name: 'Umbrella Default Configuration Setup'
+description: A module containing the custom block content types, paragraph types, image styles, etc. that were developed by KWALL for the initial UCR Umbrella launch.
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - content_moderation
+  - datetime
+  - entity_reference_revisions
+  - fences
+  - field
+  - file
+  - focal_point
+  - image
+  - link
+  - link_attributes
+  - node
+  - options
+  - paragraphs
+  - responsive_image
+  - slick
+  - views
+  - viewfield

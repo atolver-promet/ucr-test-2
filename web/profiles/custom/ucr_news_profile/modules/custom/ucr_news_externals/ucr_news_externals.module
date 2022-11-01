@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+use Drupal\Core\Block\BlockPluginInterface;
+use Drupal\Core\Entity\EntityDescriptionInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_news_externals_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_news_externals_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_news_externals_form_alter(&$form, $form_state, $form_id) {
+  if (in_array($form_id, array('node_news_externals_form', 'node_news_externals_edit_form'))) {
+    $form['uen_external_info'] = [
+      '#type' => 'details',
+      '#title' => t('External Site Info'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 99,
+      '#optional' => false,
+      '#open' => false,
+    ];
+
+    $form['field_uen_site_name']['#group'] = 'uen_external_info';
+    $form['field_uen_site_url']['#group'] = 'uen_external_info';
+    $form['field_url']['#group'] = 'uen_external_info';
+    $form['field_uen_authored_on']['#group'] = 'uen_external_info';
+
+    $form['keywords'] = [
+      '#type' => 'details',
+      '#title' => t('Content Keywords'),
+      '#group' => 'advanced',
+      '#attributes' => [
+        'class' => ['node-form-options']
+      ],
+      '#attached' => [
+        'library' => ['node/drupal.node'],
+      ],
+      '#weight' => 100,
+      '#optional' => true,
+      '#open' => true,
+    ];
+
+    $form['field_content_keywords']['#group'] = 'keywords';
+  }
+
+  return $form;
+}

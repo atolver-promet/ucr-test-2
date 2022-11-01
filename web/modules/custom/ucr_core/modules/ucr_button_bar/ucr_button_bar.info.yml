@@ -1,0 +1,16 @@
+name: 'Button Bar Component'
+description: 'Provide a custom block type with ''Paragraphs'' the ability to create a button bar view of content.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - entity_reference_revisions
+  - field
+  - field_group
+  - link_attributes
+  - options
+  - paragraphs
+  - text
+  - ucr_core

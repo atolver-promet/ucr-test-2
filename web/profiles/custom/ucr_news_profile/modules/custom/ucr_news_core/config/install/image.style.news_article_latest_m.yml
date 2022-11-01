@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: news_article_latest_m
+label: 'News Article - Latest (M)'
+effects:
+  5c048082-1677-416c-bad1-db92d7da7bc5:
+    uuid: 5c048082-1677-416c-bad1-db92d7da7bc5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 475
+      height: 539
+      crop_type: focal_point

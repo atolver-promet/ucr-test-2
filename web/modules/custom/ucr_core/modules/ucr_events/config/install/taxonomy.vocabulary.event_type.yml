@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Event Types'
+vid: event_type
+description: 'Customizable Types for Event Content'
+hierarchy: 0
+weight: 0

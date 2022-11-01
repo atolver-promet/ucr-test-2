@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: accordions
+label: Accordions
+revision: 1
+description: 'Create a content block that displays information with Accordion-like functionality.'

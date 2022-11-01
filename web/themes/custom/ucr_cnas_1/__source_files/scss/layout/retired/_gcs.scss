@@ -1,0 +1,61 @@
+// ***** Google Search Modal
+div {
+  &#gscSearchFormModal {
+    @include breakpoint(medium) {
+      border-radius: 10px;
+      box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5);
+    }
+    .gsc-modal-top {
+      background-color: $ucr-blue;
+      color: $white;
+      margin: -1rem -1rem 1rem -1rem;
+      padding: 1rem;
+      font-size: 0.9rem;
+      line-height: normal;
+      font-weight: 700;
+      @include breakpoint(medium) {
+        font-size: 1.5rem;
+      }
+      button {
+        &.close-button {
+          line-height: 1.45rem;
+          color: $white;
+          @include breakpoint(medium) {
+            line-height: 2rem;
+          }
+          &:hover {
+            color: $gray9;
+          }
+        }
+      }
+    }
+    .gsc-modal-body {
+      @include breakpoint(medium) {
+        padding: 3rem;
+      }
+      input {
+        @include breakpoint(medium) {
+          font-size: 1.5rem;
+        }
+      }
+      button {
+        margin: 0;
+        width: 100%;
+        max-width:276px;
+        text-align: center;
+        font-size: 1rem;
+        background-color: $color-picton-blue;
+        &:hover {
+          background-color: darken($color-picton-blue, 20%);
+        }
+        &.gsc-modal-button-close {
+          background-color: $color-cerise-red;
+          transition: all 0.5s ease;
+          &:hover {
+            background-color: darken($color-cerise-red, 20%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: hero_slider_medium_wide
+label: 'Hero Slider Medium (Wide Screen) - (1920 x 450)'
+effects:
+  011d3153-478b-4fd2-a5a4-33337bca2981:
+    uuid: 011d3153-478b-4fd2-a5a4-33337bca2981
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 450
+      crop_type: focal_point

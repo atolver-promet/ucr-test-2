@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Google Custom Search'
+type: gcs
+description: 'Content Type for the ''Google Custom Search Results'' page.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

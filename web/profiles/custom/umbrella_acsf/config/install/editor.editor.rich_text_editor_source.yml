@@ -1,0 +1,100 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.rich_text_editor_source
+  module:
+    - ckeditor
+format: rich_text_editor_source
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Underline
+            - Strike
+            - '-'
+            - Superscript
+            - Subscript
+            - RemoveFormat
+        -
+          name: Alignment
+          items:
+            - JustifyLeft
+            - JustifyCenter
+            - JustifyRight
+            - JustifyBlock
+        -
+          name: Modifications
+          items:
+            - Undo
+            - Redo
+            - '-'
+            - Cut
+            - Copy
+            - Paste
+            - PasteText
+            - PasteFromWord
+        -
+          name: 'Special Characters'
+          items:
+            - SpecialChar
+            - Markdown
+      -
+        -
+          name: Lists
+          items:
+            - BulletedList
+            - NumberedList
+            - Outdent
+            - Indent
+        -
+          name: Links
+          items:
+            - Linkit
+            - DrupalLink
+            - DrupalUnlink
+        -
+          name: Media
+          items:
+            - Table
+            - HorizontalRule
+            - Blockquote
+            - media_browser
+        -
+          name: 'Format Selectors'
+          items:
+            - Format
+            - '-'
+            - Styles
+            - '-'
+            - TextColor
+            - BGColor
+        -
+          name: Tools
+          items:
+            - ShowBlocks
+            - Maximize
+            - Source
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: "a.btn-ucr|Default Button\r\na.btn-ucr-alt|Alt 1 Button\r\na.btn-ucr-split|Alt 2 Button\r\nul.list-arrow|List Arrows\r\nul.list-arrow-alt|Carat Arrows\r\np.separator-line-before|Default Separator Above\r\np.separator-line-after|Default Separator Below\r\np.separator-line-maroon-before|Alt 1 Separator Above\r\np.separator-line-maroon-after|Alt 1 Separator Below\r\np.separator-line-dark-before|Alt 2 Separator Above\r\np.separator-line-dark-after|Alt 2 Separator Below\r\n"
+    colorbutton:
+      colors: '000000,1D3A61,234674,637EA4,4DADF7,3AA4DC,329AF0,802244,D6336C,FFFFFF'
+    linkit:
+      linkit_profile: linkit_default_profile
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

@@ -1,0 +1,102 @@
+name: 'UCR - News & Inside UCR'
+type: profile
+version: '8.9.x'
+description: 'UCR News & Inside UCR Profile. Sub-Profile of Acquia Lightning.'
+core: '8.x'
+core_version_requirement: ^8 || ^9
+package: Profiles
+base profile: lightning
+install:
+  - acquia_purge
+  - acsf
+  - acsf_sso
+  - addtoany
+  - admin_toolbar
+  - admin_toolbar_links_access_filter
+  - admin_toolbar_tools
+  - big_pipe
+  - block_class
+  - block_content_permissions
+  - block_region_permissions
+  - bu
+  - captcha
+  - cas
+  - ckeditor_markdown
+  - color_field
+  - colorbutton
+  - conditional_fields
+  - diff
+  - dynamic_page_cache
+  - easy_breadcrumb
+  - editor_advanced_link
+  - entity_browser_entity_form
+  - field_group
+  - focal_point
+  - google_analytics
+  - imagemagick
+  - inline_form_errors
+  - link_attributes
+  - layout_builder
+  - layout_builder_modal
+  - layout_builder_restrictions
+  - linkit
+  - media_entity_download
+  - menu_admin_per_menu
+  - menu_block
+  - metatag_open_graph
+  - metatag_twitter_cards
+  - paragraphs
+  - pathauto
+  - purge
+  - purge_drush
+  - purge_ui
+  - purge_processor_cron
+  - purge_processor_lateruntime
+  - purge_queuer_coretags
+  - redirect
+  - recaptcha
+  - redirect_404
+  - redirect_domain
+  - responsive_image
+  - role_delegation
+  - slick
+  - slick_extras
+  - slick_paragraphs
+  - slick_ui
+  - slick_views
+  - smart_trim
+  - statistics
+  - syslog
+  - telephone
+  - twig_field_value
+  - twig_tweak
+  - ucr_core
+  - ucr_gcs
+  - ucr_global
+  - ucr_layouts
+  - ucr_news_core
+  - ucr_news_localist
+  - ucr_view_block_bg
+  - vppr
+  - tvi
+  - views_taxonomy_term_name_depth
+  - webform
+  - webform_ui
+exclude:
+  - dblog
+  - lightning_banner_block
+  - lightning_landing_page
+  - lightning_layout
+  - lightning_map_block
+  - lightning_media_instagram
+  - lightning_media_twitter
+  - lightning_media_slideshow
+  - lightning_media_audio
+  - lightning_roles
+  - media_entity_twitter
+  - media_entity_instagram
+  - panelizer
+  - update
+themes:
+  - ucr_news
+  - claro

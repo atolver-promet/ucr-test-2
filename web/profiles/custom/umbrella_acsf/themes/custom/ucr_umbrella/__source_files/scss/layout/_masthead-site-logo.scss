@@ -1,0 +1,64 @@
+// File contains CSS for the Site Logo, Site Title, and the Slogan Text. For Desktop & Mobile Views.
+// -------------------------------------------
+.masthead-container {
+  margin: 11px 0 10px 0;
+  .masthead-logo {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    text-align: right !important;
+    width: 78px;
+    height: 39px;
+    background: url('../images/ucr-logo-mobile.png') no-repeat;
+    vertical-align:middle;
+
+    @media screen and #{breakpoint(medium)} {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      text-align: left !important;
+      width: 203px;
+      height: 39px;
+      background: url('../images/ucr-logo-standard.png') no-repeat;
+    }
+  }
+  .masthead-title {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    font-family: "Fira Sans Medium", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.08;
+    padding-left: 7px;
+    margin-bottom: 0;
+
+    @media screen and #{breakpoint(medium)} {
+      font-size: 1.85rem;
+      padding-left: 12px;
+    }
+
+    a {
+      color: $ucr-blue;
+
+      &:hover {
+        color: $ucr-blue;
+      }
+    }
+  }
+
+  .slogan {
+    position: relative;
+    /*max-width: 21.25rem;*/
+    text-align: right;
+    color: $slogan-color;
+    font-family: "Fira Sans Regular", sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.08;
+    font-weight: 300;
+    letter-spacing: 1.65px;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0;
+  }
+}

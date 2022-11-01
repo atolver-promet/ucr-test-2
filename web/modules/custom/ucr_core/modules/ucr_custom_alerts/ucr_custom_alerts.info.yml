@@ -1,0 +1,18 @@
+name: 'Custom Alerts Component'
+description: 'Provide a custom block type to create Custom Alerts and have them displayed on your site.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+- field
+- field_group
+- link
+- menu_ui
+- node
+- options
+- path
+- taxonomy
+- text
+- views
+- ucr_core

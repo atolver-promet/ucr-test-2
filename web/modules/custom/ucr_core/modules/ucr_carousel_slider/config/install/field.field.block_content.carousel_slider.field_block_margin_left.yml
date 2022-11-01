@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.carousel_slider
+  - field.storage.block_content.field_block_margin_left
+  module:
+  - options
+id: block_content.carousel_slider.field_block_margin_left
+field_name: field_block_margin_left
+entity_type: block_content
+bundle: carousel_slider
+label: 'Margin Left'
+description: '<em>( Optional ):</em> Please select the margin for the left.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

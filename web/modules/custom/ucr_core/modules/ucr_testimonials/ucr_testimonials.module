@@ -1,0 +1,49 @@
+<?php
+/**
+ * @file
+ * Contains landing page functionality for Testimonials.
+ */
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\image\Entity\ImageStyle;
+
+function ucr_testimonials_preprocess_paragraph__ucr_testimonials(&$variables) {
+    $media_id = "";
+    $media_display_type = "circle";
+    $variables['content']['media_object'] = array('url' => '', 'title' => '', 'alt' => '', 'img' => '');
+    if(array_key_exists(0, $variables['elements']['field_media'])) {
+        $media_id = $variables['elements']['field_media'][0]['#plain_text'];
+    }
+    if(array_key_exists(0, $variables['elements']['field_testimonial_picture_style'])) {
+        $media_display_type = $variables['elements']['field_testimonial_picture_style'][0]['#markup'];
+    }
+    if(!empty($media_id)) {
+        $media = Media::load($media_id);
+        $image_entity = $media->get('image')->first();
+
+        $media_field = $image_entity->getValue();
+        $file_id = $media_field['target_id'];
+
+        $file = File::load($file_id);
+        if($file) {
+            $image_uri = $file->getFileUri();
+            $image_url = file_create_url($image_uri);
+        }
+        switch($media_display_type) {
+            case "cover": {
+                break;
+            }
+            default: {
+                $style = ImageStyle::load('testimonial_author');
+
+                $image_url = $style->buildUrl($image_uri);
+
+                $variables['content']['media_object']['title'] = $image_entity->get('title')->getString();
+                $variables['content']['media_object']['alt'] = $image_entity->get('alt')->getString();
+                break;
+            }
+        }
+
+        $variables['content']['media_object']['url'] = $image_url;
+    }
+}

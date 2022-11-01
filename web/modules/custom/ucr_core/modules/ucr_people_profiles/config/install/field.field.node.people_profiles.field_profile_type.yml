@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_profile_type
+    - node.type.people_profiles
+  module:
+    - options
+id: node.people_profiles.field_profile_type
+field_name: field_profile_type
+entity_type: node
+bundle: people_profiles
+label: 'Profile Type'
+description: 'Please select what kind of profile that this is for.'
+required: true
+translatable: false
+default_value:
+  -
+    value: '1'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: event_detail_pattern
+label: 'Event Detail Pattern'
+type: 'canonical_entities:node'
+pattern: '/event-list/[node:field_event_start_date:date:custom:Y]/[node:field_event_start_date:date:custom:m]/[node:field_event_start_date:date:custom:d]/[node:title]'
+selection_criteria:
+  6ccdfa42-5082-43c4-886b-51baba500de0:
+    id: node_type
+    bundles:
+      event: event
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 6ccdfa42-5082-43c4-886b-51baba500de0
+selection_logic: and
+weight: -5
+relationships: {  }

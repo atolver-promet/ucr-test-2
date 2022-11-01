@@ -1,0 +1,21 @@
+name: 'UCR Collections'
+type: module
+description: 'Collections Entity Type'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'UC Riverside'
+dependencies:
+  - link
+  - taxonomy
+  - media
+  - text
+  - field
+  - field_group
+  - menu_ui
+  - options
+  - path
+  - pathauto
+  - user
+  - views
+  - views_taxonomy_term_name_depth
+  - datetime

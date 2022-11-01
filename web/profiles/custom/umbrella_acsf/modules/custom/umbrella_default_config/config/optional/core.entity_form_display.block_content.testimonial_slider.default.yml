@@ -1,0 +1,58 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_slider
+    - field.field.block_content.testimonial_slider.body
+    - field.field.block_content.testimonial_slider.field_testimonial_slider
+    - field.field.block_content.testimonial_slider.field_view
+  module:
+    - content_moderation
+    - datetime
+    - paragraphs
+    - viewfield
+id: block_content.testimonial_slider.default
+targetEntityType: block_content
+bundle: testimonial_slider
+mode: default
+content:
+  field_testimonial_slider:
+    type: entity_reference_paragraphs
+    weight: 26
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_view:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: viewfield_select
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true

@@ -1,0 +1,72 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.statistic_with_images
+    - field.storage.block_content.field_statistic
+    - paragraphs.paragraphs_type.statistic_with_image
+  module:
+    - entity_reference_revisions
+id: block_content.statistic_with_images.field_statistic
+field_name: field_statistic
+entity_type: block_content
+bundle: statistic_with_images
+label: Statistic
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      statistic_with_image: statistic_with_image
+    target_bundles_drag_drop:
+      accordion:
+        weight: 16
+        enabled: false
+      box:
+        weight: 17
+        enabled: false
+      box_info:
+        weight: 18
+        enabled: false
+      bubbles:
+        weight: 19
+        enabled: false
+      carousel_slider:
+        weight: 20
+        enabled: false
+      column:
+        weight: 21
+        enabled: false
+      hero_slides:
+        weight: 22
+        enabled: false
+      hero_slideshow:
+        weight: 23
+        enabled: false
+      info_card:
+        weight: 24
+        enabled: false
+      link_column:
+        weight: 25
+        enabled: false
+      statistic:
+        weight: 26
+        enabled: false
+      statistic_with_image:
+        enabled: true
+        weight: 27
+      tab:
+        weight: 28
+        enabled: false
+      testimonial_slider:
+        weight: 29
+        enabled: false
+      video:
+        weight: 30
+        enabled: false
+field_type: entity_reference_revisions

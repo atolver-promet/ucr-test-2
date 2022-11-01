@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: article_preview_slideshow_xl
+label: 'Article Preview: Slideshow (XL)'
+effects:
+  aca6563e-d746-4e22-b4f2-759d5c4c304e:
+    uuid: aca6563e-d746-4e22-b4f2-759d5c4c304e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 770
+      crop_type: focal_point

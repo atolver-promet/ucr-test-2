@@ -1,0 +1,158 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{% if meganav %}
+    {% if meganav_special_highlight %}
+        {% set msh = '' %}
+        {% for i_check_lv0 in items %}
+            {% if i_check_lv0.below %}
+                {% for i_check_lv1 in i_check_lv0.below %}
+                    {% set custom_url_attribs = i_check_lv1.url.getOption('attributes') %}
+                    {% if 'meganav-highlight-block' in custom_url_attribs.class and i_check_lv1.below and msh is empty %}
+                        {% set msh = menus.menu_meganav_mobile_highlight(i_check_lv1.below, attributes, 2) %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {{ menus.menu_meganav_links(items, attributes, 0, meganav_size, '', meganav_special_highlight, msh) }}
+{% else %}
+    {{ menus.menu_links(items, attributes, 0) }}
+{% endif %}
+
+{% macro menu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+<nav id="primary-site-menu" aria-labelledby="primary-site-menu">
+    <ul class="standard-menu vertical medium-horizontal menu align-center-middle" data-responsive-menu="accordion medium-dropdown" data-closing-time="200">
+    {% else %}
+    <ul class="vertical menu{% if menu_level > 0 %} submenu{% endif %}">
+    {% endif %}
+    {% for item in items %}
+        <li>
+        {{ link(item.title, item.url) }}
+        {% if item.below %}
+            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+        </li>
+    {% endfor %}
+    {% if menu_level == 0 %}
+    </ul>
+</nav>
+    {% else %}
+    </ul>
+    {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro menu_meganav_links(items, attributes, menu_level, meganav_size, meganav_class_options, meganav_special_highlight, msh) %}
+    {% import _self as menus %}
+    {% if items %}
+        {% if menu_level == 0 %}
+            <nav id="primary-site-menu">
+            <ul class="meganav-menu vertical menu medium-horizontal align-center-middle" data-responsive-menu="accordion medium-dropdown" data-closing-time="500">
+        {% else %}
+            {% if menu_level == 1 %}
+                <ul class="vertical menu meganav-submenu">
+                <div class="meganav-pane">
+                <div class="grid-container{% if meganav_size %} full{% endif %}">
+                <div class="grid-x grid-padding-x grid-padding-y {{ meganav_class_options.container_css|default('medium-up-4') }}">
+            {% endif %}
+            {% if menu_level > 1 %}<ul class="vertical menu">{% endif %}
+        {% endif %}
+        {% for item in items %}
+            {% set custom_attributes = create_attribute() %}
+            {% set custom_url_attribs = item.url.getOption('attributes') %}
+            {% set meganav_opts = item.url.getOption('ucr_meganav') %}
+            {% set item_url = (item.url.isRouted) ? item.url.getRouteName : item.url.getUri %}
+            {% set combined_column_css = (meganav_opts.column_css ~ ' ' ~ custom_url_attribs.class|join(' '))|trim %}
+            {% set combined_item_css = (meganav_opts.item_css ~ ' ' ~ custom_url_attribs.class|join(' '))|trim %}
+            {% if menu_level == 1 and (item_url == '<nolink>' or item_url == '<none>') %}
+                {% set meganav_cell_classes = [
+                    'cell',
+                    ('meganav-highlight-block' in combined_column_css and meganav_special_highlight) ? 'meganav-mobile-hide' : '',
+                ] %}
+                <div{{ custom_attributes.addClass(meganav_cell_classes).addClass(combined_column_css) }}>
+                {% if item.below %}
+                    {{ menus.menu_meganav_links(item.below, attributes, menu_level + 1, meganav_size, meganav_opts, meganav_special_highlight, msh) }}
+                {% endif %}
+            {% elseif menu_level > 1 and (item_url == '<nolink>' or item_url == '<none>') %}
+                <li{{ custom_attributes.addClass(combined_item_css) }}>
+                    {% if item.below %}
+                        <a><span>{{ item.title }}</span></a>
+                        {{ menus.menu_meganav_links(item.below, attributes, menu_level + 1, meganav_size, meganav_opts, meganav_special_highlight, msh) }}
+                    {% else %}
+                        <span>{{ item.title }}</span>
+                    {% endif %}
+                </li>
+            {% else %}
+                <li{% if menu_level == 0 %} class="meganav-main-item {{ meganav_opts.item_css }}"{% endif %}>
+                    {{ link(item.title, item.url) }}
+                    {% if item.below %}
+                        {{ menus.menu_meganav_links(item.below, attributes, menu_level + 1, meganav_size, meganav_opts, meganav_special_highlight, msh) }}
+                    {% endif %}
+                </li>
+            {% endif %}
+            {% if menu_level == 1 and (item_url == '<nolink>' or item_url == '<none>') %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% if menu_level > 1 %}</ul>{% endif %}
+    {% if menu_level == 1 %}</div></div></div></ul>{% endif %}
+        {% if menu_level == 0 %}{{ msh }}</ul></nav>{% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro menu_meganav_mobile_highlight(items, attributes, menu_level) %}
+    {% import _self as menus %}
+    {% if items %}
+        {% if menu_level > 2 %}<ul class="vertical menu meganav-mobile-highlight-list">{% endif %}
+        {% for item in items %}
+            {% set custom_attributes = create_attribute() %}
+            {% set custom_url_attribs = item.url.getOption('attributes') %}
+            {% set item_url = (item.url.isRouted) ? item.url.getRouteName : item.url.getUri %}
+
+            {% if menu_level == 2 and item_url == '<nolink>' or item_url == '<none>' %}
+                <li class="meganav-main-item meganav-mobile-highlight-title">
+                    {% if item.below %}
+                        <a><span>{{ item.title }}</span></a>
+                        {{ menus.menu_meganav_mobile_highlight(item.below, attributes, menu_level + 1) }}
+                    {% else %}
+                        <span>{{ item.title }}</span>
+                    {% endif %}
+                </li>
+            {% elseif menu_level > 2 %}
+                <li>
+                    {{ link(item.title, item.url) }}
+                    {% if item.below %}
+                        {{ menus.menu_meganav_mobile_highlight(item.below, attributes, menu_level + 1) }}
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+        {% if menu_level > 2 %}</ul>{% endif %}
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Install and uninstall functions for the local installation profile.
+ */
+
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\field\Entity\FieldConfig;
+
+function ucr_news_local_install() {
+    // Don't do anything during config sync.
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}

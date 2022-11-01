@@ -1,0 +1,339 @@
+//*******  Globals **********//
+div.more-link{
+  text-align: right;
+  margin: 2em 0;
+}
+.primary-content-area a[class^="a2a_"] {
+  border: none;
+  &:after {
+    content:"";
+  }
+}
+.social-media {
+  text-align: right;
+  padding: 1em 1.55em 2em 1em;
+}
+// Mobile-first
+.article {
+  border-top: 2px solid $gray4;
+  position:relative;
+  margin-bottom: 1.5em;
+  padding: .5em 0;
+  min-height:100px;
+  background: #fff;
+  a {
+    text-decoration:none;
+  }
+}
+h3.article-type {
+  color: $gray6;
+}
+h3.article-type:first-of-type {
+  margin-top:0;
+  }
+.article-image,
+.article-summary,
+.image-cont {
+  display:none;
+}
+.article-image {
+  margin-top: 1.33em;
+  border: 1px solid $gray8;
+}
+.article-title {
+    color: $title-blue;
+    font-size: 1.33em;
+}
+span.author {
+  display:none;
+}
+span.author,
+.article-date {
+  font-size: .8em;
+  color:$gray7;
+  font-family: $adelle;
+}
+.article-date {
+    margin: 0;
+    display: inline;
+    font-weight:400;
+}
+.category-container {
+  display: none;
+}
+.article-summary {
+    margin-top: 0.1em;
+}
+a.article-listing-link {
+  width: 100%;
+  height: auto;
+  display:block;
+  border-bottom:none;
+  text-decoration: none;
+  &:hover, &:hover div.article-title {
+    color: $link-red;
+    text-decoration: underline;
+    transition: color 0.25s ease-out, text-decoration 0.25s ease-in;
+  }
+}
+a.article-listing-link:hover {
+  border-bottom:none;
+  background-color:inherit;
+}
+a.article-listing-link:hover div.article {
+  background-color:rgba(0,0,0,.2);
+  box-shadow: #39afef 0px 0px 3px;
+}
+a.article-listing-link:hover div.article div.article-image {
+  opacity: .3;
+}
+a.article-listing-link:hover div.article div.article-date,
+a.article-listing-link:hover div.article div.article-title,
+a.article-listing-link:hover div.article div.article-summary{
+  color:#e4e4e4;
+}
+a.article-listing-link:hover::before {
+  display:block;
+  width:100%;
+  height:auto;
+  background-color:red;
+}
+//   ******** Node view ***********  //
+.article.node {
+  margin-bottom: 4rem;
+  .article-title span {
+    display: inline-block;
+    margin: 1rem 1.5rem .5rem 0;
+    font-family: $adelle;
+    font-size: 1.8rem;
+  }
+  .author-container {
+    margin: 0 0 .5rem 0 ;
+    font-size: 1rem;
+    color: $title-blue;
+  }
+  div.article-summary {
+    font-size: 1.5em;
+    font-weight: normal;
+    margin: 0 1.5em 1em 0;
+  }
+  .article-date {
+    margin: 0;
+    border: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    font-family: $trade-gothic;
+    .month, .day {
+      font-family: $trade-gothic;
+      font-size: 1em;
+      text-transform: none;
+      padding:0;
+    }
+  }
+  .article-body {
+    padding:1.5em 0;
+    & > div {
+      margin-bottom: 2rem;
+    }
+  }
+  .article-body.press {
+    span:first-of-type {
+      display: inline;
+    }
+    p:first-of-type {
+      display: inline;
+    }
+    p:nth-of-type(2) {
+      margin-top: 1em;
+    }
+  }
+  figure.article-image {
+    margin-bottom: 0;
+    text-align: center;
+    display: block;
+    position: relative;
+    border: none;
+    figcaption {
+      margin: 0;
+    }
+    .credit {
+      font-size: .8em;
+      display: block;
+      margin-top: -.33em;
+    }
+  }
+  .social-media {
+    text-align: left;
+    padding: 0;
+  }
+  div.tags {
+    font-size: .85em;
+    text-align: right;
+    padding: 0 2em 1em 0;
+    p {
+      display:inline;
+    }
+  }
+  div.more-link {
+    text-align: right;
+    margin-right: 3em;
+  }
+}// end node styles
+// ********* Articles Container (block view) *********** //
+.articles-container {
+  .article {
+    min-height:591px;
+    margin-bottom:0;
+    border: none;
+  }
+  .article-image {
+    border: none;
+    display: block;
+  }
+  .article-image-caption {
+    margin: 0 1.5rem;
+    background-color: #666;
+    color: white;
+    padding: .25em .5em;
+    font-style: italic;
+    box-shadow: darkgrey 0px 4px 2px;
+  }
+  .article-image-caption, .article-body, .article-title, .article-date {
+    margin: 0 1rem 0 1rem;
+  }
+  .article-date {
+    display: inline-block;
+    margin: 1rem 0 1rem 1rem;
+    font-size: 1.5em;
+    border-bottom: 1px solid $title-blue;
+    color: $gray5;
+  }
+  .article-title {
+    font-weight:300;
+    margin-bottom:0;
+    font-family: $adelle;
+    color: $gray8;
+    &:before {
+      display: none;
+    }
+  }
+  .article-body {
+    font-size:.9em;
+    padding-top:.5em;
+    p {
+      text-overflow: ellipsis;
+      overflow:hidden;
+    }
+    p:nth-child(3) {
+      display:inline;
+    }
+    p:nth-child(4){
+      margin-top:1rem;
+    }
+  }
+  .article-link {
+    display: block;
+    font-family: Avenir Next W01,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+    font-size: .75rem;
+    font-weight: 600;
+    color: #39afef;
+    text-transform: uppercase;
+    width: 100%;
+    padding: .5em 1.25rem;
+    background: #f0f0f0;
+    border: none;
+    position: absolute;
+    bottom: 0;
+    &:hover{
+      outline: 1px solid #666;
+      outline-offset: -1px;
+      color: #39afef;
+    }
+    a {
+      color: #39afef;
+      border: none;
+      &:hover{
+        background-color: transparent;
+        border: none;
+        color: #39afef;
+      }
+    }
+  }
+    a[href*="//"]::after {
+    content: '';
+  }
+  .block {
+    .article-image {
+      position: relative;
+      padding-right: 0;
+      margin-left:0;//1.5em
+      float:none;
+      width:auto;
+      height: auto;
+    }
+  }//end block styles
+}// end .articles-container
+// *********  Responsive queries ************//
+@include breakpoint (medium) {
+  .image-cont {
+    padding-right: 1em;
+  }
+  div.article-image,
+  .image-cont  {
+    display: inline-block;
+  }
+  .article-title {
+    margin-bottom: .75em;
+  }
+  span.author {
+    display:inline;
+  }
+  .category-container {
+    display:block;
+    color: $link-red;
+    text-transform: capitalize;
+    font-size:.8em;
+    a:hover {
+      text-decoration: underline;
+      font-weight:700;
+    }
+  }
+  .article-summary {
+    display:block;
+  }
+  .article {
+    padding:0;
+    min-height:85px;
+  }
+  .article-date {
+    display: inline-block;
+  }
+    .article.node {
+        figure.article-image {
+          position:relative;
+          text-align: center;
+          display: block;
+          font-weight: normal;
+          border:none;
+        img {
+          display: block;
+          margin: 0 auto;
+        }
+        figcaption,
+        .credit {
+          display: inline-block;
+          margin-bottom: 1em;
+        }
+
+      }
+      .article-title,
+      .article-date,
+      .article-summary {
+        margin-left: 0;
+      }
+      .social-media {
+        text-align: left;
+        padding:0;
+      }
+    }// end node
+}// end medium breakpoint

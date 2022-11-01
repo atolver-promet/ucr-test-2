@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_una_header_image
+    - media.type.image
+    - node.type.news_articles
+id: node.news_articles.field_una_header_image
+field_name: field_una_header_image
+entity_type: node
+bundle: news_articles
+label: 'Header Image'
+description: 'Select or Upload the image that you want as your header image.<br /><small>Recommended Minimum Size: 1280 x 960</small>'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

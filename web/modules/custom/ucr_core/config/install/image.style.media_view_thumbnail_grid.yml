@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: media_view_thumbnail_grid
+label: 'Media View: Thumbnail (180 x 180)'
+effects:
+  75a8f46d-09d8-4e77-a614-76404c7cc251:
+    uuid: 75a8f46d-09d8-4e77-a614-76404c7cc251
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 180
+      height: 180
+      crop_type: focal_point

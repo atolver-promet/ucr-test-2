@@ -1,0 +1,10 @@
+name: Custom Site Configuration
+type: module
+description: Provides overall site configuration such as related links, department information, etc.
+package: UC Riverside
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - drupal:block
+  - ucr_gcs
+configure: ucrglobal.settings

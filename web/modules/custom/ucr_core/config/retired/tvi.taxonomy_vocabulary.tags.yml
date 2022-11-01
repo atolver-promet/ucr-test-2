@@ -1,0 +1,5 @@
+enable_override: 1
+view: articles
+view_display: tag_filter_page
+inherit_settings: 1
+pass_arguments: 1

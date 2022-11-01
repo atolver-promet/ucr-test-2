@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_una_media_contacts
+    - node.type.news_articles
+    - taxonomy.vocabulary.ucr_news_article_media_contacts
+id: node.news_articles.field_una_media_contacts
+field_name: field_una_media_contacts
+entity_type: node
+bundle: news_articles
+label: 'Media Contacts'
+description: '<em>( Optional )</em> Please select the media contacts you want associated with this News Article.<br /><br />You can manage the Media Contacts Taxonomy <a href="/admin/structure/taxonomy/manage/ucr_news_article_media_contacts/overview" target="_blank">here</a>.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      ucr_news_article_media_contacts: ucr_news_article_media_contacts
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

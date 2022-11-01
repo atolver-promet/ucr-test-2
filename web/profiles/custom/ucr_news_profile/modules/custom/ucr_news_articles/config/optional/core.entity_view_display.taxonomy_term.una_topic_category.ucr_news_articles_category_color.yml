@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.ucr_news_articles_category_color
+    - field.field.taxonomy_term.una_topic_category.field_una_color
+    - taxonomy.vocabulary.una_topic_category
+  module:
+    - color_field
+id: taxonomy_term.una_topic_category.ucr_news_articles_category_color
+targetEntityType: taxonomy_term
+bundle: una_topic_category
+mode: ucr_news_articles_category_color
+content:
+  field_una_color:
+    weight: 0
+    label: hidden
+    settings:
+      opacity: '1'
+      format: hex
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+hidden:
+  description: true

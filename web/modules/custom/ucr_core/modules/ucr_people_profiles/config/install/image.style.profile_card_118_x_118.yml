@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: profile_card_118_x_118
+label: 'Profile Card (118 x 118)'
+effects:
+  e8b660c5-c0bf-4606-8f8f-b52672d40dbc:
+    uuid: e8b660c5-c0bf-4606-8f8f-b52672d40dbc
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 118
+      height: 118
+      crop_type: focal_point

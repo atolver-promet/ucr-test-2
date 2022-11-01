@@ -1,0 +1,83 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_button_styles
+field_name: field_button_styles
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: btn-ucr-brand-blue
+      label: 'Brand Blue (Default)'
+    -
+      value: btn-ucr
+      label: Blue
+    -
+      value: btn-ucr-alt
+      label: 'Pink Button'
+    -
+      value: btn-ucr-outline
+      label: 'Bordered Button'
+    -
+      value: btn-ucr-lt-blue
+      label: 'Lt. Blue Button'
+    -
+      value: btn-ucr-dk-blue
+      label: 'Dk. Blue Button'
+    -
+      value: btn-ucr-red
+      label: 'Red Button'
+    -
+      value: btn-ucr-burgundy
+      label: 'Burgundy Button'
+    -
+      value: btn-ucr-gold
+      label: 'Gold Button'
+    -
+      value: btn-ucr-orange
+      label: 'Orange Button'
+    -
+      value: btn-ucr-green
+      label: 'Green Button'
+    -
+      value: btn-ucr-outline-lt-blue
+      label: 'Lt. Blue Outline Button'
+    -
+      value: btn-ucr-outline-md-blue
+      label: 'Md. Blue Outline Button'
+    -
+      value: btn-ucr-outline-dk-blue
+      label: 'Dk. Blue Outline Button'
+    -
+      value: btn-ucr-outline-pink
+      label: 'Pink Outline Button'
+    -
+      value: btn-ucr-outline-red
+      label: 'Red Outline Button'
+    -
+      value: btn-ucr-outline-burgundy
+      label: 'Burgundy Outline Button'
+    -
+      value: btn-ucr-outline-gold
+      label: 'Gold Outline Button'
+    -
+      value: btn-ucr-outline-orange
+      label: 'Orange Outline Button'
+    -
+      value: btn-ucr-outline-green
+      label: 'Green Outline Button'
+    -
+      value: btn-grid-ucr-split
+      label: 'Arrow Button (Blue)'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

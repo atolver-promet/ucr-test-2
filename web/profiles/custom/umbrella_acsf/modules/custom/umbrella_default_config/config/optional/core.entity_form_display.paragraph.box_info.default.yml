@@ -1,0 +1,83 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.box_info.field_body
+    - field.field.paragraph.box_info.field_button_text_and_url
+    - field.field.paragraph.box_info.field_colo_palette
+    - field.field.paragraph.box_info.field_image
+    - field.field.paragraph.box_info.field_text_color
+    - field.field.paragraph.box_info.field_video_subtitle
+    - paragraphs.paragraphs_type.box_info
+  module:
+    - color_field
+    - content_moderation
+    - datetime
+    - entity_browser
+    - link
+id: paragraph.box_info.default
+targetEntityType: paragraph
+bundle: box_info
+mode: default
+content:
+  field_button_text_and_url:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_colo_palette:
+    weight: 1
+    settings:
+      default_colors: '#1D3A61, #637EA4, #329AF0,  #39B1EF, #3AA4DC, #91AFCC, #A5C8EA, #D6336B, #802244, #14AABE, #FA5151, #A3E24A'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_image:
+    type: entity_browser_file
+    weight: 0
+    settings:
+      entity_browser: image_browser
+      field_widget_edit: true
+      field_widget_remove: true
+      view_mode: default
+      preview_image_style: thumbnail
+      open: true
+      selection_mode: selection_append
+    region: content
+    third_party_settings: {  }
+  field_text_color:
+    weight: 2
+    settings:
+      default_colors: '#000000, #FFFFFF'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_video_subtitle:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_body: true
+  status: true
+  uid: true

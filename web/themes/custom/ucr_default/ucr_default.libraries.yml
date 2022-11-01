@@ -1,0 +1,23 @@
+global-css:
+  version: VERSION
+  css:
+    theme:
+      https://fonts.googleapis.com/css?family=Montserrat:700|Roboto+Slab:400,700|Roboto:400,700: {type: external}
+      /libraries/DataTables/datatables.min.css: {}
+      css/motion-ui.min.css: {}
+      css/icons.min.css: {}
+      css/default.min.css: {}
+global-js:
+  version: VERSION
+  js:
+    js/foundation.min.js: {}
+    js/what-input.js: {}
+    /libraries/DataTables/datatables.min.js: {}
+    js/megamenu.js: {}
+    js/megamenu_init.js: {}
+    js/default.min.js: {}
+    js/motion-ui.min.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once

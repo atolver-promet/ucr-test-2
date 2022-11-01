@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: '404'
+label: '404 page not found'
+tags:
+  canonical_url: '[site:url]'
+  shortlink: '[site:url]'
+  og_url: '[site:url]'
+  twitter_cards_page_url: '[site:url]'

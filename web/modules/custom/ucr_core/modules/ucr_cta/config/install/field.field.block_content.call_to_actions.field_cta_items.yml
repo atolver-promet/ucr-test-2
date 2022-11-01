@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.call_to_actions
+    - field.storage.block_content.field_cta_items
+    - paragraphs.paragraphs_type.cta_item
+  module:
+    - entity_reference_revisions
+id: block_content.call_to_actions.field_cta_items
+field_name: field_cta_items
+entity_type: block_content
+bundle: call_to_actions
+label: 'CTA Items'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      cta_item: cta_item
+    target_bundles_drag_drop:
+      accordion:
+        weight: 11
+        enabled: false
+      bubbles:
+        weight: 12
+        enabled: false
+      button_bar:
+        weight: 13
+        enabled: false
+      carousel_slider:
+        weight: 14
+        enabled: false
+      cta_item:
+        enabled: true
+        weight: 15
+      expanding_card:
+        weight: 16
+        enabled: false
+      galleria_items:
+        weight: 17
+        enabled: false
+      info_card:
+        weight: 18
+        enabled: false
+      statistic:
+        weight: 19
+        enabled: false
+      tab:
+        weight: 20
+        enabled: false
+field_type: entity_reference_revisions

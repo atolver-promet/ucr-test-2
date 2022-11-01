@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.taxonomy_term.news_announce_authors.field_announce_department
+  - field.field.taxonomy_term.news_announce_authors.field_announce_job_title
+  - taxonomy.vocabulary.news_announce_authors
+id: taxonomy_term.news_announce_authors.default
+targetEntityType: taxonomy_term
+bundle: news_announce_authors
+mode: default
+content:
+  field_announce_department:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_announce_job_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true

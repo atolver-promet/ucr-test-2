@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_title_placement
+    - node.type.page
+  module:
+    - options
+id: node.page.field_title_placement
+field_name: field_title_placement
+entity_type: node
+bundle: page
+label: 'Title Placement'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: bottom-left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

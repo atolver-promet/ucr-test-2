@@ -1,0 +1,171 @@
+// SASS for the System Messages, Breadcrumbs, Main Page Title, and Drupal Controls / Tabs.
+$main-page-title-color: #003DA5;
+
+$breadcumb-border: $blue-grey-200;
+$breadcrumb-home: #003DA5;
+$breadcrumb-active: $blue-grey-400;
+$breadcrumb-active-hover: $link-color;
+main {
+  a {
+    color: $link-color;
+  }
+  > div {
+    &#content-container {
+      div {
+        &.system-messages {
+          div {
+            &.callout {
+              &:nth-of-type(1n) {
+                margin-top: 0.625rem;
+                @include breakpoint(medium) {
+                  margin-top: 0.9375rem;
+                }
+              }
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+          }
+          &:empty {
+            display: none !important;
+          }
+        }
+        &.primary-content-header {
+          > div {
+            &.cell {
+              padding-top: 0;
+              &:first-of-type {
+                padding-top: 0.625rem;
+                @include breakpoint(medium) {
+                  padding-top: 0.9375rem;
+                }
+              }
+            }
+          }
+          .breadcrumb-container {
+            border: 1px solid $breadcumb-border;
+            line-height: normal;
+            .breadcrumb-home {
+              a {
+                display: block;
+                justify-content: center;
+                text-align: center;
+                vertical-align: middle;
+                height: 100%;
+                min-width: 30px;
+                border-right: 1px solid $breadcumb-border;
+                transform-style: preserve-3d;
+                -webkit-transform-style: preserve-3d;
+                -moz-transform-style: preserve-3d;
+                color: $breadcrumb-home;
+                font-size: 1.25rem;
+                line-height: normal;
+                span {
+                  &.breadcrumb-home-icon {
+                    display: inline-block;
+                    position: relative;
+                    vertical-align: middle;
+                    //top: 50%;
+                    //transform: perspective(1px) translateY(-55%);
+                    &::before {
+                      line-height: normal;
+                    }
+                  }
+                }
+                &:hover, &:focus {
+                  color: $breadcrumb-home;
+                  background-color: $body-background;
+                }
+              }
+            }
+            .breadcrumb-list {
+              nav {
+                padding: 0 7px 7px 7px;
+                transform-style: preserve-3d;
+                -webkit-transform-style: preserve-3d;
+                -moz-transform-style: preserve-3d;
+                height: 100%;
+                ul {
+                  &.breadcrumbs {
+                    margin: 0;
+                    position: relative;
+                   // top: 50%;
+                    //transform: perspective(1px) translateY(-50%);
+                    line-height: normal;
+                    display: inline-block;
+                    vertical-align: middle;
+                    li {
+                      float: none;
+                      display: inline;
+                      padding: 0;
+                      &:not(:last-child) {
+                        &::after {
+                          color: $breadcrumb-active;
+                          margin: 0 0.25rem;
+                          content: url("../images/breadcrumb-arrows-divider.svg");
+                        }
+                      }
+                      a {
+                        color: $breadcrumb-active;
+                        text-decoration: none;
+                        padding: 0;
+                        &:hover, &:focus, &:active {
+                          color: $breadcrumb-active-hover;
+                          text-decoration: none;
+                          background-color: transparent;
+                        }
+                      }
+                      span {
+                        color: $breadcrumb-home
+                      }
+                      &.list-no-display{
+                        &::after{
+                          display: none;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          h1 {
+            font-weight: 300;
+            font-size: 2.375rem;
+            line-height: 1.10526;
+            font-family: "Fira Sans Regular", sans-serif !important;
+            &.page-title {
+              color: $main-page-title-color;
+              margin-bottom: 0;
+            }
+          }
+        }
+        &.system-admin-controls {
+          ul {
+            &.content-editor-menu {
+              border-bottom: 1px solid $breadcumb-border;
+              li {
+                a {
+                  border: 1px solid $breadcumb-border;
+                  color: $breadcrumb-home;
+                  background-color: $body-background;
+                  border-bottom: none;
+                  -webkit-border-radius: 5px 5px 0 0;
+                  -moz-border-radius: 5px 5px 0 0;
+                  border-radius: 5px 5px 0 0;
+                  margin-right: 7px;
+                  text-decoration: none;
+                  &:hover, &:focus {
+                    color: $breadcrumb-active-hover;
+                    background-color: darken($body-background, 5%);
+                    border-bottom: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set block_classes = [
+    ucr_custom_css.build,
+] %}
+{% set temp_cache = content|render %}
+{% set more_align = "" %}
+{% set more_link = "" %}
+{% set intro = content.body|field_value|render %}
+{% set limit = content.field_article_limit|field_raw('value') %}
+{% set more_align = content.field_article_more_link_align|field_raw('value') %}
+{% set more_link = content.field_article_more_link.0["#url"] %}
+{% set show_per_row = content.field_article_row|field_raw('value') %}
+{% if ucr_articles.show_list == "related" %}
+    {% set view_results = drupal_view_result('article_content_blocks', ucr_articles.view_block_name, ucr_articles.related_node_id, ucr_articles.related_term_ids, ucr_articles.term_id, limit)|length %}
+    {% set view = drupal_view('article_content_blocks', ucr_articles.view_block_name, ucr_articles.related_node_id, ucr_articles.related_term_ids, ucr_articles.term_id, limit) %}
+{% else %}
+    {% set view_results = drupal_view_result('article_content_blocks', ucr_articles.view_block_name, ucr_articles.term_id, limit)|length %}
+    {% set view = drupal_view('article_content_blocks', ucr_articles.view_block_name, ucr_articles.term_id, limit) %}
+{% endif %}
+{% if show_per_row == 1 %}
+    {% set med_per_row = 1 %}
+{% else %}
+    {% set med_per_row = 2 %}
+{% endif %}
+{% if ucr_articles.display_view == "standard_alt" %}
+    {% set display_attributes = 'class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-' ~ med_per_row ~ ' large-up-' ~ show_per_row ~ ' align-center" data-equalizer data-equalize-on="medium" data-equalize-by-row="true"' %}
+{% elseif ucr_articles.display_view == "box_images" %}
+    {% set display_attributes = 'class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-' ~ med_per_row ~ ' large-up-' ~ show_per_row ~ ' align-center"' %}
+{% elseif ucr_articles.display_view == "minimalist" %}
+    {% set display_attributes = 'class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-' ~ med_per_row ~ ' large-up-' ~ show_per_row ~ ' align-center" data-equalizer data-equalize-on="medium" data-equalize-by-row="true"' %}
+{% elseif ucr_articles.display_view == "slideshow" %}
+    {% set display_attributes = 'class="grid-x grid-padding-x grid-padding-y align-center"' %}
+    {{ attach_library('ucr_article/ucr_articles_slick') }}
+{% else %}
+    {% set display_attributes = 'class="grid-x grid-padding-x grid-padding-y small-up-1 medium-up-' ~ med_per_row ~ ' large-up-' ~ show_per_row ~ ' align-center" data-equalizer data-equalize-on="medium" data-equalize-by-row="true"' %}
+{% endif %}
+{% block content %}
+    <div{{ attributes.addClass(block_classes) }}>
+        <div class="grid-container full">
+            {{ title_prefix }}
+            {% if label %}
+                <div class="grid-x grid-padding-x">
+                    <div class="cell"><h2{{ title_attributes }}>{{ label }}</h2></div>
+                </div>
+            {% endif %}
+            {{ title_suffix }}
+            {% if intro is not empty %}
+                <div class="grid-x grid-padding-x">
+                    <div class="cell">
+                        {{ content.body }}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    <div class="grid-container full ucr-articles--block--container">
+                        {% if view_results == 0 %}
+                            <div class="grid-x grid-padding-x grid-padding-y">
+                                <div class="cell">
+                                    <div class="callout info">
+                                        <div class="text-center">There is currently no articles to be displayed at this time.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div {{ display_attributes|raw }}>
+                                {% if ucr_articles.display_view == "slideshow" %}<div class="cell">
+                                    <div class="ucr-articles--block--slideshow" data-slick='{"dots":true,"infinite":true,"speed":800,"fade":true,"cssEase":"linear","autoplay":true,"autoplaySpeed":8000,"draggable":false}'>
+                                {% endif %}
+                                {{ view }}
+                                {% if ucr_articles.display_view == "slideshow" %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if view_results > 0 and more_link is not empty %}
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    <div class="ucr-articles--block--more-link{% if more_align is not empty %} text-{{- content.field_article_more_link_align|field_raw('value') -}}{% endif %}">
+                        {{ content.field_article_more_link }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

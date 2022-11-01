@@ -1,0 +1,75 @@
+main {
+  > div {
+    &#content-container {
+      .lal-link-url {
+        text-decoration: none !important;
+        &:hover {
+          text-decoration: none !important;
+        }
+      }
+      .latest-announce-list {
+        position: relative;
+        border: 1px solid $ucr-grey-1;
+        box-shadow: 0 0 7px $ucr-grey-2;
+        .lal-category-display {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          width:100%;
+          .category-box {
+            background-color: #215AA7;
+            font-family: $font-family-roboto;
+            font-weight: 700;
+            line-height: 19px;
+            font-size: 16px;
+            width: 100%;
+            min-height: 19px;
+            text-align: left;
+            padding: 10px;
+          }
+        }
+        h3.lal-header {
+          padding: 16px 24px 0;
+          line-height: 32px;
+          font-size: 28px;
+          color: $body-color;
+          font-family: $font-family-roboto;
+          font-weight: 700;
+          @include breakpoint(medium) {
+            padding: 24px 36px 0;
+          }
+        }
+        p {
+          padding: 0 24px;
+          color: $body-color;
+          @include breakpoint(medium) {
+            padding: 0 36px;
+          }
+        }
+        .lal-date {
+          padding: 0 24px 8px;
+          font-size: 0.8rem;
+          color: $ucr-grey-2;
+          font-weight: 200;
+          text-transform: uppercase;
+          @include breakpoint(medium) {
+            padding: 0 36px 24px;
+          }
+        }
+        .lal-read-more {
+          padding: 0 24px 16px;
+          font-size: 1rem;
+          color: #215AA7;
+          font-weight: bold;
+          text-transform: uppercase;
+          text-align: right;
+          @include breakpoint(medium) {
+            padding: 0 36px 24px;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}

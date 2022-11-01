@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: galleria
+label: 'Local Galleria Preview'
+revision: 1
+description: 'Display a teaser preview of a selected Local Galleria'

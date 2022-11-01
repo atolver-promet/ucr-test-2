@@ -1,0 +1,21 @@
+name: 'UCR News Custom Localist Expansion'
+type: module
+description: 'Expands the UCR Localist Events Custom Block for specific display of UCR News.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - content_moderation
+  - datetime
+  - entity_browser
+  - field
+  - link
+  - media
+  - menu_ui
+  - node
+  - path
+  - pathauto
+  - text
+  - user
+  - ucr_core
+  - ucr_localist_events

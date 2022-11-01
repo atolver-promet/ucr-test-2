@@ -1,0 +1,87 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.home_hero_option
+    - field.storage.block_content.field_homepage_callout_slider
+    - paragraphs.paragraphs_type.homepage_callout_slider
+  module:
+    - entity_reference_revisions
+id: block_content.home_hero_option.field_homepage_callout_slider
+field_name: field_homepage_callout_slider
+entity_type: block_content
+bundle: home_hero_option
+label: 'Homepage Callout Slider'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      homepage_callout_slider: homepage_callout_slider
+    target_bundles_drag_drop:
+      accordion:
+        weight: 21
+        enabled: false
+      box:
+        weight: 22
+        enabled: false
+      box_info:
+        weight: 23
+        enabled: false
+      bubbles:
+        weight: 24
+        enabled: false
+      carousel_slider:
+        weight: 25
+        enabled: false
+      column:
+        weight: 26
+        enabled: false
+      expanding_card:
+        weight: 27
+        enabled: false
+      hero_slides:
+        weight: 28
+        enabled: false
+      hero_slideshow:
+        weight: 29
+        enabled: false
+      homepage_callout_slider:
+        enabled: true
+        weight: 30
+      homepage_hero_option:
+        weight: 31
+        enabled: false
+      info_card:
+        weight: 32
+        enabled: false
+      link_column:
+        weight: 33
+        enabled: false
+      quicklinks_sidebar:
+        weight: 34
+        enabled: false
+      statistic:
+        weight: 35
+        enabled: false
+      statistic_with_image:
+        weight: 36
+        enabled: false
+      tab:
+        weight: 37
+        enabled: false
+      teaser_callout_slider:
+        weight: 38
+        enabled: false
+      testimonial_slider:
+        weight: 39
+        enabled: false
+      video:
+        weight: 40
+        enabled: false
+field_type: entity_reference_revisions

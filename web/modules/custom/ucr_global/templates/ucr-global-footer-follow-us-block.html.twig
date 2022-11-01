@@ -1,0 +1,12 @@
+{% block content %}
+    {% if social_links is not empty %}
+<section class="footer-item"{{ attributes }}>
+   <p class="social-title">Follow US:</p>
+   <div class="social-link">
+        {% for network, social_data in social_links %}
+            <a href="{{ social_data.url }}" target="_blank" class="{{ social_data.css }}" title="{{ social_data.title }}" aria-label="link to {{ network }}"><span class="show-for-sr">{{ social_data.title }}</span></a>
+        {% endfor %}
+    </div>
+</section>
+    {% endif %}
+{% endblock %}

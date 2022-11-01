@@ -1,0 +1,319 @@
+.ipe-tabs-content {
+  color: #333;
+  font: normal 81.3%/1.538em "Lucida Grande", "Lucida Sans Unicode", "DejaVu Sans", "Lucida Sans", sans-serif;
+}
+.ipe-form {
+  min-width: 400px;
+  max-width: 650px;
+
+  @media screen and #{breakpoint(medium)} {
+    min-width: 75%;
+  }
+
+  .form-item {
+    margin: 0.75em 0;
+  }
+
+  label {
+    font-weight: bold;
+    display: table;
+    &.form-required {
+      &:after {
+        background-size: 7px 7px;
+        width: 7px;
+        height: 7px;
+        content: '';
+        vertical-align: super;
+        display: inline-block;
+        background-image: url(../../../../core/misc/icons/ee0000/required.svg);
+        background-repeat: no-repeat;
+        margin: 0 0.3em;
+      }
+    }
+  }
+  h4 {
+    @extend label;
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #0a0a0a;
+    background-color: transparent;
+  }
+
+  .description {
+    margin: 0.2em 0 0 0;
+    color: #595959;
+    font-size: 0.95em;
+  }
+
+  input {
+    &.form-text {
+      padding: .3em .4em .3em .5em;
+      margin: 0;
+      max-width: 100%;
+      width: inherit;
+      height: auto;
+      border: 1px solid #b8b8b8;
+      border-top-color: #999;
+      border-radius: 2px;
+      background: #fcfcfa;
+      box-sizing: border-box;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .125);
+      font-size: 1em;
+      color: #595959;
+      -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+      transition: border linear 0.2s, box-shadow linear 0.2s;
+      line-height: normal;
+    }
+    &.form-autocomplete {
+      @extend .form-text;
+      background-image: url(../../../../core/misc/throbber-inactive.png);
+      background-position: 100% center;
+      background-repeat: no-repeat;
+      &.ui-autocomplete-loading {
+        background-image: url(../../../../core/misc/throbber-active.gif);
+        background-position: 100% center;
+      }
+    }
+    &.form-tel {
+      @extend .form-text;
+    }
+    &.form-email {
+      @extend .form-text;
+    }
+    &.form-url {
+      @extend .form-text;
+    }
+    &.form-search {
+      @extend .form-text;
+    }
+    &.form-number {
+      @extend .form-text;
+    }
+    &.form-color {
+      @extend .form-text;
+    }
+    &.form-file {
+      @extend .form-text;
+    }
+    &.form-date {
+      @extend .form-text;
+    }
+    &.form-time {
+      @extend .form-text;
+    }
+    &.form-email {
+      @extend .form-text;
+    }
+    &.form-email {
+      @extend .form-text;
+    }
+  }
+
+  textarea {
+    &.form-textarea {
+      @extend input.form-text;
+      width: 100%;
+    }
+  }
+
+  select {
+    height: auto;
+    margin: 0;
+    padding: inherit;
+    border: 1px solid;
+    border-radius: 0;
+    background: none;
+    background-color: white;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: normal;
+    color: inherit;
+    width: auto;
+    max-width: 100%;
+    -webkit-appearance: button !important;
+    -moz-appearance: button !important;
+    appearance: button !important;
+  }
+
+  [type="checkbox"] + h4 {
+    display: inline-block;
+    vertical-align: baseline;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    text-transform: capitalize;
+    font-weight: normal;
+  }
+  [type="radio"] + h4 {
+    @extend h4;
+  }
+  [type="checkbox"] + label {
+    @extend h4;
+  }
+  [type="radio"] + label {
+    @extend h4;
+  }
+
+  .vertical-tabs {
+    position: relative;
+    overflow: hidden;
+    margin: 10px 0;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    background: #e6e5e1;
+
+    .vertical-tabs__menu {
+      float: left;
+      width: 240px;
+      margin: 0 -100% -1px 0;
+      padding: 0;
+      border-bottom: 1px solid #ccc;
+      line-height: 1;
+      border-top: 1px solid #ccc;
+      list-style: none;
+
+      .vertical-tabs__menu-item {
+        position: relative;
+        border: 1px solid #ccc;
+        border-top: 0;
+        background: #eee;
+        &.is-selected {
+          background-color: #fff;
+          z-index: 1;
+          overflow-x: hidden;
+          width: 100%;
+          border-right: 1px solid #fcfcfa;
+          box-shadow: 0 5px 5px -5px hsla(0, 0%, 0%, 0.3);
+        }
+        &.last {
+          border-bottom: none;
+        }
+      }
+    }
+    .vertical-tabs__panes {
+      margin: 0 0 0 240px;
+      padding: 10px 15px 10px 15px;
+      border-left: 1px solid #a6a5a1;
+      background-color: #fcfcfa;
+      &:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    }
+  }
+  .clearfix {
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  .color-field-widget-box-form {
+    padding: 7px 0 9px 0;
+    display: inline-block;
+  }
+
+  .field-multiple-drag {
+    width: 30px;
+    padding: 10px 12px;
+    padding-right: 0;
+    a {
+      &.tabledrag-handle {
+        cursor: move;
+        float: left;
+        margin-left: -1em;
+        overflow: hidden;
+        text-decoration: none;
+        .handle {
+          height: 28px;
+          margin: 0;
+          padding: 0;
+          width: 28px;
+        }
+      }
+    }
+  }
+
+  .messages {
+    margin: 9px 0 10px 8px;
+    background: no-repeat 10px 17px;
+    border: 1px solid;
+    border-width: 1px 1px 1px 0;
+    border-radius: 2px;
+    padding: 15px 20px 15px 35px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  .messages--warning {
+    background-color: #fdf8ed;
+    background-image: url(../../../../core/misc/icons/e29700/warning.svg);
+    border-color: #f4daa6 #f4daa6 #f4daa6 transparent;
+    color: #734c00;
+    box-shadow: -8px 0 0 #e09600;
+  }
+
+  .error {
+    @extend .alert;
+  }
+
+  input {
+    &[type="submit"] {
+      &.button {
+        padding: 9px 11px;
+        border: 1px solid #363636;
+        background: linear-gradient(to bottom, #fcfcfa, #e9e9dd);
+        &:hover {
+          background: #f9f8f6;
+        }
+      }
+      &.button--primary {
+        background: #0071b8;
+        color: white;
+        &:hover {
+          background: #2369a6;
+        }
+      }
+    }
+  }
+}
+
+.ipe-block-form {
+  display: block;
+  border: 1px solid darkgrey;
+}
+
+.ui-autocomplete {
+  .ui-menu-item {
+    a {
+      &.ui-menu-item-wrapper {
+        display: block;
+        font-size: 0.9rem;
+        padding: 3px;
+      }
+    }
+  }
+}
+
+ul {
+  &.ipe-action-list {
+    li {
+      a {
+        line-height: normal;
+        border-bottom: none;
+        &:hover {
+          border-bottom: none;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+.ipe-action-list {
+  .ipe-icon {
+    margin-top: 0;
+  }
+}

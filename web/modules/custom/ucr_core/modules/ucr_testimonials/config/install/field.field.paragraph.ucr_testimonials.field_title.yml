@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.ucr_testimonials
+id: paragraph.ucr_testimonials.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: ucr_testimonials
+label: 'Author''s Title'
+description: '<em>( Optional ):</em> Enter in the Author''s Title.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

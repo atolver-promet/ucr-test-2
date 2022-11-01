@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ucr_news
+id: ucr_news_page_title
+theme: ucr_news
+region: content_header
+weight: -10
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page Title (Default)'
+  provider: core
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: "<front>\r\n/articles/*/*/*/*"
+    negate: true
+    context_mapping: {  }

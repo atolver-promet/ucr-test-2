@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: testimonial_slider
+label: 'Testimonial Slider'
+icon_uuid: null
+description: 'Creates Slider for Testimonials'
+behavior_plugins: {  }

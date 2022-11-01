@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_color
+    - paragraphs.paragraphs_type.ucr_columns
+  module:
+    - color_field
+id: paragraph.ucr_columns.field_background_color
+field_name: field_background_color
+entity_type: paragraph
+bundle: ucr_columns
+label: 'Background Color'
+description: '<em>( Optional ):</em> Select a background color and opacity for the cell. For Opacity, please enter from 0 (hidden) to 1 (fully visible).'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 1
+field_type: color_field_type

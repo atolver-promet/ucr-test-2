@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.feeds_display
+  - feeds.feed_type.ucr_rss_feed_importer
+  - field.storage.block_content.field_feed_to_display
+id: block_content.feeds_display.field_feed_to_display
+field_name: field_feed_to_display
+entity_type: block_content
+bundle: feeds_display
+label: 'Feed to Display'
+description: 'Select the Feed that you want to display.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings:
+    target_bundles:
+      ucr_rss_feed_importer: ucr_rss_feed_importer
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,161 @@
+$profile-card-image-size-small: rem-calc(100);
+$profile-card-accent-color: darken($alternate, 10%);
+
+.profile-card-container {
+  padding: 1.25rem 0.75rem 0.75rem 0.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+
+  .profile-card-image-container {
+    padding: 0;
+    float: none;
+    margin-bottom: .5rem;
+    text-align: center;
+    @media screen and #{breakpoint(medium)} {
+      float: left;
+      padding: 0 0.75rem;
+    };
+
+    img {
+      object-fit: cover;
+      border-radius: $profile-card-image-size-small / 2;
+      width: $profile-card-image-size-small;
+      height: $profile-card-image-size-small;
+      box-shadow: 0 0 1px 1px $shades;
+    }
+  }
+
+  .profile-card-name-container {
+    margin-left: 0;
+    margin-bottom: .5rem;
+    @media screen and #{breakpoint(medium)} {
+      margin-left: 154px;
+    };
+
+    h3 {
+      font-size: 1.3rem;
+      color: $profile-card-accent-color;
+      font-weight: normal;
+      font-family: $adelle;
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+
+    .profile-job-titles {
+      font-style: italic;
+      color: lighten($body-font-color, 50%);
+      display: block;
+      font-size: small;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    .profile-dept-info {
+      color: lighten($body-font-color, 50%);
+      display: block;
+      font-size: small;
+      padding: 5px 0;
+    }
+    &.no-profile-card-image {
+      margin-left: 0;
+    }
+  }
+
+  .profile-card-contact-info {
+    clear: both;
+    font-size: small;
+    .contact-location {
+      &:before {
+        display: inline-block;
+        font-family: "Material Design Icons";
+        font-size: 1.15rem;
+        text-rendering: auto;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: $color-curious-blue;
+        content: "\F34E";
+        text-align: center;
+        vertical-align: middle;
+        padding-right: 5px;
+      }
+      border-top: 1px solid #ccc;
+      padding-top: 3px;
+      font-weight: 700;
+    }
+    .contact-email {
+      &:before {
+        display: inline-block;
+        font-family: "Material Design Icons";
+        font-size: 1.15rem;
+        text-rendering: auto;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: $color-curious-blue;
+        content: "\F1EE";
+        text-align: center;
+        vertical-align: middle;
+        padding-right: 5px;
+      }
+      border-top: 1px solid #ccc;
+      padding-top: 3px;
+    }
+    .contact-phone {
+      &:before {
+        display: inline-block;
+        font-family: "Material Design Icons";
+        font-size: 1.15rem;
+        text-rendering: auto;
+        line-height: inherit;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        color: $color-curious-blue;
+        content: "\F3F2";
+        text-align: center;
+        vertical-align: middle;
+        padding-right: 5px;
+      }
+      border-top: 1px solid #ccc;
+      padding-top: 3px;
+    }
+  }
+
+  .profile-card-view-more {
+    text-transform: uppercase;
+    font-family: "Avenir Next W01", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 0.89rem;
+    a {
+      color: $white;
+      background-color: #266ecd;
+      transition: background-color 0.25s ease-out, color 0.25s ease-out;
+      border-bottom: none;
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin: .5rem 0 .5rem .25rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 2px;
+
+      &:hover {
+        color: $white;
+        border-bottom: none;
+        background-color: #0d55b3;
+      }
+    }
+  }
+}
+
+.col-4 {
+  .profile-card-container {
+    .profile-card-image-container {
+      padding: 0;
+      float: none;
+    }
+    .profile-card-name-container {
+      margin-left: 0;
+    }
+  }
+}

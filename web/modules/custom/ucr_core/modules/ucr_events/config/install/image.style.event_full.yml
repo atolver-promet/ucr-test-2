@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: event_full
+label: 'Event Image (Full) - (1170 x 658)'
+effects:
+  e663c5b5-a246-4ade-8949-b818a12b7a44:
+    uuid: e663c5b5-a246-4ade-8949-b818a12b7a44
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1170
+      height: 658
+      crop_type: focal_point

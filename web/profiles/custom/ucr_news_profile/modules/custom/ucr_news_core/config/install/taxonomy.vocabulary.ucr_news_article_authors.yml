@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Content Authors'
+vid: ucr_news_article_authors
+description: 'A Collection of Authors for Articles, Stories, and / or Awards.'
+hierarchy: 0
+weight: 0

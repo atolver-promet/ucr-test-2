@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: statistic
+label: Statistic
+icon_uuid: null
+description: 'Add a Statistic Card for the Statistical Grid'
+behavior_plugins: {  }

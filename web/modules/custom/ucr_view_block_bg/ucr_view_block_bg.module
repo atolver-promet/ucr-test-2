@@ -1,0 +1,44 @@
+<?php
+
+use Drupal\views\Plugin\views\display\Block as CoreBlock;
+use Drupal\ctools_views\Plugin\Display\Block as CToolsBlock;
+use Drupal\ucr_view_block_bg\Plugin\Display\Block;
+
+/**
+ * Implements hook_views_plugins_display_alter().
+ */
+function ucr_view_block_bg_views_plugins_display_alter(&$displays) {
+    if (!empty($displays['block']['class']) && $displays['block']['class'] == CToolsBlock::class) {
+        $displays['block']['class'] = Block::class;
+    }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function ucr_view_block_bg_preprocess_block(&$variables) {
+    $styles = "";
+    if(array_key_exists('background', $variables['configuration'])) {
+        $background_array = (is_array($variables['configuration']['background']) ? $variables['configuration']['background'] : array());
+        if (count($background_array) > 0) { // Means that there is something in there.
+            // Build out the styling.
+            if (!empty($background_array['image_path'])) {
+                $styles .= 'url(' . $background_array['image_path'] . ')';
+                $styles .= (!empty($styles) ? ' ' : '').$background_array['image_repeat'];
+            }
+
+            if(empty($background_array['color_none'])) {
+                if (!empty($background_array['color']) || (strtolower($background_array['color']) !== '#ffffff')) {
+                    list($r, $g, $b) = sscanf($background_array['color'], "#%02x%02x%02x");
+                    $opacity = $background_array['opacity'] / 100;
+                    $styles .= (!empty($styles) ? " " : "") . ' rgba(' . $r . ', ' . $g . ', ' . $b . ', ' . $opacity . ')';
+                }
+            }
+
+            if(!empty($styles)) {
+                $variables['attributes']['style'] = 'background: '.$styles.';';
+            }
+
+        }
+    }
+}

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_exclude
+  - node.type.news_stories
+id: node.news_stories.field_una_exclude
+field_name: field_una_exclude
+entity_type: node
+bundle: news_stories
+label: 'Exclude from Frontpage?'
+description: '<em>( Optional ):</em> Check this box if you do not want this story to show up in the ''Latest Stories'' on the Frontpage.'
+required: false
+translatable: false
+default_value:
+-
+  value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

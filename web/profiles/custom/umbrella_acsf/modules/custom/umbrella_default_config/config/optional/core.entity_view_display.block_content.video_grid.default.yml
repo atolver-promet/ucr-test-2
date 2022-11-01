@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_grid
+    - field.field.block_content.video_grid.body
+    - field.field.block_content.video_grid.field_button_url
+    - field.field.block_content.video_grid.field_callout_text_color
+    - field.field.block_content.video_grid.field_color
+    - field.field.block_content.video_grid.field_title
+    - field.field.block_content.video_grid.field_video_embed
+    - field.field.block_content.video_grid.field_video_grid_item
+    - field.field.block_content.video_grid.field_video_header_title
+    - field.field.block_content.video_grid.field_video_image
+    - field.field.block_content.video_grid.field_video_subtitle
+  module:
+    - entity_reference_revisions
+    - link
+    - text
+id: block_content.video_grid.default
+targetEntityType: block_content
+bundle: video_grid
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_button_url:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_video_grid_item:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_callout_text_color: true
+  field_color: true
+  field_title: true
+  field_video_embed: true
+  field_video_header_title: true
+  field_video_image: true
+  field_video_subtitle: true

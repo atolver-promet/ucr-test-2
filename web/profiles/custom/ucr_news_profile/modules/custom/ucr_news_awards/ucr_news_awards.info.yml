@@ -1,0 +1,33 @@
+name: 'UCR News Awards'
+type: module
+description: 'Create the UCR News Awards Content Type and its related content.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - color_field
+  - content_moderation
+  - ctools
+  - datetime
+  - entity_browser
+  - entity_reference_revisions
+  - field
+  - field_group
+  - file
+  - image
+  - media
+  - menu_ui
+  - metatag
+  - node
+  - options
+  - paragraphs
+  - path
+  - pathauto
+  - responsive_image
+  - taxonomy
+  - text
+  - tvi
+  - ucr_core
+  - ucr_news_core
+  - views
+  - views_taxonomy_term_name_depth

@@ -1,0 +1,44 @@
+{#
+/**
+ * @file
+ * Theme override to display a taxonomy term.
+ *
+ * Available variables:
+ * - url: URL of the current term.
+ * - name: Name of the current term.
+ * - content: Items for the content of the term (fields and description).
+ *   Use 'content' to print them all, or print a subset such as
+ *   'content.description'. Use the following code to exclude the
+ *   printing of a given child element:
+ *   @code
+ *   {{ content|without('description') }}
+ *   @endcode
+ * - attributes: HTML attributes for the wrapper.
+ * - page: Flag for the full page state.
+ * - term: The taxonomy term entity, including:
+ *   - id: The ID of the taxonomy term.
+ *   - bundle: Machine name of the current vocabulary.
+ * - view_mode: View mode, e.g. 'full', 'teaser', etc.
+ *
+ * @see template_preprocess_taxonomy_term()
+ */
+#}
+{% set att_classes = [
+    'grid-container',
+] %}
+<div{{ attributes.addClass(att_classes) }}>
+    <div class="grid-x grid-padding-x grid-padding-y">
+        <div class="cell">
+            {{ content.field_feed_item_description }}
+        </div>
+        <div class="cell">
+            <strong>Authored By:</strong> {{ content.field_feed_item_author|render|striptags|trim -}}
+        </div>
+        <div class="cell">
+            <strong>Published On:</strong> {{ content.field_feed_item_pub_date|render|striptags|trim -}}
+        </div>
+        <div class="cell">
+            <a href="{{- content.field_feed_item_url|render|striptags|trim -}}" target="_blank">View the Original Feed Item</a>
+        </div>
+    </div>
+</div>

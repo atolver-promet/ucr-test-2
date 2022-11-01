@@ -1,0 +1,14 @@
+uuid: 955d8df6-ea11-4396-9df7-b9e823de6ce5
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.cnas_localist_card_default
+label: 'CNAS Localist Card Default'
+targetEntityType: block_content
+cache: true

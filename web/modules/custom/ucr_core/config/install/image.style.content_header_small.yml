@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: content_header_small
+label: 'Content Header (Small)'
+effects:
+  bceb12e5-dcc5-4ba0-bff6-5f68ab842624:
+    uuid: bceb12e5-dcc5-4ba0-bff6-5f68ab842624
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 450
+      crop_type: focal_point

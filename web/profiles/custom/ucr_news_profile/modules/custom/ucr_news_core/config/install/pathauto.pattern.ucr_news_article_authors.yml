@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: ucr_news_article_authors
+label: 'UCR News Article Authors'
+type: 'canonical_entities:taxonomy_term'
+pattern: '/author/[term:name]'
+selection_criteria:
+  e37b13ad-3127-4d03-98f3-3d734a9c3778:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      ucr_news_article_authors: ucr_news_article_authors
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: e37b13ad-3127-4d03-98f3-3d734a9c3778
+selection_logic: and
+weight: -1
+relationships: {  }

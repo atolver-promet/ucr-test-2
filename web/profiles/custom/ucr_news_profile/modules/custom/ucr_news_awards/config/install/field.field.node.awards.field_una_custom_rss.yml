@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_una_custom_rss
+    - node.type.awards
+    - taxonomy.vocabulary.custom_rss
+id: node.awards.field_una_custom_rss
+field_name: field_una_custom_rss
+entity_type: node
+bundle: awards
+label: 'Custom RSS'
+description: '<em>( Optional )</em> Select a Custom Term to have this article appear within its RSS Feed.<br /><br />You can manage the Custom RSS Taxonomy <a href="/admin/structure/taxonomy/manage/custom_rss/overview" target="_blank">here</a>.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      custom_rss: custom_rss
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

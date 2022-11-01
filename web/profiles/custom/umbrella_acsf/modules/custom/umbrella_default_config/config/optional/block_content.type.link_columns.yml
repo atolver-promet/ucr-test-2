@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: link_columns
+label: 'Link Columns'
+revision: 1
+description: 'Columns of listed links'

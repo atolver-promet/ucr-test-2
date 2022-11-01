@@ -1,0 +1,13 @@
+global-css:
+  version: VERSION
+  css:
+    theme:
+      css/default.min.css: {}
+global-js:
+  version: VERSION
+  js:
+    js/default.min.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/jquery.once

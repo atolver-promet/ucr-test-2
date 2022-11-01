@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.testimonial_slider
+    - field.field.block_content.testimonial_slider.body
+    - field.field.block_content.testimonial_slider.field_testimonial_slider
+    - field.field.block_content.testimonial_slider.field_view
+  module:
+    - fences
+    - viewfield
+id: block_content.testimonial_slider.default
+targetEntityType: block_content
+bundle: testimonial_slider
+mode: default
+content:
+  field_view:
+    weight: 0
+    label: hidden
+    settings:
+      view_title: hidden
+      always_build_output: '1'
+      empty_view_title: hidden
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: viewfield_default
+    region: content
+hidden:
+  body: true
+  field_testimonial_slider: true

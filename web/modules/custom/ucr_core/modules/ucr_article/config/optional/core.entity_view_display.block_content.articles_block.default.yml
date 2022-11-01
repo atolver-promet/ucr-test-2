@@ -1,0 +1,148 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.articles_block
+    - field.field.block_content.articles_block.body
+    - field.field.block_content.articles_block.field_article_display
+    - field.field.block_content.articles_block.field_article_limit
+    - field.field.block_content.articles_block.field_article_list
+    - field.field.block_content.articles_block.field_article_more_link
+    - field.field.block_content.articles_block.field_article_more_link_align
+    - field.field.block_content.articles_block.field_article_row
+    - field.field.block_content.articles_block.field_article_type
+    - field.field.block_content.articles_block.field_block_margin_bottom
+    - field.field.block_content.articles_block.field_block_margin_left
+    - field.field.block_content.articles_block.field_block_margin_right
+    - field.field.block_content.articles_block.field_block_margin_top
+    - field.field.block_content.articles_block.field_block_padding_bottom
+    - field.field.block_content.articles_block.field_block_padding_left
+    - field.field.block_content.articles_block.field_block_padding_right
+    - field.field.block_content.articles_block.field_block_padding_top
+  module:
+    - link
+    - options
+    - text
+id: block_content.articles_block.default
+targetEntityType: block_content
+bundle: articles_block
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_article_display:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_article_limit:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: number_unformatted
+    region: content
+  field_article_list:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_article_more_link:
+    weight: 6
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_article_more_link_align:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_article_row:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: number_unformatted
+    region: content
+  field_article_type:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: entity_reference_entity_id
+    region: content
+  field_block_margin_bottom:
+    weight: 8
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_left:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_right:
+    weight: 11
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_top:
+    weight: 10
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_bottom:
+    weight: 12
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_left:
+    weight: 13
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_right:
+    weight: 14
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_top:
+    weight: 15
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+hidden: {  }

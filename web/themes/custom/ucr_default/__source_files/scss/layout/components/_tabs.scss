@@ -1,0 +1,57 @@
+$ucr-tabs-title-border: $ucr-grey-2;
+$ucr-tabs-title-active: $blue-700;
+$ucr-tabs-content-border: $ucr-grey-1;
+main {
+  > div {
+    &#content-container {
+      ul.tabs.ucr-tabs {
+        border: none;
+        background-color: transparent;
+        li.tabs-title {
+          border: 1px solid $ucr-tabs-title-border;
+          min-height: 50px;
+          background-color: $white;
+          a {
+            font-family: "Fira Sans Regular", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+            padding: 1em 2em;
+            border: none;
+            text-decoration: none;
+            text-transform: uppercase;
+            background: none;
+            color: $ucr-tabs-title-border;
+          }
+          &:hover {
+            background: none;
+            border-bottom: solid 4px $link-color;
+            a {
+              padding-bottom: 11px;
+              color: $link-color;
+            }
+          }
+          &.is-active {
+            border-bottom: solid 4px $ucr-tabs-title-active;
+            &:hover {
+              border-bottom: solid 4px $link-color;
+              a {
+                color: $link-color;
+              }
+            }
+            a {
+              padding-bottom: 11px;
+              color: $ucr-tabs-title-active;
+            }
+          }
+        }
+      }
+      div.tabs-content {
+        border: none;
+        border-top: solid 1px $ucr-tabs-content-border;
+        color: $body-color;
+        background-color: transparent;
+        div.tabs-panel {
+          padding: 24px 32px;
+        }
+      }
+    }
+  }
+}

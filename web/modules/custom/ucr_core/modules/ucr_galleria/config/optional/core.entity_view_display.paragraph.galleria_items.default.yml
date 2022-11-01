@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.galleria_items.field_image
+    - field.field.paragraph.galleria_items.field_status
+    - field.field.paragraph.galleria_items.field_subtitle
+    - field.field.paragraph.galleria_items.field_title
+    - image.style.galleria_thumbnail
+    - paragraphs.paragraphs_type.galleria_items
+  module:
+    - image
+id: paragraph.galleria_items.default
+targetEntityType: paragraph
+bundle: galleria_items
+mode: default
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: galleria_thumbnail
+      image_link: file
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_status:
+    weight: 1
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_subtitle:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_title:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden: {  }

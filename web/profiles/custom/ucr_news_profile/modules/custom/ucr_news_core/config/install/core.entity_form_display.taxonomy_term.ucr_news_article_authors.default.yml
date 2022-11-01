@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_browser
+    - field.field.taxonomy_term.ucr_news_article_authors.field_una_authors_image
+    - taxonomy.vocabulary.ucr_news_article_authors
+  module:
+    - entity_browser
+    - path
+id: taxonomy_term.ucr_news_article_authors.default
+targetEntityType: taxonomy_term
+bundle: ucr_news_article_authors
+mode: default
+content:
+  field_una_authors_image:
+    type: entity_browser_entity_reference
+    weight: 1
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: false
+    region: content
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true

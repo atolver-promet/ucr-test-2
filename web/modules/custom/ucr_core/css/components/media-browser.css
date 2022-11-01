@@ -1,0 +1,44 @@
+.media-display {
+  position: relative;
+}
+.media-display-container {
+
+}
+.media-display-thumbnail {}
+.media-info {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  bottom: 0;
+  background-color: rgba(0,0,0,.8);
+  padding: 5px 10px;
+  color: white;
+  text-align: left;
+}
+
+.media-info::before {
+  display: inline-block;
+  font: normal normal normal 16px/1 "Material Design Icons";
+  text-rendering: auto;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\F224";
+}
+
+.media-info--Image::before {
+  content: "\F2E9";
+}
+
+.media-info--Document::before {
+  content: "\F219";
+}
+
+.media-info--Video::before {
+  content: "\F567";
+}
+
+.view.eb-media .views-col.selected {
+  border-color: #007ecc;
+}

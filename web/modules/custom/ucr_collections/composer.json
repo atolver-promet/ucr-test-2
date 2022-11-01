@@ -1,0 +1,13 @@
+{
+    "name": "ucr_collections",
+    "type": "drupal-module",
+    "description": "Collections Entity Type",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/ucr_collections",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/ucr_collections",
+        "source": "http://cgit.drupalcode.org/ucr_collections"
+    }
+}

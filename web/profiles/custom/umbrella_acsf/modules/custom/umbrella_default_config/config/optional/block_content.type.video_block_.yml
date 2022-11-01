@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: video_block_
+label: 'Video Block '
+revision: 1
+description: 'Video to play inside block'

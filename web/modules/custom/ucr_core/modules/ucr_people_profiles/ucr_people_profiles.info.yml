@@ -1,0 +1,12 @@
+name: 'Local People Profiles Component'
+type: module
+description: 'Provides a content type that allows you to easily manage staff & faculty information. Includes a view with 3 different page views for different column layouts.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - focal_point
+  - field_group
+  - pathauto
+  - telephone
+  - ucr_core

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_callout_text_colour
+    - paragraphs.paragraphs_type.homepage_callout_slider
+  module:
+    - color_field
+id: paragraph.homepage_callout_slider.field_callout_text_colour
+field_name: field_callout_text_colour
+entity_type: paragraph
+bundle: homepage_callout_slider
+label: 'Homepage Callout Text Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 0
+field_type: color_field_type

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.paragraph.field_button_styles
+  - paragraphs.paragraphs_type.button_bar
+  module:
+  - options
+id: paragraph.button_bar.field_button_styles
+field_name: field_button_styles
+entity_type: paragraph
+bundle: button_bar
+label: 'Button Style'
+description: 'Select the style of how this button will look.'
+required: true
+translatable: false
+default_value:
+-
+  value: btn-ucr
+default_value_callback: ''
+settings: {  }
+field_type: list_string

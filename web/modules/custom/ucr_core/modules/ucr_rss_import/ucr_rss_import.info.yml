@@ -1,0 +1,19 @@
+name: 'RSS Import Component'
+description: 'Provide a custom block type that will help leverage the Feeds Import of multiple Feeds.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - entity_reference_revisions
+  - field
+  - taxonomy
+  - feeds
+  - link
+  - link_attributes
+  - twig_field_value
+  - twig_tweak
+  - views
+  - text
+  - ucr_core

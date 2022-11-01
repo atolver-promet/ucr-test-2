@@ -1,0 +1,104 @@
+<?php
+/**
+ * @file
+ * Contains installation and update routines for the Bubble Grid Custom Block Type.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Core\Utility\PDOException;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\block\Entity\Block;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_columns_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+
+    // Update the Permissions for the Roles that need to be updated.
+    $roles = \Drupal\user\Entity\Role::loadMultiple();
+
+    $permissions = array(
+        'site_builders' => array(
+            'update any ucr_columns block content',
+            'delete any ucr_columns block content',
+            'create ucr_columns block content',
+        ),
+        'editors' => array(
+            'update any ucr_columns block content',
+            'delete any ucr_columns block content',
+            'create ucr_columns block content',
+        ),
+        'contributors' => array(),
+    );
+
+    $skip_roles = array('anonymous', 'authenticated', 'administrator');
+
+    foreach ($roles as $role) {
+        $role_id = $role->id();
+
+        if (!in_array($role_id, $skip_roles)) {
+            $read_permissions = $permissions[$role_id];
+            if (is_array($read_permissions) && (count($read_permissions) > 0)) {
+                foreach ($read_permissions as $new_perm) {
+                    $role->grantPermission($new_perm)->save(TRUE);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_columns_update_8001() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.ucr_columns.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_columns', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * August 2020 - Updated color options for Dynamic Columns.
+ */
+function ucr_columns_update_8002() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.ucr_columns.default',
+            'core.entity_form_display.paragraph.ucr_columns.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_columns', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_columns_dependencies() {
+    $dependencies = array();
+    return $dependencies;
+}

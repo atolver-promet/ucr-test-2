@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: event_listing_image
+label: 'Event Image (Listing) - (190 x 190)'
+effects:
+  1b0e6722-7553-4b24-b11d-ab3b6778a811:
+    uuid: 1b0e6722-7553-4b24-b11d-ab3b6778a811
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 190
+      height: 190
+      crop_type: focal_point

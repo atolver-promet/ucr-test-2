@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.topics_list
+    - field.storage.block_content.field_show_count
+id: block_content.topics_list.field_show_count
+field_name: field_show_count
+entity_type: block_content
+bundle: topics_list
+label: 'Show Count'
+description: 'Displays the number of articles published under the Tag or Category. <br /> <i>ex. News (10) </i>'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

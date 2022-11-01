@@ -1,0 +1,10 @@
+name: 'UCR News Core Components'
+type: module
+description: 'Contains the different shared fields for the different UCR News modules / components.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - ucr_core
+  - ucr_galleria
+  - views_taxonomy_term_name_depth

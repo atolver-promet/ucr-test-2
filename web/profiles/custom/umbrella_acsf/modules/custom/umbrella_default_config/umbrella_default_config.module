@@ -1,0 +1,7 @@
+<?php
+/**
+ * Implements hook_uninstall().
+ */
+function umbrella_default_config_uninstall() {
+
+}

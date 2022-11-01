@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Content Keywords'
+vid: content_keywords
+description: 'Create & Define Keywords for better content sorting.'
+hierarchy: 0
+weight: 0

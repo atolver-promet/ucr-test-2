@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.custom_header
+    - field.storage.block_content.field_title_link
+  module:
+    - link
+id: block_content.custom_header.field_title_link
+field_name: field_title_link
+entity_type: block_content
+bundle: custom_header
+label: 'Title link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

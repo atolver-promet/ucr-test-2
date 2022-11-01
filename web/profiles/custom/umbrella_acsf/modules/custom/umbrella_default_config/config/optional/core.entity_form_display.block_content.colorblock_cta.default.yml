@@ -1,0 +1,77 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.colorblock_cta
+    - entity_browser.browser.image_browser
+    - field.field.block_content.colorblock_cta.body
+    - field.field.block_content.colorblock_cta.field_box_info
+    - field.field.block_content.colorblock_cta.field_callout_text_color
+    - field.field.block_content.colorblock_cta.field_image
+    - field.field.block_content.colorblock_cta.field_title
+  module:
+    - content_moderation
+    - datetime
+    - entity_browser
+    - paragraphs
+id: block_content.colorblock_cta.default
+targetEntityType: block_content
+bundle: colorblock_cta
+mode: default
+content:
+  field_box_info:
+    type: entity_reference_paragraphs
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_image:
+    type: entity_browser_file
+    weight: 1
+    settings:
+      entity_browser: image_browser
+      field_widget_edit: true
+      field_widget_remove: true
+      view_mode: default
+      preview_image_style: thumbnail
+      open: true
+      selection_mode: selection_append
+    region: content
+    third_party_settings: {  }
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  field_callout_text_color: true

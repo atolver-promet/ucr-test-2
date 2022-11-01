@@ -1,0 +1,10 @@
+name: CNAS Color Field
+description: Extends the color field type from the UCR color field module.
+package: UCR CNAS
+dependencies:
+  - color_field:color_field
+
+type: module
+version: 1.0
+core: 8.x
+core_version_requirement: ^8 || ^9

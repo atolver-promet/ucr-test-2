@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: teaser_callout
+label: 'Teaser Callout'
+revision: 1
+description: 'Create a simple teaser that can be placed in your site.'

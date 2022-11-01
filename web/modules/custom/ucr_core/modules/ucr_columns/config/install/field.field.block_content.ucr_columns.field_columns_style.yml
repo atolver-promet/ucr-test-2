@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_columns
+    - field.storage.block_content.field_columns_style
+  module:
+    - options
+id: block_content.ucr_columns.field_columns_style
+field_name: field_columns_style
+entity_type: block_content
+bundle: ucr_columns
+label: Style
+description: 'Please select the style look for the columns block.'
+required: true
+translatable: false
+default_value:
+  -
+    value: dc-standard
+default_value_callback: ''
+settings: {  }
+field_type: list_string

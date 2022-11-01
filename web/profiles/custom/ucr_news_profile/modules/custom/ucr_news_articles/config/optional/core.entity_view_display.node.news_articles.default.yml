@@ -1,0 +1,111 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.news_articles.body
+    - field.field.node.news_articles.field_content_keywords
+    - field.field.node.news_articles.field_meta_tags
+    - field.field.node.news_articles.field_una_additional_content
+    - field.field.node.news_articles.field_una_authored_by
+    - field.field.node.news_articles.field_una_authored_on
+    - field.field.node.news_articles.field_una_custom_rss
+    - field.field.node.news_articles.field_una_exclude
+    - field.field.node.news_articles.field_una_featured
+    - field.field.node.news_articles.field_una_featured_header
+    - field.field.node.news_articles.field_una_header_image
+    - field.field.node.news_articles.field_una_header_video
+    - field.field.node.news_articles.field_una_icon
+    - field.field.node.news_articles.field_una_media_contacts
+    - field.field.node.news_articles.field_una_recommend_header
+    - field.field.node.news_articles.field_una_recommend_story
+    - field.field.node.news_articles.field_una_tags
+    - field.field.node.news_articles.field_una_title_teaser
+    - field.field.node.news_articles.field_una_topic_category
+    - node.type.news_articles
+  module:
+    - entity_reference_revisions
+    - metatag
+    - text
+    - user
+id: node.news_articles.default
+targetEntityType: node
+bundle: news_articles
+mode: default
+content:
+  addtoany:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  body:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  content_moderation_control:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_meta_tags:
+    weight: 7
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
+    region: content
+  field_una_additional_content:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_una_media_contacts:
+    weight: 4
+    label: hidden
+    settings:
+      link: true
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_una_tags:
+    weight: 6
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_una_topic_category:
+    type: entity_reference_label
+    weight: 5
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_content_keywords: true
+  field_una_authored_by: true
+  field_una_authored_on: true
+  field_una_custom_rss: true
+  field_una_exclude: true
+  field_una_featured: true
+  field_una_featured_header: true
+  field_una_header_image: true
+  field_una_header_video: true
+  field_una_icon: true
+  field_una_recommend_header: true
+  field_una_recommend_story: true
+  field_una_title_teaser: true

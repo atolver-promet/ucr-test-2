@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - node
+id: ucr_news_announcements_pattern
+label: 'UCR News Announcements Pattern'
+type: 'canonical_entities:node'
+pattern: '/announcements/[node:field_una_authored_on:date:custom:Y]/[node:field_una_authored_on:date:custom:m]/[node:field_una_authored_on:date:custom:d]/[node:title]'
+selection_criteria:
+  0e4e97cc-b6aa-476d-8270-446607c6b046:
+    id: node_type
+    bundles:
+      announcements: announcements
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 0e4e97cc-b6aa-476d-8270-446607c6b046
+selection_logic: and
+weight: -5
+relationships: {  }

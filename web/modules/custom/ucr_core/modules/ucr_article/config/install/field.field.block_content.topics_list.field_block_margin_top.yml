@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.topics_list
+    - field.storage.block_content.field_block_margin_top
+  module:
+    - options
+id: block_content.topics_list.field_block_margin_top
+field_name: field_block_margin_top
+entity_type: block_content
+bundle: topics_list
+label: 'Margin Top'
+description: '<em>( Optional ):</em> Please select the margin for the top.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,106 @@
+main {
+  > div {
+    &#content-container {
+      .una-articles-recommend {
+        > div {
+          &.cell {
+            border: 1px solid lighten($blue-grey-900, 20%);
+            @include breakpoint(medium) {
+              box-shadow: 0 0 10px $blue-grey-900;
+            }
+          }
+        }
+        .una-recomm-item {
+          position: relative;
+        }
+        .article-recommend-image {
+          display: inline-block;
+          position: relative;
+          .articles-media {
+            top: inherit;
+            left: inherit;
+            bottom: 0;
+            right: 0;
+          }
+        }
+        .article-recommend-info {
+          .article-recommend-category {
+            text-align: right;
+            color: $white;
+            font-family: $font-family-roboto;
+            font-weight: 700;
+            line-height: 19px;
+            font-size: 16px;
+            margin-bottom: 24px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            @include breakpoint(medium) {
+              position: inherit;
+            }
+            .taxonomy-ucr-news-article-category {
+              div {
+                padding: 10px;
+              }
+            }
+          }
+          a {
+            text-decoration: none;
+            h3 {
+              font-family: $font-family-roboto;
+              font-size: 22px;
+              line-height: 28px;
+              font-weight: 700;
+              color: $articles-recommend-title-color;
+              padding: 0;
+              margin: 12px;
+              @include breakpoint(medium) {
+                margin: 0 10px 24px 0;
+              }
+            }
+            &:hover {
+              h3 {
+                color: $articles-recommend-title-hover-color;
+              }
+            }
+          }
+          .taxonomy-author {
+            margin-bottom: 32px;
+            margin-right: 10px;
+            font-family: $font-family-roboto-slab;
+            font-size: 16px;
+            line-height: 19px;
+            color: $articles-recommend-author-color;
+            display: none;
+            @include breakpoint(medium) {
+              display: flex;
+            }
+            .author-thumbnail {
+              img {
+                border-radius: 50%;
+              }
+            }
+            .author-name {
+              display: block;
+              a {
+                color: $articles-recommend-author-url-color;
+                text-decoration: none;
+                &:hover {
+                  color: $articles-recommend-author-url-hover-color;
+                }
+              }
+            }
+            .authored-on-date {
+              font-family: $font-family-montserrat;
+              font-size: 12px;
+              line-height: 16px;
+              color: $articles-recommend-author-date-color;
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

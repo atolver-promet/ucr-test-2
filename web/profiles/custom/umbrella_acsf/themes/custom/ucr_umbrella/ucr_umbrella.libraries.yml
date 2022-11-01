@@ -1,0 +1,27 @@
+global-css:
+  version: VERSION
+  css:
+    theme:
+      css/motion-ui.min.css: {}
+      css/icons.min.css: {}
+      css/default.min.css: {}
+      css/umbrella.min.css: {}
+global-js:
+  version: VERSION
+  js:
+    js/foundation.min.js: {}
+    js/motion-ui.min.js: {}
+    js/match-height.min.js: {}
+    js/megamenu.js: {}
+    js/default.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/modernizr
+
+twocol_bricks_75_25:
+  version: 1.x
+  css:
+    theme:
+      layouts/twocol_bricks_75_25/twocol_bricks.css: {}
+  dependencies:
+    - core/jquery

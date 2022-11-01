@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.node.gcs.field_content_keywords
+  - node.type.gcs
+  module:
+  - user
+id: node.gcs.default
+targetEntityType: node
+bundle: gcs
+mode: default
+content:
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  field_content_keywords: true

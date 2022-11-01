@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_columns
+    - field.storage.block_content.field_columns_margins
+id: block_content.ucr_columns.field_columns_margins
+field_name: field_columns_margins
+entity_type: block_content
+bundle: ucr_columns
+label: 'Add Even Margin to Cells'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: articles_pattern
+label: 'Article Pattern'
+type: 'canonical_entities:node'
+pattern: '/[node:field_article_types:entity:field_at_base_path]/[node:field_article_date:date:custom:Y]/[node:field_article_date:date:custom:m]/[node:field_article_date:date:custom:d]/[node:title]'
+selection_criteria:
+  43997804-8be1-4890-b5d9-702c6cccef02:
+    id: node_type
+    bundles:
+      article: article
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 43997804-8be1-4890-b5d9-702c6cccef02
+selection_logic: and
+weight: -5
+relationships: {  }

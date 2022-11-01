@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - image.style.content_header_large
+  - image.style.content_header_medium
+  - image.style.content_header_small
+  - image.style.content_header_xlarge
+  theme:
+  - ucr_default
+id: content_header
+label: 'Content Header'
+image_style_mappings:
+-
+  breakpoint_id: ucr_default.wide
+  multiplier: 1x
+  image_mapping_type: image_style
+  image_mapping: content_header_xlarge
+-
+  breakpoint_id: ucr_default.narrow
+  multiplier: 1x
+  image_mapping_type: image_style
+  image_mapping: content_header_large
+-
+  breakpoint_id: ucr_default.tablet
+  multiplier: 1x
+  image_mapping_type: image_style
+  image_mapping: content_header_medium
+-
+  breakpoint_id: ucr_default.mobile
+  multiplier: 1x
+  image_mapping_type: image_style
+  image_mapping: content_header_small
+breakpoint_group: ucr_default
+fallback_image_style: content_header_xlarge

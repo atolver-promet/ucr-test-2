@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.majors.field_college_page
+    - taxonomy.vocabulary.majors
+id: taxonomy_term.majors.default
+targetEntityType: taxonomy_term
+bundle: majors
+mode: default
+content:
+  field_college_page:
+    weight: 0
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  description: true

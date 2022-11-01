@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_news_stories_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays
+ */
+function ucr_news_stories_update_8001() {
+    // Create the new Field Configs for the Block.
+    $config_files = [
+        'core.entity_form_display.node.news_stories.default',
+    ];
+
+    $completed = UCRCustoms::updateConfigFromStorage('ucr_news_stories', $config_files);
+    if(!$completed) {
+        throw new UpdateException('Update has Failed.');
+    }
+}

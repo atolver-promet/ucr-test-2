@@ -1,0 +1,249 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Core\Utility\PDOException;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\block_content\Entity\BlockContent;
+use Drupal\block\Entity\Block;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\ucr_core\UCRCustoms;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_carousel_slider_install()
+{
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+}
+
+/**
+ * Add the 'Intro Body' field.
+ */
+function ucr_carousel_slider_update_8001()
+{
+    $config = \Drupal::configFactory();
+    $uuid_service = \Drupal::service('uuid');
+
+    // *** Update the Form Display.
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    // Create the field.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/field.field.block_content.carousel_slider.body.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_field = Yaml::decode($file_contents);
+
+    $uuid = $uuid_service->generate();
+    $full_array = array_merge(array('uuid' => $uuid), $new_field);
+    \Drupal\field\Entity\FieldConfig::create($full_array)->save();
+
+    // Update the form view.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/core.entity_form_display.block_content.carousel_slider.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_form = Yaml::decode($file_contents);
+    $current_form = $config->getEditable('core.entity_form_display.block_content.carousel_slider.default');
+    $current_form->set('dependencies', $new_form['dependencies'])
+        ->set('third_party_settings', $new_form['third_party_settings'])
+        ->set('content', $new_form['content'])->save(TRUE);
+
+    // Update the default display view.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/core.entity_view_display.block_content.carousel_slider.default.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_view = Yaml::decode($file_contents);
+    $current_view = $config->getEditable('core.entity_view_display.block_content.carousel_slider.default');
+    $current_view->set('dependencies', $new_view['dependencies'])
+        ->set('content', $new_view['content'])
+        ->set('hidden', $new_view['hidden'])->save(TRUE);
+
+    // Update the slider-default display view.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/core.entity_view_display.block_content.carousel_slider.hero_slider.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_view = Yaml::decode($file_contents);
+    $current_view = $config->getEditable('core.entity_view_display.block_content.carousel_slider.hero_slider');
+    $current_view->set('dependencies', $new_view['dependencies'])
+        ->set('content', $new_view['content'])
+        ->set('hidden', $new_view['hidden'])->save(TRUE);
+
+    // Update the slider-large display view.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/core.entity_view_display.block_content.carousel_slider.hero_slider_large.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_view = Yaml::decode($file_contents);
+    $current_view = $config->getEditable('core.entity_view_display.block_content.carousel_slider.hero_slider_large');
+    $current_view->set('dependencies', $new_view['dependencies'])
+        ->set('content', $new_view['content'])
+        ->set('hidden', $new_view['hidden'])->save(TRUE);
+
+    // Update the slider-medium display view.
+    $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/core.entity_view_display.block_content.carousel_slider.hero_slider_medium.yml';
+    $file_contents = file_get_contents($file_path);
+    $new_view = Yaml::decode($file_contents);
+    $current_view = $config->getEditable('core.entity_view_display.block_content.carousel_slider.hero_slider_medium');
+    $current_view->set('dependencies', $new_view['dependencies'])
+        ->set('content', $new_view['content'])
+        ->set('hidden', $new_view['hidden'])->save(TRUE);
+}
+
+/**
+ * September 2018 - Modify the Link Field to be Unlimited and hide the older Text Field.
+ */
+function ucr_carousel_slider_update_8002()
+{
+    $config = \Drupal::configFactory();
+
+    // *** Update the Form Display.
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    if (in_array($profile_name, array('ucr_profile', 'ucr_profile_local'))) {
+        // First we are going to update the current URL's with the text from the old button field, then proceed to update the rest of the field.
+        $ids = \Drupal::entityQuery('block_content')->condition('type', 'carousel_slider')->execute();
+        if(!empty($ids)) { // Ids were found, so loop through them and get their storage.
+            foreach($ids as $id) {
+                $content_storage = BlockContent::load($id);
+                $paragraph_targets = $content_storage->field_sliders->getValue();
+                foreach($paragraph_targets as $targets) {
+
+                    $paragraph = Paragraph::load($targets['target_id']);
+                    $links = $paragraph->field_link->getValue();
+                    $button = $paragraph->field_slider_button_text->getValue();
+
+                    foreach($links as $l_key => $l_data) {
+                        if(!empty($l_data['uri'])) {
+                            $button_text = $button[$l_key]['value'];
+                            $updated_link_data = $l_data;
+                            $updated_link_data['title'] = $button_text;
+                            $paragraph->set('field_link', $updated_link_data)->save(true);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Update the field storage.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/config/install/field.storage.paragraph.field_link.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+
+        $current_view = $config->getEditable('field.storage.paragraph.field_link');
+        $current_view->set('cardinality', $new_view['cardinality'])->save(TRUE);
+
+        // Update the Field with the updated information.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/field.field.paragraph.carousel_slider.field_link.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('field.field.paragraph.carousel_slider.field_link');
+        $current_view->set('description', $new_view['description'])
+            ->set('settings', $new_view['settings'])->save(TRUE);
+
+        // Update the Form view.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/core.entity_form_display.paragraph.carousel_slider.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_form = Yaml::decode($file_contents);
+        $current_form = $config->getEditable('core.entity_form_display.paragraph.carousel_slider.default');
+        $current_form->set('dependencies', $new_form['dependencies'])
+            ->set('third_party_settings', $new_form['third_party_settings'])
+            ->set('content', $new_form['content'])->save(TRUE);
+
+        // Update the Default display view.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/install/core.entity_view_display.paragraph.carousel_slider.default.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_view_display.paragraph.carousel_slider.default');
+        $current_view->set('dependencies', $new_view['dependencies'])
+            ->set('content', $new_view['content'])
+            ->set('hidden', $new_view['hidden'])->save(TRUE);
+
+        // Update the Hero Default display view.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/optional/core.entity_view_display.paragraph.carousel_slider.hero_slider.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_view_display.paragraph.carousel_slider.hero_slider');
+        $current_view->set('dependencies', $new_view['dependencies'])
+            ->set('content', $new_view['content'])
+            ->set('hidden', $new_view['hidden'])->save(TRUE);
+
+        // Update the Hero Medium display view.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/optional/core.entity_view_display.paragraph.carousel_slider.hero_slider_medium.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_view_display.paragraph.carousel_slider.hero_slider_medium');
+        $current_view->set('dependencies', $new_view['dependencies'])
+            ->set('content', $new_view['content'])
+            ->set('hidden', $new_view['hidden'])->save(TRUE);
+
+        // Update the Hero Large display view.
+        $file_path = DRUPAL_ROOT . '/modules/custom/ucr_core/modules/ucr_carousel_slider/config/optional/core.entity_view_display.paragraph.carousel_slider.hero_slider_large.yml';
+        $file_contents = file_get_contents($file_path);
+        $new_view = Yaml::decode($file_contents);
+        $current_view = $config->getEditable('core.entity_view_display.paragraph.carousel_slider.hero_slider_large');
+        $current_view->set('dependencies', $new_view['dependencies'])
+            ->set('content', $new_view['content'])
+            ->set('hidden', $new_view['hidden'])->save(TRUE);
+    }
+}
+
+/**
+ * December 2018 - Adding of Style Options.
+ */
+function ucr_carousel_slider_update_8003() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'field.field.block_content.carousel_slider.field_block_margin_bottom',
+            'field.field.block_content.carousel_slider.field_block_margin_left',
+            'field.field.block_content.carousel_slider.field_block_margin_right',
+            'field.field.block_content.carousel_slider.field_block_margin_top',
+            'core.entity_form_display.block_content.carousel_slider.default',
+            'core.entity_view_display.block_content.carousel_slider.default',
+            'core.entity_view_display.block_content.carousel_slider.hero_slider',
+            'core.entity_view_display.block_content.carousel_slider.hero_slider_large',
+            'core.entity_view_display.block_content.carousel_slider.hero_slider_medium',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_carousel_slider', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+/**
+ * July 2019 - Update to the Form Displays.
+ */
+function ucr_carousel_slider_update_8004() {
+    $config = \Drupal::configFactory();
+    $profile_name = $config->getEditable('core.extension')->get('profile');
+
+    $invalid_profiles = ['umbrella_acsf', 'umbrella_local'];
+
+    if(!in_array($profile_name, $invalid_profiles)) {
+        // Create the new Field Configs for the Block.
+        $config_files = [
+            'core.entity_form_display.block_content.carousel_slider.default',
+            'core.entity_form_display.paragraph.carousel_slider.default',
+        ];
+
+        $completed = UCRCustoms::updateConfigFromStorage('ucr_carousel_slider', $config_files);
+        if(!$completed) {
+            throw new UpdateException('Update has Failed.');
+        }
+    }
+}
+
+function ucr_carousel_slider_update_dependencies() {
+    $dependencies = array();
+    $dependencies['ucr_carousel_slider']['8003'] = [
+        'ucr_core' => '8007'
+    ];
+    return $dependencies;
+}

@@ -1,0 +1,14 @@
+uuid: 87fe964a-c8f3-437e-bd8b-ef56854a6559
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.cnas_localist_image
+label: 'CNAS Localist Image'
+targetEntityType: block_content
+cache: true

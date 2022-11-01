@@ -1,0 +1,82 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.carousel_slider
+  - field.field.block_content.carousel_slider.body
+  - field.field.block_content.carousel_slider.field_block_margin_bottom
+  - field.field.block_content.carousel_slider.field_block_margin_left
+  - field.field.block_content.carousel_slider.field_block_margin_right
+  - field.field.block_content.carousel_slider.field_block_margin_top
+  - field.field.block_content.carousel_slider.field_sliders
+  module:
+  - options
+  - slick_paragraphs
+  - text
+id: block_content.carousel_slider.default
+targetEntityType: block_content
+bundle: carousel_slider
+mode: default
+content:
+  body:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_block_margin_bottom:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_left:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_right:
+    weight: 4
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_top:
+    weight: 5
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_sliders:
+    type: slick_paragraphs_vanilla
+    weight: 1
+    label: hidden
+    settings:
+      optionset: hero_slider_ui
+      skin: grid
+      view_mode: default
+      cache: 0
+      current_view_mode: default
+      override: false
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      skin_arrows: ''
+      skin_dots: ''
+      style: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  scheduled_publication: true

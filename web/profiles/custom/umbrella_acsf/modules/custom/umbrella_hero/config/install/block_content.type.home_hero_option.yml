@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: home_hero_option
+label: 'Homepage Callout Slider'
+revision: 1
+description: ''

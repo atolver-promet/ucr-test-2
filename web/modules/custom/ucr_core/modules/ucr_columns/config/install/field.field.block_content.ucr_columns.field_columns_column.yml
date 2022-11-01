@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_columns
+    - field.storage.block_content.field_columns_column
+    - paragraphs.paragraphs_type.ucr_columns
+  module:
+    - entity_reference_revisions
+id: block_content.ucr_columns.field_columns_column
+field_name: field_columns_column
+entity_type: block_content
+bundle: ucr_columns
+label: Column
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      ucr_columns: ucr_columns
+    target_bundles_drag_drop:
+      accordion:
+        weight: 12
+        enabled: false
+      bubbles:
+        weight: 13
+        enabled: false
+      button_bar:
+        weight: 14
+        enabled: false
+      carousel_slider:
+        weight: 15
+        enabled: false
+      cta_item:
+        weight: 16
+        enabled: false
+      expanding_card:
+        weight: 17
+        enabled: false
+      galleria_items:
+        weight: 18
+        enabled: false
+      info_card:
+        weight: 19
+        enabled: false
+      statistic:
+        weight: 20
+        enabled: false
+      tab:
+        weight: 21
+        enabled: false
+      ucr_columns:
+        enabled: true
+        weight: 22
+field_type: entity_reference_revisions

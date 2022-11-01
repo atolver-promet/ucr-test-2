@@ -1,0 +1,49 @@
+.breadcrumb_container {
+  ul {
+    border: 1px solid $breadcrumb-border-color;
+    li {
+      font-size: .75rem;
+      font-weight: 700;
+      a {
+        margin-top: -4px;
+        color: $breadcrumb-active-color;
+        text-decoration: none;
+        display: inline-block;
+        padding: 7px 0;
+        vertical-align: middle;
+        &:hover, &:focus, &:active {
+          color: $color-cerise-red;
+          text-decoration: none;
+          background-color: transparent;
+        }
+        &.breadcrumb_home {
+          color: $color-picton-blue;
+          padding: 0 7px;
+          font-size: 1.25rem;
+          border-right: 1px solid $breadcrumb-border-color;
+          &:hover, &:focus {
+            color: $color-picton-blue;
+            background-color: $breadcrumb-home-hover-color;
+          }
+        }
+      }
+      span {
+        display: inline-block;
+        padding: 7px 0;
+        color: $color-picton-blue
+      }
+    }
+  }
+}
+
+.breadcrumbs {
+  li {
+    float: none;
+    display: inline-block;
+    &:not(:last-child) {
+      &::after {
+        font-size: 1rem;
+      }
+    }
+  }
+}

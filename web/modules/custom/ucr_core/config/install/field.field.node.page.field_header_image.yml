@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_header_image
+  - media.type.image
+  - node.type.page
+id: node.page.field_header_image
+field_name: field_header_image
+entity_type: node
+bundle: page
+label: 'Header Image'
+description: '<em>( Optional ):</em> Select an image to be used as the header image for this page. If selected, then the image and title will be displayed in full width.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

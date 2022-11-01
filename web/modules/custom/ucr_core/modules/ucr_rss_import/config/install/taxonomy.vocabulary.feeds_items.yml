@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Feed Items'
+vid: feeds_items
+description: 'Taxonomy containing the items from the imported Feeds.'
+hierarchy: 0
+weight: 0

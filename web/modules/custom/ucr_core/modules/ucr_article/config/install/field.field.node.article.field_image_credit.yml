@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_credit
+    - node.type.article
+id: node.article.field_image_credit
+field_name: field_image_credit
+entity_type: node
+bundle: article
+label: 'RETIRED - Image Credit'
+description: 'This field is used to credit creators of borrowed content.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

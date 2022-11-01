@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: colorblock_cta
+label: 'Colorblock CTA'
+revision: 1
+description: 'Creates color block CTA'

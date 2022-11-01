@@ -1,0 +1,75 @@
+{#
+/**
+ * @file
+ * Theme override to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ */
+#}
+ {% set video_url = fields.field_header_video_url.content|render|striptags|trim %}
+    {% set title_placement = fields.field_title_placement.content|render|striptags|trim %}
+    {% set hide_title = fields.field_hide_overlay_title.content|render|striptags|trim %}
+    {% set second_title = fields.field_secondary_title.content |render|striptags|trim %}
+
+    {% if title_placement == "bottom-left" %}
+        {% set title_placement = "overlay-title-bottom-left" %}
+    {% elseif title_placement == "bottom-right" %}
+        {% set title_placement = "overlay-title-bottom-right" %}
+    {% endif %}
+
+    {% if hide_title == 1 %}
+        {% set hide_title = "none" %}
+    {% else %}
+        {% set hide_title = "block" %}
+    {% endif %}
+
+<div class="hia-area">
+    <div class="hia-image">
+        {%  if video_url is not empty %}
+            {{ fields.field_header_image_1.content }}
+        {% else %}
+             {{ fields.field_header_image.content }}
+        {% endif %}
+    </div>
+    {% if video_url is not empty %}
+    <div class="hero-video">
+        <video class="hero-video-player" autoplay="true" loop="true" muted="true">
+            <source src="{{ video_url }}" type="video/mp4" />
+        </video>
+    </div>
+    <div class="video-overlay-title {{ title_placement }}" style="display:{{ hide_title }};">
+        <h1>{{ fields.title.content }}</h1>
+        {% if second_title is not empty %}
+          <h3>{{ fields.field_secondary_title.content }}</h3>
+        {% endif %}
+        {{ fields.field_title_link.content }}
+    </div>
+    {% else %}
+        <div class="hia-title">
+            <h1>{{ fields.title.content }}</h1>
+        </div>
+    {% endif %}
+</div>

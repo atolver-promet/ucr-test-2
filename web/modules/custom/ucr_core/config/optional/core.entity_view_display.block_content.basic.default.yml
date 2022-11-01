@@ -1,0 +1,123 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.basic
+  - field.field.block_content.basic.body
+  - field.field.block_content.basic.field_block_bg_color
+  - field.field.block_content.basic.field_block_bg_image
+  - field.field.block_content.basic.field_block_font_color
+  - field.field.block_content.basic.field_block_margin_bottom
+  - field.field.block_content.basic.field_block_margin_left
+  - field.field.block_content.basic.field_block_margin_right
+  - field.field.block_content.basic.field_block_margin_top
+  - field.field.block_content.basic.field_block_padding_bottom
+  - field.field.block_content.basic.field_block_padding_left
+  - field.field.block_content.basic.field_block_padding_right
+  - field.field.block_content.basic.field_block_padding_top
+  - field.field.block_content.basic.field_content_bg_color
+  module:
+  - color_field
+  - options
+  - text
+id: block_content.basic.default
+targetEntityType: block_content
+bundle: basic
+mode: default
+content:
+  body:
+    type: text_default
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_block_bg_color:
+    weight: 1
+    label: hidden
+    settings:
+      format: rgb
+      opacity: '1'
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+  field_block_bg_image:
+    type: entity_reference_entity_id
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_block_font_color:
+    weight: 12
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_bottom:
+    weight: 9
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_left:
+    weight: 10
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_right:
+    weight: 11
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_margin_top:
+    weight: 8
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_bottom:
+    weight: 14
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_left:
+    weight: 15
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_right:
+    weight: 16
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_block_padding_top:
+    weight: 13
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_content_bg_color:
+    weight: 2
+    label: hidden
+    settings:
+      format: rgb
+      opacity: '1'
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+hidden: {  }

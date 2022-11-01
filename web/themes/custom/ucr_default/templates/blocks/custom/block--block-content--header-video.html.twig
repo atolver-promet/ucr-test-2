@@ -1,0 +1,34 @@
+<div>
+    {% block content %}
+    {% set video_url = content.field_video_url|render|striptags|trim %}
+    {% set title_placement = content.field_placement|render|striptags|trim %}
+    {% set hide_title = content.field_hide_title|render|striptags|trim %}
+
+    {% if title_placement == "bottom-left" %}
+        {% set title_placement = "overlay-title-bottom-left" %}
+    {% elseif title_placement == "bottom-right" %}
+        {% set title_placement = "overlay-title-bottom-right" %}
+    {% endif %}
+
+    {% if hide_title == 1 %}
+        {% set hide_title = "none" %}
+    {% else %}
+        {% set hide_title = "block" %}
+    {% endif %}
+    <div class="container-hero-video">
+        <div class="hero-image">
+            {{ content.field_header_image }}
+        </div>
+        <div class="hero-video">
+            <video autoplay="true" loop="true" muted="true">
+                <source src="{{ video_url }}" type="video/mp4" />
+            </video>
+        </div>
+    </div>
+
+        <div class="header-overlay-title {{ title_placement }}" style="display:{{ hide_title }};">
+           <h1>{{ content.field_overlay_title }}</h1>
+        </div>
+
+    {% endblock %}
+</div>

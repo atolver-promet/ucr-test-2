@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Announcement Authors'
+vid: news_announce_authors
+description: 'Authors of the Announcements.'
+hierarchy: 0
+weight: 0

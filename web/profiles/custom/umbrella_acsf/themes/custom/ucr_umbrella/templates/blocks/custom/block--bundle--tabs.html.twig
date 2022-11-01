@@ -1,0 +1,70 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set tab_set_id = label|render|lower|replace({' ':'_', '!':'', '@':'', '#':'', '$':'', '%':'', '^':'', '&':'', '*':'', '(':'', ')':'', '+':'', '=':'', '`':'', '~':'', '<':'', ',':'', '>':'', '.':'', '?':'', '/':'', '|':'', '\\':'', '\'':'', '"':'', '[':'', '{':'', ']':'', '}':''}) %}
+{% set vertical_tabs = content.field_vertical_status|render|striptags|trim %}
+
+<div{{ attributes }}>
+    {{ title_prefix }}
+    {% if label %}
+        <h2{{ title_attributes }}>{{ label }}</h2>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+    <div class="ucr-custom-block">
+        {% if vertical_tabs == 1 %}
+        <div class="grid-container full">
+            <div class="grid-x">
+            <div class="cell medium-3">
+        {% endif %}
+                <ul class="{% if vertical_tabs == 1 %}vertical {% endif %}tabs ucr-tabs" data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge="500" data-tabs id="{{ tab_set_id }}">
+                    {% for temp_variable in content.field_tabs %}
+                        {% set tab_title = content.field_tabs[loop.index0]['#paragraph'].field_title.value %}
+                        {% if tab_title %}
+                            {% set tab_active = content.field_tabs[loop.index0]['#paragraph'].field_status.value %}
+                            {% set individual_tab_id = tab_title|render|lower|replace({' ':'_', '!':'', '@':'', '#':'', '$':'', '%':'', '^':'', '&':'', '*':'', '(':'', ')':'', '+':'', '=':'', '`':'', '~':'', '<':'', ',':'', '>':'', '.':'', '?':'', '/':'', '|':'', '\\':'', '\'':'', '"':'', '[':'', '{':'', ']':'', '}':''}) %}
+                            <li class="tabs-title{% if tab_active == 1 %} is-active{% endif %}"><a href="#{{ individual_tab_id }}">{{ tab_title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+        {% if vertical_tabs == 1 %}
+            </div>
+            <div class="cell medium-9">
+        {% endif %}
+                <div class="tabs-content" data-tabs-content="{{ tab_set_id }}">
+                {{ content.field_tabs }}
+                </div>
+        {% if vertical_tabs == 1 %}
+            </div>
+        </div>
+        </div>
+        {% endif %}
+    </div>
+    {% endblock %}
+</div>

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_rss_import_standard_format
+label: 'Feeds Import - Standard Format'
+locked: false
+pattern: 'F d, Y'

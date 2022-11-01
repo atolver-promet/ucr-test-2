@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.homepage_video
+    - field.storage.block_content.field_local_video_mp4
+  module:
+    - file
+id: block_content.homepage_video.field_local_video_mp4
+field_name: field_local_video_mp4
+entity_type: block_content
+bundle: homepage_video
+label: 'Local Video (mp4)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: mp4
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

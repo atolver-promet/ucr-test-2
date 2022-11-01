@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: media_view_thumbnail
+label: 'Media View: Thumbnail (75 x 75)'
+effects:
+  79b93ba1-888a-4a1a-9eb6-c98b03fad232:
+    uuid: 79b93ba1-888a-4a1a-9eb6-c98b03fad232
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 75
+      height: 75
+      crop_type: focal_point

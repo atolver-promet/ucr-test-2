@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.articles_block
+    - field.storage.block_content.field_article_list
+  module:
+    - options
+id: block_content.articles_block.field_article_list
+field_name: field_article_list
+entity_type: block_content
+bundle: articles_block
+label: Show
+description: 'Please select which you wish to display.<br /><strong>Note:</strong> The ''Related Articles'' will only show properly when viewing the block while also viewing an Article itself.'
+required: true
+translatable: false
+default_value:
+  -
+    value: latest
+default_value_callback: ''
+settings: {  }
+field_type: list_string

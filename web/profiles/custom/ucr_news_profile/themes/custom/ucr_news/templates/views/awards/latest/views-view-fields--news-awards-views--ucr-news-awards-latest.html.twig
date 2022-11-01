@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Theme override to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ */
+#}
+<a href="{{ fields.view_node.content|render|striptags|trim }}" class="lal-link-url">
+<div class="latest-awards-list">
+  <!--
+  <div class="lal-category-display">
+    <div class="category-box"></div>
+  </div>
+  -->
+  <div class="lal-content-area">
+    <div class="grid-container full">
+      <div class="grid-x grid-padding-x">
+        <div class="cell small-12">
+          <h3 class="lal-header">{{ fields.title.content }}</h3>
+          <p>{{ fields.body.content }}</p>
+        </div>
+        <div class="cell small-12 medium-6">
+          <div class="lal-date">{{ fields.field_una_authored_on.content }}</div>
+        </div>
+        <div class="cell small-12 medium-6">
+          <div class="lal-read-more" aria-label="Read more about {{ fields.title.content|render|striptags|trim }}">Read More &#187;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</a>

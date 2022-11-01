@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: hero_slider_large_tablet
+label: 'Hero Slider Large (Tablet) - (1024 x 730)'
+effects:
+  10d66939-4dbb-4923-8358-6b35b0e241f9:
+    uuid: 10d66939-4dbb-4923-8358-6b35b0e241f9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 730
+      crop_type: focal_point

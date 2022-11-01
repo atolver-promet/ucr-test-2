@@ -1,0 +1,157 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page.body
+    - field.field.node.page.field_content_keywords
+    - field.field.node.page.field_header_image
+    - field.field.node.page.field_header_video_url
+    - field.field.node.page.field_hide_overlay_title
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_secondary_title
+    - field.field.node.page.field_social_media_image
+    - field.field.node.page.field_title_link
+    - field.field.node.page.field_title_placement
+    - field.field.node.page.layout_builder__layout
+    - node.type.page
+  module:
+    - layout_builder
+    - layout_builder_restrictions
+    - metatag
+    - text
+    - user
+  theme:
+    - ucr_default
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: lb_one_column
+        layout_settings:
+          centered_options: center
+          padding_options: 'grid-padding-x grid-padding-y'
+          margin_options: 'grid-margin-x grid-margin-y'
+          bg_colors: '#F1F3F5,#E9ECEF,#DEE2E6,#CED4DA,#ADB5BD,#868E96,#495057,#343A40,#212529,#1D3661,#637EA4,#329AF0,#3AA4DC,#91AFCC,#A5C8EA,#D6336B,#802244,#14AABE,#FA5151,#F18200'
+          column_classes:
+            column_1: ''
+        components:
+          195eb946-0996-49b4-ac20-6ff19677afc1:
+            uuid: 195eb946-0996-49b4-ac20-6ff19677afc1
+            region: main
+            configuration:
+              id: 'field_block:node:page:body'
+              label: Body
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            additional: {  }
+            weight: 0
+        third_party_settings: {  }
+  layout_builder_restrictions:
+    entity_view_mode_restriction:
+      allowed_blocks:
+        'Auto Blocks':
+          - 'views_block:content_views-content_head_image_title_block'
+          - 'views_block:event_list-events_latest_block'
+        'Chaos tools': {  }
+        Content: {  }
+        'Content fields':
+          - 'field_block:node:page:body'
+        'Custom Site Configuration': {  }
+        'Entity Block': {  }
+        Help: {  }
+        'Lists (Views)':
+          - 'views_block:who_s_online-who_s_online_block'
+        'Moderation Dashboard': {  }
+        System:
+          - system_powered_by_block
+          - system_branding_block
+        User: {  }
+        'User fields': {  }
+        core:
+          - page_title_block
+      allowed_layouts:
+        - lb_one_column
+        - lb_two_column
+        - lb_three_column
+        - lb_four_column
+      whitelisted_blocks:
+        'Auto Blocks':
+          - 'views_block:article_content_topics_list-categories_list_no_count'
+          - 'views_block:article_content_topics_list-categories_list_with_count'
+          - 'views_block:content_views-content_head_image_title_block'
+          - 'views_block:event_list-events_latest_block'
+          - 'views_block:article_content_topics_list-tags_list_no_count'
+          - 'views_block:article_content_topics_list-tags_list_with_count'
+        'Chaos Tools': {  }
+        'Content fields':
+          - 'field_block:node:page:body'
+        'Custom Site Configuration': {  }
+        'Entity Block': {  }
+        Forms: {  }
+        Help: {  }
+        'Lists (Views)': {  }
+        'Moderation Dashboard': {  }
+        'Purge UI': {  }
+        System: {  }
+        User: {  }
+        Views: {  }
+        core: {  }
+      blacklisted_blocks:
+        Menus:
+          - 'system_menu_block:admin'
+          - 'menu_block:admin'
+          - 'menu_block:footer'
+          - 'system_menu_block:footer'
+          - shortcuts
+          - 'menu_block:tools'
+          - 'system_menu_block:tools'
+          - 'menu_block:account'
+          - 'system_menu_block:account'
+    allowed_block_categories: {  }
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    region: content
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  addtoany: true
+  content_moderation_control: true
+  field_content_keywords: true
+  field_header_image: true
+  field_header_video_url: true
+  field_hide_overlay_title: true
+  field_secondary_title: true
+  field_social_media_image: true
+  field_title_link: true
+  field_title_placement: true
+  layout_builder__layout: true
+  search_api_excerpt: true

@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.quicklinks_sidebar_menu
+    - field.storage.block_content.field_quicklinks
+    - paragraphs.paragraphs_type.quicklinks_sidebar
+  module:
+    - entity_reference_revisions
+id: block_content.quicklinks_sidebar_menu.field_quicklinks
+field_name: field_quicklinks
+entity_type: block_content
+bundle: quicklinks_sidebar_menu
+label: Quicklinks
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      quicklinks_sidebar: quicklinks_sidebar
+    target_bundles_drag_drop:
+      accordion:
+        weight: 17
+        enabled: false
+      box:
+        weight: 18
+        enabled: false
+      box_info:
+        weight: 19
+        enabled: false
+      bubbles:
+        weight: 20
+        enabled: false
+      carousel_slider:
+        weight: 21
+        enabled: false
+      column:
+        weight: 22
+        enabled: false
+      hero_slides:
+        weight: 23
+        enabled: false
+      hero_slideshow:
+        weight: 24
+        enabled: false
+      info_card:
+        weight: 25
+        enabled: false
+      link_column:
+        weight: 26
+        enabled: false
+      quicklinks_sidebar:
+        enabled: true
+        weight: 27
+      statistic:
+        weight: 28
+        enabled: false
+      statistic_with_image:
+        weight: 29
+        enabled: false
+      tab:
+        weight: 30
+        enabled: false
+      testimonial_slider:
+        weight: 31
+        enabled: false
+      video:
+        weight: 32
+        enabled: false
+field_type: entity_reference_revisions

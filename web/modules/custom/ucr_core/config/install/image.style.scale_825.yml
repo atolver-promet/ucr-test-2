@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: scale_825
+label: 'WYSIWYG Scale - 825px'
+effects:
+  6ab8a0e2-1df1-4d6f-b2ea-9675de57e920:
+    uuid: 6ab8a0e2-1df1-4d6f-b2ea-9675de57e920
+    id: image_scale
+    weight: 1
+    data:
+      width: 825
+      height: 825
+      upscale: false

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_localist_events
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.ucr_localist_events.body
+field_name: body
+entity_type: block_content
+bundle: ucr_localist_events
+label: Body
+description: 'Please switch the editor to SOURCE, and paste in the Script Code from the <a href="https://events.ucr.edu/help/widget" target="_blank">UCR Events Widget Page</a> to embed the Events Widget.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

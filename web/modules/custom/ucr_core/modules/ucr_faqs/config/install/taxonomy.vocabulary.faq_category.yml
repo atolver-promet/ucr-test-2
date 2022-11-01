@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'FAQ Category'
+vid: faq_category
+description: 'A list of categories to organize frequently asked questions'
+hierarchy: 0
+weight: 0

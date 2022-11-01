@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.article_type_url
+    - field.field.taxonomy_term.article_types.field_at_base_path
+    - taxonomy.vocabulary.article_types
+id: taxonomy_term.article_types.article_type_url
+targetEntityType: taxonomy_term
+bundle: article_types
+mode: article_type_url
+content:
+  field_at_base_path:
+    weight: -4
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true

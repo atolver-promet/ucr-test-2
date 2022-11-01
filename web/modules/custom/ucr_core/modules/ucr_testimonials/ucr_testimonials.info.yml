@@ -1,0 +1,20 @@
+name: 'Testimonials Slider Component'
+type: module
+description: 'Provide a Custom Block configuration to create a slider based around testimonials.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - config
+  - entity_browser
+  - field
+  - field_group
+  - file
+  - focal_point
+  - image
+  - media
+  - media_library
+  - paragraphs
+  - responsive_image
+  - text
+  - ucr_core

@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - node
+id: ucr_news_awards_pattern
+label: 'UCR News Awards Pattern'
+type: 'canonical_entities:node'
+pattern: '/awards/[node:field_una_authored_on:date:custom:Y]/[node:field_una_authored_on:date:custom:m]/[node:field_una_authored_on:date:custom:d]/[node:title]'
+selection_criteria:
+  05327267-d148-4e95-ac55-7f6066e702fb:
+    id: node_type
+    bundles:
+      awards: awards
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 05327267-d148-4e95-ac55-7f6066e702fb
+selection_logic: and
+weight: -5
+relationships: {  }

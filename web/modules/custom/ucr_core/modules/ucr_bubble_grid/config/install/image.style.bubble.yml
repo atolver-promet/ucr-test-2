@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: bubble
+label: 'Bubble - (250 x 250)'
+effects:
+  6ceab99e-973d-4bc6-8011-4a49e7276fa1:
+    uuid: 6ceab99e-973d-4bc6-8011-4a49e7276fa1
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 250
+      height: 250
+      crop_type: focal_point

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_teaser
+    - field.storage.block_content.field_orientation
+  module:
+    - options
+id: block_content.video_teaser.field_orientation
+field_name: field_orientation
+entity_type: block_content
+bundle: video_teaser
+label: Orientation
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 'Text Right'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

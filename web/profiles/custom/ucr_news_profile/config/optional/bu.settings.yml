@@ -1,0 +1,20 @@
+notify_ie: !!float -2
+notify_firefox: !!float -2
+notify_opera: !!float -2
+notify_safari: !!float -2
+notify_chrome: !!float -2
+insecure: true
+unsupported: false
+mobile: true
+position: top
+visibility_type: hide
+visibility_pages: 'admin/*'
+test_mode: false
+new_window: true
+no_close: false
+text_override: ''
+reminder: 6
+reminder_closed: 6
+url: ''
+source: ''
+show_source: ''

@@ -1,0 +1,12 @@
+name: 'Localist Events Component'
+type: module
+description: 'Provide a custom block type with the ability to embed the widget code from events.ucr.edu (Localist).'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - block_content
+  - entity_reference_revisions
+  - field
+  - text
+  - ucr_core

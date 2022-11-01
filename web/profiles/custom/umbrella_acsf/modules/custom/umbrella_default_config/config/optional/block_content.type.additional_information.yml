@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: additional_information
+label: 'Additional Information'
+revision: 1
+description: 'This block will create a list of links at the bottom of the page.'

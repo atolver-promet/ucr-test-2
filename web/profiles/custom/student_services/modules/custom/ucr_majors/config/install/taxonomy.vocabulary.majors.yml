@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Majors for Colleges'
+vid: majors
+description: ''
+hierarchy: 0
+weight: 0

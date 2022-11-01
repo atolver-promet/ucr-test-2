@@ -1,0 +1,130 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_campus_relation
+    - field.field.user.user.field_contact_number
+    - field.field.user.user.field_dept_id
+    - field.field.user.user.field_dept_name
+    - field.field.user.user.field_full_name
+    - field.field.user.user.field_org_id
+    - field.field.user.user.user_picture
+  module:
+    - field_group
+    - telephone
+    - user
+third_party_settings:
+  field_group:
+    group_people_info:
+      children:
+        - group_account_info
+        - group_personnel_info
+      parent_name: ''
+      weight: 7
+      format_type: tabs
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'People Info'
+      region: content
+    group_account_info:
+      children:
+        - account
+      parent_name: group_people_info
+      weight: 20
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: 'Account Info'
+      region: content
+    group_personnel_info:
+      children:
+        - field_full_name
+        - field_campus_relation
+        - field_contact_number
+        - field_org_id
+        - field_dept_id
+        - field_dept_name
+      parent_name: group_people_info
+      weight: 21
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: 'Personnel Info'
+      region: content
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  account:
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_campus_relation:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_contact_number:
+    weight: 4
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+    region: content
+  field_dept_id:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_dept_name:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_full_name:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_org_id:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  timezone:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  contact: true
+  google_analytics: true
+  language: true
+  user_picture: true

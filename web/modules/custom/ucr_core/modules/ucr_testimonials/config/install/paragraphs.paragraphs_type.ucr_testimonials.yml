@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: ucr_testimonials
+label: Testimonials
+icon_uuid: null
+description: 'Provide an entity type to create / articulate Testimonials for UCR Websites.'
+behavior_plugins: {  }

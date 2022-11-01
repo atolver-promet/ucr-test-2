@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: expanding_card
+label: 'Expanding Card'
+icon_uuid: null
+description: 'Create an expanding info card for your block.'
+behavior_plugins: {  }

@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.author_avatar
+    - field.field.media.image.field_media_in_library
+    - field.field.media.image.image
+    - image.style.author_avatar
+    - media.type.image
+  module:
+    - image
+id: media.image.author_avatar
+targetEntityType: media
+bundle: image
+mode: author_avatar
+content:
+  image:
+    type: image
+    weight: 0
+    label: hidden
+    settings:
+      image_style: author_avatar
+      image_link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  addtoany: true
+  created: true
+  field_media_in_library: true
+  name: true
+  thumbnail: true
+  uid: true

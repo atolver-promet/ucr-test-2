@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ucr_global
+  theme:
+    - ucr_default
+id: ucriversidefooterdeptinformationblock
+theme: ucr_default
+region: footer_second
+weight: 0
+provider: null
+plugin: ucr_global_footer_dept_info
+settings:
+  id: ucr_global_footer_dept_info
+  label: 'UC Riverside Footer Dept Information Block'
+  provider: ucr_global
+  label_display: '0'
+visibility: {  }

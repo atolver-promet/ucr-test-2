@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_una_exclude
+  - node.type.announcements
+id: node.announcements.field_una_exclude
+field_name: field_una_exclude
+entity_type: node
+bundle: announcements
+label: 'Exclude from Frontpage?'
+description: '<em>( Optional ):</em> Check this box if you do not want this announcement to show up in the ''Latest Announcements'' on the Frontpage.'
+required: false
+translatable: true
+default_value:
+-
+  value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

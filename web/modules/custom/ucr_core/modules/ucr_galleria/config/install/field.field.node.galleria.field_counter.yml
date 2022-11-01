@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_counter
+    - node.type.galleria
+id: node.galleria.field_counter
+field_name: field_counter
+entity_type: node
+bundle: galleria
+label: 'Images to Preview'
+description: 'Please enter in the number of images you want to have displayed when you place a preview block on another page. By default the number of images will be 5.'
+required: true
+translatable: false
+default_value:
+  -
+    value: 5
+default_value_callback: ''
+settings:
+  min: 1
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

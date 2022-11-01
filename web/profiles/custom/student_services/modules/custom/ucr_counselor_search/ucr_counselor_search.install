@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Contains installation and update routines for the People Profile Content Type.
+ */
+
+use Drupal\Component\Serialization\Yaml;
+
+/**
+ * Implements hook_install().
+ */
+function ucr_counselor_search_install() {
+    if (\Drupal::isConfigSyncing()) {
+        return;
+    }
+
+    // Update the Permissions for the Roles that need to be updated.
+    $roles = \Drupal\user\Entity\Role::loadMultiple();
+
+    $skipped_roles = array('anonymous', 'authenticated', 'administrator');
+
+    $new_perms = array(
+        'administer colleges vocabulary terms' => array('site_builders', 'editors'),
+        'administer counselors vocabulary terms' => array('site_builders', 'editors'),
+        'create terms in colleges' => array('site_builders', 'editors'),
+        'create terms in counselors' => array('site_builders', 'editors'),
+        'delete terms in colleges' => array('site_builders', 'editors'),
+        'delete terms in counselors' => array('site_builders', 'editors'),
+        'edit terms in colleges' => array('site_builders', 'editors'),
+        'edit terms in counselors' => array('site_builders', 'editors'),
+    );
+
+    foreach($roles as $role) {
+        $role_id = $role->id();
+        if(!in_array($role_id, $skipped_roles)) {
+            foreach($new_perms as $perm => $for_roles) {
+                if(in_array('all', $for_roles) || in_array($role_id, $for_roles)) {
+                    $role->grantPermission($perm)->save(TRUE);
+                }
+            }
+        }
+    }
+}

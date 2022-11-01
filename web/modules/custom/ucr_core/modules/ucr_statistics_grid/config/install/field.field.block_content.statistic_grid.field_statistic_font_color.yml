@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.statistic_grid
+  - field.storage.block_content.field_statistic_font_color
+  module:
+  - options
+id: block_content.statistic_grid.field_statistic_font_color
+field_name: field_statistic_font_color
+entity_type: block_content
+bundle: statistic_grid
+label: 'Font Color'
+description: '<em>( Optional ):</em> Please select the font color you would like to use.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

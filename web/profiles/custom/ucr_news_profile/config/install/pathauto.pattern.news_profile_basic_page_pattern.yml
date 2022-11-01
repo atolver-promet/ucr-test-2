@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: news_profile_basic_page_pattern
+label: 'News Profile - Basic Page Pattern'
+type: 'canonical_entities:node'
+pattern: '/[node:title]'
+selection_criteria:
+  20fe42c5-6fc4-4902-aa87-153a0d4b87f0:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 20fe42c5-6fc4-4902-aa87-153a0d4b87f0
+selection_logic: and
+weight: -5
+relationships: {  }

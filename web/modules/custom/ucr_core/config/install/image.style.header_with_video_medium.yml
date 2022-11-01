@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: header_with_video_medium
+label: 'Header with Video - medium'
+effects:
+  bd9eda20-8d27-4dd0-8561-4e2579ac2f42:
+    uuid: bd9eda20-8d27-4dd0-8561-4e2579ac2f42
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 300
+      crop_type: focal_point

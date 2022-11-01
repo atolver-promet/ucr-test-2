@@ -1,0 +1,22 @@
+# Collection Item routing definition
+
+entity.collections.canonical:
+  route_name: entity.collections.canonical
+  base_route: entity.collections.canonical
+  title: 'View'
+
+entity.collections.edit_form:
+  route_name: entity.collections.edit_form
+  base_route: entity.collections.canonical
+  title: 'Edit'
+
+entity.collections.version_history:
+  route_name: entity.collections.version_history
+  base_route: entity.collections.canonical
+  title: 'Revisions'
+
+entity.collections.delete_form:
+  route_name:  entity.collections.delete_form
+  base_route:  entity.collections.canonical
+  title: Delete
+  weight: 10

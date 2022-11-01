@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_office_hours
+    - node.type.people_profiles
+id: node.people_profiles.field_office_hours
+field_name: field_office_hours
+entity_type: node
+bundle: people_profiles
+label: 'Office Hours'
+description: '<em>( Optional )</em> Please enter in their office hours.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

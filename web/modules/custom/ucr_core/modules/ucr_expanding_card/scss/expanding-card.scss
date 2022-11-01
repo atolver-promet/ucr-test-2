@@ -1,0 +1,396 @@
+// Example colors
+$light-gray: #eceef1;
+$gray: darken(#eceef1, 30%);
+$slate: darken(hsl(216, 15%, 94%), 70%);
+$slate-dark: darken(hsl(216, 15%, 94%), 72%);
+$dark-blue: #234674;
+$dark-gray: #343b46;
+
+// UCR colors:
+
+//Grays:
+$gray0: #f8f9fa; //almost white
+$gray1: #f1f3f5;
+$gray2: #e9ecef;
+$gray3: #dee2e6;
+$gray4: #ced4da;
+$gray5: #adb5bd;
+$gray6: #868e96;
+$gray6a: #7e7e7e;
+$gray7: #495057;
+$gray8: #343a40;
+$gray9: #212529; //almost black
+
+//New UCR Design 8 Colors:
+$color-primary-content: $gray6;
+$color-picton-blue: #4DADF7;//Light Blue (Cyan)
+$blue1: $color-picton-blue; // the primary theme blue
+$blue-accent: #4DADF7; //$color-piction-blue;
+
+$color-curious-blue: #3AA4DC;//Greenish Light Blue (Dark Cyan)
+$title-blue: $color-curious-blue; //(Same color, more memorable name)
+$color-astronaut: #234674;//Dark Blue
+$dark-blue: $color-astronaut;
+$color-cello: #1D3A61;//Dark, Dark blue
+$darkerer-blue: #152A45;// Darkerer blue (for submenu child hover)
+$color-polo-blue: #91AFCC;//Lt. Gray Blue
+$color-cornflower: #A5C8EA;//Lt. Blue-Gray
+$color-picton-blue-alt: #329AF0; //Medium-Light Blue (Royal Cyan)
+$color-hoki: #637EA4;//Medium Gray Blue
+$color-crown-of-thorns: #802244;//Dark burgundy
+$color-cerise-red: #D6336C;//Magenta Red
+$link-red: $color-cerise-red;
+$color-warning-alert: #FCC419;
+$color-success-alert: #21A474;
+$color-error-alert: #DC1D1D;
+$color-info-alert: #68D3F8;
+$color-ghost: $gray4;//Lt.-med. Gray
+$text-gray: $color-primary-content;
+// UCR colors
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: $light-gray;
+  font-family: 'Slabo 27px', serif;
+  color: $slate;
+}
+
+.wrapper {
+  padding-left: 1em!important;
+  padding-right: 1em!important;
+  max-width: 1000px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.06);
+}
+
+.header {
+  padding: 30px 30px 0;
+  text-align: center;
+
+  &__title {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 2.5em;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  &__subtitle {
+    margin: 0;
+    font-size: 1.5em;
+    color: $gray;
+    font-family: 'Yesteryear', cursive;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+}
+
+//Grid Container
+.cards {
+  padding: 15px;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 2.5rem .9em 0em .9em;
+}
+//Cards
+div.card {
+  flex-grow: 0;
+  width: calc((100% / 3) - 30px);
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 1rem;
+  display: block;
+  border: none;
+  overflow: visible;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+
+  &:hover {
+    .card__inner {
+      background-color: $gray5;
+      transform: scale(1.05);
+    }
+  }
+
+  &__inner {
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    color: $light-gray;
+    text-transform: initial;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 1px 1px 3px #7e7e7e;
+
+    &:hover {
+      border: none;
+    }
+
+
+    &:after {
+      transition: all 0.3s ease-in-out;
+    }
+
+    .fa {
+      width: 100%;
+      margin-top: .25em;
+    }
+  }
+
+  //Expander
+  &__expander {
+    transition: all 0.2s ease-in-out;
+    background-color: $slate;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $light-gray;
+    font-size: .9em;
+    padding: 1.5em 1em;
+    box-shadow: 1px 1px 3px #000;
+
+    .fa {
+      font-size: 1.33em;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      width: 1em;
+      height: 1em;
+
+      &:hover {
+        opacity: 0.9;
+      }
+      &:after {
+        content: '\2715';
+        font-family: Arial, 'arial', 'Arial', sans-serif;
+        position: relative;
+        top: -5px;
+        left: 1px;
+        font-style: normal;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.is-collapsed {
+
+    .card__inner {
+      &:after {
+        content: "";
+        opacity: 0;
+      }
+    }
+    .card__expander {
+      max-height: 0;
+      min-height: 0;
+      overflow: hidden;
+      margin-top: 0;
+      opacity: 0;
+    }
+  }
+
+  &.is-expanded {
+
+    .card__inner {
+      opacity:1;
+      background-color: $dark-blue;
+
+      &:after{
+        content: "";
+        opacity: 1;
+        display: block;
+        height: 0;
+        width: 0;
+        position: absolute;
+        bottom: -31px;
+        left: calc(50% - 15px);
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-bottom: 15px solid #333a45;
+      }
+
+      //folder open icon
+      .fa:before {
+        content: "\f115";
+      }
+    }
+
+    .card__expander {
+
+      min-height: 200px;
+      overflow: visible;
+      margin-top: 30px;
+      opacity: 1;
+      margin-bottom: 2em;
+
+      .card_expander_body {
+        overflow: auto;
+        width:100%;
+        table{
+          margin:auto;
+          li{
+            color: black !important;
+          }
+        }
+        p{
+          iframe{
+
+            @media screen and (max-width: 600px){
+              width: 100% !important;
+            }
+          }
+        }
+
+        @media screen and (max-width: 600px){
+          width: 100%;
+        }
+
+      }
+
+    }
+
+    &:hover {
+      .card__inner {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &.is-inactive {
+    .card__inner {
+      // pointer-events: none;
+      // opacity: 0.5;
+      &:hover {
+        background-color: $dark-blue;
+      }
+    }
+
+
+    &:hover {
+      .card__inner {
+        //background-color: $gray;
+        transform: scale(1);
+      }
+    }
+  }
+}
+ .expanding-card-background {
+   padding: 1em;
+   height:100%;
+ }
+
+// When user chooses 4 columns:
+.num-cols-4 {
+  // ( 3 cards in a row at this breakpoint)
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+
+    .card:nth-of-type(3n+2) .card__expander {
+      margin-left: calc(-100% - 30px);
+    }
+    .card:nth-of-type(3n+3) .card__expander {
+      margin-left: calc(-200% - 60px);
+    }
+    div.card__expander {
+      width: calc(300% + 60px);
+    }
+  }
+
+  // (4 cards in a row at this breakpoint)
+  @media screen and (min-width: 1024px) {
+
+    .card:nth-of-type(4n+1) .card__expander {
+      margin-left: 0;
+    }
+    .card:nth-of-type(4n+2) .card__expander {
+      margin-left: calc(-100% - 30px);
+    }
+    .card:nth-of-type(4n+3) .card__expander {
+      margin-left: calc(-200% - 60px);
+    }
+    .card:nth-of-type(4n+4) .card__expander {
+      margin-left: calc(-300% - 90px);
+    }
+    div.card__expander {
+      width: calc(400% + 90px);
+    }
+  }
+} // end .num-cols-4
+
+
+// When user chooses 3 columns:
+.num-cols-3 {
+  .card div.card__expander {
+    margin-left: 0;
+  }
+  div.card__expander {
+    width:100%;
+  }
+  @media screen and (min-width: 768px) {
+    .card:nth-of-type(2n+2) div.card__expander {
+      margin-left: calc(-100% - 30px);
+    }
+    div.card__expander {
+      width: calc(200% + 30px);
+    }
+  }
+  @media screen and (min-width:1024px) {
+    .card:nth-of-type(3n+4) div.card__expander {
+      margin-left: 0;
+    }
+    .card:nth-of-type(3n+3) div.card__expander {
+      margin-left: calc(-200% - 60px);
+    }
+    .card:nth-of-type(3n+2) div.card__expander {
+      margin-left: calc(-100% - 30px);
+    }
+    div.card__expander {
+      width: calc(300% + 60px);
+    }
+  }
+
+} //  end .num-cols-3
+
+// When user chooses 2 columns:
+.num-cols-2 {
+  .card:nth-of-type(2n+2) div.card__expander {
+    margin-left: 0;
+  }
+  div.card__expander {
+    width:100%;
+  }
+  @media screen and (min-width: 768px) {
+    .card:nth-of-type(2n+2) div.card__expander {
+      margin-left: 0;
+    }
+    div.card__expander {
+      width: 100%;
+    }
+  }
+  @media screen and (min-width:1024px) {
+    .card:nth-of-type(2n+2) div.card__expander {
+      margin-left: calc(-100% - 30px);
+    }
+    div.card__expander {
+      width: calc(200% + 30px);
+    }
+  }
+
+} // end .num-cols-2
+
+// When user chooses 1 column:
+.num-cols-1 {
+  .card div.card__expander {
+    margin-left: 0;
+  }
+  div.card__expander {
+    width:100%;
+  }
+} // end .num-cols-1
+
+

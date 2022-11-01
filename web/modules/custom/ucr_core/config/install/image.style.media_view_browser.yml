@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: media_view_browser
+label: 'Media View: Browser (300 x 250)'
+effects:
+  7cb78f57-2d7b-445e-ab61-094e5a10a947:
+    uuid: 7cb78f57-2d7b-445e-ab61-094e5a10a947
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 300
+      height: 250
+      crop_type: focal_point

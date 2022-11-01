@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.ucr_columns
+    - field.storage.block_content.field_columns_row_desktop
+id: block_content.ucr_columns.field_columns_row_desktop
+field_name: field_columns_row_desktop
+entity_type: block_content
+bundle: ucr_columns
+label: 'Columns per Row (Desktop)'
+description: 'Please enter in the number of columns to show up on the desktop display view.<br />Min: 1, Max: 12'
+required: true
+translatable: false
+default_value:
+  -
+    value: 6
+default_value_callback: ''
+settings:
+  min: 1
+  max: 12
+  prefix: ''
+  suffix: ''
+field_type: integer

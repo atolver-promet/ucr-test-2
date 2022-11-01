@@ -1,0 +1,147 @@
+// File contains CSS for the Parent Org Title, Audience Menu, and Site-Top Search Bar.
+// The Site-Top Search Bar & Audience Menu CSS in here is for primarily Desktop Views. For Mobile views, look in the 'primary_navigation.scss' file.
+// -------------------------------------------
+.audience-container {
+  background-color: $primary;
+  border-bottom: none;
+  position: relative;
+  line-height: normal;
+
+  .mobile-menu-expander {
+    font-size: 2rem;
+    height: 100%;
+    padding: 0 7px;
+    margin: 0;
+  }
+
+  @media screen and #{breakpoint(medium)} {
+    background-color: transparent;
+    border-bottom: 1px solid $audience-border;
+    padding: inherit;
+  };
+
+  .parent-org-title {
+    text-transform: uppercase;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: .1rem;
+    line-height: 1;
+    display: inline-block;
+    max-width: 100%;
+    padding: 8px 0;
+    margin: 0;
+    a {
+      color: $white;
+      &::after {
+        content: "";
+        padding-left: 0;
+      }
+    }
+
+    @media screen and #{breakpoint(medium)} {
+      font-size: 1rem;
+      font-weight: inherit;
+      padding: 0;
+      a {
+        color: $parent-org-color;
+        letter-spacing: 0;
+        &:hover {
+          border-bottom: 1px dotted;
+        }
+      }
+    }
+  }
+
+  .google-search {
+    border-left: 1px solid $audience-border;
+    height: 100%;
+    overflow: hidden;
+    input {
+      margin:0;
+      padding:0 0 0 16px;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      min-width: 195px;
+      max-width: 100%;
+      background: url("../images/search-top.png") no-repeat;
+      background-position: 15% 50%;
+
+      &:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
+        background: none;
+      }
+
+      &::placeholder {
+        opacity: 1;
+        position: relative;
+        border: none;
+        box-shadow: none;
+        margin-bottom: 0;
+      }
+
+      @-moz-document url-prefix() {
+        &::placeholder {
+          left: -14px;
+        }
+      }
+
+      &:focus::placeholder {
+        background-image: none;
+      }
+    }
+  }
+
+  .audience-links {
+    .audience-button {
+      a {
+        font-weight: 600;
+        font-size: 0.685rem;
+        letter-spacing: 0.0375rem;
+        font-family: "Avenir Next W01", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+        text-transform: uppercase;
+        color: $alternate;
+      }
+      > a {
+        padding:15px 30px 13px 0 !important;
+        &::after {
+          right: 12px !important;
+          padding-right: 0;
+          content: "" !important;
+          border-color: $alternate transparent transparent !important;
+        }
+      }
+
+      ul {
+        background-color: $audience-menu-background;
+        border: 1px solid $audience-menu-border;
+        border-radius: 2px;
+        border-bottom: none;
+        font-size: 1rem;
+        box-shadow: 1px 1px 4px $audience-menu-shadow;
+
+        li {
+          border-bottom: 1px solid $audience-menu-border;
+        }
+
+        a {
+          padding: 14px 7px !important;
+          color: $audience-menu-link;
+          &::after {
+            position: relative !important;
+            top: 0 !important;
+            right: 0 !important;
+            margin-top: 0 !important;
+          }
+          &:hover {
+            background-color: $audience-menu-link-hover-bg;
+            color: $audience-menu-hover;
+          }
+        }
+      }
+    }
+  }
+}

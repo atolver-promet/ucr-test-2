@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: scotmemo_pattern
+label: 'Scotmemo pattern'
+type: 'canonical_entities:node'
+pattern: '/scotmemos/[node:field_date_to_publish:date:custom:Y]/[node:field_date_to_publish:date:custom:m]/[node:field_date_to_publish:date:custom:d]/[node:title]'
+selection_criteria:
+  5264c57b-57a5-4b0a-a637-bb885beb43c5:
+    id: node_type
+    bundles:
+      scotmemo_submissions: scotmemo_submissions
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 5264c57b-57a5-4b0a-a637-bb885beb43c5
+selection_logic: and
+weight: -5
+relationships: {  }

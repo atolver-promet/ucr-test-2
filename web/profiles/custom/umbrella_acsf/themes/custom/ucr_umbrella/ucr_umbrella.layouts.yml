@@ -1,0 +1,22 @@
+layout_twocol_bricks_75_25:
+  label: 'Two column bricks 75/25'
+  path: layouts/twocol_bricks_75_25
+  template: layout--twocol-bricks-75-25
+  library: ucr_umbrella/twocol_bricks_75_25
+  category: 'Columns: 2'
+  default_region: middle
+  regions:
+    top:
+      label: Top
+    first_above:
+      label: 'First above'
+    second_above:
+      label: 'Second above'
+    middle:
+      label: Middle
+    first_below:
+      label: 'First below'
+    second_below:
+      label: 'Second below'
+    bottom:
+      label: Bottom

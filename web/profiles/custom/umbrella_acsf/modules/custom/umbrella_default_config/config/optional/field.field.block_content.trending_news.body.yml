@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.trending_news
+    - field.storage.block_content.body
+  module:
+    - text
+id: block_content.trending_news.body
+field_name: body
+entity_type: block_content
+bundle: trending_news
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

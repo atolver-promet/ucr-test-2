@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - lightning_core
+    - paragraphs
+third_party_settings:
+  lightning_core:
+    description: 'Large size Hero Slider view. Max height: 730px.'
+id: paragraph.hero_slider_large
+label: 'Hero Slider (Large)'
+targetEntityType: paragraph
+cache: true

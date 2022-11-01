@@ -1,0 +1,14 @@
+ucr_news_stories.content:
+  path: '/admin/content/stories'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::overview'
+  requirements:
+    _permission: 'access administration pages'
+
+ucr_news_stories.content_moderated:
+  path: '/admin/content/stories/moderated'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::overview'
+  requirements:
+    _permission: 'access administration pages'
+

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_hide_on_latest
+    - node.type.article
+id: node.article.field_article_hide_on_latest
+field_name: field_article_hide_on_latest
+entity_type: node
+bundle: article
+label: 'Do not show on Latest Lists'
+description: '<em>( Optional ):</em> If checked, this article will not show up on any ''Latest'' listing pages or preview blocks.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

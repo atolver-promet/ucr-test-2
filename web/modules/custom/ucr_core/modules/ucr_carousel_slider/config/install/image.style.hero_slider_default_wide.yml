@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: hero_slider_default_wide
+label: 'Hero Slider Default (Wide Screen) - (1920 x 250)'
+effects:
+  efeaf3aa-934f-4f2f-955d-ca39061a03c5:
+    uuid: efeaf3aa-934f-4f2f-955d-ca39061a03c5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1920
+      height: 250
+      crop_type: focal_point

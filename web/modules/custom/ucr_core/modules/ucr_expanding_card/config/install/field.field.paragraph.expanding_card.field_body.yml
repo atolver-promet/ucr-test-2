@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.expanding_card
+  module:
+    - text
+id: paragraph.expanding_card.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: expanding_card
+label: 'Expanding Card Body'
+description: 'Enter in the content of the card. Please note that the text, images, etc. will all be centered upon display.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

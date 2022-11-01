@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.image_link_grid
+    - field.storage.block_content.field_box
+    - paragraphs.paragraphs_type.box
+  module:
+    - entity_reference_revisions
+id: block_content.image_link_grid.field_box
+field_name: field_box
+entity_type: block_content
+bundle: image_link_grid
+label: Box
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      box: box
+    target_bundles_drag_drop:
+      accordion:
+        weight: 9
+        enabled: false
+      box:
+        enabled: true
+        weight: 10
+      bubbles:
+        weight: 11
+        enabled: false
+      carousel_slider:
+        weight: 12
+        enabled: false
+      info_card:
+        weight: 13
+        enabled: false
+      statistic:
+        weight: 14
+        enabled: false
+      tab:
+        weight: 15
+        enabled: false
+      video:
+        weight: 16
+        enabled: false
+field_type: entity_reference_revisions
+cardinality_number_fake: '-4'

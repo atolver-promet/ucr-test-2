@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Custom RSS'
+vid: custom_rss
+description: 'Create a Taxonomy Vocabulary that will create an RSS feed for each term.'
+hierarchy: 0
+weight: 0

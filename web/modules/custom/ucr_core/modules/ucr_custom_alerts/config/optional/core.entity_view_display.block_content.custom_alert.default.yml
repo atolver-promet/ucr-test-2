@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.custom_alert
+  - field.field.block_content.custom_alert.body
+  - field.field.block_content.custom_alert.field_custom_alert_type
+  - field.field.block_content.custom_alert.field_dismiss_custom_alert
+  module:
+  - options
+  - text
+id: block_content.custom_alert.default
+targetEntityType: block_content
+bundle: custom_alert
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_custom_alert_type:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_key
+    region: content
+  field_dismiss_custom_alert:
+    weight: 2
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_true: ''
+      format_custom_false: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+hidden: {  }

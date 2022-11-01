@@ -1,0 +1,102 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_browser
+    - field.field.paragraph.cta_item.field_cta_bg_image
+    - field.field.paragraph.cta_item.field_cta_caption
+    - field.field.paragraph.cta_item.field_cta_description
+    - field.field.paragraph.cta_item.field_cta_font_color
+    - field.field.paragraph.cta_item.field_cta_open_modal
+    - field.field.paragraph.cta_item.field_cta_overlay_color
+    - field.field.paragraph.cta_item.field_cta_title
+    - field.field.paragraph.cta_item.field_cta_url
+    - paragraphs.paragraphs_type.cta_item
+  module:
+    - color_field
+    - entity_browser
+    - link_attributes
+id: paragraph.cta_item.default
+targetEntityType: paragraph
+bundle: cta_item
+mode: default
+content:
+  field_cta_bg_image:
+    type: entity_browser_entity_reference
+    weight: 7
+    settings:
+      entity_browser: media_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      selection_mode: selection_append
+      field_widget_display_settings:
+        view_mode: thumbnail
+      open: false
+      field_widget_replace: false
+    third_party_settings: {  }
+    region: content
+  field_cta_caption:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cta_description:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cta_font_color:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_cta_open_modal:
+    weight: 5
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+    region: content
+  field_cta_overlay_color:
+    weight: 6
+    settings:
+      default_colors: '#1D3661,#637EA4,#91AFCC,#A5C8EA,#329AF0,#39B1EF,#3AA4DC,#D6336B,#802244,#14AABE,#FA5151,#F18200,#FEF4F6,#D2D8DD,#AEB6BE,#5E6A71,#37424B,#293134,#003DA5,#FFB81C'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_cta_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_cta_url:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

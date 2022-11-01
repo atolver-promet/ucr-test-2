@@ -1,0 +1,25 @@
+main {
+  > div {
+    &#content-container {
+      .views-padding {
+        padding: 1rem;
+      }
+      .btn-ucr-news {
+        border-color: #215AA7;
+        color: #215AA7 !important;
+        width: 100%;
+        @include breakpoint(medium) {
+          width: 300px;
+        }
+        &:hover, &:focus, &:active {
+          border-color: #215AA7;
+          color: #215AA7 !important;
+        }
+        &::after {
+          content: "";
+          display: none !important;
+        }
+      }
+    }
+  }
+}

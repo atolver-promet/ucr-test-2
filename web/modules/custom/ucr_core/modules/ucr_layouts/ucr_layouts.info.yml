@@ -1,0 +1,9 @@
+name: 'UCR Layouts Component'
+type: module
+description: 'Provides Layout Options for Themes for UCR Websites.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+  - layout_builder
+  - ucr_core

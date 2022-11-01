@@ -1,0 +1,20 @@
+name: 'FAQs Component'
+description: 'Provide a Content Type to create FAQs and have them listed out and able to search at on ''/faqs''.'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: UC Riverside
+dependencies:
+- entity_browser
+- field
+- field_group
+- link
+- menu_ui
+- node
+- options
+- path
+- pathauto
+- taxonomy
+- text
+- views
+- ucr_core

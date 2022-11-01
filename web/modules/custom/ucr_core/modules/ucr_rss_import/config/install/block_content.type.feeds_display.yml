@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: feeds_display
+label: 'Feed Display'
+revision: 1
+description: 'Display a particular feed of items that come from an RSS.'

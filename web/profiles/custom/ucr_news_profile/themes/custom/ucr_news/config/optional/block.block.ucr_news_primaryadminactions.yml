@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+  - ucr_news
+id: ucr_news_primaryadminactions
+theme: ucr_news
+region: admin_controls
+weight: -14
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  provider: core
+  label_display: '0'
+visibility: {  }

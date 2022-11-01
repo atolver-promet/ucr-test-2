@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - core.entity_view_mode.taxonomy_term.event_contacts
+  - field.field.taxonomy_term.contact.field_contact_department
+  - field.field.taxonomy_term.contact.field_contact_email
+  - field.field.taxonomy_term.contact.field_contact_name
+  - field.field.taxonomy_term.contact.field_contact_phone
+  - taxonomy.vocabulary.contact
+id: taxonomy_term.contact.event_contacts
+targetEntityType: taxonomy_term
+bundle: contact
+mode: event_contacts
+content:
+  field_contact_department:
+    weight: 0
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_contact_email:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: email_mailto
+    region: content
+  field_contact_phone:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  field_contact_name: true

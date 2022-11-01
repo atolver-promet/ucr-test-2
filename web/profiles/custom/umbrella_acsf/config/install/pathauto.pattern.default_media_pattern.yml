@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+id: default_media_pattern
+label: 'Default Media Pattern'
+type: 'canonical_entities:media'
+pattern: '[media:bundle]/[media:name]'
+selection_criteria:
+  3e560621-805c-4ddd-b4cc-87f88cdd469e:
+    id: 'entity_bundle:media'
+    bundles:
+      document: document
+      image: image
+      video: video
+    negate: false
+    context_mapping:
+      media: media
+    uuid: 3e560621-805c-4ddd-b4cc-87f88cdd469e
+selection_logic: and
+weight: -5
+relationships: {  }

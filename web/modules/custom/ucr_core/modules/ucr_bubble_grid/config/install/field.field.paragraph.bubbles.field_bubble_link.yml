@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.paragraph.field_bubble_link
+  - paragraphs.paragraphs_type.bubbles
+  module:
+  - link
+id: paragraph.bubbles.field_bubble_link
+field_name: field_bubble_link
+entity_type: paragraph
+bundle: bubbles
+label: Link
+description: '<em>( Optional )</em> Provide a URL or an internal page / path for the bubble to link to.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

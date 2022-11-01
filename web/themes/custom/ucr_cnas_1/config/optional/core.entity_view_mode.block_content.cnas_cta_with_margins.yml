@@ -1,0 +1,14 @@
+uuid: 42ba289c-b4a8-4b25-8d8e-9812ad0749cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - lightning_core
+third_party_settings:
+  lightning_core:
+    description: ''
+id: block_content.cnas_cta_with_margins
+label: 'CNAS CTA with Margins'
+targetEntityType: block_content
+cache: true

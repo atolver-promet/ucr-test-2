@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.quicklinks_sidebar.field_body
+    - field.field.paragraph.quicklinks_sidebar.field_links
+    - field.field.paragraph.quicklinks_sidebar.field_title
+    - paragraphs.paragraphs_type.quicklinks_sidebar
+  module:
+    - link
+id: paragraph.quicklinks_sidebar.default
+targetEntityType: paragraph
+bundle: quicklinks_sidebar
+mode: default
+content:
+  field_links:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  field_body: true
+  status: true
+  uid: true

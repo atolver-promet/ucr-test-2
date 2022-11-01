@@ -1,0 +1,62 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.field.taxonomy_term.feeds_items.feeds_item
+  - field.field.taxonomy_term.feeds_items.field_feed_item_author
+  - field.field.taxonomy_term.feeds_items.field_feed_item_description
+  - field.field.taxonomy_term.feeds_items.field_feed_item_id
+  - field.field.taxonomy_term.feeds_items.field_feed_item_pub_date
+  - field.field.taxonomy_term.feeds_items.field_feed_item_url
+  - field.field.taxonomy_term.feeds_items.field_feed_url
+  - taxonomy.vocabulary.feeds_items
+  module:
+  - datetime
+  - link
+  - text
+id: taxonomy_term.feeds_items.default
+targetEntityType: taxonomy_term
+bundle: feeds_items
+mode: default
+content:
+  field_feed_item_author:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_feed_item_description:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_feed_item_pub_date:
+    weight: 1
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: ucr_rss_import_standard_format
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_feed_item_url:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: null
+      url_only: true
+      url_plain: true
+      rel: '0'
+      target: '0'
+    third_party_settings: {  }
+    type: link
+    region: content
+hidden:
+  description: true
+  feeds_item: true
+  field_feed_item_id: true
+  field_feed_url: true

@@ -1,0 +1,33 @@
+{%
+  set classes = [
+    'feeds_feed',
+    'feeds_feed--feed-type-' ~ feed.bundle|clean_class,
+    feed.isActive() ? 'feeds_feed-active',
+    view_mode ? 'feeds_feed--view-mode-' ~ view_mode|clean_class,
+    'grid-container',
+  ]
+%}
+{% set content_classes = [
+    'grid-x',
+    'grid-padding-x',
+    'grid-padding-y',
+    'feeds_feed__content',
+]
+ %}
+<div{{ attributes.addClass(classes) }}>
+  <div{{ content_attributes.addClass(content_classes) }}>
+    <div class="cell">
+      {% set source_url = content.source|render|striptags|trim %}
+      <a href="{{ source_url }}" target="_blank">{{ source_url }}</a>
+    </div>
+    <div class="cell item-count">
+      {{ content.item_count }}
+    </div>
+    <div class="cell">
+      Last Import: {{ content.imported|render|striptags|trim }}
+    </div>
+    <div class="cell">
+      Next Import: {{ content.next|render|striptags|trim }}
+    </div>
+  </div>
+</div>

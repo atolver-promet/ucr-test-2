@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: una_gallery_view
+label: 'Galleria Teaser'
+icon_uuid: null
+description: 'A Teaser of a Local Galleria content-type node to be displayed within the News Articles.'
+behavior_plugins: {  }

@@ -1,0 +1,154 @@
+{#
+/**
+ * @file
+ * Theme override to display all the fields in a row.
+ *
+ * Available variables:
+ * - view: The view in use.
+ * - fields: A list of fields, each one contains:
+ *   - content: The output of the field.
+ *   - raw: The raw data for the field, if it exists. This is NOT output safe.
+ *   - class: The safe class ID to use.
+ *   - handler: The Views field handler controlling this field.
+ *   - inline: Whether or not the field should be inline.
+ *   - wrapper_element: An HTML element for a wrapper.
+ *   - wrapper_attributes: List of attributes for wrapper element.
+ *   - separator: An optional separator that may appear before a field.
+ *   - label: The field's label text.
+ *   - label_element: An HTML element for a label wrapper.
+ *   - label_attributes: List of attributes for label wrapper.
+ *   - label_suffix: Colon after the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ *   - has_label_colon: A boolean indicating whether to display a colon after
+ *     the label.
+ *   - element_type: An HTML element for the field content.
+ *   - element_attributes: List of attributes for HTML element for field content.
+ * - row: The raw result from the query, with all data it fetched.
+ *
+ * @see template_preprocess_views_view_fields()
+ */
+#}
+{% set general_check = fields.field_collection_item_general.content|render|striptags('<a><p><br><div><h2><h3><h4><h5><h6><script><ul><ol><li><strong><em><ul><iframe>')|trim %}
+{% set media_check = fields.field_collection_item_media.content|render|striptags|trim %}
+{% set url_check = fields.field_collection_item_urls.content|render|striptags('<a>')|trim %}
+{% if fields.nothing.content|render|striptags|trim > 1 %}{% set is_multiple = true %}{% else %}{% set is_multiple = false %}{% endif %}
+
+
+{% if is_multiple %}
+
+  <div>
+    <a href="{{ media_check }}"><span class="ucr-collections-page-item-title">{{ fields.name.content }}</span> -
+      <span class="ucr-collections-page-item-date">{{ fields.field_collection_item_date.content }}</span></a>
+    <br/>
+    {% if fields.field_collection_item_status.content|render|striptags|trim is not empty %}
+      <span class="ucr-collections-page-item-status">
+       <b>Status</b>: {{ fields.field_collection_item_status.content }}
+      </span>
+    {% endif %}
+  </div>
+
+  <div class="ucr-collections-page-item-multiple">
+    {% if general_check is not empty %}
+      <div class="ucr-collections-page-item-general">{{ fields.field_collection_item_general.content }}</div>
+    {% endif %}
+
+    {% if url_check is not empty %}
+      <div class="ucr-collections-page-item-urls">
+      <b>URL</b>:  {{ fields.field_collection_item_urls.content }}
+
+      </div>
+    {% endif %}
+  </div>
+
+
+
+{% else %}
+  <div>
+    <a href="{{ media_check }}"><span class="ucr-collections-page-item-title">{{ fields.name.content }}</span> -
+      <span class="ucr-collections-page-item-date">{{ fields.field_collection_item_date.content }}</span></a>
+  </div>
+
+  <div class="ucr-collections-page-item-title">
+
+    {% if fields.field_collection_item_status.content|render|striptags|trim is not empty %}
+      <span class="ucr-collections-page-item-status">
+       <b>Status</b>: {{ fields.field_collection_item_status.content }}
+      </span>
+    {% endif %}
+  </div>
+  {#<div class="ucr-collections-page-item-date">{{ fields.field_collection_item_date.content }}</div>#}
+  <div class="ucr-collections-page-item-multiple">
+    {% if general_check is not empty %}
+      <div class="ucr-collections-page-item-general">{{ fields.field_collection_item_general.content }}</div>
+    {% endif %}
+
+    {% if url_check is not empty %}
+      <div class="ucr-collections-page-item-urls">
+        <b>URL</b>:  {{ fields.field_collection_item_urls.content }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+
+
+{#Michael's OG code#}
+
+
+{#
+Total in this display: {{ fields.nothing.content }}<br>
+{% if is_multiple %}
+  <div class="ucr-collections-page-item-title">
+    {% if fields.field_collection_item_status.content|render|striptags|trim is not empty %}
+      <span class="ucr-collections-page-item-status">
+       Status: {{ fields.field_collection_item_status.content }}
+      </span>
+    {% endif %}
+   <b>{{ fields.name.content }}</b>
+  </div>
+  <div class="ucr-collections-page-item-date">{{ fields.field_collection_item_date.content }}</div>
+  <div class="ucr-collections-page-item-multiple">
+    {% if general_check is not empty %}
+    <div class="ucr-collections-page-item-general">{{ fields.field_collection_item_general.content }}</div>
+    {% endif %}
+    {% if media_check is not empty %}
+    <div class="ucr-collections-page-item-media">
+
+    </div>
+    {% endif %}
+    {% if url_check is not empty %}
+    <div class="ucr-collections-page-item-urls">
+
+    </div>
+    {% endif %}
+  </div>
+{% else %}
+  {% if general_check is not empty %}
+  {% elseif media_check is not empty %}
+  {% elseif url_check is not empty %}
+  {% endif %}
+  SHOW SINGLE!<br>
+{% endif %}
+#}
+
+{#{% for field in fields -%}#}
+  {#{{ field.separator }}#}
+  {#{%- if field.wrapper_element -%}#}
+    {#<{{ field.wrapper_element }}{{ field.wrapper_attributes }}>#}
+  {#{%- endif %}#}
+  {#{%- if field.label -%}#}
+    {#{%- if field.label_element -%}#}
+      {#<{{ field.label_element }}{{ field.label_attributes }}>{{ field.label }}{{ field.label_suffix }}</{{ field.label_element }}>#}
+    {#{%- else -%}#}
+      {#{{ field.label }}{{ field.label_suffix }}#}
+    {#{%- endif %}#}
+  {#{%- endif %}#}
+  {#{%- if field.element_type -%}#}
+    {#<{{ field.element_type }}{{ field.element_attributes }}>{{ field.content }}</{{ field.element_type }}>#}
+  {#{%- else -%}#}
+    {#{{ field.content }}#}
+  {#{%- endif %}#}
+  {#{%- if field.wrapper_element -%}#}
+    {#</{{ field.wrapper_element }}>#}
+  {#{%- endif %}#}
+{#{%- endfor %}#}

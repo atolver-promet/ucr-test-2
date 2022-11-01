@@ -1,0 +1,130 @@
+main {
+  > div {
+    &#content-container {
+      .uen-externals-slider {
+        background-color: #eaeaea;
+        margin-top: 30px;
+        button {
+          &.slick-arrow {
+            z-index: 9;
+            cursor: pointer;
+          }
+          &.slick-prev {
+            left: 0 !important;
+          }
+          &.slick-next {
+            right: 0 !important;
+          }
+        }
+        .news-item {
+          padding: 32px;
+          @include breakpoint(medium) {
+            padding: 32px 72px;
+          }
+          .uen-uin-title {
+            display: inline-block;
+            border-top: 4px solid #0979d0;
+            padding-top: 4px;
+            font-family: $font-family-montserrat;
+            font-size: 16px;
+            line-height: 16px;
+            color: #636b72;
+            text-transform: uppercase;
+          }
+          h3 {
+            padding: 24px 0 16px 0;
+            font-family: $font-family-roboto;
+            font-size: 27px;
+            line-height: 32px;
+            color: #606060;
+          }
+          .uen-authoring-info {
+            padding-bottom: 24px;
+            font-family: $font-family-roboto;
+            font-size: 15px;
+            line-height: 19px;
+            .uen-author-site {
+              a {
+                color: #d6336c;
+                text-decoration: none;
+                &:hover {
+                  color: #2D6CC0;
+                }
+                &::after {
+                  content: "";
+                  padding-left: 0;
+                  display: none;
+                }
+              }
+            }
+            .uen-author-date {
+              font-family: $font-family-montserrat;
+              font-weight: normal;
+              font-size: 14px;
+              color: #636b72;
+            }
+          }
+          .uen-body {
+            font-family: $font-family-roboto;
+            font-size: 18px;
+            line-height: 24px;
+            color: #606060;
+            padding-bottom: 40px;
+          }
+          .uen-readmore {
+            a {
+              border: 1px solid #d6336c;
+              background-color: $white;
+              color: #d6336c;
+              size: 16px;
+              line-height: 24px;
+              padding: 5px 52px;
+              text-decoration: none;
+              display: block;
+              text-align: center;
+              @include breakpoint(medium) {
+                display: inline-block;
+              }
+              &:hover {
+                color: $white;
+                background-color: #d6336c;
+              }
+              &::after {
+                content: "";
+                padding-left: 0;
+                display: none;
+              }
+            }
+          }
+        }
+        ul {
+          &.slick-dots {
+            position: relative;
+            background-color: $white;
+            li {
+              margin: 0;
+              button {
+                padding-top:8px;
+                &::before {
+                  font-family: "Material Design Icons";
+                  font-size: 13px;
+                  content: "\F130";
+                  color: $articles-featured-slider-dots-color !important;
+                }
+              }
+              &.slick-active {
+                button {
+                  &::before {
+                    color: $articles-featured-slider-dots-active-color !important;
+                    content: "\F12F";
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

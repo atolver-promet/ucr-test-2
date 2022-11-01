@@ -1,0 +1,10 @@
+ucr_external_slick:
+  version: VERSION
+  css:
+    theme:
+      /libraries/slick/slick/slick-theme.css: {}
+  js:
+    js/ucr_news_externals-slick.js: {}
+  dependencies:
+    - core/jquery
+    - slick/slick.theme

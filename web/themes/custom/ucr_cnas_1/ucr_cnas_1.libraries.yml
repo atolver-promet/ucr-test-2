@@ -1,0 +1,21 @@
+global-css:
+  version: VERSION
+  css:
+    theme:
+      css/default.min.css: {}
+      css/cnas.css: {}
+      'https://use.fontawesome.com/releases/v5.6.3/css/all.css': { type: external }
+
+global-js:
+  version: VERSION
+  js:
+    js/megamenu.js: {}
+    js/megamenu_init.js: {}
+    js/default.min.js: {}
+    js/respimagemap/jquery.rwdImageMaps.js: {}
+    js/respimagemap/jquery.rwdImageMaps.min.js: {}
+    js/jquery.waypoints.js: {}
+    js/jquery.counterup.min.js: {}
+    js/bubbleup.js: {}
+    js/custom.js: {}
+    js/global.js: {}

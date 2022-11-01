@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.info_card.field_body
+    - field.field.paragraph.info_card.field_info_card_url
+    - paragraphs.paragraphs_type.info_card
+  module:
+    - link_attributes
+    - text
+id: paragraph.info_card.default
+targetEntityType: paragraph
+bundle: info_card
+mode: default
+content:
+  field_body:
+    weight: 6
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_info_card_url:
+    weight: 101
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      enabled_attributes:
+        target: true
+        title: true
+        id: false
+        name: false
+        rel: false
+        class: false
+        accesskey: false
+        aria-label: false
+    third_party_settings: {  }
+    type: link_attributes
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: cta_image_medium
+label: 'CTA Image (Medium)'
+effects:
+  a91104aa-cff9-4447-8131-d82fe2b45ea9:
+    uuid: a91104aa-cff9-4447-8131-d82fe2b45ea9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 512
+      height: 512
+      crop_type: focal_point

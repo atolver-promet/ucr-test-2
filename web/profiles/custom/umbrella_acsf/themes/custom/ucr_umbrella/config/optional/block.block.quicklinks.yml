@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.quick-links
+  module:
+    - menu_block
+  theme:
+    - ucr_umbrella
+id: quicklinks
+theme: ucr_umbrella
+region: header_top
+weight: 0
+provider: null
+plugin: 'menu_block:quick-links'
+settings:
+  id: 'menu_block:quick-links'
+  label: 'Quick Links'
+  provider: menu_block
+  label_display: visible
+  level: 1
+  depth: 0
+  expand: 0
+  parent: 'quick-links:'
+  suggestion: quick_links
+  follow: 0
+  follow_parent: 0
+visibility: {  }

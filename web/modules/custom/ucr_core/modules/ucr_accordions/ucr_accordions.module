@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Contains landing page functionality for Lightning.
+ */
+
+use Drupal\field\FieldConfigInterface;
+use Drupal\node\Entity\NodeType;
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ucr_accordions_field_config_insert(FieldConfigInterface $field) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_modules_installed().
+ */
+function ucr_accordions_modules_installed(array $modules) {
+  // Don't do anything during config sync.
+  if (\Drupal::isConfigSyncing()) {
+    return;
+  }
+}
+
+function ucr_accordions_preprocess_block(&$variables) {
+    if(isset($variables['elements']['content']['#block_content'])) {
+        $bundle = $variables['elements']['content']['#block_content']->bundle();
+        if(strtolower($bundle) == "accordions") {
+            $accordion_options = "";
+            $unique_id = md5(uniqid(rand(), true));
+
+            $options = $variables['elements']['content']['#block_content']->get('field_options')->getValue();
+            if(count($options) > 0) {
+                foreach ($options as $opts) {
+                    switch (strtolower($opts['value'])) {
+                        case "multiple":
+                            {
+                                $accordion_options .= " data-multi-expand=true";
+                                break;
+                            }
+                        case "closed":
+                            {
+                                $accordion_options .= " data-allow-all-closed=true";
+                                break;
+                            }
+                    }
+                }
+            }
+
+            $variables['accordion_unique_id'] = "accordion-".$unique_id;
+            $variables['accordion_options'] = $accordion_options;
+        }
+    }
+}
+
+function ucr_accordions_preprocess_paragraph__accordion(&$variables) {
+    $clean_title = "";
+    $display_status = "";
+
+    if(array_key_exists(0, $variables['elements']['field_title'])) {
+        $title = $variables['elements']['field_title'][0]['#context']['value'];
+
+        if(!empty($title)) {
+            $clean_title = str_replace(' ', '_', $title);
+            $clean_title = preg_replace('/[^A-Za-z0-9\_]/', '', $clean_title);
+            $clean_title = preg_replace('/_+/', '_', $clean_title);
+        }
+    }
+    if(array_key_exists(0, $variables['elements']['field_status'])) {
+        $display_status = $variables['elements']['field_status'][0]['#markup'];
+    }
+
+    $variables['accordion_title_id'] = strtolower($clean_title);
+    $variables['accordion_display_status'] = $display_status;
+}

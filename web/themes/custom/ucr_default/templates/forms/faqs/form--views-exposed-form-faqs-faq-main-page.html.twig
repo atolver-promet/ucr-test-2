@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes }}>
+<div class="grid-container faq-search-form-container">
+        <div class="grid-x grid-margin-x">
+            <div class="medium-6 cell">
+                <label>Search by Keywords</label>
+                {{ element.keywords }}
+            </div>
+            <div class="medium-6 cell">
+                <label>Search by Category <em>(If Available)</em></label>
+                {{ element.category }}
+            </div>
+            <div class="cell">
+                {{ element.actions }}
+            </div>
+        </div>
+</div>
+</form>

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.una_general_content.field_body
+    - paragraphs.paragraphs_type.una_general_content
+  module:
+    - text
+id: paragraph.una_general_content.default
+targetEntityType: paragraph
+bundle: una_general_content
+mode: default
+content:
+  field_body:
+    weight: 0
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  scheduled_publication: true
+  status: true
+  uid: true

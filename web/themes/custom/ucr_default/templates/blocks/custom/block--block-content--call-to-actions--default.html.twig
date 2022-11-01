@@ -1,0 +1,74 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ *
+ * @ingroup themeable
+ */
+#}
+{% set block_classes = [
+    ucr_custom_css.build,
+] %}
+{% set intro = content.body|field_value|render %}
+{% set style = content.field_cta_style|field_value|render|trim %}
+{% if style == "image-only" %}
+    {% set style_class = "cta-image-display" %}
+{% elseif style == "image-describe" %}
+    {% set style_class = "cta-image-describe-display" %}
+{% elseif style == "color-only" %}
+    {% set style_class = "cta-color-display" %}
+{% elseif style == "color-describe" %}
+    {% set style_class = "cta-color-describe-display" %}
+{% else %}
+    {% set style_class = "cta-image-color-display" %}
+{% endif %}
+{% block content %}
+    <div{{ attributes.addClass(block_classes) }}>
+        <div class="grid-container full">
+            {{ title_prefix }}
+            {% if label %}
+            <div class="grid-x grid-padding-x">
+                <div class="cell"><h2{{ title_attributes }}>{{ label }}</h2></div>
+            </div>
+            {% endif %}
+            {{ title_suffix }}
+            {% if intro is not empty %}
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    {{ content.body }}
+                </div>
+            </div>
+            {% endif %}
+            <div class="grid-x grid-padding-x">
+                <div class="cell">
+                    <div class="grid-container full">
+                        <div class="grid-x small-up-1 medium-up-2 large-up-{{- content.field_counter|field_value }} {{ style_class }} align-center">
+                            {{ content.field_cta_items }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

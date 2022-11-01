@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.home_hero_option
+    - field.field.block_content.home_hero_option.field_home_hero_view
+    - field.field.block_content.home_hero_option.field_homepage_callout_slider
+  module:
+    - content_moderation
+    - datetime
+    - paragraphs
+    - viewfield
+id: block_content.home_hero_option.default
+targetEntityType: block_content
+bundle: home_hero_option
+mode: default
+content:
+  field_home_hero_view:
+    weight: 103
+    settings: {  }
+    third_party_settings: {  }
+    type: viewfield_select
+    region: content
+  field_homepage_callout_slider:
+    type: entity_reference_paragraphs
+    weight: 104
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

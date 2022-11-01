@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.una_gallery_view.field_una_local_galleria
+    - paragraphs.paragraphs_type.una_gallery_view
+id: paragraph.una_gallery_view.default
+targetEntityType: paragraph
+bundle: una_gallery_view
+mode: default
+content:
+  field_una_local_galleria:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  scheduled_publication: true
+  status: true
+  uid: true

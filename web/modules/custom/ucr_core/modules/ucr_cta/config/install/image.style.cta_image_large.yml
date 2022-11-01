@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: cta_image_large
+label: 'CTA Image (Large)'
+effects:
+  ae05334c-1129-413d-ab69-5c38ce621305:
+    uuid: ae05334c-1129-413d-ab69-5c38ce621305
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 767
+      height: 767
+      crop_type: focal_point

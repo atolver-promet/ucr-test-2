@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ucr_global
+  theme:
+    - ucr_umbrella
+id: ucriversideaudiencesearchblock_4
+theme: ucr_umbrella
+region: primary_menu
+weight: -10
+provider: null
+plugin: ucr_global_audience_search
+settings:
+  id: ucr_global_audience_search
+  label: 'UC Riverside - Audience Search Block (Mobile)'
+  provider: ucr_global
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - ucr_global
+  theme:
+    - ucr_umbrella
+id: ucr_umbrella_footer_newsletter
+theme: ucr_umbrella
+region: footer_fourth
+weight: 0
+provider: null
+plugin: ucr_global_footer_newsletter
+settings:
+  id: ucr_global_footer_newsletter
+  label: 'UC Riverside - Footer Newsletter Block'
+  provider: ucr_global
+  label_display: '0'
+visibility: {  }

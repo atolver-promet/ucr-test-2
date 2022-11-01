@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - block_content.type.info_card_grid
+  - field.storage.block_content.field_counter
+id: block_content.info_card_grid.field_counter
+field_name: field_counter
+entity_type: block_content
+bundle: info_card_grid
+label: 'Cards per Row'
+description: 'Enter a number from 1 to 5 for how many cards will appear per row.'
+required: true
+translatable: true
+default_value:
+-
+  value: 3
+default_value_callback: ''
+settings:
+  min: 1
+  max: 5
+  prefix: ''
+  suffix: ''
+field_type: integer

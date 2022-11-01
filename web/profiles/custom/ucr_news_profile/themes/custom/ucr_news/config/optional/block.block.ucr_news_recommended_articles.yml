@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.news_article_views
+  module:
+    - system
+    - views
+  theme:
+    - ucr_news
+id: ucr_news_recommended_articles
+theme: ucr_news
+region: content_frontpage
+weight: -10
+provider: null
+plugin: 'views_block:news_article_views-ucr_news_articles_recommended'
+settings:
+  id: 'views_block:news_article_views-ucr_news_articles_recommended'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

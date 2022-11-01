@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a one-column layout.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+{%
+    set classes = [
+    'layout',
+    'layout-two-col',
+    'grid-container',
+]
+%}
+{% if content %}
+{% set classes = (attributes.ucr_layout_config.centered_options == 'full') ? classes|merge(['full']) : classes %}
+{% set background_color = (attributes.ucr_layout_config.bg_colors != '') ? ' style="background-color:' ~ attributes.ucr_layout_config.bg_colors ~ ';"' : '' %}
+{% if background_color is not empty %}<div{{ background_color|raw }}>{% endif %}
+    <div {{ attributes.addClass(classes)|without('ucr_layout_config') }}>
+        <div class="grid-x{{ attributes.ucr_layout_config.spacing_options }}">
+            <div class="cell medium-{{ attributes.ucr_layout_config.columns.column_1|default('6') }}{{ attributes.ucr_layout_config.classes.column_1 }}">
+                {% if content.column_1 %}
+                    <div {{ region_attributes.column_1.addClass('layout__region', 'layout__region--column-1') }}>
+                        {{ content.column_1 }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="cell medium-{{ attributes.ucr_layout_config.columns.column_2|default('6') }}{{ attributes.ucr_layout_config.classes.column_2 }}">
+                {% if content.column_2 %}
+                    <div {{ region_attributes.column_2.addClass('layout__region', 'layout__region--column-2') }}>
+                        {{ content.column_2 }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% if background_color is not empty %}</div>{% endif %}
+{% endif %}

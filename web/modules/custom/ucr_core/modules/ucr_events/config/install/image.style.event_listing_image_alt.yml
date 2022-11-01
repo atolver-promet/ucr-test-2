@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+  - focal_point
+name: event_listing_image_alt
+label: 'Event Image (Block) - (600 x 338)'
+effects:
+  8ee0bc31-bb3a-4393-a7c2-17cd091f5795:
+    uuid: 8ee0bc31-bb3a-4393-a7c2-17cd091f5795
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 338
+      crop_type: focal_point

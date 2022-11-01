@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: cta_item
+label: 'CTA Item'
+icon_uuid: null
+description: 'A collection of fields for displaying the ''Call to Action'' Custom Block'
+behavior_plugins: {  }

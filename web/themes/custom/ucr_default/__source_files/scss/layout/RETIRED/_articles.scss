@@ -1,0 +1,189 @@
+//*******  Globals **********//
+h3 {
+  &.article-type {
+    color: #6F7780;
+  }
+}
+div {
+  &.more-link {
+    margin-right: 2.5em;
+    text-align: right;
+    clear:both;
+    a {
+      @extend .btn-ucr-split
+    }
+  }
+}
+// ********* Articles - Node Page *********** //
+.article-full-display {
+  figure {
+    &.article-header-image {
+      margin-bottom: 2rem;
+      text-align: center;
+      display: block;
+      figcaption {
+        line-height: 1rem;
+        span {
+          &.credit {
+            font-size: .75rem;
+            display: block;
+            margin-top: .15rem;
+          }
+        }
+      }
+    }
+  }
+  .article-date {
+    font-family: "Fira Sans Regular","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #495057;
+  }
+  .article-author {
+    margin-bottom: .5rem;
+    font-size: 1rem;
+    color: #1F7DAF;
+  }
+  .article-social-media {
+    a {
+      &::after {
+        content: "";
+        display: none;
+      }
+    }
+  }
+  .article-body {
+    padding: 1rem 0;
+  }
+  .article-tags {
+    font-size: .85rem;
+    text-align: right;
+    padding: 0 2rem 1rem 0;
+    p {
+      display: inline;
+      margin: 0;
+    }
+  }
+}
+// ********* Articles - Listing Pages *********** //
+.article-listings {
+  .article-list-row {
+    .article-list-separator {
+      border-top: 2px solid $ucr-white-4;
+    }
+    .article-image {
+      display: inline-block;
+      border: 1px solid $ucr-grey-4;
+    }
+    .article-title {
+      color: $ucr-alt-blue-4;
+      font-size: 1.33em;
+      padding-bottom: 0.25rem;
+      a {
+        color: $ucr-alt-blue-4;
+        text-decoration: none;
+        &:hover {
+          color: $link-color;
+          text-decoration: underline;
+        }
+      }
+    }
+    .separator-line-before, .separator-line-dark-before, .separator-line-maroon-before {
+      &::before {
+        margin-top: 0 !important;
+      }
+    }
+    .author, .article-date {
+      font-size: .8em;
+      color:$ucr-grey-3;
+      font-family: "Fira Sans Regular","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    }
+    .article-date {
+      font-weight:400;
+    }
+    .category-container {
+      display:block;
+      color: $link-color;
+      text-transform: capitalize;
+      font-size:.8em;
+      a:hover {
+        text-decoration: underline;
+        font-weight:700;
+      }
+    }
+    .article-summary {
+      margin: 0.5rem 0;
+    }
+  }
+}
+// ********* Articles - Blocks *********** //
+.articles-container {
+  .article {
+    position: relative;
+    border: 1px solid #f0f0f0;
+    @include breakpoint(medium) {
+      min-height:291px;
+      height: 100%;
+      max-height:591px;
+      overflow: hidden;
+    }
+  }
+  .article-image {
+    border: none;
+    display: block;
+    margin: 0;
+    text-align: center;
+  }
+  .article-date {
+    display: block;
+    margin: 1rem 1rem 0.5rem 1rem;
+    .date {
+      display: inline-block;
+      padding-bottom: 2px;
+      font-size: 1.5em;
+      border-bottom: 1px solid $ucr-alt-blue-3;
+      color: $ucr-grey-1;
+    }
+  }
+  .article-title {
+    margin: 0.5rem 1rem;
+    font-weight:300;
+    font-family: "Fira Sans Regular", "Helvetica Neue", "Helvetica", Roboto, Arial, sans-serif;
+    color: $ucr-grey-4;
+  }
+  .article-body {
+    font-size:.9em;
+    padding: 0.5rem 1rem 1rem 1rem;
+    @include breakpoint(medium) {
+      margin-bottom: 1.9rem;
+      padding-bottom: 2.5rem;
+    }
+  }
+  .article-link {
+    display: block;
+    width: 100%;
+    @include breakpoint(medium) {
+      position: absolute;
+      bottom: 0;
+    }
+    a {
+      display: block;
+      font-family: Avenir Next W01,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+      font-size: .75rem;
+      font-weight: 600;
+      color: #39afef;
+      text-transform: uppercase;
+      padding: .5em 1.25rem;
+      background: #f0f0f0;
+      border: 1px solid #f0f0f0;
+      text-decoration: none;
+      &:hover{
+        border-color: #666666;
+        color: #39afef;
+      }
+      &::after {
+        display: none;
+      }
+    }
+  }
+}

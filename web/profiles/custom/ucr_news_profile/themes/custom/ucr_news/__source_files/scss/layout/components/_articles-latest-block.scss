@@ -1,0 +1,98 @@
+main {
+  > div {
+    &#content-container {
+      .una-articles-latest {
+        justify-content: center;
+      }
+      .latest-articles-list {
+        position: relative;
+        max-height: 420px;
+        overflow: hidden;
+        .lal-background-image {
+        }
+        .lal-background-cover {
+          position:absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0.5;
+          z-index: 1;
+          transition: opacity 0.5s ease;
+        }
+        .lal-category-display {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          .taxonomy-ucr-news-article-category {
+            div {
+              font-family: $font-family-roboto;
+              font-weight: 700;
+              line-height: 19px;
+              font-size: 16px;
+              min-width: 272px;
+              text-align: left;
+              padding: 10px;
+            }
+          }
+        }
+        .lal-title-content {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          z-index: 3;
+          padding: 0 8px 40px 8px;
+          h3 {
+            line-height: 30px;
+            font-size: 24px;
+            color: $white;
+            font-family: $font-family-roboto;
+            font-weight: 700;
+            margin: 0;
+            padding: 0 0 4px 0;
+            @include breakpoint(medium) {
+              padding: 0 0 16px 0;
+            }
+          }
+          p {
+            margin: 0;
+            padding: 0 0 4px 0;
+            font-family: $font-family-roboto;
+            font-weight: 400;
+            line-height: 24px;
+            font-size: 16px;
+            @include breakpoint(medium) {
+              padding: 0 0 18px 0;
+            }
+          }
+          div {
+            font-family: $font-family-roboto-slab;
+            font-size: 14px;
+            line-height: 19px;
+          }
+        }
+        a {
+          &.lal-link-url {
+            color: $white;
+            text-decoration: none;
+            &:hover {
+              color: $white;
+              text-decoration: none;
+              .lal-background-cover {
+                opacity: 0.9;
+              }
+            }
+            .articles-media {
+              z-index: 4;
+              top: inherit;
+              left: inherit;
+              bottom: 0;
+              right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+  - field.storage.node.field_social_media_image
+  - media.type.image
+  - node.type.awards
+id: node.awards.field_social_media_image
+field_name: field_social_media_image
+entity_type: node
+bundle: awards
+label: 'Social Image'
+description: '<em>( Optional ):</em> Set the image that will be referenced and used when someone shares this content on a social media platform.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

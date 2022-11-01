@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override to display a media item.
+ *
+ * Available variables:
+ * - name: Name of the media.
+ * - content: Media content.
+ *
+ * @see template_preprocess_media()
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="grid-container">
+    <div class="grid-x grid-padding-x grid-padding-y">
+        <div class="cell">
+            <article{{ attributes }}>
+                {{ title_suffix.contextual_links }}
+                {% if content %}
+                    <div class="media-object">
+                        <div class="media-object-section align-self-middle">
+                            <div class="thumbnail">{{- content.thumbnail -}}</div>
+                        </div>
+                        <div class="media-object-section main-section align-self-middle">
+                            <div class="media-download-url">{{- content.field_document -}}</div>
+                        </div>
+                    </div>
+                {% endif %}
+            </article>
+        </div>
+    </div>
+</div>

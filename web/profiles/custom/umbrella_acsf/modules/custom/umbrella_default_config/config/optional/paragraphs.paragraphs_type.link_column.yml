@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: link_column
+label: 'Link Column'
+icon_uuid: null
+description: 'a column of links to be placed in Image Link Grid'
+behavior_plugins: {  }

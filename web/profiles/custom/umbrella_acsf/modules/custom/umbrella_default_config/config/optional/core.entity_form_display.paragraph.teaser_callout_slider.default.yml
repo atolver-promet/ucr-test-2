@@ -1,0 +1,107 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.paragraph.teaser_callout_slider.field_button
+    - field.field.paragraph.teaser_callout_slider.field_callout_body
+    - field.field.paragraph.teaser_callout_slider.field_callout_color
+    - field.field.paragraph.teaser_callout_slider.field_callout_image
+    - field.field.paragraph.teaser_callout_slider.field_callout_title
+    - field.field.paragraph.teaser_callout_slider.field_orientation
+    - field.field.paragraph.teaser_callout_slider.field_text_color
+    - field.field.paragraph.teaser_callout_slider.field_title
+    - paragraphs.paragraphs_type.teaser_callout_slider
+  module:
+    - color_field
+    - content_moderation
+    - datetime
+    - entity_browser
+    - link
+    - text
+id: paragraph.teaser_callout_slider.default
+targetEntityType: paragraph
+bundle: teaser_callout_slider
+mode: default
+content:
+  field_button:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_callout_body:
+    weight: 4
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_callout_color:
+    weight: 0
+    settings:
+      default_colors: '#212529, #1D3661, #637EA4, #329AF0, #39B1EF, #3AA4DC, #91AFCC, #A5C8EA, #D6336B, #802244, #14AABE, #FA5151, #A3E24A'
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_callout_image:
+    type: entity_browser_file
+    weight: 1
+    settings:
+      entity_browser: image_browser
+      field_widget_edit: true
+      field_widget_remove: true
+      view_mode: default
+      preview_image_style: thumbnail
+      open: true
+      selection_mode: selection_append
+    region: content
+    third_party_settings: {  }
+  field_callout_title:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_orientation:
+    weight: 7
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_text_color:
+    weight: 5
+    settings:
+      default_colors: "#FFF\n#000"
+    third_party_settings: {  }
+    type: color_field_widget_box
+    region: content
+  field_title:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  scheduled_publication:
+    type: datetime_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,58 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.testimonial_slider.field_author_nka
+    - field.field.paragraph.testimonial_slider.field_author_t
+    - field.field.paragraph.testimonial_slider.field_image
+    - field.field.paragraph.testimonial_slider.field_quote
+    - image.style.testimonial
+    - paragraphs.paragraphs_type.testimonial_slider
+  module:
+    - fences
+    - image
+id: paragraph.testimonial_slider.default
+targetEntityType: paragraph
+bundle: testimonial_slider
+mode: default
+content:
+  field_author_nka:
+    weight: 2
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_author_t:
+    weight: 3
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: testimonial
+      image_link: ''
+    third_party_settings:
+      fences:
+        fences_field_tag: div
+        fences_field_classes: ''
+        fences_field_item_tag: div
+        fences_field_item_classes: ''
+        fences_label_tag: div
+        fences_label_classes: ''
+    type: image
+    region: content
+  field_quote:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+hidden: {  }
